@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1522178451 source:/home/andres/Taller/TallerProgramacionTP/main.cpp
+	<iostream>
+
+1522179814 source:/home/andres/Taller/TallerProgramacionTP/Controller/Controller_Jugador.cpp
+
+1522179814 source:/home/andres/Taller/TallerProgramacionTP/Model/Model_Jugador.cpp
+
+1522179814 source:/home/andres/Taller/TallerProgramacionTP/View/View_Jugador.cpp
+
