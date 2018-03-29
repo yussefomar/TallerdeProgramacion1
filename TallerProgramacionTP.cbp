@@ -13,8 +13,15 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add option="-lSDL -lSDL_image -lSDL_ttf" />
 					<Add directory="include" />
 				</Compiler>
+				<ResourceCompiler>
+					<Add option="-lSDL -lSDL_image -lSDL_ttf" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="-lSDL2" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/TallerProgramacionTP" prefix_auto="1" extension_auto="1" />
@@ -23,17 +30,23 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-lSDL -lSDL_image -lSDL_ttf" />
 					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add option="-lSDL2" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add option="-lSDL -lSDL_image -lSDL_ttf" />
 		</Compiler>
+		<Linker>
+			<Add option="-lSDL2" />
+		</Linker>
 		<Unit filename="Controller/Controller_Jugador.cpp" />
 		<Unit filename="Controller/Controller_Jugador.h" />
 		<Unit filename="Model/Model_Jugador.cpp" />

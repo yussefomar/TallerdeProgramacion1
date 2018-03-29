@@ -8,3 +8,18 @@
 
 1522179814 source:/home/andres/Taller/TallerProgramacionTP/View/View_Jugador.cpp
 
+1522179814 source:/home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/Controller/Controller_Jugador.cpp
+
+1522179814 source:/home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/Model/Model_Jugador.cpp
+
+1522179814 source:/home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/Utils/Util_Logger.cpp
+
+1522179814 source:/home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/Utils/Util_Parser.cpp
+
+1522179814 source:/home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/View/View_Jugador.cpp
+
+1522262201 source:/home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/main.cpp
+	<iostream>
+	<SDL2/SDL.h>
+	<stdio.h>
+
