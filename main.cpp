@@ -1,8 +1,14 @@
 #include <iostream>
+#include <stdlib.h>
 #include <SDL2/SDL.h>
 #include <stdio.h>
 
+#include "Utils/Util_Logger.h"
+
 using namespace std;
+
+unsigned short logLevel;
+Util_Logger logger;
 
 void obtenerControles() {
     cout << "obtenerControles" << endl;
@@ -101,17 +107,35 @@ void handleInput()
 
 int main(int argc, char* args[])
 {
+
+	/********************************************************************************************/
+	// Inicializar el log.
+	logger.createFile(3);
+
+	//Si queremos usar el logger mientras leemos el archivo de configuracion debemos crearlo como
+	//arriba, luego podemos llamar al método updateLevel para ponerle el nivel que corresponda.
+
+    //En cualquier parte del código que querramos usar el logger podemos llamar a los siguientes
+    //métodos según corresponda, luego según el level del logger, escribirá o no en el archivo.
+    //por ejemplo en un catch donde saltó una excepción ponemos log.writeErrorLine y si el level
+    //está configurado para escribir errores los pondra en el archivo.
+	logger.writeErrorLine("Ejemplo de Error."); //nivel bajo, siempre mostramos errores.
+	logger.writeWarningLine("Ejemplo de Warning."); //nivel medio, mostramos errores y warnings.
+	logger.writeLine("Ejemplo de linea común."); //nivel alto, se escribe todo.
+	/********************************************************************************************/
+
+	/********************************************************************************************/
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Window* window = SDL_CreateWindow("Hello",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600,  SDL_WINDOW_SHOWN);
     SDL_Event e;
     int quit=0;
     inicializar();
-    while(true)//(KEYS[SDLK_UP])
+    /*while(true)//(KEYS[SDLK_UP])
     {
         // do something
-        keyboard();
+        // keyboard();
         // don't forget to redetect which keys are being pressed!
-        //handleInput();
-    }
+        // handleInput();
+    }*/
     return 0;
 }

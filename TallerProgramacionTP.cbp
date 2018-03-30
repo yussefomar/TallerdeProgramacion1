@@ -49,8 +49,11 @@
 		</Linker>
 		<Unit filename="Controller/Controller_Jugador.cpp" />
 		<Unit filename="Controller/Controller_Jugador.h" />
+		<Unit filename="Logs/Log.txt" />
 		<Unit filename="Model/Model_Jugador.cpp" />
 		<Unit filename="Model/Model_Jugador.h" />
+		<Unit filename="Utils/Util_Common.cpp" />
+		<Unit filename="Utils/Util_Common.h" />
 		<Unit filename="Utils/Util_Logger.cpp" />
 		<Unit filename="Utils/Util_Logger.h" />
 		<Unit filename="Utils/Util_Parser.cpp" />

@@ -12,14 +12,40 @@
 
 1522179814 source:/home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/Model/Model_Jugador.cpp
 
-1522179814 source:/home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/Utils/Util_Logger.cpp
+1522440666 source:/home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/Utils/Util_Logger.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<stdio.h>
+	<time.h>
+	<list>
+	<sys/stat.h>
+	<unistd.h>
+	<stdlib.h>
+	"Util_Logger.h"
+	"Util_Common.h"
 
 1522179814 source:/home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/Utils/Util_Parser.cpp
 
 1522179814 source:/home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/View/View_Jugador.cpp
 
-1522262201 source:/home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/main.cpp
+1522440166 source:/home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/main.cpp
 	<iostream>
+	<stdlib.h>
 	<SDL2/SDL.h>
 	<stdio.h>
+	"Utils/Util_Logger.h"
+
+1522437440 source:/home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/Utils/Util_Common.cpp
+	<time.h>
+	"Util_Common.h"
+
+1522437328 /home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/Utils/Util_Common.h
+	<iostream>
+	<string>
+
+1522438262 /home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/Utils/Util_Logger.h
+	<iostream>
+	<string>
+	<list>
 
