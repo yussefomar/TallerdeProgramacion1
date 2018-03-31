@@ -13,47 +13,72 @@ using namespace std;
 #include "Util_Logger.h"
 #include "Util_Common.h"
 
-string logName = "Log.txt";
-string logPath =  "./Logs/";
-
 Util_Common util;
-unsigned short level;
 
-char const* getLogFile(){
-	char const* fullPath = (logPath + logName).c_str();
-	return fullPath;
+unsigned short  Util_Logger::getLoggerLevel()
+{
+    return this->loggerLevel;
 }
 
-void Util_Logger::writeLine(string line)
+void Util_Logger::setLoggerLevel(unsigned short  newLevel)
 {
-	printf("%s\n",line.c_str());
-	if(level >= 3){
-		ofstream log_file(getLogFile(), ios_base::out | ios_base::app );
-		log_file << util.currentDateTime() + " || " << line << endl;
-	    log_file.close();
+    this->loggerLevel = newLevel;
+}
+
+string Util_Logger::getLoggerName()
+{
+    return this->loggerName;
+}
+
+void Util_Logger::setLoggerName(string newName)
+{
+    this->loggerName = newName;
+}
+
+string Util_Logger::getLoggerPath()
+{
+    return this->loggerPath;
+}
+
+void Util_Logger::setLoggerPath(string newPath)
+{
+    this->loggerPath = newPath;
+}
+
+string Util_Logger::getLogFile()
+{
+    string fullPathString = getLoggerPath() + getLoggerName();
+	return fullPathString;
+}
+
+void Util_Logger::writeSingleLine(string line, string type)
+{
+    printf((line + "\n").c_str());
+    ofstream log_file(getLogFile(), ios_base::out | ios_base::app );
+    log_file << util.currentDateTime() + " || " + type + " || " << line << endl;
+    log_file.close();
+}
+
+void Util_Logger::writeMessageLine(string line)
+{
+	if(getLoggerLevel() >= 3){
+        writeSingleLine(line, "MESSAGE");
 	}
 }
 
 void Util_Logger::writeWarningLine(string line)
 {
-	if(level >= 2){
-		printf("%s\n",line.c_str());
-		ofstream log_file(getLogFile(), ios_base::out | ios_base::app );
-		log_file << util.currentDateTime() + " || WARNING || " << line << endl;
-	    log_file.close();
+	if(getLoggerLevel() >= 2){
+        writeSingleLine(line, "WARNING");
 	}
 }
 
 void Util_Logger::writeErrorLine(string line)
 {
-	if(level >= 1){
-		perror((line + "\n").c_str());
-		ofstream log_file(getLogFile(), ios_base::out | ios_base::app );
-		log_file << util.currentDateTime() + " || ERROR || " << line << endl;
-	    log_file.close();
+	if(getLoggerLevel() >= 1){
+        writeSingleLine(line, "ERROR");
 	}
 }
-
 
 void Util_Logger::deleteLine()
 {
@@ -92,36 +117,28 @@ inline bool file_exists (const std::string& name) {
     }
 }
 
-
-
-void Util_Logger::updateLevel(unsigned short  newLevel)
-{
-	// Actualizamos el nivel de logueo.
-	level = newLevel;
-}
-
 void Util_Logger::createFile(unsigned short  newLevel)
 {
-	// Actualizamos el nivel de logueo.
-	level = newLevel;
-
 	// Definimos un nombre para el Log de manera que sea UNIVOCO.-
-	string fileDate = "(" + util.currentDateTime() + ") " + logName;
-	logName = fileDate.c_str();
+	string fileDate = "(" + util.currentDateTime() + ") Log.txt";
+
+	// Actualizamos la configuración básico del logger.
+    setLoggerLevel(newLevel);
+    setLoggerPath("./Logs/");
+    setLoggerName(fileDate.c_str());
 
 	// Creamos e inicializamos nunestro nuevo archivos de log.
 	std::ofstream outfile (getLogFile());
+	//outfile.open(getLogFile());
 	outfile << "Archivo de Log inicializado: " << util.currentDateTime() << std::endl;
 	outfile << std::endl;
 	outfile.close();
 
-	/** NO ESTA CREANDO EL ARCHIVO CORRECTO, PARA REVIZAR. **/
-    /*
 	//Chequeamos que haya sido creado exitosamente.
 	if(!file_exists(getLogFile())){
-		perror(("Missing folder " + logPath).c_str());
+		perror(("No existe el archivo de Log que se intento inicializar."));
 		exit(1);
-	}*/
+	}
 }
 
 void Util_Logger::deleteFile()

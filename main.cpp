@@ -45,7 +45,7 @@ void inicializar()
     }
     // you can configure this how you want,
     // but it makes it nice for when you want to register a key continuously being held down
-    //SDL_EnableKeyRepeat(0,0);
+    // SDL_EnableKeyRepeat(0,0);
 }
 
 void keyboard()
@@ -107,21 +107,21 @@ void handleInput()
 
 int main(int argc, char* args[])
 {
-
 	/********************************************************************************************/
 	// Inicializar el log.
 	logger.createFile(3);
+    /**
+	Si queremos usar el logger mientras leemos el archivo de configuracion debemos crearlo como
+	arriba, luego podemos llamar al método updateLevel para ponerle el nivel que corresponda.
 
-	//Si queremos usar el logger mientras leemos el archivo de configuracion debemos crearlo como
-	//arriba, luego podemos llamar al método updateLevel para ponerle el nivel que corresponda.
-
-    //En cualquier parte del código que querramos usar el logger podemos llamar a los siguientes
-    //métodos según corresponda, luego según el level del logger, escribirá o no en el archivo.
-    //por ejemplo en un catch donde saltó una excepción ponemos log.writeErrorLine y si el level
-    //está configurado para escribir errores los pondra en el archivo.
+    En cualquier parte del código que querramos usar el logger podemos llamar a los siguientes
+    métodos según corresponda, luego según el level del logger, escribirá o no en el archivo.
+    por ejemplo en un catch donde saltó una excepción ponemos log.writeErrorLine y si el level
+    está configurado para escribir errores los pondra en el archivo.
+    **/
 	logger.writeErrorLine("Ejemplo de Error."); //nivel bajo, siempre mostramos errores.
 	logger.writeWarningLine("Ejemplo de Warning."); //nivel medio, mostramos errores y warnings.
-	logger.writeLine("Ejemplo de linea común."); //nivel alto, se escribe todo.
+	logger.writeMessageLine("Ejemplo de linea común."); //nivel alto, se escribe todo.
 	/********************************************************************************************/
 
 	/********************************************************************************************/
@@ -137,5 +137,6 @@ int main(int argc, char* args[])
         // don't forget to redetect which keys are being pressed!
         // handleInput();
     }*/
+	/********************************************************************************************/
     return 0;
 }

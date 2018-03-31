@@ -12,7 +12,7 @@
 
 1522179814 source:/home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/Model/Model_Jugador.cpp
 
-1522440666 source:/home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/Utils/Util_Logger.cpp
+1522535162 source:/home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/Utils/Util_Logger.cpp
 	<iostream>
 	<fstream>
 	<string>
@@ -29,7 +29,7 @@
 
 1522179814 source:/home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/View/View_Jugador.cpp
 
-1522440166 source:/home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/main.cpp
+1522534953 source:/home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/main.cpp
 	<iostream>
 	<stdlib.h>
 	<SDL2/SDL.h>
@@ -44,7 +44,7 @@
 	<iostream>
 	<string>
 
-1522438262 /home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/Utils/Util_Logger.h
+1522535182 /home/andres/Taller/TallerProgramacionTP/TallerdeProgramacion1/Utils/Util_Logger.h
 	<iostream>
 	<string>
 	<list>
