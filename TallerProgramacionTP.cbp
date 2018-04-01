@@ -46,10 +46,13 @@
 		</Compiler>
 		<Linker>
 			<Add option="-lSDL2" />
+			<Add option="-lSDL2_image" />
 		</Linker>
 		<Unit filename="Controller/Controller_Jugador.cpp" />
 		<Unit filename="Controller/Controller_Jugador.h" />
 		<Unit filename="Logs/Log.txt" />
+		<Unit filename="Model/LTexture.cpp" />
+		<Unit filename="Model/LTexture.h" />
 		<Unit filename="Model/Model_Jugador.cpp" />
 		<Unit filename="Model/Model_Jugador.h" />
 		<Unit filename="Utils/Util_Common.cpp" />

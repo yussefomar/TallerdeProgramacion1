@@ -1,5 +1,6 @@
 #include "Model_Jugador.h"
 
+
 Jugador::Jugador()
 {
     //Initialize the offsets

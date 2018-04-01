@@ -4,8 +4,10 @@
 #include <stdio.h>
 #include "Model/Model_Jugador.h"
 #include "Utils/Util_Logger.h"
-
+#include "Model/LTexture.h"
+#include "View/View_Jugador.h"
 using namespace std;
+
 
 //dimension del nivel
 //const int ANCHO_NIVEL = 2048;
@@ -119,6 +121,12 @@ void handleInput()
 
 //The window we'll be rendering to
 SDL_Window* window = NULL;
+//The window renderer
+SDL_Renderer* gRenderer = NULL;
+
+//Scene textures
+LTexture texturaJugador;
+LTexture texturaCancha;
 
 bool inicializar()
 {
@@ -146,7 +154,7 @@ bool inicializar()
 		else
 		{
 			//Create vsynced renderer for window
-			/*gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
+			gRenderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
 			if( gRenderer == NULL )
 			{
 				printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
@@ -163,11 +171,33 @@ bool inicializar()
 				{
 					printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
 					exito = false;
-				}*/
+				}
 			}
 		}
-
+    }
 	return exito;
+}
+
+bool loadMedia()
+{
+	//Loading success flag
+	bool success = true;
+
+	//Load dot texture
+	if( !texturaJugador.loadFromFile( "Images/soccer.png", gRenderer) )
+	{
+		printf( "Failed to load dot texture!\n" );
+		success = false;
+	}
+
+	//Load background texture
+	if( !texturaCancha.loadFromFile( "Images/canchafubol.jpg",gRenderer ) )
+	{
+		printf( "Failed to load background texture!\n" );
+		success = false;
+	}
+
+	return success;
 }
 
 void close()
@@ -209,8 +239,22 @@ int main(int argc, char* args[])
 	}
 	else
 	{
+		//Load media
+		if( !loadMedia() )
+		{
+			printf( "Failed to load media!\n" );
+		}
+		else
+		{
     SDL_Event e;
     bool quit = false;
+
+    //The dot that will be moving around on the screen
+    Jugador jugador;
+
+    //The camera area
+    SDL_Rect camera = { 0, 0, ANCHO_VENTANA, ALTO_VENTANA };
+
     while( !quit )
 			{
 				//Handle events on queue
@@ -223,10 +267,47 @@ int main(int argc, char* args[])
 					}
 
 					//Handle input Jugador
-				//	Jugador.handleEvent( e );
+					jugador.handleEvent( e );
+				}
+                //Move the dot
+				jugador.move();
+
+				//Center the camera over the dot
+				camera.x = ( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA / 2;
+				camera.y = ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
+
+				//Keep the camera in bounds
+				if( camera.x < 0 )
+				{
+					camera.x = 0;
+				}
+				if( camera.y < 0 )
+				{
+					camera.y = 0;
+				}
+				if( camera.x > ANCHO_NIVEL - camera.w )
+				{
+					camera.x = ANCHO_NIVEL - camera.w;
+				}
+				if( camera.y > ANCHO_NIVEL - camera.h )
+				{
+					camera.y = ANCHO_NIVEL - camera.h;
 				}
 
+				//Clear screen
+				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+				SDL_RenderClear( gRenderer );
+
+				//Render background
+				texturaCancha.render( 0, 0, &camera,0,0,SDL_FLIP_NONE,gRenderer );
+
+				//Render objects
+				texturaJugador.render( camera.x, camera.y,NULL,0.0,NULL,SDL_FLIP_NONE,gRenderer);
+
+				//Update screen
+				SDL_RenderPresent( gRenderer );
 			}
+        }
     }
 	//Free resources and close SDL
 	close();
