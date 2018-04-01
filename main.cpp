@@ -2,10 +2,19 @@
 #include <stdlib.h>
 #include <SDL2/SDL.h>
 #include <stdio.h>
-
+#include "Model/Model_Jugador.h"
 #include "Utils/Util_Logger.h"
 
 using namespace std;
+
+//dimension del nivel
+//const int ANCHO_NIVEL = 2048;
+//const int ALTO_NIVEL = 1318;
+
+//dimension de pantalla
+const int ANCHO_VENTANA = 800;
+const int ALTO_VENTANA = 600;
+
 
 unsigned short logLevel;
 Util_Logger logger;
@@ -36,7 +45,7 @@ void renderizar() {
 
 bool KEYS[322];  // 322 is the number of SDLK_DOWN events
 
-void inicializar()
+/*void inicializar()
 {
     for(int i = 0; i < 322; i++)
     {
@@ -46,7 +55,7 @@ void inicializar()
     // you can configure this how you want,
     // but it makes it nice for when you want to register a key continuously being held down
     // SDL_EnableKeyRepeat(0,0);
-}
+}*/
 
 void keyboard()
 {
@@ -105,6 +114,73 @@ void handleInput()
     }
 }
 
+//Frees media and shuts down SDL
+//void close();
+
+//The window we'll be rendering to
+SDL_Window* window = NULL;
+
+bool inicializar()
+{
+	bool exito = true;
+
+	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
+	{
+		printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
+		exito = false;
+	}
+	else
+	{
+		if( !SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" ) )
+		{
+			printf( "Warning: Linear texture filtering not enabled!" );
+		}
+
+		//Create window
+		window = SDL_CreateWindow( "Taller de Programacion - Correlatividad", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ANCHO_VENTANA, ALTO_VENTANA, SDL_WINDOW_SHOWN );
+		if( window == NULL )
+		{
+			printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
+			exito = false;
+		}
+		else
+		{
+			//Create vsynced renderer for window
+			/*gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
+			if( gRenderer == NULL )
+			{
+				printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
+				exito = false;
+			}
+			else
+			{
+				//Initialize renderer color
+				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+
+				//Initialize PNG loading
+				int imgFlags = IMG_INIT_PNG;
+				if( !( IMG_Init( imgFlags ) & imgFlags ) )
+				{
+					printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
+					exito = false;
+				}*/
+			}
+		}
+
+	return exito;
+}
+
+void close()
+{
+	//Destroy window
+	SDL_DestroyWindow( window );
+	window = NULL;
+
+	//Quit SDL subsystems
+//	IMG_Quit();
+	SDL_Quit();
+}
+
 int main(int argc, char* args[])
 {
 	/********************************************************************************************/
@@ -125,18 +201,36 @@ int main(int argc, char* args[])
 	/********************************************************************************************/
 
 	/********************************************************************************************/
-    SDL_Init(SDL_INIT_VIDEO);
-    SDL_Window* window = SDL_CreateWindow("Hello",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600,  SDL_WINDOW_SHOWN);
+
+
+  	if( !inicializar() )
+	{
+		printf( "Fallo al Inicializar!\n" );
+	}
+	else
+	{
     SDL_Event e;
-    int quit=0;
-    inicializar();
-    /*while(true)//(KEYS[SDLK_UP])
-    {
-        // do something
-        // keyboard();
-        // don't forget to redetect which keys are being pressed!
-        // handleInput();
-    }*/
-	/********************************************************************************************/
-    return 0;
+    bool quit = false;
+    while( !quit )
+			{
+				//Handle events on queue
+				while( SDL_PollEvent( &e ) != 0 )
+				{
+					//User requests quit
+					if( e.type == SDL_QUIT )
+					{
+						quit = true;
+					}
+
+					//Handle input Jugador
+				//	Jugador.handleEvent( e );
+				}
+
+			}
+    }
+	//Free resources and close SDL
+	close();
+
+	return 0;
+
 }

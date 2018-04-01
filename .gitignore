@@ -1,2 +1,10 @@
 
 �� l�U
+
+*.o
+
+bin/Debug/TallerProgramacionTP
+
+TallerProgramacionTP\.depend
+
+TallerProgramacionTP\.layout
