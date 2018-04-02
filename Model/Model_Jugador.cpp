@@ -4,8 +4,8 @@
 Jugador::Jugador()
 {
     //Initialize the offsets
-    mPosX = 800;
-    mPosY = 420;
+    mPosX = 950;
+    mPosY = 678;
 
     //Initialize the velocity
     mVelX = 0;
@@ -46,7 +46,7 @@ void Jugador::move()
     mPosX += mVelX;
 
     //If the dot went too far to the left or right
-    if( ( mPosX < 0 ) || ( mPosX + ANCHO_JUGADOR > ANCHO_NIVEL ) )
+    if( ( mPosX < 0 ) || ( mPosX + ANCHO_JUGADOR > ANCHO_NIVEL) )
     {
         //Move back
         mPosX -= mVelX;
@@ -66,7 +66,7 @@ void Jugador::move()
 void Jugador::render( int camX, int camY,LTexture * texturaJugador,SDL_Renderer * gRenderer)
 {
     //Show the dot relative to the camera
-	texturaJugador->render( mPosX - camX, mPosY - camY ,NULL,0.0,NULL,SDL_FLIP_NONE,gRenderer);
+	texturaJugador->render( mPosX - camX, mPosY - camY ,NULL,90.0,NULL,SDL_FLIP_NONE,gRenderer);
 }
 
 int Jugador::getPosX()

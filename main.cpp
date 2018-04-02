@@ -14,6 +14,7 @@ using namespace std;
 //const int ALTO_NIVEL = 1318;
 
 //dimension de pantalla
+const int MARGEN = 200;
 const int ANCHO_VENTANA = 800;
 const int ALTO_VENTANA = 600;
 
@@ -126,6 +127,7 @@ SDL_Renderer* gRenderer = NULL;
 
 //Scene textures
 LTexture texturaJugador;
+
 LTexture texturaCancha;
 
 bool inicializar()
@@ -261,7 +263,7 @@ int main(int argc, char* args[])
     Jugador jugador;
 
     //The camera area
-    SDL_Rect camera = { 0, 0, ANCHO_VENTANA, ALTO_VENTANA };
+    SDL_Rect camera = { 650,378, ANCHO_VENTANA, ALTO_VENTANA };
 
     while( !quit )
 			{
@@ -281,9 +283,19 @@ int main(int argc, char* args[])
 				jugador.move();
 
 				//Center the camera over the dot
-				camera.x = ( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA / 2;
-				camera.y = ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
+                if ( (camera.x + ANCHO_VENTANA-MARGEN)<(jugador.getPosX()+Jugador::ANCHO_JUGADOR / 2 )){
+				camera.x +=3; //=( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
+				}
+				 if ( (camera.x +MARGEN)>(jugador.getPosX()+Jugador::ANCHO_JUGADOR / 2 )){
+				camera.x -=3;// ( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
+				}
 
+				if ((camera.y + ALTO_VENTANA-MARGEN)<(jugador.getPosY()+Jugador::ALTO_JUGADOR / 2 )){
+				camera.y +=3;//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
+                }
+                if ((camera.y +MARGEN)>(jugador.getPosY()+Jugador::ALTO_JUGADOR / 2 )){
+				camera.y -=3;//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
+                }
 				//Keep the camera in bounds
 				if( camera.x < 0 )
 				{
