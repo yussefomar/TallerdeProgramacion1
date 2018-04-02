@@ -51,7 +51,7 @@
 
 1522558724 source:/home/matias/Documentos/TallerdeProgramacion1/Controller/Controller_Jugador.cpp
 
-1522624680 source:/home/matias/Documentos/TallerdeProgramacion1/main.cpp
+1522635642 source:/home/matias/Documentos/TallerdeProgramacion1/main.cpp
 	<iostream>
 	<stdlib.h>
 	<SDL2/SDL.h>
@@ -92,10 +92,11 @@
 1522616741 source:/home/matias/Documentos/TallerdeProgramacion1/View/View_Jugador.cpp
 	"View_Jugador.h"
 
-1522615948 /home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.h
+1522635666 /home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.h
 	<SDL2/SDL.h>
+	"LTexture.h"
 
-1522623749 source:/home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.cpp
+1522635639 source:/home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.cpp
 	"Model_Jugador.h"
 
 1522616945 /home/matias/Documentos/TallerdeProgramacion1/View/View_Jugador.h

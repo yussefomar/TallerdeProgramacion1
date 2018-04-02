@@ -50,6 +50,8 @@
 		</Linker>
 		<Unit filename="Controller/Controller_Jugador.cpp" />
 		<Unit filename="Controller/Controller_Jugador.h" />
+		<Unit filename="Images/canchafubol.jpg" />
+		<Unit filename="Images/soccer.png" />
 		<Unit filename="Logs/Log.txt" />
 		<Unit filename="Model/LTexture.cpp" />
 		<Unit filename="Model/LTexture.h" />

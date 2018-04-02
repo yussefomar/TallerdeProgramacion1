@@ -4,8 +4,8 @@
 Jugador::Jugador()
 {
     //Initialize the offsets
-    mPosX = 900;
-    mPosY = 520;
+    mPosX = 800;
+    mPosY = 420;
 
     //Initialize the velocity
     mVelX = 0;
@@ -63,10 +63,10 @@ void Jugador::move()
     }
 }
 //esto va a la vista
-void Jugador::render( int camX, int camY )
+void Jugador::render( int camX, int camY,LTexture * texturaJugador,SDL_Renderer * gRenderer)
 {
     //Show the dot relative to the camera
-//	gDotTexture.render( mPosX - camX, mPosY - camY );
+	texturaJugador->render( mPosX - camX, mPosY - camY ,NULL,0.0,NULL,SDL_FLIP_NONE,gRenderer);
 }
 
 int Jugador::getPosX()

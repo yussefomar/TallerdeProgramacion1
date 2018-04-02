@@ -1,6 +1,7 @@
 #ifndef MODEL_JUGADOR_H_
 #define MODEL_JUGADOR_H_
 #include <SDL2/SDL.h>
+#include "LTexture.h"
 //dimension del nivel
 const int ANCHO_NIVEL = 2048;
 const int ALTO_NIVEL = 1318;
@@ -9,8 +10,8 @@ class Jugador
 {
     public:
 		//The dimensions of the dot
-		static const int ANCHO_JUGADOR = 128;
-		static const int ALTO_JUGADOR = 128;
+		static const int ANCHO_JUGADOR = 80;
+		static const int ALTO_JUGADOR = 80;
 
 		//Maximum axis velocity of the dot
 		static const int VELOCIDAD_JUGADOR = 10;
@@ -25,7 +26,7 @@ class Jugador
 		void move();
 
 		//esto va a la vista
-		void render( int camX, int camY );
+		void render( int camX, int camY,LTexture * texturaJugador,SDL_Renderer * gRenderer );
 
 		//Position accessors
 		int getPosX();

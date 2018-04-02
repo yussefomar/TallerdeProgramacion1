@@ -183,12 +183,6 @@ bool loadMedia()
 	//Loading success flag
 	bool success = true;
 
-	//Load dot texture
-	if( !texturaJugador.loadFromFile( "Images/soccer.png", gRenderer) )
-	{
-		printf( "Failed to load dot texture!\n" );
-		success = false;
-	}
 
 	//Load background texture
 	if( !texturaCancha.loadFromFile( "Images/canchafubol.jpg",gRenderer ) )
@@ -197,17 +191,31 @@ bool loadMedia()
 		success = false;
 	}
 
+    //Load dot texture
+	if( !texturaJugador.loadFromFile( "Images/soccer.png", gRenderer) )
+	{
+		printf( "Failed to load dot texture!\n" );
+		success = false;
+	}
+
 	return success;
 }
 
 void close()
 {
-	//Destroy window
+
+    texturaCancha.free();
+    texturaJugador.free();
+
+	//Destroy window}
+    SDL_DestroyRenderer( gRenderer );
 	SDL_DestroyWindow( window );
+
+    gRenderer = NULL;
 	window = NULL;
 
 	//Quit SDL subsystems
-//	IMG_Quit();
+	IMG_Quit();
 	SDL_Quit();
 }
 
@@ -289,9 +297,9 @@ int main(int argc, char* args[])
 				{
 					camera.x = ANCHO_NIVEL - camera.w;
 				}
-				if( camera.y > ANCHO_NIVEL - camera.h )
+				if( camera.y > ALTO_NIVEL - camera.h )
 				{
-					camera.y = ANCHO_NIVEL - camera.h;
+					camera.y = ALTO_NIVEL - camera.h;
 				}
 
 				//Clear screen
@@ -299,10 +307,10 @@ int main(int argc, char* args[])
 				SDL_RenderClear( gRenderer );
 
 				//Render background
-				texturaCancha.render( 0, 0, &camera,0,0,SDL_FLIP_NONE,gRenderer );
+				texturaCancha.render( 0, 0, &camera,0.0,NULL,SDL_FLIP_NONE,gRenderer );
 
 				//Render objects
-				texturaJugador.render( camera.x, camera.y,NULL,0.0,NULL,SDL_FLIP_NONE,gRenderer);
+				jugador.render( camera.x, camera.y,&texturaJugador,gRenderer);
 
 				//Update screen
 				SDL_RenderPresent( gRenderer );
