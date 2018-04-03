@@ -79,3 +79,13 @@ int Jugador::getPosY()
 	return mPosY;
 }
 
+void Jugador::setPosX(int PosX)
+{
+	 mPosX= PosX;
+}
+
+void Jugador::setPosY(int PosY)
+{
+	mPosY=PosY ;
+}
+

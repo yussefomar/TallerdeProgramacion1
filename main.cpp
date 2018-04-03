@@ -126,7 +126,7 @@ SDL_Window* window = NULL;
 SDL_Renderer* gRenderer = NULL;
 
 LTexture texturaJugador;
-
+LTexture texturaJugador2;
 LTexture texturaCancha;
 
 bool inicializar()
@@ -199,6 +199,12 @@ bool loadMedia()
 		success = false;
 	}
 
+	    //Load dot texture
+	if( !texturaJugador2.loadFromFile( "Images/soccer.png", gRenderer) )
+	{
+		printf( "Failed to load dot texture!\n" );
+		success = false;
+	}
 	return success;
 }
 
@@ -258,12 +264,22 @@ int main(int argc, char* args[])
     SDL_Event e;
     bool quit = false;
 
+    /*MVC example:
+     Model model("Model");
+    View view(model);
+    // register the data-change event
+    model.RegisterDataChangeHandler(&DataChange);
+    // binds model and view.
+    Controller controller(model, view);
+    // when application starts or button is clicked or form is shown...
+    controller.OnLoad();
+    model.SetData("Changes"); // this should trigger View to render*/
     //The dot that will be moving around on the screen
     Jugador jugador;
 
     //The camera area
     SDL_Rect camera = { 650,378, ANCHO_VENTANA, ALTO_VENTANA };
-
+    SDL_Rect cancha = { 300,400, ANCHO_NIVEL, ALTO_NIVEL };
     while( !quit )
 			{
 				//Handle events on queue
@@ -319,9 +335,26 @@ int main(int argc, char* args[])
 
 				//Render background
 				texturaCancha.render( 0, 0, &camera,0.0,NULL,SDL_FLIP_NONE,gRenderer );
-
 				//Render objects
-				jugador.render( camera.x, camera.y,&texturaJugador,gRenderer);
+
+                Jugador jugador2;
+                jugador2.setPosX(700);
+                jugador2.setPosY(400);
+                jugador2.render( camera.x, camera.y,&texturaJugador,gRenderer);
+
+                Jugador jugador3;
+                jugador3.setPosX(700);
+                jugador3.setPosY(600);
+                jugador3.render( camera.x, camera.y,&texturaJugador,gRenderer);
+
+
+                Jugador jugador4;
+                jugador4.setPosX(700);
+                jugador4.setPosY(800);
+                jugador4.render( camera.x, camera.y,&texturaJugador,gRenderer);
+
+                jugador.render( camera.x, camera.y,&texturaJugador,gRenderer);
+
 
 				//Update screen
 				SDL_RenderPresent( gRenderer );

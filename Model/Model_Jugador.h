@@ -32,6 +32,10 @@ class Jugador
 		int getPosX();
 		int getPosY();
 
+		void setPosX(int PosX);
+
+        void setPosY(int PosY);
+
     private:
 		//The X and Y offsets of the dot
 		int mPosX, mPosY;
