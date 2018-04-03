@@ -49,9 +49,10 @@
 	<string>
 	<list>
 
-1522558724 source:/home/matias/Documentos/TallerdeProgramacion1/Controller/Controller_Jugador.cpp
+1522716265 source:/home/matias/Documentos/TallerdeProgramacion1/Controller/Controller_Jugador.cpp
+	"Controller_Jugador.h"
 
-1522651126 source:/home/matias/Documentos/TallerdeProgramacion1/main.cpp
+1522710776 source:/home/matias/Documentos/TallerdeProgramacion1/main.cpp
 	<iostream>
 	<stdlib.h>
 	<SDL2/SDL.h>
@@ -89,17 +90,20 @@
 
 1522558724 source:/home/matias/Documentos/TallerdeProgramacion1/Utils/Util_Parser.cpp
 
-1522616741 source:/home/matias/Documentos/TallerdeProgramacion1/View/View_Jugador.cpp
+1522716835 source:/home/matias/Documentos/TallerdeProgramacion1/View/View_Jugador.cpp
 	"View_Jugador.h"
 
-1522652251 /home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.h
+1522707047 /home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.h
 	<SDL2/SDL.h>
 	"LTexture.h"
 
-1522638279 source:/home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.cpp
+1522708732 source:/home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.cpp
 	"Model_Jugador.h"
 
-1522616945 /home/matias/Documentos/TallerdeProgramacion1/View/View_Jugador.h
+1522717000 /home/matias/Documentos/TallerdeProgramacion1/View/View_Jugador.h
+	<SDL2/SDL.h>
+	"../Model/LTexture.h"
+	"../Model/Model_Jugador.h"
 
 1522622817 source:/home/matias/Documentos/TallerdeProgramacion1/Model/LTexture.cpp
 	"LTexture.h"
@@ -110,4 +114,10 @@
 	<iostream>
 	<stdlib.h>
 	<stdio.h>
+
+1522716281 /home/matias/Documentos/TallerdeProgramacion1/Controller/Controller_Jugador.h
+	<SDL2/SDL.h>
+	"../Model/LTexture.h"
+	"../View/View_Jugador.h"
+	"../Model/Model_Jugador.h"
 

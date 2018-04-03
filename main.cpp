@@ -125,7 +125,6 @@ SDL_Window* window = NULL;
 //The window renderer
 SDL_Renderer* gRenderer = NULL;
 
-//Scene textures
 LTexture texturaJugador;
 
 LTexture texturaCancha;
