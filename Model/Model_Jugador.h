@@ -25,7 +25,9 @@ class Jugador
 		//Position accessors
 		int getPosX();
 		int getPosY();
-
+		//Position accessors
+		int getVelX();
+		int getVelY();
 		void setPosX(int PosX);
 
         void setPosY(int PosY);

@@ -38,12 +38,65 @@
         }
         void View_Jugador::render( int camX, int camY,SDL_Renderer * gRenderer ){
         SDL_Rect* currentClip = &gSpriteClips[frame / 4 ];
+
+        if ((*this->model).getVelX()>0) {
         ++frame;
+        direccion = 90;
+        if ((*this->model).getVelY()>0) {
+        direccion += 45;
+        }
+        if ((*this->model).getVelY()<0) {
+        direccion -= 45;
+        }
         if (frame / 4 >= 4){
         frame = 0;
         }
+        }
+
+
+        if ((*this->model).getVelY()>0) {
+        ++frame;
+        direccion = 180;
+        if ((*this->model).getVelX()>0) {
+        direccion -= 45;
+        }
+        if ((*this->model).getVelX()<0) {
+        direccion += 45;
+        }
+        if (frame / 4 >= 4){
+        frame = 0;
+        }
+        }
+
+
+        if ((*this->model).getVelY()<0) {
+        ++frame;
+        direccion = 0;
+        if ((*this->model).getVelX()<0) {
+        direccion -= 45;
+        }
+        if ((*this->model).getVelX()>0) {
+        direccion += 45;
+        }
+        if (frame / 4 >= 4){
+        frame = 0;
+        }
+        }
+        if ((*this->model).getVelX()<0) {
+        ++frame;
+        direccion = 270;
+        if ((*this->model).getVelY()<0) {
+        direccion += 45;
+        }
+        if ((*this->model).getVelY()>0) {
+        direccion -= 45;
+        }
+        if (frame / 4 >= 4){
+        frame = 0;
+        }
+        }
             //Show the dot relative to the camera
-        this->texturaJugador.render( (*this->model).getPosX() - camX, (*this->model).getPosY() - camY ,currentClip,90.0,NULL,SDL_FLIP_NONE,gRenderer);
+        this->texturaJugador.render( (*this->model).getPosX() - camX, (*this->model).getPosY() - camY ,currentClip,direccion,NULL,SDL_FLIP_NONE,gRenderer);
         }
 
 

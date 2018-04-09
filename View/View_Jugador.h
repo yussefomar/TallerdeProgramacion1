@@ -19,6 +19,7 @@ class View_Jugador
         Jugador *model;
         LTexture texturaJugador;
         int frame = 4;
+        double direccion=90.0;
       //  int WALKING_ANIMATION_FRAMES = 4;
         SDL_Rect gSpriteClips[ 4 ];
 };

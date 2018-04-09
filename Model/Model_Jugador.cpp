@@ -75,3 +75,13 @@ void Jugador::aumentarVelocidadY()
 {
 	mVelY += VELOCIDAD_JUGADOR; ;
 }
+
+int Jugador::getVelX()
+{
+	return mVelX;
+}
+
+int Jugador::getVelY()
+{
+	return mVelY;
+}
