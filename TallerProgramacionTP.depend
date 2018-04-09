@@ -49,10 +49,10 @@
 	<string>
 	<list>
 
-1522716265 source:/home/matias/Documentos/TallerdeProgramacion1/Controller/Controller_Jugador.cpp
+1523228224 source:/home/matias/Documentos/TallerdeProgramacion1/Controller/Controller_Jugador.cpp
 	"Controller_Jugador.h"
 
-1522719053 source:/home/matias/Documentos/TallerdeProgramacion1/main.cpp
+1523235204 source:/home/matias/Documentos/TallerdeProgramacion1/main.cpp
 	<iostream>
 	<stdlib.h>
 	<SDL2/SDL.h>
@@ -61,6 +61,8 @@
 	"Utils/Util_Logger.h"
 	"Model/LTexture.h"
 	"View/View_Jugador.h"
+	"Controller/Controller_Jugador.h"
+	<yaml-cpp/yaml.h>
 
 1522558724 /home/matias/Documentos/TallerdeProgramacion1/Utils/Util_Logger.h
 	<iostream>
@@ -88,34 +90,34 @@
 	"Util_Logger.h"
 	"Util_Common.h"
 
-1522558724 source:/home/matias/Documentos/TallerdeProgramacion1/Utils/Util_Parser.cpp
+1522880102 source:/home/matias/Documentos/TallerdeProgramacion1/Utils/Util_Parser.cpp
 
-1522717003 source:/home/matias/Documentos/TallerdeProgramacion1/View/View_Jugador.cpp
+1523235089 source:/home/matias/Documentos/TallerdeProgramacion1/View/View_Jugador.cpp
 	"View_Jugador.h"
 
-1522718697 /home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.h
+1523233303 /home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.h
 	<SDL2/SDL.h>
 	"LTexture.h"
 
-1522718725 source:/home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.cpp
+1523229186 source:/home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.cpp
 	"Model_Jugador.h"
 
-1522717000 /home/matias/Documentos/TallerdeProgramacion1/View/View_Jugador.h
+1523234958 /home/matias/Documentos/TallerdeProgramacion1/View/View_Jugador.h
 	<SDL2/SDL.h>
 	"../Model/LTexture.h"
 	"../Model/Model_Jugador.h"
 
-1522622817 source:/home/matias/Documentos/TallerdeProgramacion1/Model/LTexture.cpp
+1523232452 source:/home/matias/Documentos/TallerdeProgramacion1/Model/LTexture.cpp
 	"LTexture.h"
 
-1522623417 /home/matias/Documentos/TallerdeProgramacion1/Model/LTexture.h
+1523232432 /home/matias/Documentos/TallerdeProgramacion1/Model/LTexture.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_image.h>
 	<iostream>
 	<stdlib.h>
 	<stdio.h>
 
-1522716281 /home/matias/Documentos/TallerdeProgramacion1/Controller/Controller_Jugador.h
+1523227458 /home/matias/Documentos/TallerdeProgramacion1/Controller/Controller_Jugador.h
 	<SDL2/SDL.h>
 	"../Model/LTexture.h"
 	"../View/View_Jugador.h"

@@ -7,17 +7,17 @@
 class View_Jugador
 {
     public:
-        View_Jugador();
-		//Initializes the variables
-		View_Jugador(const Jugador &model);
 
-        void SetModel(const Jugador &model);
+		View_Jugador( Jugador *model,SDL_Renderer * gRenderer);
+
+        void SetModel( Jugador *model);
 
 		//esto va a la vista
-		void render( int camX, int camY,LTexture * texturaJugador,SDL_Renderer * gRenderer );
+		void render( int camX, int camY,SDL_Renderer * gRenderer );
 
     private:
-        Jugador model;
+        Jugador *model;
+        LTexture texturaJugador;
 };
 
 #endif

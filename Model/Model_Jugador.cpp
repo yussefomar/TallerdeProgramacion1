@@ -11,34 +11,7 @@ Jugador::Jugador()
     mVelX = 0;
     mVelY = 0;
 }
-// esto va al controlador
-void Jugador::handleEvent( SDL_Event& e )
-{
-    //If a key was pressed
-	if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
-    {
-        //Adjust the velocity
-        switch( e.key.keysym.sym )
-        {
-            case SDLK_UP: mVelY -= VELOCIDAD_JUGADOR; break;
-            case SDLK_DOWN: mVelY += VELOCIDAD_JUGADOR; break;
-            case SDLK_LEFT: mVelX -= VELOCIDAD_JUGADOR; break;
-            case SDLK_RIGHT: mVelX += VELOCIDAD_JUGADOR; break;
-        }
-    }
-    //If a key was released
-    else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
-    {
-        //Adjust the velocity
-        switch( e.key.keysym.sym )
-        {
-            case SDLK_UP: mVelY += VELOCIDAD_JUGADOR; break;
-            case SDLK_DOWN: mVelY -= VELOCIDAD_JUGADOR; break;
-            case SDLK_LEFT: mVelX += VELOCIDAD_JUGADOR; break;
-            case SDLK_RIGHT: mVelX -= VELOCIDAD_JUGADOR; break;
-        }
-    }
-}
+
 
 void Jugador::move()
 {
@@ -62,12 +35,6 @@ void Jugador::move()
         mPosY -= mVelY;
     }
 }
-//esto va a la vista
-void Jugador::render( int camX, int camY,LTexture * texturaJugador,SDL_Renderer * gRenderer)
-{
-    //Show the dot relative to the camera
-	texturaJugador->render( mPosX - camX, mPosY - camY ,NULL,90.0,NULL,SDL_FLIP_NONE,gRenderer);
-}
 
 int Jugador::getPosX()
 {
@@ -89,3 +56,22 @@ void Jugador::setPosY(int PosY)
 	mPosY=PosY ;
 }
 
+void Jugador::disminuirVelocidadX()
+{
+    mVelX -= VELOCIDAD_JUGADOR;;
+}
+
+void Jugador::disminuirVelocidadY()
+{
+	mVelY -= VELOCIDAD_JUGADOR; ;
+}
+
+void Jugador::aumentarVelocidadX()
+{
+	mVelX += VELOCIDAD_JUGADOR; ;
+}
+
+void Jugador::aumentarVelocidadY()
+{
+	mVelY += VELOCIDAD_JUGADOR; ;
+}

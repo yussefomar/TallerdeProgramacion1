@@ -47,6 +47,7 @@
 		<Linker>
 			<Add option="-lSDL2" />
 			<Add option="-lSDL2_image" />
+			<Add option="-lyaml-cpp" />
 		</Linker>
 		<Unit filename="Controller/Controller_Jugador.cpp" />
 		<Unit filename="Controller/Controller_Jugador.h" />

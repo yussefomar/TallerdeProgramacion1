@@ -19,14 +19,8 @@ class Jugador
 		//Initializes the variables
 		Jugador();
 
-		//Takes key presses and adjusts the dot's velocity
-		void handleEvent( SDL_Event& e );
-
 		//Moves the dot
 		void move();
-
-		//esto va a la vista
-		void render( int camX, int camY,LTexture * texturaJugador,SDL_Renderer * gRenderer );
 
 		//Position accessors
 		int getPosX();
@@ -35,6 +29,14 @@ class Jugador
 		void setPosX(int PosX);
 
         void setPosY(int PosY);
+
+        void disminuirVelocidadX();
+
+        void disminuirVelocidadY();
+
+        void aumentarVelocidadX();
+
+        void aumentarVelocidadY();
 
     private:
 		//The X and Y offsets of the dot

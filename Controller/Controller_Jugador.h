@@ -8,19 +8,26 @@
 class Controller_Jugador
 {
     public:
+    		//The dimensions of the dot
+		static const int ANCHO_JUGADOR = 45;
+		static const int ALTO_JUGADOR = 45;
 
-        Controller_Jugador( const Jugador &model, const View_Jugador &view) ;
+		//Maximum axis velocity of the dot
+		static const int VELOCIDAD_JUGADOR = 3;
 
-        void SetModel( const Jugador &model);
 
-        void SetView(const View_Jugador &view);
+        Controller_Jugador(  Jugador *model,  View_Jugador *view) ;
+
+        void SetModel(  Jugador *model);
+
+        void SetView( View_Jugador *view);
 
 		void handleEvent( SDL_Event& e );
 
     private:
 
-    Jugador jugador;
-    View_Jugador vista;
+    Jugador *jugador;
+    View_Jugador *vista;
 };
 
 #endif
