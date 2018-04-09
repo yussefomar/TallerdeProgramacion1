@@ -92,7 +92,7 @@
 
 1522880102 source:/home/matias/Documentos/TallerdeProgramacion1/Utils/Util_Parser.cpp
 
-1523235089 source:/home/matias/Documentos/TallerdeProgramacion1/View/View_Jugador.cpp
+1523240859 source:/home/matias/Documentos/TallerdeProgramacion1/View/View_Jugador.cpp
 	"View_Jugador.h"
 
 1523233303 /home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.h
@@ -102,7 +102,7 @@
 1523229186 source:/home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.cpp
 	"Model_Jugador.h"
 
-1523234958 /home/matias/Documentos/TallerdeProgramacion1/View/View_Jugador.h
+1523240574 /home/matias/Documentos/TallerdeProgramacion1/View/View_Jugador.h
 	<SDL2/SDL.h>
 	"../Model/LTexture.h"
 	"../Model/Model_Jugador.h"
