@@ -135,6 +135,7 @@ int main(int argc, char* args[])
     Pelota pelota;
     View_Pelota vistaPelota(&pelota,gRenderer);
     Jugador jugador;
+    Jugador * jugadorActual = &jugador;
     View_Jugador vistaJugador(&jugador,gRenderer);
     Controller_Jugador controlJugador(&jugador,&vistaJugador);
     Jugador jugador2;
@@ -171,23 +172,58 @@ int main(int argc, char* args[])
 
 					//Handle input Jugador
 					controlJugador.handleEvent( e );
+					   if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
+                     {
+                            //Adjust the velocity
+                            switch( e.key.keysym.sym )
+                                {
+
+                                case SDLK_4: { jugadorActual->stop();
+                                                controlJugador.SetModel(&jugador4);
+                                               jugadorActual = &jugador4;
+                                               jugadorActual->stop();
+                                               camera.x=( jugadorActual->getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
+                                               camera.y=( jugadorActual->getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA/ 2;} break;
+                                case SDLK_1: {jugadorActual->stop();
+                                                controlJugador.SetModel(&jugador);
+                                               jugadorActual = &jugador;
+                                               jugadorActual->stop();
+                                                  camera.x=( jugadorActual->getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
+                                               camera.y=( jugadorActual->getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA/ 2;} break;
+                                case SDLK_2:  {jugadorActual->stop();
+                                                controlJugador.SetModel(&jugador2);
+                                               jugadorActual = &jugador2;
+                                               jugadorActual->stop();
+                                                  camera.x=( jugadorActual->getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
+                                               camera.y=( jugadorActual->getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA/ 2;} break;
+                                case SDLK_3: {  jugadorActual->stop();
+                                                controlJugador.SetModel(&jugador3);
+                                               jugadorActual = &jugador3;
+                                               jugadorActual->stop();
+                                                  camera.x=( jugadorActual->getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
+                                               camera.y=( jugadorActual->getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA/ 2;} break;
+                                }
+                    }
 				}
                 //Move the dot
 				jugador.move();
+				jugador2.move();
+				jugador3.move();
+				jugador4.move();
 				pelota.move();
 
 				//Center the camera over the dot
-                if ( (camera.x + ANCHO_VENTANA-MARGEN)<(jugador.getPosX()+Jugador::ANCHO_JUGADOR / 2 )){
+                if ( (camera.x + ANCHO_VENTANA-MARGEN)<((*jugadorActual).getPosX()+Jugador::ANCHO_JUGADOR / 2 )){
 				camera.x +=Jugador::VELOCIDAD_JUGADOR; //=( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
 				}
-				 if ( (camera.x +MARGEN)>(jugador.getPosX()+Jugador::ANCHO_JUGADOR / 2 )){
+				 if ( (camera.x +MARGEN)>((*jugadorActual).getPosX()+Jugador::ANCHO_JUGADOR / 2 )){
 				camera.x -=Jugador::VELOCIDAD_JUGADOR;// ( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
 				}
 
-				if ((camera.y + ALTO_VENTANA-MARGEN)<(jugador.getPosY()+Jugador::ALTO_JUGADOR / 2 )){
+				if ((camera.y + ALTO_VENTANA-MARGEN)<((*jugadorActual).getPosY()+Jugador::ALTO_JUGADOR / 2 )){
 				camera.y +=Jugador::VELOCIDAD_JUGADOR;//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
                 }
-                if ((camera.y +MARGEN)>(jugador.getPosY()+Jugador::ALTO_JUGADOR / 2 )){
+                if ((camera.y +MARGEN)>((*jugadorActual).getPosY()+Jugador::ALTO_JUGADOR / 2 )){
 				camera.y -=Jugador::VELOCIDAD_JUGADOR;//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
                 }
 				//Keep the camera in bounds

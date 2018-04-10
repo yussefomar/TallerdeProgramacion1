@@ -97,3 +97,8 @@ bool Jugador::casacaPrincipal()
 	return casaca;
 }
 
+void Jugador::stop()
+{
+	mVelY = 0;
+	mVelX = 0;
+}

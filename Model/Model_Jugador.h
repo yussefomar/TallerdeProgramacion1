@@ -39,6 +39,8 @@ class Jugador
 
         void aumentarVelocidadY();
 
+         void stop();
+
         bool casacaPrincipal();
 
     private:
