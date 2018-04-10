@@ -52,7 +52,7 @@
 1523228224 source:/home/matias/Documentos/TallerdeProgramacion1/Controller/Controller_Jugador.cpp
 	"Controller_Jugador.h"
 
-1523329136 source:/home/matias/Documentos/TallerdeProgramacion1/main.cpp
+1523395075 source:/home/matias/Documentos/TallerdeProgramacion1/main.cpp
 	<iostream>
 	<stdlib.h>
 	<SDL2/SDL.h>
@@ -64,6 +64,7 @@
 	"Controller/Controller_Jugador.h"
 	"Model/Model_Pelota.h"
 	"View/View_Pelota.h"
+	"View/View_Cancha.h"
 	<yaml-cpp/yaml.h>
 
 1522558724 /home/matias/Documentos/TallerdeProgramacion1/Utils/Util_Logger.h
@@ -125,17 +126,35 @@
 	"../View/View_Jugador.h"
 	"../Model/Model_Jugador.h"
 
-1523329898 source:/home/matias/Documentos/TallerdeProgramacion1/Model/Model_Pelota.cpp
+1523391457 source:/home/matias/Documentos/TallerdeProgramacion1/Model/Model_Pelota.cpp
 	"Model_Pelota.h"
 
 1523329760 source:/home/matias/Documentos/TallerdeProgramacion1/View/View_Pelota.cpp
 	"View_Pelota.h"
 
-1523328887 /home/matias/Documentos/TallerdeProgramacion1/Model/Model_Pelota.h
+1523330039 /home/matias/Documentos/TallerdeProgramacion1/Model/Model_Pelota.h
 	<SDL2/SDL.h>
 	"LTexture.h"
 
 1523327362 /home/matias/Documentos/TallerdeProgramacion1/View/View_Pelota.h
+	<SDL2/SDL.h>
+	"../Model/LTexture.h"
+	"../Model/Model_Pelota.h"
+
+1523394448 source:/home/matias/Documentos/TallerdeProgramacion1/Model/Model_Equipo.cpp
+	"Model_Equipo.h"
+
+1523393378 /home/matias/Documentos/TallerdeProgramacion1/Model/Model_Equipo.h
+	<SDL2/SDL.h>
+	"LTexture.h"
+	<iostream>
+	<list>
+	"Model_Jugador.h"
+
+1523394679 source:/home/matias/Documentos/TallerdeProgramacion1/View/View_Cancha.cpp
+	"View_Cancha.h"
+
+1523394472 /home/matias/Documentos/TallerdeProgramacion1/View/View_Cancha.h
 	<SDL2/SDL.h>
 	"../Model/LTexture.h"
 	"../Model/Model_Pelota.h"

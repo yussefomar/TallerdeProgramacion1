@@ -7,11 +7,11 @@ class Pelota
 {
     public:
 		//The dimensions of the dot
-		static const int ANCHO_JUGADOR = 45;
-		static const int ALTO_JUGADOR = 45;
+		static const int ANCHO_PELOTA = 12;
+		static const int ALTO_PELOTA = 12;
 
 		//Maximum axis velocity of the dot
-		static const int VELOCIDAD_JUGADOR = 3;
+		static const int VELOCIDAD_PELOTA = 3;
 
 		//Initializes the variables
 		Pelota();

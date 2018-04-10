@@ -9,23 +9,23 @@
 #include "Controller/Controller_Jugador.h"
 #include "Model/Model_Pelota.h"
 #include "View/View_Pelota.h"
+#include "View/View_Cancha.h"
 #include <yaml-cpp/yaml.h>
-using namespace std;
+
 
 //dimension de pantalla
 const int MARGEN = 200;
 const int ANCHO_VENTANA = 800;
 const int ALTO_VENTANA = 600;
-const int CAMARAPOSICIONINICIALX = 300;
-const int CAMARAPOSICIONINICIALY = 600;
+const int CAMARAPOSICIONINICIALX = (ANCHO_NIVEL/2)-(ANCHO_VENTANA/2);
+const int CAMARAPOSICIONINICIALY = (ALTO_NIVEL/2)-(ALTO_VENTANA/2);
 unsigned short logLevel;
+using namespace std;
 Util_Logger logger;
 //The window we'll be rendering to
 SDL_Window* window = NULL;
 //The window renderer
 SDL_Renderer* gRenderer = NULL;
-
-LTexture texturaCancha;
 
 /**
 
@@ -88,27 +88,8 @@ bool inicializar()
 	return exito;
 }
 
-bool loadMedia()
-{
-	//Loading success flag
-	bool success = true;
-
-	//Load background texture
-	if( !texturaCancha.loadFromFile( "Images/canchafubol.jpg",gRenderer ) )
-	{
-		printf( "Failed to load background texture!\n" );
-		success = false;
-	}
-
-
-	return success;
-}
-
 void close()
 {
-
-    texturaCancha.free();
-//    texturaJugador.free();
 
 	//Destroy window}
     SDL_DestroyRenderer( gRenderer );
@@ -150,13 +131,7 @@ int main(int argc, char* args[])
 	}
 	else
 	{
-		//Load media
-		if( !loadMedia() )
-		{
-			printf( "Failed to load media!\n" );
-		}
-		else
-		{
+
     Pelota pelota;
     View_Pelota vistaPelota(&pelota,gRenderer);
     Jugador jugador;
@@ -175,7 +150,7 @@ int main(int argc, char* args[])
     jugador4.setPosX(700);
     jugador4.setPosY(800);
     View_Jugador vistaJugador4(&jugador4,gRenderer);
-
+    View_Cancha vistaCancha(gRenderer);
     //The camera area
     SDL_Rect camera = { CAMARAPOSICIONINICIALX,CAMARAPOSICIONINICIALY, ANCHO_VENTANA, ALTO_VENTANA };
     //SDL events
@@ -199,20 +174,21 @@ int main(int argc, char* args[])
 				}
                 //Move the dot
 				jugador.move();
+				pelota.move();
 
 				//Center the camera over the dot
                 if ( (camera.x + ANCHO_VENTANA-MARGEN)<(jugador.getPosX()+Jugador::ANCHO_JUGADOR / 2 )){
-				camera.x +=3; //=( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
+				camera.x +=Jugador::VELOCIDAD_JUGADOR; //=( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
 				}
 				 if ( (camera.x +MARGEN)>(jugador.getPosX()+Jugador::ANCHO_JUGADOR / 2 )){
-				camera.x -=3;// ( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
+				camera.x -=Jugador::VELOCIDAD_JUGADOR;// ( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
 				}
 
 				if ((camera.y + ALTO_VENTANA-MARGEN)<(jugador.getPosY()+Jugador::ALTO_JUGADOR / 2 )){
-				camera.y +=3;//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
+				camera.y +=Jugador::VELOCIDAD_JUGADOR;//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
                 }
                 if ((camera.y +MARGEN)>(jugador.getPosY()+Jugador::ALTO_JUGADOR / 2 )){
-				camera.y -=3;//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
+				camera.y -=Jugador::VELOCIDAD_JUGADOR;//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
                 }
 				//Keep the camera in bounds
 				if( camera.x < 0 )
@@ -237,7 +213,8 @@ int main(int argc, char* args[])
 				SDL_RenderClear( gRenderer );
 
 				//Render background
-				texturaCancha.render( 0, 0, &camera,0.0,NULL,SDL_FLIP_NONE,gRenderer );
+				vistaCancha.render(&camera,gRenderer);
+				//texturaCancha.render( 0, 0, &camera,0.0,NULL,SDL_FLIP_NONE,gRenderer );
 
 				vistaPelota.render(camera.x, camera.y,gRenderer);
 
@@ -253,8 +230,8 @@ int main(int argc, char* args[])
 				//Update screen
 				SDL_RenderPresent( gRenderer );
 			}
-        }
     }
+
 	//Free resources and close SDL
 	close();
 

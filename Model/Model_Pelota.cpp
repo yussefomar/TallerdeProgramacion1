@@ -4,12 +4,12 @@
 Pelota::Pelota()
 {
     //Initialize the offsets
-    mPosX = (ANCHO_NIVEL/2)-6;
-    mPosY = (ALTO_NIVEL/2)-6;
+    mPosX = (ANCHO_NIVEL/2)-(ANCHO_PELOTA/2);
+    mPosY = (ALTO_NIVEL/2)-(ANCHO_PELOTA/2);
 
     //Initialize the velocity
-    mVelX = 0;
-    mVelY = 0;
+    mVelX = 50;
+    mVelY = 50;
 }
 
 void Pelota::move()
@@ -18,21 +18,25 @@ void Pelota::move()
     mPosX += mVelX;
 
     //If the dot went too far to the left or right
-    if( ( mPosX < 0 ) || ( mPosX + ANCHO_JUGADOR > ANCHO_NIVEL) )
+    if( ( mPosX < 0 ) || ( mPosX + ANCHO_PELOTA > ANCHO_NIVEL) )
     {
         //Move back
         mPosX -= mVelX;
+        mVelX=(-1)*mVelX;
+
     }
 
     //Move the dot up or down
     mPosY += mVelY;
 
     //If the dot went too far up or down
-    if( ( mPosY < 0 ) || ( mPosY + ALTO_JUGADOR > ALTO_NIVEL ) )
+    if( ( mPosY < 0 ) || ( mPosY + ANCHO_PELOTA > ALTO_NIVEL ) )
     {
         //Move back
         mPosY -= mVelY;
+        mVelY=(-1)*mVelY;
     }
+
 }
 
 int Pelota::getPosX()
@@ -59,22 +63,22 @@ void Pelota::setPosY(int PosY)
 
 void Pelota::disminuirVelocidadX()
 {
-    mVelX -= VELOCIDAD_JUGADOR;;
+    mVelX -= VELOCIDAD_PELOTA;;
 }
 
 void Pelota::disminuirVelocidadY()
 {
-	mVelY -= VELOCIDAD_JUGADOR; ;
+	mVelY -= VELOCIDAD_PELOTA; ;
 }
 
 void Pelota::aumentarVelocidadX()
 {
-	mVelX += VELOCIDAD_JUGADOR; ;
+	mVelX += VELOCIDAD_PELOTA; ;
 }
 
 void Pelota::aumentarVelocidadY()
 {
-	mVelY += VELOCIDAD_JUGADOR; ;
+	mVelY += VELOCIDAD_PELOTA; ;
 }
 
 int Pelota::getVelX()
