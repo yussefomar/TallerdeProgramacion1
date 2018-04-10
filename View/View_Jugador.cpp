@@ -8,24 +8,27 @@
                // success = false;
             }
             else
-            {
+            {   int offset = 0;
+                if (!model->casacaPrincipal()) {
+                offset = 256;
+                }
                 //Set sprite clips
-                gSpriteClips[ 0 ].x =   0;
+                gSpriteClips[ 0 ].x =   offset+0; //si sumo 256 en X tengo la otra camiseta
                 gSpriteClips[ 0 ].y =   128;
                 gSpriteClips[ 0 ].w =  62;
                 gSpriteClips[ 0 ].h = 62;
 
-                gSpriteClips[ 1 ].x =  64;
+                gSpriteClips[ 1 ].x =  offset+64;
                 gSpriteClips[ 1 ].y =  128;
                 gSpriteClips[ 1 ].w =  62;
                 gSpriteClips[ 1 ].h = 62;
 
-                gSpriteClips[ 2 ].x = 128;
+                gSpriteClips[ 2 ].x = offset+128;
                 gSpriteClips[ 2 ].y =   128;
                 gSpriteClips[ 2 ].w =  62;
                 gSpriteClips[ 2 ].h = 62;
 
-                gSpriteClips[ 3 ].x = 192;
+                gSpriteClips[ 3 ].x = offset+192;
                 gSpriteClips[ 3 ].y =   128;
                 gSpriteClips[ 3 ].w =  62;
                 gSpriteClips[ 3 ].h = 62;
@@ -85,7 +88,5 @@
             //Show the dot relative to the camera
         this->texturaJugador.render( (*this->model).getPosX() - camX, (*this->model).getPosY() - camY ,currentClip,direccion,NULL,SDL_FLIP_NONE,gRenderer);
         }
-
-
 
 

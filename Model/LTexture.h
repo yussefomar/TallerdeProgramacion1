@@ -6,6 +6,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+//dimension del nivel
+const int ANCHO_NIVEL = 2048;
+const int ALTO_NIVEL = 1318;
+
 class LTexture
 {
 	public:

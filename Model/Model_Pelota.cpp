@@ -1,20 +1,18 @@
-#include "Model_Jugador.h"
+#include "Model_Pelota.h"
 
 
-Jugador::Jugador()
+Pelota::Pelota()
 {
     //Initialize the offsets
-    mPosX = 950;
-    mPosY = 678;
-    casaca = true;
+    mPosX = (ANCHO_NIVEL/2)-6;
+    mPosY = (ALTO_NIVEL/2)-6;
 
     //Initialize the velocity
     mVelX = 0;
     mVelY = 0;
 }
 
-
-void Jugador::move()
+void Pelota::move()
 {
     //Move the dot left or right
     mPosX += mVelX;
@@ -37,63 +35,56 @@ void Jugador::move()
     }
 }
 
-int Jugador::getPosX()
+int Pelota::getPosX()
 {
 	return mPosX;
 }
 
-int Jugador::getPosY()
+int Pelota::getPosY()
 {
 	return mPosY;
 }
 
-void Jugador::setPosX(int PosX)
+void Pelota::setPosX(int PosX)
 {
 	 mPosX= PosX;
 }
 
-void Jugador::setPosY(int PosY)
+void Pelota::setPosY(int PosY)
 {
 	mPosY=PosY ;
 }
 
-void Jugador::setCasacaAlternativa()
-{
-	casaca=false ;
-}
 
 
-void Jugador::disminuirVelocidadX()
+void Pelota::disminuirVelocidadX()
 {
     mVelX -= VELOCIDAD_JUGADOR;;
 }
 
-void Jugador::disminuirVelocidadY()
+void Pelota::disminuirVelocidadY()
 {
 	mVelY -= VELOCIDAD_JUGADOR; ;
 }
 
-void Jugador::aumentarVelocidadX()
+void Pelota::aumentarVelocidadX()
 {
 	mVelX += VELOCIDAD_JUGADOR; ;
 }
 
-void Jugador::aumentarVelocidadY()
+void Pelota::aumentarVelocidadY()
 {
 	mVelY += VELOCIDAD_JUGADOR; ;
 }
 
-int Jugador::getVelX()
+int Pelota::getVelX()
 {
 	return mVelX;
 }
 
-int Jugador::getVelY()
+int Pelota::getVelY()
 {
 	return mVelY;
 }
-bool Jugador::casacaPrincipal()
-{
-	return casaca;
-}
+
 

@@ -58,6 +58,8 @@
 		<Unit filename="Model/LTexture.h" />
 		<Unit filename="Model/Model_Jugador.cpp" />
 		<Unit filename="Model/Model_Jugador.h" />
+		<Unit filename="Model/Model_Pelota.cpp" />
+		<Unit filename="Model/Model_Pelota.h" />
 		<Unit filename="Utils/Util_Common.cpp" />
 		<Unit filename="Utils/Util_Common.h" />
 		<Unit filename="Utils/Util_Logger.cpp" />
@@ -66,6 +68,8 @@
 		<Unit filename="Utils/Util_Parser.h" />
 		<Unit filename="View/View_Jugador.cpp" />
 		<Unit filename="View/View_Jugador.h" />
+		<Unit filename="View/View_Pelota.cpp" />
+		<Unit filename="View/View_Pelota.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

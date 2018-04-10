@@ -7,6 +7,8 @@
 #include "Model/LTexture.h"
 #include "View/View_Jugador.h"
 #include "Controller/Controller_Jugador.h"
+#include "Model/Model_Pelota.h"
+#include "View/View_Pelota.h"
 #include <yaml-cpp/yaml.h>
 using namespace std;
 
@@ -22,8 +24,6 @@ Util_Logger logger;
 SDL_Window* window = NULL;
 //The window renderer
 SDL_Renderer* gRenderer = NULL;
-
-//LTexture texturaJugador;
 
 LTexture texturaCancha;
 
@@ -157,17 +157,24 @@ int main(int argc, char* args[])
 		}
 		else
 		{
-
+    Pelota pelota;
+    View_Pelota vistaPelota(&pelota,gRenderer);
     Jugador jugador;
     View_Jugador vistaJugador(&jugador,gRenderer);
     Controller_Jugador controlJugador(&jugador,&vistaJugador);
     Jugador jugador2;
+    jugador2.setCasacaAlternativa();
+    jugador2.setPosX(700);
+    jugador2.setPosY(400);
     View_Jugador vistaJugador2(&jugador2,gRenderer);
     Jugador jugador3;
+    jugador3.setPosX(700);
+    jugador3.setPosY(600);
     View_Jugador vistaJugador3(&jugador3,gRenderer);
     Jugador jugador4;
+    jugador4.setPosX(700);
+    jugador4.setPosY(800);
     View_Jugador vistaJugador4(&jugador4,gRenderer);
-
 
     //The camera area
     SDL_Rect camera = { CAMARAPOSICIONINICIALX,CAMARAPOSICIONINICIALY, ANCHO_VENTANA, ALTO_VENTANA };
@@ -231,18 +238,14 @@ int main(int argc, char* args[])
 
 				//Render background
 				texturaCancha.render( 0, 0, &camera,0.0,NULL,SDL_FLIP_NONE,gRenderer );
-				//Render objects
 
-                jugador2.setPosX(700);
-                jugador2.setPosY(400);
+				vistaPelota.render(camera.x, camera.y,gRenderer);
+
+				//Render objects
                 vistaJugador2.render( camera.x, camera.y,gRenderer);
 
-                jugador3.setPosX(700);
-                jugador3.setPosY(600);
                 vistaJugador3.render( camera.x, camera.y,gRenderer);
 
-                jugador4.setPosX(700);
-                jugador4.setPosY(800);
                 vistaJugador4.render( camera.x, camera.y,gRenderer);
 
                 vistaJugador.render( camera.x, camera.y,gRenderer);

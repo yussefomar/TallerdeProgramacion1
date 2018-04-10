@@ -1,9 +1,9 @@
-#ifndef MODEL_JUGADOR_H_
-#define MODEL_JUGADOR_H_
+#ifndef MODEL_PELOTA_H_
+#define MODEL_PELOTA_H_
 #include <SDL2/SDL.h>
 #include "LTexture.h"
 
-class Jugador
+class Pelota
 {
     public:
 		//The dimensions of the dot
@@ -14,7 +14,7 @@ class Jugador
 		static const int VELOCIDAD_JUGADOR = 3;
 
 		//Initializes the variables
-		Jugador();
+		Pelota();
 
 		//Moves the dot
 		void move();
@@ -25,11 +25,10 @@ class Jugador
 		//Position accessors
 		int getVelX();
 		int getVelY();
+
 		void setPosX(int PosX);
 
         void setPosY(int PosY);
-
-        void setCasacaAlternativa();
 
         void disminuirVelocidadX();
 
@@ -39,8 +38,6 @@ class Jugador
 
         void aumentarVelocidadY();
 
-        bool casacaPrincipal();
-
     private:
 		//The X and Y offsets of the dot
 		int mPosX, mPosY;
@@ -48,7 +45,6 @@ class Jugador
 		//The velocity of the dot
 		int mVelX, mVelY;
 
-		bool casaca;
 };
 
 #endif

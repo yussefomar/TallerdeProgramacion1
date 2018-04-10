@@ -52,7 +52,7 @@
 1523228224 source:/home/matias/Documentos/TallerdeProgramacion1/Controller/Controller_Jugador.cpp
 	"Controller_Jugador.h"
 
-1523235204 source:/home/matias/Documentos/TallerdeProgramacion1/main.cpp
+1523329136 source:/home/matias/Documentos/TallerdeProgramacion1/main.cpp
 	<iostream>
 	<stdlib.h>
 	<SDL2/SDL.h>
@@ -62,6 +62,8 @@
 	"Model/LTexture.h"
 	"View/View_Jugador.h"
 	"Controller/Controller_Jugador.h"
+	"Model/Model_Pelota.h"
+	"View/View_Pelota.h"
 	<yaml-cpp/yaml.h>
 
 1522558724 /home/matias/Documentos/TallerdeProgramacion1/Utils/Util_Logger.h
@@ -92,14 +94,14 @@
 
 1522880102 source:/home/matias/Documentos/TallerdeProgramacion1/Utils/Util_Parser.cpp
 
-1523244931 source:/home/matias/Documentos/TallerdeProgramacion1/View/View_Jugador.cpp
+1523325113 source:/home/matias/Documentos/TallerdeProgramacion1/View/View_Jugador.cpp
 	"View_Jugador.h"
 
-1523241396 /home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.h
+1523327573 /home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.h
 	<SDL2/SDL.h>
 	"LTexture.h"
 
-1523241344 source:/home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.cpp
+1523325148 source:/home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.cpp
 	"Model_Jugador.h"
 
 1523241917 /home/matias/Documentos/TallerdeProgramacion1/View/View_Jugador.h
@@ -110,7 +112,7 @@
 1523232452 source:/home/matias/Documentos/TallerdeProgramacion1/Model/LTexture.cpp
 	"LTexture.h"
 
-1523232432 /home/matias/Documentos/TallerdeProgramacion1/Model/LTexture.h
+1523327553 /home/matias/Documentos/TallerdeProgramacion1/Model/LTexture.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_image.h>
 	<iostream>
@@ -122,4 +124,19 @@
 	"../Model/LTexture.h"
 	"../View/View_Jugador.h"
 	"../Model/Model_Jugador.h"
+
+1523329898 source:/home/matias/Documentos/TallerdeProgramacion1/Model/Model_Pelota.cpp
+	"Model_Pelota.h"
+
+1523329760 source:/home/matias/Documentos/TallerdeProgramacion1/View/View_Pelota.cpp
+	"View_Pelota.h"
+
+1523328887 /home/matias/Documentos/TallerdeProgramacion1/Model/Model_Pelota.h
+	<SDL2/SDL.h>
+	"LTexture.h"
+
+1523327362 /home/matias/Documentos/TallerdeProgramacion1/View/View_Pelota.h
+	<SDL2/SDL.h>
+	"../Model/LTexture.h"
+	"../Model/Model_Pelota.h"
 
