@@ -159,3 +159,122 @@
 	"../Model/LTexture.h"
 	"../Model/Model_Pelota.h"
 
+1523415074 source:/home/andres/TallerdeProgramacion1/Controller/Controller_Jugador.cpp
+	"Controller_Jugador.h"
+
+1523415074 /home/andres/TallerdeProgramacion1/Controller/Controller_Jugador.h
+	<SDL2/SDL.h>
+	"../Model/LTexture.h"
+	"../View/View_Jugador.h"
+	"../Model/Model_Jugador.h"
+
+1523415074 /home/andres/TallerdeProgramacion1/Model/LTexture.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_image.h>
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+
+1523415074 /home/andres/TallerdeProgramacion1/View/View_Jugador.h
+	<SDL2/SDL.h>
+	"../Model/LTexture.h"
+	"../Model/Model_Jugador.h"
+
+1523415074 /home/andres/TallerdeProgramacion1/Model/Model_Jugador.h
+	<SDL2/SDL.h>
+	"LTexture.h"
+
+1523421717 source:/home/andres/TallerdeProgramacion1/main.cpp
+	<iostream>
+	<stdlib.h>
+	<SDL2/SDL.h>
+	<stdio.h>
+	"Model/Model_Jugador.h"
+	"Utils/Util_Logger.h"
+	"Utils/Util_Parser.h"
+	"Model/LTexture.h"
+	"View/View_Jugador.h"
+	"Controller/Controller_Jugador.h"
+	"Model/Model_Pelota.h"
+	"View/View_Pelota.h"
+	"View/View_Cancha.h"
+	<yaml-cpp/yaml.h>
+
+1523415074 /home/andres/TallerdeProgramacion1/Utils/Util_Logger.h
+	<iostream>
+	<string>
+	<list>
+
+1523415074 /home/andres/TallerdeProgramacion1/Model/Model_Pelota.h
+	<SDL2/SDL.h>
+	"LTexture.h"
+
+1523415074 /home/andres/TallerdeProgramacion1/View/View_Pelota.h
+	<SDL2/SDL.h>
+	"../Model/LTexture.h"
+	"../Model/Model_Pelota.h"
+
+1523415074 /home/andres/TallerdeProgramacion1/View/View_Cancha.h
+	<SDL2/SDL.h>
+	"../Model/LTexture.h"
+	"../Model/Model_Pelota.h"
+
+1523415074 source:/home/andres/TallerdeProgramacion1/Model/LTexture.cpp
+	"LTexture.h"
+
+1523415074 source:/home/andres/TallerdeProgramacion1/Model/Model_Equipo.cpp
+	"Model_Equipo.h"
+
+1523415074 /home/andres/TallerdeProgramacion1/Model/Model_Equipo.h
+	<SDL2/SDL.h>
+	"LTexture.h"
+	<iostream>
+	<list>
+	"Model_Jugador.h"
+
+1523415074 source:/home/andres/TallerdeProgramacion1/Model/Model_Jugador.cpp
+	"Model_Jugador.h"
+
+1523415074 source:/home/andres/TallerdeProgramacion1/Model/Model_Pelota.cpp
+	"Model_Pelota.h"
+
+1523415074 source:/home/andres/TallerdeProgramacion1/Utils/Util_Common.cpp
+	<time.h>
+	"Util_Common.h"
+
+1523415074 /home/andres/TallerdeProgramacion1/Utils/Util_Common.h
+	<iostream>
+	<string>
+
+1523415074 source:/home/andres/TallerdeProgramacion1/Utils/Util_Logger.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<stdio.h>
+	<time.h>
+	<list>
+	<sys/stat.h>
+	<unistd.h>
+	<stdlib.h>
+	"Util_Logger.h"
+	"Util_Common.h"
+
+1523415074 source:/home/andres/TallerdeProgramacion1/View/View_Cancha.cpp
+	"View_Cancha.h"
+
+1523415074 source:/home/andres/TallerdeProgramacion1/View/View_Jugador.cpp
+	"View_Jugador.h"
+
+1523415074 source:/home/andres/TallerdeProgramacion1/View/View_Pelota.cpp
+	"View_Pelota.h"
+
+1523424050 source:/home/andres/TallerdeProgramacion1/Utils/Util_Parser.cpp
+	<yaml-cpp/yaml.h>
+	"Util_Parser.h"
+
+1523423884 /home/andres/TallerdeProgramacion1/Utils/Util_Parser.h
+	<iostream>
+	<string>
+	<list>
+	<yaml-cpp/yaml.h>
+

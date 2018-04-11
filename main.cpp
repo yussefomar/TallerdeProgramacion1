@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include "Model/Model_Jugador.h"
 #include "Utils/Util_Logger.h"
+#include "Utils/Util_Parser.h"
 #include "Model/LTexture.h"
 #include "View/View_Jugador.h"
 #include "Controller/Controller_Jugador.h"
@@ -22,6 +23,7 @@ const int CAMARAPOSICIONINICIALY = (ALTO_NIVEL/2)-(ALTO_VENTANA/2);
 unsigned short logLevel;
 using namespace std;
 Util_Logger logger;
+Util_Parser parser;
 //The window we'll be rendering to
 SDL_Window* window = NULL;
 //The window renderer
@@ -106,7 +108,8 @@ void close()
 int main(int argc, char* args[])
 {
 	/********************************************************************************************/
-	// Inicializar el log.
+	Equipo equipoParseado = parser.read_yaml_Equipo("./Configs/config.yaml");
+	Debug debugParseado = parser.read_yaml_Debug("./Configs/config.yaml");
 	logger.createFile(3);
     /**
 	Si queremos usar el logger mientras leemos el archivo de configuracion debemos crearlo como
@@ -117,9 +120,9 @@ int main(int argc, char* args[])
     por ejemplo en un catch donde saltó una excepción ponemos log.writeErrorLine y si el level
     está configurado para escribir errores los pondra en el archivo.
     **/
-	logger.writeErrorLine("Ejemplo de Error."); //nivel bajo, siempre mostramos errores.
-	logger.writeWarningLine("Ejemplo de Warning."); //nivel medio, mostramos errores y warnings.
-	logger.writeMessageLine("Ejemplo de linea común."); //nivel alto, se escribe todo.
+	logger.writeErrorLine("Ejemplo de Error." + equipoParseado.get_formacion()); //nivel bajo, siempre mostramos errores.
+	logger.writeWarningLine("Ejemplo de Warning." + equipoParseado.get_casaca()); //nivel medio, mostramos errores y warnings.
+	logger.writeMessageLine("Ejemplo de linea común." + debugParseado.get_level()); //nivel alto, se escribe todo.
 	/********************************************************************************************/
 
 	/********************************************************************************************/

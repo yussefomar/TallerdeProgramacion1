@@ -49,6 +49,7 @@
 			<Add option="-lSDL2_image" />
 			<Add option="-lyaml-cpp" />
 		</Linker>
+		<Unit filename="Configs/config.yaml" />
 		<Unit filename="Controller/Controller_Jugador.cpp" />
 		<Unit filename="Controller/Controller_Jugador.h" />
 		<Unit filename="Images/canchafubol.jpg" />
