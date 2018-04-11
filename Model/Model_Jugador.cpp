@@ -1,6 +1,5 @@
 #include "Model_Jugador.h"
 
-
 Jugador::Jugador()
 {
     //Initialize the offsets
@@ -39,27 +38,27 @@ void Jugador::move()
 
 int Jugador::getPosX()
 {
-	return mPosX;
+    return mPosX;
 }
 
 int Jugador::getPosY()
 {
-	return mPosY;
+    return mPosY;
 }
 
 void Jugador::setPosX(int PosX)
 {
-	 mPosX= PosX;
+    mPosX= PosX;
 }
 
 void Jugador::setPosY(int PosY)
 {
-	mPosY=PosY ;
+    mPosY=PosY ;
 }
 
 void Jugador::setCasacaAlternativa()
 {
-	casaca=false ;
+    casaca=false ;
 }
 
 
@@ -70,30 +69,29 @@ void Jugador::disminuirVelocidadX()
 
 void Jugador::disminuirVelocidadY()
 {
-	mVelY -= VELOCIDAD_JUGADOR; ;
+    mVelY -= VELOCIDAD_JUGADOR; ;
 }
 
 void Jugador::aumentarVelocidadX()
 {
-	mVelX += VELOCIDAD_JUGADOR; ;
+    mVelX += VELOCIDAD_JUGADOR; ;
 }
 
 void Jugador::aumentarVelocidadY()
 {
-	mVelY += VELOCIDAD_JUGADOR; ;
+    mVelY += VELOCIDAD_JUGADOR; ;
 }
 
 int Jugador::getVelX()
 {
-	return mVelX;
+    return mVelX;
 }
 
 int Jugador::getVelY()
 {
-	return mVelY;
+    return mVelY;
 }
 bool Jugador::casacaPrincipal()
 {
-	return casaca;
+    return casaca;
 }
-
