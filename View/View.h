@@ -41,6 +41,8 @@ class View : public Observer
         bool inicializar();
         bool loadMedia();
         void close();
+        //solo una vista por el momento.
+        View_Jugador viewJugador;
 
 };
 

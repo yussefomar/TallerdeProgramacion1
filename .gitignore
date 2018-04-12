@@ -8,3 +8,7 @@ bin/Debug/TallerProgramacionTP
 TallerProgramacionTP\.depend
 
 TallerProgramacionTP\.layout
+
+*.depend
+
+*.layout

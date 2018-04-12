@@ -25,12 +25,12 @@
 	<string>
 	<list>
 
-1523022029 source:/home/joacko/TallerdeProgramacion1/Utils/Util_Parser.cpp
+1523508108 source:/home/joacko/TallerdeProgramacion1/Utils/Util_Parser.cpp
 
-1523454215 source:/home/joacko/TallerdeProgramacion1/Controller/Controller_Jugador.cpp
+1523508108 source:/home/joacko/TallerdeProgramacion1/Controller/Controller_Jugador.cpp
 	"Controller_Jugador.h"
 
-1523455640 /home/joacko/TallerdeProgramacion1/Controller/Controller_Jugador.h
+1523508108 /home/joacko/TallerdeProgramacion1/Controller/Controller_Jugador.h
 	<SDL2/SDL.h>
 	"../Model/LTexture.h"
 	"../View/View_Jugador.h"
@@ -48,9 +48,7 @@
 	"../Model/LTexture.h"
 	"../Model/Model_Jugador.h"
 
-1523368717 /home/joacko/TallerdeProgramacion1/Model/Model_Jugador.h
-	<SDL2/SDL.h>
-	"LTexture.h"
+1523508108 /home/joacko/TallerdeProgramacion1/Model/Model_Jugador.h
 
 1523368717 source:/home/joacko/TallerdeProgramacion1/Model/LTexture.cpp
 	"LTexture.h"
@@ -58,10 +56,10 @@
 1523454429 source:/home/joacko/TallerdeProgramacion1/Model/Model_Jugador.cpp
 	"Model_Jugador.h"
 
-1523368717 source:/home/joacko/TallerdeProgramacion1/Model/Model_Pelota.cpp
+1523508108 source:/home/joacko/TallerdeProgramacion1/Model/Model_Pelota.cpp
 	"Model_Pelota.h"
 
-1523368717 /home/joacko/TallerdeProgramacion1/Model/Model_Pelota.h
+1523508108 /home/joacko/TallerdeProgramacion1/Model/Model_Pelota.h
 	<SDL2/SDL.h>
 	"LTexture.h"
 
@@ -76,12 +74,12 @@
 	"../Model/LTexture.h"
 	"../Model/Model_Pelota.h"
 
-1523470789 source:/home/joacko/TallerdeProgramacion1/main.cpp
+1523508108 source:/home/joacko/TallerdeProgramacion1/main.cpp
 	"View/View.h"
 	"Controller/Controller.h"
 	"Model/Model.h"
 
-1523456540 /home/joacko/TallerdeProgramacion1/View/View.h
+1523508751 /home/joacko/TallerdeProgramacion1/View/View.h
 	<iostream>
 	<stdio.h>
 	<stdlib.h>
@@ -91,15 +89,15 @@
 	"Observer.h"
 	"Model.h"
 
-1523412049 source:/home/joacko/TallerdeProgramacion1/View/Observer.cpp
+1523508108 source:/home/joacko/TallerdeProgramacion1/View/Observer.cpp
 	"Observer.h"
 
-1523469594 /home/joacko/TallerdeProgramacion1/View/Observer.h
+1523508108 /home/joacko/TallerdeProgramacion1/View/Observer.h
 
-1523468815 source:/home/joacko/TallerdeProgramacion1/Controller/Controller.cpp
+1523508108 source:/home/joacko/TallerdeProgramacion1/Controller/Controller.cpp
 	"Controller.h"
 
-1523467128 /home/joacko/TallerdeProgramacion1/Controller/Controller.h
+1523508108 /home/joacko/TallerdeProgramacion1/Controller/Controller.h
 	"Model.h"
 	"Command.h"
 	<SDL2/SDL.h>
@@ -108,13 +106,13 @@
 	"DisminuirVelocidadX.h"
 	"AumentarVelocidadX.h"
 
-1523472024 /home/joacko/TallerdeProgramacion1/Model/Model.h
+1523508108 /home/joacko/TallerdeProgramacion1/Model/Model.h
 	"Observer.h"
 	"Command.h"
 	"Model_Jugador.h"
 	<list>
 
-1523472252 source:/home/joacko/TallerdeProgramacion1/Model/Model.cpp
+1523508108 source:/home/joacko/TallerdeProgramacion1/Model/Model.cpp
 	"Model.h"
 
 1523456781 source:/home/joacko/TallerdeProgramacion1/View/View.cpp
@@ -123,13 +121,13 @@
 1523455927 source:/home/joacko/TallerdeProgramacion1/Controller/Command.cpp
 	"Command.h"
 
-1523466151 /home/joacko/TallerdeProgramacion1/Controller/Command.h
+1523508108 /home/joacko/TallerdeProgramacion1/Controller/Command.h
 
 1523471900 source:/home/joacko/TallerdeProgramacion1/Controller/DesminuirVelocidadY.cpp
 	"DesminuirVelocidadY.h"
 	"Model_Jugador.h"
 
-1523466845 /home/joacko/TallerdeProgramacion1/Controller/DesminuirVelocidadY.h
+1523508108 /home/joacko/TallerdeProgramacion1/Controller/DesminuirVelocidadY.h
 	<Command.h>
 	<Model.h>
 
@@ -137,7 +135,7 @@
 	"AumentarVelocidadY.h"
 	"Model_Jugador.h"
 
-1523467850 /home/joacko/TallerdeProgramacion1/Controller/AumentarVelocidadY.h
+1523508108 /home/joacko/TallerdeProgramacion1/Controller/AumentarVelocidadY.h
 	<Command.h>
 	"Model.h"
 
@@ -145,7 +143,7 @@
 	"DisminuirVelocidadX.h"
 	"Model_Jugador.h"
 
-1523467487 /home/joacko/TallerdeProgramacion1/Controller/DisminuirVelocidadX.h
+1523508108 /home/joacko/TallerdeProgramacion1/Controller/DisminuirVelocidadX.h
 	<Command.h>
 	"Model.h"
 
@@ -153,7 +151,7 @@
 	"AumentarVelocidadX.h"
 	"Model_Jugador.h"
 
-1523467347 /home/joacko/TallerdeProgramacion1/Controller/AumentarVelocidadX.h
+1523508108 /home/joacko/TallerdeProgramacion1/Controller/AumentarVelocidadX.h
 	<Command.h>
 	"Model.h"
 

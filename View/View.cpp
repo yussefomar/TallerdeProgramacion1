@@ -134,6 +134,8 @@ void View::update()
 void View::setModel(Model& model)
 {
     this->model = model;
+    //Muy para salir del apuro...
+    this->viewJugador.SetModel(&(this->model.getActivePlayer()))
 }
 
 void View::render()
