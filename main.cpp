@@ -126,17 +126,12 @@ int main(int argc, char* args[])
     {
         //The camera area
         SDL_Rect camera = { CAMARAPOSICIONINICIALX,CAMARAPOSICIONINICIALY, ANCHO_VENTANA, ALTO_VENTANA };
-        //SDL events
-        SDL_Event e;
 
         Model model;
         ViewModel viewModel(&model, gRenderer, &camera);
         Controller controller(&model);
 
         Jugador* jugadorActual = model.getJugadorActivo();
-
-
-        bool quit = false;
 
         while( !controller.quitPressed() )
         {
