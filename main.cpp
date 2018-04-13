@@ -145,17 +145,10 @@ int main(int argc, char* args[])
         //SDL events
         SDL_Event e;
 
-        //modelo y vistas init
         Model model;
         ViewModel viewModel(&model, gRenderer, &camera);
         Controller controller(&model);
-        //Me cuesta entender porque estan ligados los controles con la vista...
-        //Cuando sumen sonido se va a tener rearmar todo
-        //Y por otro lado... porque un controlador para un jugador...
-        //Controller_Jugador controlJugador(&jugador,&vistaJugador);
 
-
-        //Solo para que funcione esta locura
         Jugador* jugadorActual = model.getJugadorActivo();
 
 
@@ -163,81 +156,19 @@ int main(int argc, char* args[])
 
         while( !quit )
         {
-            //Handle events on queue
             while( SDL_PollEvent( &e ) != 0 )
             {
-                //User requests quit
                 if( e.type == SDL_QUIT )
                 {
                     quit = true;
                 }
-
-                //Handle input Jugador
-                //controlJugador.handleEvent( e );
-                //En general se retrasa la aplicacion de un evento
-                //Pero aca lo hago asi para no romper todo.
                 model.addCommand(controller.handleEvent(e));
-                //model.update();
-                //suponemos que esto es para cambiar de jugador.
-                if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
-                {
-                    //Adjust the velocity
-                    switch( e.key.keysym.sym )
-                    {
-
-                    case SDLK_4:
-                    {
-//                        jugadorActual->stop();
-//                        controlJugador.SetModel(&jugador4);
-//                        jugadorActual = &jugador4;
-//                        jugadorActual->stop();
-//                        camera.x=( jugadorActual->getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
-//                        camera.y=( jugadorActual->getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA/ 2;
-                    }
-                    break;
-                    case SDLK_1:
-                    {
-//                        jugadorActual->stop();
-//                        controlJugador.SetModel(&jugador);
-//                        jugadorActual = &jugador;
-//                        jugadorActual->stop();
-//                        camera.x=( jugadorActual->getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
-//                        camera.y=( jugadorActual->getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA/ 2;
-                    }
-                    break;
-                    case SDLK_2:
-                    {
-//                        jugadorActual->stop();
-//                        controlJugador.SetModel(&jugador2);
-//                        jugadorActual = &jugador2;
-//                        jugadorActual->stop();
-//                        camera.x=( jugadorActual->getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
-//                        camera.y=( jugadorActual->getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA/ 2;
-                    }
-                    break;
-                    case SDLK_3:
-                    {
-//                        jugadorActual->stop();
-//                        controlJugador.SetModel(&jugador3);
-//                        jugadorActual = &jugador3;
-//                        jugadorActual->stop();
-//                        camera.x=( jugadorActual->getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
-//                        camera.y=( jugadorActual->getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA/ 2;
-                    }
-                    break;
-                    }
-                }
             }
             model.update();
+            jugadorActual = model.getJugadorActivo();
+            camera.x=( jugadorActual->getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
+            camera.y=( jugadorActual->getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA/ 2;
 
-            //Move the dot
-//            jugador.move();
-//            jugador2.move();
-//            jugador3.move();
-//            jugador4.move();
-//            pelota.move();
-//            camera.x=( jugadorActual->getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
-//            camera.y=( jugadorActual->getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA/ 2;
             //Center the camera over the dot
             if ( (camera.x + ANCHO_VENTANA-MARGEN)<((*jugadorActual).getPosX()+Jugador::ANCHO_JUGADOR / 2 ))
             {
@@ -279,22 +210,6 @@ int main(int argc, char* args[])
             SDL_RenderClear( gRenderer );
 
             viewModel.render();
-            //Porque inicializaba a todas las vistas con gRenderer si despues las tienen que volver
-            //a usar en el render de cada vista....
-//            //Render background
-//            vistaCancha.render(&camera,gRenderer);
-//            //texturaCancha.render( 0, 0, &camera,0.0,NULL,SDL_FLIP_NONE,gRenderer );
-//
-//            vistaPelota.render(camera.x, camera.y,gRenderer);
-//
-//            //Render objects
-//            vistaJugador2.render( camera.x, camera.y,gRenderer);
-//
-//            vistaJugador3.render( camera.x, camera.y,gRenderer);
-//
-//            vistaJugador4.render( camera.x, camera.y,gRenderer);
-//
-//            vistaJugador.render( camera.x, camera.y,gRenderer);
 
             //Update screen
             SDL_RenderPresent( gRenderer );

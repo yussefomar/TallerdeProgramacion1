@@ -16,6 +16,8 @@ public:
     Jugador* getJugadorNro(int i);
     Jugador* getJugadorActivo();
     void addCommand(Command* command);
+    void cambiarJugadorActivo();
+    void detenerJugadores();
     void update();
 
 protected:

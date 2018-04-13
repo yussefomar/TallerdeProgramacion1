@@ -14,6 +14,5 @@ DisminuirVelocidadY::~DisminuirVelocidadY()
 void DisminuirVelocidadY::execute() {
     Jugador* jugador = this->model->getJugadorActivo();
     jugador->disminuirVelocidadY();
-    //jugador->move();
     return;
 }

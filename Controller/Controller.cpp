@@ -4,11 +4,12 @@
 #include "AumentarVelocidadY.h"
 #include "DisminuirVelocidadX.h"
 #include "AumentarVelocidadX.h"
+#include "CambiarJugador.h"
 
-#define CANTCOMMANDS 4
+#define CANTCOMMANDS 5
 
 
-enum IDCommand{DECVELX, DECVELY, INCVELX, INCVELY};
+enum IDCommand{DECVELX, DECVELY, INCVELX, INCVELY, CAMBJUG};
 
 Controller::Controller(Model* model)
 {
@@ -18,6 +19,7 @@ Controller::Controller(Model* model)
     this->commands[DECVELY] = new DisminuirVelocidadY(model);
     this->commands[INCVELX] = new AumentarVelocidadX(model);
     this->commands[INCVELY] = new AumentarVelocidadY(model);
+    this->commands[CAMBJUG] = new CambiarJugador(model);
 }
 
 Controller::~Controller()
@@ -30,52 +32,48 @@ Controller::~Controller()
 Command* Controller::handleEvent(SDL_Event& e)
 {
     Command* command = nullptr;
-    //Jugador jugador = (*this->jugador);
-    //If a key was pressed
+
     if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
     {
-        //Adjust the velocity
         switch( e.key.keysym.sym )
         {
         case SDLK_UP:
-            //(*this->jugador).disminuirVelocidadY();
             command = this->commands[DECVELY];
             break;
         case SDLK_DOWN:
-            //(*this->jugador).aumentarVelocidadY();
             command = this->commands[INCVELY];
             break;
         case SDLK_LEFT:
-            //(*this->jugador).disminuirVelocidadX();
             command = this->commands[DECVELX];
             break;
         case SDLK_RIGHT:
-            //(*this->jugador).aumentarVelocidadX();
             command = this->commands[INCVELX];
             break;
+        case SDLK_SPACE:
+            command = this->commands[CAMBJUG];
+            break;
+
         }
     }
     //If a key was released
     else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
     {
-        //Adjust the velocity
         switch( e.key.keysym.sym )
         {
         case SDLK_UP:
-            //(*this->jugador).aumentarVelocidadY();
             command = this->commands[INCVELY];
             break;
         case SDLK_DOWN:
-            //(*this->jugador).disminuirVelocidadY();
             command = this->commands[DECVELY];
             break;
         case SDLK_LEFT:
-            //(*this->jugador).aumentarVelocidadX();
             command = this->commands[INCVELX];
             break;
         case SDLK_RIGHT:
-            //(*this->jugador).disminuirVelocidadX();
             command = this->commands[DECVELX];
+            break;
+        case SDLK_SPACE:
+            command = this->commands[CAMBJUG];
             break;
         }
     }

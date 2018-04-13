@@ -14,7 +14,6 @@ AumentarVelocidadX::~AumentarVelocidadX()
 void AumentarVelocidadX::execute() {
     Jugador* jugador = this->model->getJugadorActivo();
     jugador->aumentarVelocidadX();
-    //jugador->move();
     return;
 }
 
