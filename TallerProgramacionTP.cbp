@@ -60,6 +60,8 @@
 		<Unit filename="Controller/AumentarVelocidadX.h" />
 		<Unit filename="Controller/AumentarVelocidadY.cpp" />
 		<Unit filename="Controller/AumentarVelocidadY.h" />
+		<Unit filename="Controller/CambiarJugador.cpp" />
+		<Unit filename="Controller/CambiarJugador.h" />
 		<Unit filename="Controller/Command.cpp" />
 		<Unit filename="Controller/Command.h" />
 		<Unit filename="Controller/Controller.cpp" />
@@ -89,6 +91,8 @@
 		<Unit filename="Utils/Util_Logger.h" />
 		<Unit filename="Utils/Util_Parser.cpp" />
 		<Unit filename="Utils/Util_Parser.h" />
+		<Unit filename="View/View.cpp" />
+		<Unit filename="View/View.h" />
 		<Unit filename="View/ViewModel.cpp" />
 		<Unit filename="View/ViewModel.h" />
 		<Unit filename="View/View_Cancha.cpp" />

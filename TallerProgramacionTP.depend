@@ -468,7 +468,7 @@
 	"Command.h"
 	<vector>
 
-1523597273 source:/home/joacko/TallerdeProgramacion1/Controller/AumentarVelocidadX.cpp
+1523600546 source:/home/joacko/TallerdeProgramacion1/Controller/AumentarVelocidadX.cpp
 	"AumentarVelocidadX.h"
 	"Model_Jugador.h"
 
@@ -478,7 +478,7 @@
 
 1523509590 /home/joacko/TallerdeProgramacion1/Controller/Command.h
 
-1523589952 /home/joacko/TallerdeProgramacion1/Model/Model.h
+1523600363 /home/joacko/TallerdeProgramacion1/Model/Model.h
 	"Model_Pelota.h"
 	"Model_Jugador.h"
 	"Command.h"
@@ -499,7 +499,7 @@
 	<SDL2/SDL.h>
 	"LTexture.h"
 
-1523597279 source:/home/joacko/TallerdeProgramacion1/Controller/AumentarVelocidadY.cpp
+1523600550 source:/home/joacko/TallerdeProgramacion1/Controller/AumentarVelocidadY.cpp
 	"AumentarVelocidadY.h"
 	"Model_Jugador.h"
 
@@ -510,14 +510,15 @@
 1523509590 source:/home/joacko/TallerdeProgramacion1/Controller/Command.cpp
 	"Command.h"
 
-1523590085 source:/home/joacko/TallerdeProgramacion1/Controller/Controller.cpp
+1523601993 source:/home/joacko/TallerdeProgramacion1/Controller/Controller.cpp
 	"Controller.h"
 	"DisminuirVelocidadY.h"
 	"AumentarVelocidadY.h"
 	"DisminuirVelocidadX.h"
 	"AumentarVelocidadX.h"
+	"CambiarJugador.h"
 
-1523588004 /home/joacko/TallerdeProgramacion1/Controller/Controller.h
+1523601963 /home/joacko/TallerdeProgramacion1/Controller/Controller.h
 	"Model.h"
 	"Command.h"
 	<vector>
@@ -544,32 +545,22 @@
 	"../Model/LTexture.h"
 	"../Model/Model_Jugador.h"
 
-1523597284 source:/home/joacko/TallerdeProgramacion1/Controller/DisminuirVelocidadX.cpp
+1523600556 source:/home/joacko/TallerdeProgramacion1/Controller/DisminuirVelocidadX.cpp
 	"DisminuirVelocidadX.h"
 	"Model_Jugador.h"
 
-1523597290 source:/home/joacko/TallerdeProgramacion1/Controller/DisminuirVelocidadY.cpp
+1523600560 source:/home/joacko/TallerdeProgramacion1/Controller/DisminuirVelocidadY.cpp
 	"DisminuirVelocidadY.h"
 	"Model_Jugador.h"
 
-1523597160 source:/home/joacko/TallerdeProgramacion1/main.cpp
+1523607008 source:/home/joacko/TallerdeProgramacion1/main.cpp
 	<iostream>
-	<stdlib.h>
-	<SDL2/SDL.h>
-	<stdio.h>
-	"Model/Model_Jugador.h"
 	"Utils/Util_Logger.h"
 	"Utils/Util_Parser.h"
-	"Model/LTexture.h"
-	"View/View_Jugador.h"
-	"Controller/Controller_Jugador.h"
-	"Model/Model_Pelota.h"
-	"View/View_Pelota.h"
-	"View/View_Cancha.h"
 	<yaml-cpp/yaml.h>
 	"Model.h"
-	"ViewModel.h"
 	"Controller.h"
+	"View.h"
 
 1523424843 /home/joacko/TallerdeProgramacion1/Utils/Util_Logger.h
 	<iostream>
@@ -601,7 +592,7 @@
 1523424843 source:/home/joacko/TallerdeProgramacion1/Model/LTexture.cpp
 	"LTexture.h"
 
-1523597387 source:/home/joacko/TallerdeProgramacion1/Model/Model.cpp
+1523600409 source:/home/joacko/TallerdeProgramacion1/Model/Model.cpp
 	"Model.h"
 
 1523424843 source:/home/joacko/TallerdeProgramacion1/Model/Model_Equipo.cpp
@@ -654,7 +645,24 @@
 1523554440 source:/home/joacko/TallerdeProgramacion1/View/View_Pelota.cpp
 	"View_Pelota.h"
 
-1523593038 source:/home/joacko/TallerdeProgramacion1/View/ViewModel.cpp
+1523606430 source:/home/joacko/TallerdeProgramacion1/View/ViewModel.cpp
 	"ViewModel.h"
 	<SDL2/SDL.h>
+
+1523599454 /home/joacko/TallerdeProgramacion1/Controller/CambiarJugador.h
+	<Command.h>
+	"Model.h"
+
+1523600332 source:/home/joacko/TallerdeProgramacion1/Controller/CambiarJugador.cpp
+	"CambiarJugador.h"
+
+1523606714 source:/home/joacko/TallerdeProgramacion1/View/View.cpp
+	"View.h"
+	"Model_Jugador.h"
+	<SDL2/SDL.h>
+
+1523607223 /home/joacko/TallerdeProgramacion1/View/View.h
+	"ViewModel.h"
+	"Model.h"
+	"Model_Jugador.h"
 
