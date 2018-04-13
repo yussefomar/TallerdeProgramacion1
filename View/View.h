@@ -8,9 +8,12 @@
 #include <SDL2/SDL.h>
 
 #include "View_Jugador.h"
-#include "View_Pelota.h"
+//#include "View_Pelota.h"
 #include "Observer.h"
 #include "Model.h"
+#include "LTexture.h"
+#include "Entity.h"
+#include "Event.h"
 
 class View : public Observer
 {
@@ -18,8 +21,8 @@ class View : public Observer
         View();
         virtual ~View();
         void render();
-        void update();
         void setModel(Model& model);
+        void onNotify(Entity& entity, Event& event);
 
 
     protected:

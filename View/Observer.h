@@ -1,13 +1,15 @@
 #ifndef OBSERVER_H
 #define OBSERVER_H
 
+#include "Entity.h"
+#include "Event.h"
 
 class Observer
 {
 public:
     Observer();
     virtual ~Observer();
-    virtual void update() = 0;;
+    virtual void onNotify(Entity& entity, Event& event) = 0;;
 
 protected:
 

@@ -1,4 +1,5 @@
 #include "View.h"
+
 //dimension de pantalla
 static const int MARGEN = 200;
 static const int ANCHO_VENTANA = 800;
@@ -22,14 +23,20 @@ View::View()
 
     if (!this->inicializar())
     {
+        //Hay que tirar una excepcion.
+        //Hay que tirar una excepcion.
         printf("%s\n", "Fallo el inicializar");
         return;
     }
     if (!this->loadMedia())
     {
+        //Hay que tirar una excepcion.
         printf("%s\n", "Fallo el loadMedia");
         return;
     }
+    //Esto lo hacemos para uno, pero tiene que ser para todos los jugadores.
+    //un posible metodo a ejecutar en view seria. configurarVistaJugadores.
+    this->viewJugador.setGRenders(this->gRenderer);
 }
 
 View::~View()
@@ -126,7 +133,7 @@ void View::close()
     SDL_Quit();
 }
 
-void View::update()
+void View::onNotify(Entity& entity, Event& event)
 {
     return;
 }
@@ -135,7 +142,9 @@ void View::setModel(Model& model)
 {
     this->model = model;
     //Muy para salir del apuro...
-    this->viewJugador.SetModel(&(this->model.getActivePlayer()))
+    //Agregar modelo a las vista jugador es algo que la vista tiene que
+    //Poder hacer por si sola.... es la que sabe a que jugador quiere seguir.
+    this->viewJugador.setModel(this->model.getActivePlayer());
 }
 
 void View::render()
@@ -144,20 +153,29 @@ void View::render()
     //centrar camara sobre el jugador.
     if ( (this->camera.x + ANCHO_VENTANA-MARGEN)<(jugador->getPosX()+Jugador::ANCHO_JUGADOR / 2 ))
     {
-        camera.x +=3; //=( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
+        this->camera.x +=3; //=( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
     }
-    if ( (camera.x +MARGEN)>(jugador.getPosX()+Jugador::ANCHO_JUGADOR / 2 ))
+    if ( (this->camera.x +MARGEN)>(jugador->getPosX()+Jugador::ANCHO_JUGADOR / 2 ))
     {
-        camera.x -=3;// ( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
+        this->camera.x -=3;// ( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
     }
 
-    if ((camera.y + ALTO_VENTANA-MARGEN)<(jugador.getPosY()+Jugador::ALTO_JUGADOR / 2 ))
+    if ((this->camera.y + ALTO_VENTANA-MARGEN)<(jugador->getPosY()+Jugador::ALTO_JUGADOR / 2 ))
     {
-        camera.y +=3;//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
+        this->camera.y +=3;//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
     }
-    if ((camera.y +MARGEN)>(jugador.getPosY()+Jugador::ALTO_JUGADOR / 2 ))
+    if ((this->camera.y +MARGEN)>(jugador->getPosY()+Jugador::ALTO_JUGADOR / 2 ))
     {
-        camera.y -=3;//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
+        this->camera.y -=3;//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
     }
+
+    //Clear screen
+    SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+    SDL_RenderClear( gRenderer );
+
+    //Render background
+    this->texturaCancha.render( 0, 0, &camera,0.0,NULL,SDL_FLIP_NONE,gRenderer );
+    //vistaPelota.render(camera.x, camera.y,gRenderer);
+    this->viewJugador.render(this->camera.x, this->camera.y, this->gRenderer);
 
 }

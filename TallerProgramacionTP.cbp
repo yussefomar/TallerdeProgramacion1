@@ -15,9 +15,9 @@
 					<Add option="-g" />
 					<Add option="-lSDL -lSDL_image -lSDL_ttf" />
 					<Add directory="include" />
-					<Add directory="Controller" />
-					<Add directory="View" />
 					<Add directory="Model" />
+					<Add directory="View" />
+					<Add directory="Controller" />
 				</Compiler>
 				<ResourceCompiler>
 					<Add option="-lSDL -lSDL_image -lSDL_ttf" />
@@ -35,9 +35,9 @@
 					<Add option="-O2" />
 					<Add option="-lSDL -lSDL_image -lSDL_ttf" />
 					<Add directory="include" />
-					<Add directory="Controller" />
-					<Add directory="View" />
 					<Add directory="Model" />
+					<Add directory="View" />
+					<Add directory="Controller" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -55,10 +55,21 @@
 			<Add option="-lSDL2_image" />
 			<Add option="-lyaml-cpp" />
 		</Linker>
+		<Unit filename="Configs/config.yaml" />
+		<Unit filename="Controller/AumentarVelocidadX.cpp" />
+		<Unit filename="Controller/AumentarVelocidadX.h" />
+		<Unit filename="Controller/AumentarVelocidadY.cpp" />
+		<Unit filename="Controller/AumentarVelocidadY.h" />
+		<Unit filename="Controller/Command.cpp" />
+		<Unit filename="Controller/Command.h" />
 		<Unit filename="Controller/Controller.cpp" />
 		<Unit filename="Controller/Controller.h" />
 		<Unit filename="Controller/Controller_Jugador.cpp" />
 		<Unit filename="Controller/Controller_Jugador.h" />
+		<Unit filename="Controller/DisminuirVelocidadX.cpp" />
+		<Unit filename="Controller/DisminuirVelocidadX.h" />
+		<Unit filename="Controller/DisminuirVelocidadY.cpp" />
+		<Unit filename="Controller/DisminuirVelocidadY.h" />
 		<Unit filename="Images/canchafubol.jpg" />
 		<Unit filename="Images/soccer.png" />
 		<Unit filename="Logs/Log.txt" />
@@ -66,6 +77,8 @@
 		<Unit filename="Model/LTexture.h" />
 		<Unit filename="Model/Model.cpp" />
 		<Unit filename="Model/Model.h" />
+		<Unit filename="Model/Model_Equipo.cpp" />
+		<Unit filename="Model/Model_Equipo.h" />
 		<Unit filename="Model/Model_Jugador.cpp" />
 		<Unit filename="Model/Model_Jugador.h" />
 		<Unit filename="Model/Model_Pelota.cpp" />
@@ -76,15 +89,14 @@
 		<Unit filename="Utils/Util_Logger.h" />
 		<Unit filename="Utils/Util_Parser.cpp" />
 		<Unit filename="Utils/Util_Parser.h" />
-		<Unit filename="View/Observer.cpp" />
-		<Unit filename="View/Observer.h" />
-		<Unit filename="View/View.cpp" />
-		<Unit filename="View/View.h" />
+		<Unit filename="View/ViewModel.cpp" />
+		<Unit filename="View/ViewModel.h" />
+		<Unit filename="View/View_Cancha.cpp" />
+		<Unit filename="View/View_Cancha.h" />
 		<Unit filename="View/View_Jugador.cpp" />
 		<Unit filename="View/View_Jugador.h" />
 		<Unit filename="View/View_Pelota.cpp" />
 		<Unit filename="View/View_Pelota.h" />
-		<Unit filename="include/View.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

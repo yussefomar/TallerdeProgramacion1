@@ -1,9 +1,9 @@
 #include "AumentarVelocidadY.h"
 #include "Model_Jugador.h"
 
-AumentarVelocidadY::AumentarVelocidadY()
+AumentarVelocidadY::AumentarVelocidadY(Model* model)
 {
-    //ctor
+    this->model = model;
 }
 
 AumentarVelocidadY::~AumentarVelocidadY()
@@ -12,12 +12,8 @@ AumentarVelocidadY::~AumentarVelocidadY()
 }
 
 void AumentarVelocidadY::execute() {
-    Jugador* jugador = this->model.getActivePlayer();
+    Jugador* jugador = this->model->getJugadorActivo();
     jugador->aumentarVelocidadY();
-    jugador->move();
+    //jugador->move();
     return;
-}
-
-void AumentarVelocidadY::setModel(Model& model) {
-    this->model = model;
 }

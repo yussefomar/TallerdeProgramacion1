@@ -12,3 +12,7 @@ TallerProgramacionTP\.layout
 *.depend
 
 *.layout
+
+TallerProgramacionTP\.cbp
+
+*.cbp

@@ -1,96 +1,81 @@
 #include "Controller.h"
 
-Controller::Controller()
+#include "DisminuirVelocidadY.h"
+#include "AumentarVelocidadY.h"
+#include "DisminuirVelocidadX.h"
+#include "AumentarVelocidadX.h"
+
+#define CANTCOMMANDS 4
+
+
+enum IDCommand{DECVELX, DECVELY, INCVELX, INCVELY};
+
+Controller::Controller(Model* model)
 {
-    this->quit = false;
+    this->model = model;
+    this->commands = std::vector<Command*>(CANTCOMMANDS);
+    this->commands[DECVELX] = new DisminuirVelocidadX(model);
+    this->commands[DECVELY] = new DisminuirVelocidadY(model);
+    this->commands[INCVELX] = new AumentarVelocidadX(model);
+    this->commands[INCVELY] = new AumentarVelocidadY(model);
 }
 
 Controller::~Controller()
 {
-    //dtor
-}
-
-void Controller::setModel(Model& model)
-{
-    this->model = model;
-    this->desminuirVelocidadY.setModel(this->model);
-    this->aumentarVelocidadX.setModel(this->model);
-    this->disminuirVelocidadX.setModel(this->model);
-    this->aumentarVelocidadY.setModel(this->model);
-}
-
-void Controller::processInput()
-{
-    while( SDL_PollEvent( &this->event ) != 0 )
-    {
-        Command* command;
-        if( this->event.type == SDL_QUIT )
-        {
-            quit = true;
-            break;
-        }
-        else
-        {
-            command = this->handleEvent();
-        }
-        this->model.addRequest(command);
+    for(unsigned i = 0; i < CANTCOMMANDS; ++i) {
+        delete this->commands[i];
     }
-
-    return;
 }
 
-bool Controller::quitPressed()
+Command* Controller::handleEvent(SDL_Event& e)
 {
-    return this->quit;
-}
-
-Command* Controller::handleEvent()
-{
-    Command* command;
-    if( this->event.type == SDL_KEYDOWN && this->event.key.repeat == 0 )
+    Command* command = nullptr;
+    //Jugador jugador = (*this->jugador);
+    //If a key was pressed
+    if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
     {
         //Adjust the velocity
-        switch( this->event.key.keysym.sym )
+        switch( e.key.keysym.sym )
         {
         case SDLK_UP:
             //(*this->jugador).disminuirVelocidadY();
-            command = &(this->desminuirVelocidadY);
+            command = this->commands[DECVELY];
             break;
         case SDLK_DOWN:
             //(*this->jugador).aumentarVelocidadY();
-            command = &(this->aumentarVelocidadY);
+            command = this->commands[INCVELY];
             break;
         case SDLK_LEFT:
             //(*this->jugador).disminuirVelocidadX();
-            command = &(this->disminuirVelocidadX);
+            command = this->commands[DECVELX];
             break;
         case SDLK_RIGHT:
             //(*this->jugador).aumentarVelocidadX();
-            command = &(this->aumentarVelocidadX);
+            command = this->commands[INCVELX];
             break;
         }
     }
     //If a key was released
-    else if( this->event.type == SDL_KEYUP && this->event.key.repeat == 0 )
+    else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
     {
         //Adjust the velocity
-        switch( this->event.key.keysym.sym )
+        switch( e.key.keysym.sym )
         {
         case SDLK_UP:
             //(*this->jugador).aumentarVelocidadY();
-            command = &aumentarVelocidadY;
+            command = this->commands[INCVELY];
             break;
         case SDLK_DOWN:
             //(*this->jugador).disminuirVelocidadY();
-            command = &desminuirVelocidadY;
+            command = this->commands[DECVELY];
             break;
         case SDLK_LEFT:
             //(*this->jugador).aumentarVelocidadX();
-            command = &aumentarVelocidadX;
+            command = this->commands[INCVELX];
             break;
         case SDLK_RIGHT:
             //(*this->jugador).disminuirVelocidadX();
-            command = &disminuirVelocidadX;
+            command = this->commands[DECVELX];
             break;
         }
     }

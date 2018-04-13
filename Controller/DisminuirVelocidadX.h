@@ -7,16 +7,15 @@
 
 class DisminuirVelocidadX : public Command
 {
-    public:
-        DisminuirVelocidadX();
-        virtual ~DisminuirVelocidadX();
-        void execute();
-        void setModel(Model& model);
+public:
+    DisminuirVelocidadX(Model* model);
+    virtual ~DisminuirVelocidadX();
+    void execute();
 
-    protected:
+protected:
 
-    private:
-        Model model;
+private:
+    Model* model;
 };
 
 #endif // DISMINUIRVELOCIDADX_H

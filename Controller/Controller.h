@@ -1,39 +1,24 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
+
 #include "Model.h"
 #include "Command.h"
-#include <SDL2/SDL.h>
-
-#include "DesminuirVelocidadY.h"
-#include "AumentarVelocidadY.h"
-#include "DisminuirVelocidadX.h"
-#include "AumentarVelocidadX.h"
-
+#include <vector>
 
 
 class Controller
 {
     public:
-        Controller();
+        Controller(Model* model);
         virtual ~Controller();
-        void setModel(Model& model);
-        void processInput();
-        bool quitPressed();
+        Command* handleEvent(SDL_Event& e);
 
     protected:
 
     private:
-        Model model;
-        bool quit;
-        SDL_Event event;
-
-        DesminuirVelocidadY desminuirVelocidadY;
-        AumentarVelocidadY aumentarVelocidadY;
-        DisminuirVelocidadX disminuirVelocidadX;
-        AumentarVelocidadX aumentarVelocidadX;
-
-        Command* handleEvent();
+        Model* model;
+        std::vector<Command*> commands;
 };
 
 #endif // CONTROLLER_H

@@ -8,16 +8,15 @@
 class AumentarVelocidadY : public Command
 {
     public:
-        AumentarVelocidadY();
+        AumentarVelocidadY(Model* model);
         virtual ~AumentarVelocidadY();
         void execute();
-        void setModel(Model& model);
 
 
     protected:
 
     private:
-        Model model;
+        Model* model;
 };
 
 #endif // AUMENTARVELOCIDADY_H

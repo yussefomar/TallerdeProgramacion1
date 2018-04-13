@@ -1,32 +1,48 @@
 #include "Model.h"
 
+#define CANTJUGADORES 7
+
+
 Model::Model()
 {
-    //ctor
+    this->jugadores = new Jugador[CANTJUGADORES]();
+    this->nroJugadorActivo = 0;
 }
 
 Model::~Model()
 {
-    //dtor
+    delete[] this->jugadores;
 }
 
-void Model::addObserver(Observer* observer) {
-    this->observers.push_front(observer);
+Pelota* Model::getPelota()
+{
+    return &(this->pelota);
 }
 
-void Model::addRequest(Command* command) {
-    this->commands.push_back(command);
+Jugador* Model::getJugadorNro(int i)
+{
+    return &(this->jugadores[i]);
+}
+
+Jugador* Model::getJugadorActivo()
+{
+    return &(this->jugadores[this->nroJugadorActivo]);
+}
+
+void Model::addCommand(Command* command) {
+    //hay que tirar una excepcion
+    if(command == nullptr) return;
+    this->commandsToApply.push_back(command);
 }
 
 void Model::update() {
-    Command* command;
-    while(!this->commands.empty()) {
-        command = this->commands.front();
-        this->commands.pop_front();
+    Command* command = nullptr;
+    while(!this->commandsToApply.empty()) {
+        command = this->commandsToApply.front();
         command->execute();
+        this->commandsToApply.pop_front();
     }
-}
-
-Jugador* Model::getActivePlayer() {
-    return &(this->jugador);
+    for(int i = 0; i < CANTJUGADORES; ++i) {
+        this->jugadores[i].move();
+    }
 }

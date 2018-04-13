@@ -1,29 +1,31 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include "Observer.h"
-#include "Command.h"
+#include "Model_Pelota.h"
 #include "Model_Jugador.h"
+#include "Command.h"
 
 #include <list>
 
 class Model
 {
-    public:
-        Model();
-        virtual ~Model();
-        void addObserver(Observer* observer);
-        void update();
-        void addRequest(Command* command);
-        Jugador* getActivePlayer();
+public:
+    Model();
+    virtual ~Model();
+    Pelota* getPelota();
+    Jugador* getJugadorNro(int i);
+    Jugador* getJugadorActivo();
+    void addCommand(Command* command);
+    void update();
 
-    protected:
+protected:
 
-    private:
-        std::list<Observer*> observers;
-        std::list<Command*> commands;
-        //Por ahora para probar, solo hay un jugador.
-        Jugador jugador;
+private:
+    Pelota pelota;
+    Jugador* jugadores;
+    Jugador jugadorActual;
+    int nroJugadorActivo;
+    std::list<Command*> commandsToApply;
 };
 
 #endif // MODEL_H

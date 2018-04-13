@@ -9,7 +9,9 @@ class View_Jugador
     public:
 
 		View_Jugador( Jugador *model,SDL_Renderer * gRenderer);
+		View_Jugador();
 
+		void initialize(Jugador *model,SDL_Renderer * gRenderer);
         void SetModel( Jugador *model);
 
 		//esto va a la vista
