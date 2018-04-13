@@ -50,7 +50,7 @@ void View_Pelota::SetModel( Pelota * model)
 }
 void View_Pelota::render( int camX, int camY,SDL_Renderer * gRenderer )
 {
-    SDL_Rect* currentClip = &gSpriteClips[frame / 4 ];
+    //SDL_Rect* currentClip = &gSpriteClips[frame / 4 ];
 
     if ((*this->model).getVelX()>0)
     {
