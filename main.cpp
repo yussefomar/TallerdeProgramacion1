@@ -6,11 +6,6 @@
 #include "Utils/Util_Logger.h"
 #include "Utils/Util_Parser.h"
 #include "Model/LTexture.h"
-#include "View/View_Jugador.h"
-#include "Controller/Controller_Jugador.h"
-#include "Model/Model_Pelota.h"
-#include "View/View_Pelota.h"
-#include "View/View_Cancha.h"
 #include <yaml-cpp/yaml.h>
 
 #include "Model.h"
@@ -32,17 +27,6 @@ SDL_Window* window = NULL;
 //The window renderer
 SDL_Renderer* gRenderer = NULL;
 
-/**
-
- EL CÓDIGO QUE SIGUE ES MERAMENTE UN EJEMPLO DONDE ESTABA PROBANDO.-
- EJEMPLO PARA LEER LAS KEY Y ARMAR LA VENTANA CON SDL.
- EN PROGRESO, TOMARLO SOLO COMO UN EJEMPLO A MEDIO CAMINO.-
-
- PARA QUE COMPILE SDL TIENEN QUE AGREGAR EN Project -> Build Options -> Linker Setting -> Other Linker Options:
-
- -lSDL2
-
-**/
 bool inicializar()
 {
     bool exito = true;
@@ -154,16 +138,9 @@ int main(int argc, char* args[])
 
         bool quit = false;
 
-        while( !quit )
+        while( !controller.quitPressed() )
         {
-            while( SDL_PollEvent( &e ) != 0 )
-            {
-                if( e.type == SDL_QUIT )
-                {
-                    quit = true;
-                }
-                model.addCommand(controller.handleEvent(e));
-            }
+            controller.processInput();
             model.update();
             jugadorActual = model.getJugadorActivo();
             camera.x=( jugadorActual->getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;

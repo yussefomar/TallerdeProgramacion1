@@ -9,7 +9,7 @@
 #define CANTCOMMANDS 5
 
 
-enum IDCommand{DECVELX, DECVELY, INCVELX, INCVELY, CAMBJUG};
+enum IDCommand {DECVELX, DECVELY, INCVELX, INCVELY, CAMBJUG};
 
 Controller::Controller(Model* model)
 {
@@ -20,13 +20,32 @@ Controller::Controller(Model* model)
     this->commands[INCVELX] = new AumentarVelocidadX(model);
     this->commands[INCVELY] = new AumentarVelocidadY(model);
     this->commands[CAMBJUG] = new CambiarJugador(model);
+    this->quit = false;
 }
 
 Controller::~Controller()
 {
-    for(unsigned i = 0; i < CANTCOMMANDS; ++i) {
+    for(unsigned i = 0; i < CANTCOMMANDS; ++i)
+    {
         delete this->commands[i];
     }
+}
+
+bool Controller::quitPressed() {
+    return this->quit;
+}
+
+void Controller::processInput()
+{
+    while( SDL_PollEvent( &(this->e) ) != 0 )
+    {
+        if( this->e.type == SDL_QUIT )
+        {
+            this->quit = true;
+        }
+        this->model->addCommand(this->handleEvent(this->e));
+    }
+
 }
 
 Command* Controller::handleEvent(SDL_Event& e)
