@@ -1,52 +1,30 @@
 #ifndef VIEW_H
 #define VIEW_H
 
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-
-#include <SDL2/SDL.h>
-
-#include "View_Jugador.h"
-//#include "View_Pelota.h"
-#include "Observer.h"
+#include "ViewModel.h"
 #include "Model.h"
-#include "LTexture.h"
-#include "Entity.h"
-#include "Event.h"
+#include "Model_Jugador.h"
 
-class View : public Observer
+class View
 {
-    public:
-        View();
-        virtual ~View();
-        void render();
-        void setModel(Model& model);
-        void onNotify(Entity& entity, Event& event);
+public:
+    View(Model* model);
+    virtual ~View();
+    void ajustarCamara();
+    void render();
+    bool inicializar();
+    void close();
 
+protected:
 
-    protected:
-
-    private:
-        unsigned short logLevel;
-
-        //The camera area
-        SDL_Rect camera;
-        //The window we'll be rendering to
-        SDL_Window* window;
-        //The window renderer
-        SDL_Renderer* gRenderer;
-
-        LTexture texturaCancha;
-
-        Model model;
-
-        bool inicializar();
-        bool loadMedia();
-        void close();
-        //solo una vista por el momento.
-        View_Jugador viewJugador;
-
+private:
+    Model* model;
+    Jugador* jugadorAnterior;
+    ViewModel* viewModel;
+    SDL_Rect* camara;
+    SDL_Rect camaraStatic;
+    SDL_Renderer* gRenderer;
+    SDL_Window* window;
 };
 
 #endif // VIEW_H

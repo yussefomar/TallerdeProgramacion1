@@ -1,47 +1,96 @@
 #include "View.h"
+#include "Model_Jugador.h"
+#include <SDL2/SDL.h>
 
-//dimension de pantalla
-static const int MARGEN = 200;
-static const int ANCHO_VENTANA = 800;
-static const int ALTO_VENTANA = 600;
-static const int CAMARAPOSICIONINICIALX = 300;
-static const int CAMARAPOSICIONINICIALY = 600;
+#define MARGEN 200
+#define ANCHO_VENTANA 800
+#define ALTO_VENTANA 600
+#define CAMARAPOSICIONINICIALX (((ANCHO_NIVEL)/2)-((ANCHO_VENTANA)/2))
+#define CAMARAPOSICIONINICIALY (((ALTO_NIVEL)/2)-((ALTO_VENTANA)/2))
 
-View::View()
+View::View(Model* model)
 {
-    //The camera area
-    this->camera = {CAMARAPOSICIONINICIALX,
-                    CAMARAPOSICIONINICIALY,
-                    ANCHO_VENTANA,
-                    ALTO_VENTANA
-                   };
-    //The window we'll be rendering to
-    this->window = NULL;
-    //The window renderer
-    this->gRenderer = NULL;
-
-
-    if (!this->inicializar())
+    if(!this->inicializar())
     {
-        //Hay que tirar una excepcion.
-        //Hay que tirar una excepcion.
-        printf("%s\n", "Fallo el inicializar");
-        return;
+        printf( "Fallo al Inicializar!\n" );
     }
-    if (!this->loadMedia())
+    else
     {
-        //Hay que tirar una excepcion.
-        printf("%s\n", "Fallo el loadMedia");
-        return;
+        this->model = model;
+        this->camaraStatic = { CAMARAPOSICIONINICIALX,CAMARAPOSICIONINICIALY, ANCHO_VENTANA, ALTO_VENTANA };
+        this->camara = &(this->camaraStatic);
+        this->viewModel = new ViewModel(this->model, this->gRenderer, this->camara);
     }
-    //Esto lo hacemos para uno, pero tiene que ser para todos los jugadores.
-    //un posible metodo a ejecutar en view seria. configurarVistaJugadores.
-    this->viewJugador.setGRenders(this->gRenderer);
+
 }
 
 View::~View()
 {
+    delete this->viewModel;
     this->close();
+}
+
+void View::ajustarCamara()
+{
+    Jugador* jugadorActual = this->model->getJugadorActivo();
+    //Esto hacerlo con Patron Observer.
+    if(this->jugadorAnterior != jugadorActual)
+    {
+        //Posiblemente esto solo se haga cada vez que se cambia de jugador
+        this->camara->x = ( jugadorActual->getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
+        this->camara->y = ( jugadorActual->getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA/ 2;
+
+    }
+
+    //Esto siempre
+    //Center the this->camara->over the dot
+    if ( (this->camara->x + ANCHO_VENTANA-MARGEN)<(jugadorActual->getPosX() + Jugador::ANCHO_JUGADOR / 2 ))
+    {
+        this->camara->x +=Jugador::VELOCIDAD_JUGADOR; //=( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
+    }
+    if ( (this->camara->x + MARGEN)>(jugadorActual->getPosX() + Jugador::ANCHO_JUGADOR / 2 ))
+    {
+        this->camara->x -=Jugador::VELOCIDAD_JUGADOR;// ( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
+    }
+
+    if ((this->camara->y + ALTO_VENTANA-MARGEN)<(jugadorActual->getPosY() + Jugador::ALTO_JUGADOR / 2 ))
+    {
+        this->camara->y +=Jugador::VELOCIDAD_JUGADOR;//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
+    }
+    if ((this->camara->y + MARGEN)>(jugadorActual->getPosY() + Jugador::ALTO_JUGADOR / 2 ))
+    {
+        this->camara->y -=Jugador::VELOCIDAD_JUGADOR;//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
+    }
+    //Keep the this->camara->in bounds
+    if( this->camara->x < 0 )
+    {
+        this->camara->x = 0;
+    }
+    if( this->camara->y < 0 )
+    {
+        this->camara->y = 0;
+    }
+    if( this->camara->x > ANCHO_NIVEL - this->camara->w )
+    {
+        this->camara->x = ANCHO_NIVEL - this->camara->w;
+    }
+    if( this->camara->y > ALTO_NIVEL - this->camara->h )
+    {
+        this->camara->y = ALTO_NIVEL - this->camara->h;
+    }
+    this->jugadorAnterior = jugadorActual;
+}
+
+void View::render()
+{
+    this->ajustarCamara();
+    SDL_SetRenderDrawColor( this->gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+    SDL_RenderClear( this->gRenderer );
+
+    this->viewModel->render();
+
+    //Update screen
+    SDL_RenderPresent( this->gRenderer );
 }
 
 bool View::inicializar()
@@ -61,22 +110,17 @@ bool View::inicializar()
         }
 
         //Create window
-        this->window = SDL_CreateWindow( "Taller de Programacion - Correlatividad",
-                                         SDL_WINDOWPOS_UNDEFINED,
-                                         SDL_WINDOWPOS_UNDEFINED,
-                                         ANCHO_VENTANA,
-                                         ALTO_VENTANA,
-                                         SDL_WINDOW_SHOWN );
-        if(this->window == NULL )
+        this->window = SDL_CreateWindow( "Taller de Programacion - Correlatividad", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ANCHO_VENTANA, ALTO_VENTANA, SDL_WINDOW_SHOWN );
+        if( this->window == NULL )
         {
             printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
             exito = false;
         }
         else
         {
-            //Create vsynced renderer for window
-            this->gRenderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
-            if(this->gRenderer == NULL )
+            //Create vsynced renderer for this->window
+            this->gRenderer = SDL_CreateRenderer( this->window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
+            if( this->gRenderer == NULL )
             {
                 printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
                 exito = false;
@@ -84,7 +128,7 @@ bool View::inicializar()
             else
             {
                 //Initialize renderer color
-                SDL_SetRenderDrawColor(this->gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+                SDL_SetRenderDrawColor( this->gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 
                 //Initialize PNG loading
                 int imgFlags = IMG_INIT_PNG;
@@ -99,29 +143,9 @@ bool View::inicializar()
     return exito;
 }
 
-bool View::loadMedia()
-{
-    //Loading success flag
-    bool success = true;
-
-    //Load background texture
-    if( !this->texturaCancha.loadFromFile( "Images/canchafubol.jpg", this->gRenderer ) )
-    {
-        printf( "Failed to load background texture!\n" );
-        success = false;
-    }
-
-
-    return success;
-}
-
 void View::close()
 {
-
-    this->texturaCancha.free();
-    //texturaJugador.free();
-
-    //Destroy window}
+    //Destroy this->window}
     SDL_DestroyRenderer( this->gRenderer );
     SDL_DestroyWindow( this->window );
 
@@ -131,51 +155,4 @@ void View::close()
     //Quit SDL subsystems
     IMG_Quit();
     SDL_Quit();
-}
-
-void View::onNotify(Entity& entity, Event& event)
-{
-    return;
-}
-
-void View::setModel(Model& model)
-{
-    this->model = model;
-    //Muy para salir del apuro...
-    //Agregar modelo a las vista jugador es algo que la vista tiene que
-    //Poder hacer por si sola.... es la que sabe a que jugador quiere seguir.
-    this->viewJugador.setModel(this->model.getActivePlayer());
-}
-
-void View::render()
-{
-    Jugador* jugador = this->model.getActivePlayer();
-    //centrar camara sobre el jugador.
-    if ( (this->camera.x + ANCHO_VENTANA-MARGEN)<(jugador->getPosX()+Jugador::ANCHO_JUGADOR / 2 ))
-    {
-        this->camera.x +=3; //=( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
-    }
-    if ( (this->camera.x +MARGEN)>(jugador->getPosX()+Jugador::ANCHO_JUGADOR / 2 ))
-    {
-        this->camera.x -=3;// ( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
-    }
-
-    if ((this->camera.y + ALTO_VENTANA-MARGEN)<(jugador->getPosY()+Jugador::ALTO_JUGADOR / 2 ))
-    {
-        this->camera.y +=3;//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
-    }
-    if ((this->camera.y +MARGEN)>(jugador->getPosY()+Jugador::ALTO_JUGADOR / 2 ))
-    {
-        this->camera.y -=3;//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
-    }
-
-    //Clear screen
-    SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-    SDL_RenderClear( gRenderer );
-
-    //Render background
-    this->texturaCancha.render( 0, 0, &camera,0.0,NULL,SDL_FLIP_NONE,gRenderer );
-    //vistaPelota.render(camera.x, camera.y,gRenderer);
-    this->viewJugador.render(this->camera.x, this->camera.y, this->gRenderer);
-
 }
