@@ -6,15 +6,16 @@
 
 class View_Cancha
 {
-    public:
+public:
+    View_Cancha();
+    View_Cancha(SDL_Renderer * gRenderer);
 
-		View_Cancha(SDL_Renderer * gRenderer);
+    void initialize(SDL_Renderer * gRenderer);
+    //esto va a la vista
+    void render( SDL_Rect * camara,SDL_Renderer * gRenderer );
 
-		//esto va a la vista
-		void render( SDL_Rect * camara ,SDL_Renderer * gRenderer );
-
-    private:
-        LTexture texturaCancha;
+private:
+    LTexture texturaCancha;
 };
 
 #endif
