@@ -31,7 +31,8 @@ Controller::~Controller()
     }
 }
 
-bool Controller::quitPressed() {
+bool Controller::quitPressed()
+{
     return this->quit;
 }
 

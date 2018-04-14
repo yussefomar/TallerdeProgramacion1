@@ -9,9 +9,9 @@ std::vector<Debug> debugs;
 
 Equipo Util_Parser::read_yaml_Equipo(std::string path)
 {
-	std::vector<YAML::Node> baseNode = YAML::LoadAllFromFile(path);
+    std::vector<YAML::Node> baseNode = YAML::LoadAllFromFile(path);
 
-	for (auto &document : baseNode)
+    for (auto &document : baseNode)
     {
         equipos.emplace_back(document["equipo"]);
     }
@@ -20,9 +20,9 @@ Equipo Util_Parser::read_yaml_Equipo(std::string path)
 
 Debug Util_Parser::read_yaml_Debug(std::string path)
 {
-	std::vector<YAML::Node> baseNode = YAML::LoadAllFromFile(path);
+    std::vector<YAML::Node> baseNode = YAML::LoadAllFromFile(path);
 
-	for (auto &document : baseNode)
+    for (auto &document : baseNode)
     {
         debugs.emplace_back(document["debug"]);
     }

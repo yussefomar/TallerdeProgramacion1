@@ -1,6 +1,7 @@
 #include "View_Jugador.h"
 
-View_Jugador::View_Jugador() {
+View_Jugador::View_Jugador()
+{
 
 }
 
@@ -43,15 +44,21 @@ View_Jugador::View_Jugador( Jugador *model,SDL_Renderer * gRenderer)
     }
 }
 
-void View_Jugador::initialize(Jugador *model,SDL_Renderer * gRenderer) {
+void View_Jugador::initialize(Jugador *model,SDL_Renderer * gRenderer)
+{
     this->model = model;
     if( !texturaJugador.loadFromFile( "Images/spritejugador.png",gRenderer) )
     {
         printf( "Failed to load dot texture!\n" );
         // success = false;
+    }else{
+    if( !texturaSeleccionado.loadFromFile( "Images/jugadorseleccionado.png",gRenderer) )
+    {
+        printf( "Failed to load dot texture!\n" );
+        // success = false;
     }
     else
-    {
+    {   texturaSeleccionado.setAlpha(100);
         int offset = 0;
         if (!model->casacaPrincipal())
         {
@@ -78,7 +85,7 @@ void View_Jugador::initialize(Jugador *model,SDL_Renderer * gRenderer) {
         gSpriteClips[ 3 ].w =  62;
         gSpriteClips[ 3 ].h = 62;
 
-    }
+    }}
 }
 
 void View_Jugador::SetModel( Jugador * model)
@@ -145,7 +152,11 @@ void View_Jugador::render( int camX, int camY,SDL_Renderer * gRenderer )
     }
 
     //Show the dot relative to the camera
+    if ((this->model)->estaActivo()){
+        this->texturaSeleccionado.render( (*this->model).getPosX() - camX, (*this->model).getPosY() - camY,NULL,direccion,NULL,SDL_FLIP_NONE,gRenderer);
+    }
     this->texturaJugador.render( (*this->model).getPosX() - camX, (*this->model).getPosY() - camY,currentClip,direccion,NULL,SDL_FLIP_NONE,gRenderer);
+
 }
 
 

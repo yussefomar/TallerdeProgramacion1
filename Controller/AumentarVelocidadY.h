@@ -7,16 +7,16 @@
 
 class AumentarVelocidadY : public Command
 {
-    public:
-        AumentarVelocidadY(Model* model);
-        virtual ~AumentarVelocidadY();
-        void execute();
+public:
+    AumentarVelocidadY(Model* model);
+    virtual ~AumentarVelocidadY();
+    void execute();
 
 
-    protected:
+protected:
 
-    private:
-        Model* model;
+private:
+    Model* model;
 };
 
 #endif // AUMENTARVELOCIDADY_H

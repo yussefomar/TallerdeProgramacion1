@@ -35,14 +35,14 @@ void View::ajustarCamara()
 {
     Jugador* jugadorActual = this->model->getJugadorActivo();
     //Esto hacerlo con Patron Observer.
-   // va a servir mas con los corners, saques de arco, y despues de los goles.
-   /* if(this->jugadorAnterior != jugadorActual)
-    {
-        //Posiblemente esto solo se haga cada vez que se cambia de jugador
-        this->camara->x = ( jugadorActual->getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
-        this->camara->y = ( jugadorActual->getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA/ 2;
+    // va a servir mas con los corners, saques de arco, y despues de los goles.
+    /* if(this->jugadorAnterior != jugadorActual)
+     {
+         //Posiblemente esto solo se haga cada vez que se cambia de jugador
+         this->camara->x = ( jugadorActual->getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
+         this->camara->y = ( jugadorActual->getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA/ 2;
 
-    }*/
+     }*/
 
     //Esto siempre
     //Center the this->camara->over the dot

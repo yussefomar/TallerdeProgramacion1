@@ -61,20 +61,20 @@
 	"Controller.h"
 	"View.h"
 
-1523497325 /home/matias/Documentos/TallerdeProgramacion1/Utils/Util_Logger.h
+1523675138 /home/matias/Documentos/TallerdeProgramacion1/Utils/Util_Logger.h
 	<iostream>
 	<string>
 	<list>
 
-1523497325 source:/home/matias/Documentos/TallerdeProgramacion1/Utils/Util_Common.cpp
+1523675138 source:/home/matias/Documentos/TallerdeProgramacion1/Utils/Util_Common.cpp
 	<time.h>
 	"Util_Common.h"
 
-1523497325 /home/matias/Documentos/TallerdeProgramacion1/Utils/Util_Common.h
+1523675137 /home/matias/Documentos/TallerdeProgramacion1/Utils/Util_Common.h
 	<iostream>
 	<string>
 
-1523497325 source:/home/matias/Documentos/TallerdeProgramacion1/Utils/Util_Logger.cpp
+1523675138 source:/home/matias/Documentos/TallerdeProgramacion1/Utils/Util_Logger.cpp
 	<iostream>
 	<fstream>
 	<string>
@@ -87,60 +87,60 @@
 	"Util_Logger.h"
 	"Util_Common.h"
 
-1523497630 source:/home/matias/Documentos/TallerdeProgramacion1/Utils/Util_Parser.cpp
+1523675137 source:/home/matias/Documentos/TallerdeProgramacion1/Utils/Util_Parser.cpp
 	<yaml-cpp/yaml.h>
 	"Util_Parser.h"
 
-1523648866 source:/home/matias/Documentos/TallerdeProgramacion1/View/View_Jugador.cpp
+1523680953 source:/home/matias/Documentos/TallerdeProgramacion1/View/View_Jugador.cpp
 	"View_Jugador.h"
 
-1523672266 /home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.h
+1523678568 /home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.h
 	<SDL2/SDL.h>
 	"LTexture.h"
 
-1523674005 source:/home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.cpp
+1523678867 source:/home/matias/Documentos/TallerdeProgramacion1/Model/Model_Jugador.cpp
 	"Model_Jugador.h"
 
-1523648866 /home/matias/Documentos/TallerdeProgramacion1/View/View_Jugador.h
+1523677428 /home/matias/Documentos/TallerdeProgramacion1/View/View_Jugador.h
 	<SDL2/SDL.h>
 	"../Model/LTexture.h"
 	"../Model/Model_Jugador.h"
 
-1523497325 source:/home/matias/Documentos/TallerdeProgramacion1/Model/LTexture.cpp
+1523675138 source:/home/matias/Documentos/TallerdeProgramacion1/Model/LTexture.cpp
 	"LTexture.h"
 
-1523497325 /home/matias/Documentos/TallerdeProgramacion1/Model/LTexture.h
+1523675138 /home/matias/Documentos/TallerdeProgramacion1/Model/LTexture.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_image.h>
 	<iostream>
 	<stdlib.h>
 	<stdio.h>
 
-1523502238 /home/matias/Documentos/TallerdeProgramacion1/Controller/Controller_Jugador.h
+1523675137 /home/matias/Documentos/TallerdeProgramacion1/Controller/Controller_Jugador.h
 	<SDL2/SDL.h>
 	"../Model/LTexture.h"
 	"../View/View_Jugador.h"
 	"../Model/Model_Jugador.h"
 
-1523499115 source:/home/matias/Documentos/TallerdeProgramacion1/Model/Model_Pelota.cpp
+1523675137 source:/home/matias/Documentos/TallerdeProgramacion1/Model/Model_Pelota.cpp
 	"Model_Pelota.h"
 
 1523648866 source:/home/matias/Documentos/TallerdeProgramacion1/View/View_Pelota.cpp
 	"View_Pelota.h"
 
-1523497325 /home/matias/Documentos/TallerdeProgramacion1/Model/Model_Pelota.h
+1523675138 /home/matias/Documentos/TallerdeProgramacion1/Model/Model_Pelota.h
 	<SDL2/SDL.h>
 	"LTexture.h"
 
-1523648866 /home/matias/Documentos/TallerdeProgramacion1/View/View_Pelota.h
+1523675138 /home/matias/Documentos/TallerdeProgramacion1/View/View_Pelota.h
 	<SDL2/SDL.h>
 	"../Model/LTexture.h"
 	"../Model/Model_Pelota.h"
 
-1523497325 source:/home/matias/Documentos/TallerdeProgramacion1/Model/Model_Equipo.cpp
+1523675138 source:/home/matias/Documentos/TallerdeProgramacion1/Model/Model_Equipo.cpp
 	"Model_Equipo.h"
 
-1523497325 /home/matias/Documentos/TallerdeProgramacion1/Model/Model_Equipo.h
+1523675138 /home/matias/Documentos/TallerdeProgramacion1/Model/Model_Equipo.h
 	<SDL2/SDL.h>
 	"LTexture.h"
 	<iostream>
@@ -662,15 +662,15 @@
 	"Model.h"
 	"Model_Jugador.h"
 
-1523648866 source:/home/matias/Documentos/TallerdeProgramacion1/Controller/AumentarVelocidadX.cpp
+1523675138 source:/home/matias/Documentos/TallerdeProgramacion1/Controller/AumentarVelocidadX.cpp
 	"AumentarVelocidadX.h"
 	"Model_Jugador.h"
 
-1523648866 /home/matias/Documentos/TallerdeProgramacion1/Controller/AumentarVelocidadX.h
+1523675137 /home/matias/Documentos/TallerdeProgramacion1/Controller/AumentarVelocidadX.h
 	<Command.h>
 	"Model.h"
 
-1523648866 /home/matias/Documentos/TallerdeProgramacion1/Controller/Command.h
+1523675138 /home/matias/Documentos/TallerdeProgramacion1/Controller/Command.h
 
 1523660717 /home/matias/Documentos/TallerdeProgramacion1/Model/Model.h
 	"Model_Pelota.h"
@@ -678,25 +678,25 @@
 	"Command.h"
 	<list>
 
-1523648866 source:/home/matias/Documentos/TallerdeProgramacion1/Controller/AumentarVelocidadY.cpp
+1523675137 source:/home/matias/Documentos/TallerdeProgramacion1/Controller/AumentarVelocidadY.cpp
 	"AumentarVelocidadY.h"
 	"Model_Jugador.h"
 
-1523648866 /home/matias/Documentos/TallerdeProgramacion1/Controller/AumentarVelocidadY.h
+1523675138 /home/matias/Documentos/TallerdeProgramacion1/Controller/AumentarVelocidadY.h
 	<Command.h>
 	"Model.h"
 
 1523659139 source:/home/matias/Documentos/TallerdeProgramacion1/Controller/CambiarJugador.cpp
 	"CambiarJugador.h"
 
-1523648866 /home/matias/Documentos/TallerdeProgramacion1/Controller/CambiarJugador.h
+1523675138 /home/matias/Documentos/TallerdeProgramacion1/Controller/CambiarJugador.h
 	<Command.h>
 	"Model.h"
 
 1523648866 source:/home/matias/Documentos/TallerdeProgramacion1/Controller/Command.cpp
 	"Command.h"
 
-1523648866 source:/home/matias/Documentos/TallerdeProgramacion1/Controller/Controller.cpp
+1523675137 source:/home/matias/Documentos/TallerdeProgramacion1/Controller/Controller.cpp
 	"Controller.h"
 	"DisminuirVelocidadY.h"
 	"AumentarVelocidadY.h"
@@ -704,7 +704,7 @@
 	"AumentarVelocidadX.h"
 	"CambiarJugador.h"
 
-1523648866 /home/matias/Documentos/TallerdeProgramacion1/Controller/Controller.h
+1523675138 /home/matias/Documentos/TallerdeProgramacion1/Controller/Controller.h
 	"Model.h"
 	"Command.h"
 	<vector>
@@ -721,11 +721,11 @@
 	"DisminuirVelocidadX.h"
 	"Model_Jugador.h"
 
-1523648866 source:/home/matias/Documentos/TallerdeProgramacion1/Controller/DisminuirVelocidadY.cpp
+1523675137 source:/home/matias/Documentos/TallerdeProgramacion1/Controller/DisminuirVelocidadY.cpp
 	"DisminuirVelocidadY.h"
 	"Model_Jugador.h"
 
-1523497630 /home/matias/Documentos/TallerdeProgramacion1/Utils/Util_Parser.h
+1523675137 /home/matias/Documentos/TallerdeProgramacion1/Utils/Util_Parser.h
 	<iostream>
 	<string>
 	<list>
@@ -742,15 +742,15 @@
 	"View_Cancha.h"
 	"Model.h"
 
-1523673549 source:/home/matias/Documentos/TallerdeProgramacion1/Model/Model.cpp
+1523678958 source:/home/matias/Documentos/TallerdeProgramacion1/Model/Model.cpp
 	"Model.h"
 	"ViewModel.h"
 
-1523660322 source:/home/matias/Documentos/TallerdeProgramacion1/View/ViewModel.cpp
+1523677203 source:/home/matias/Documentos/TallerdeProgramacion1/View/ViewModel.cpp
 	"ViewModel.h"
 	<SDL2/SDL.h>
 
-1523660735 source:/home/matias/Documentos/TallerdeProgramacion1/View/View.cpp
+1523675138 source:/home/matias/Documentos/TallerdeProgramacion1/View/View.cpp
 	"View.h"
 	"Model_Jugador.h"
 	<SDL2/SDL.h>

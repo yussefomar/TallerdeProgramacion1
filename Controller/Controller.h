@@ -9,20 +9,20 @@
 
 class Controller
 {
-    public:
-        Controller(Model* model);
-        virtual ~Controller();
-        Command* handleEvent(SDL_Event& e);
-        void processInput();
-        bool quitPressed();
+public:
+    Controller(Model* model);
+    virtual ~Controller();
+    Command* handleEvent(SDL_Event& e);
+    void processInput();
+    bool quitPressed();
 
-    protected:
+protected:
 
-    private:
-        Model* model;
-        std::vector<Command*> commands;
-        bool quit;
-        SDL_Event e;
+private:
+    Model* model;
+    std::vector<Command*> commands;
+    bool quit;
+    SDL_Event e;
 };
 
 #endif // CONTROLLER_H

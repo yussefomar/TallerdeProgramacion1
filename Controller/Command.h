@@ -3,14 +3,14 @@
 
 class Command
 {
-    public:
-        Command();
-        virtual ~Command();
-        virtual void execute() = 0;
+public:
+    Command();
+    virtual ~Command();
+    virtual void execute() = 0;
 
-    protected:
+protected:
 
-    private:
+private:
 };
 
 #endif // COMMAND_H

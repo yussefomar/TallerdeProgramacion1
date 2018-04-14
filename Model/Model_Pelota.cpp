@@ -41,22 +41,22 @@ void Pelota::move()
 
 int Pelota::getPosX()
 {
-	return mPosX;
+    return mPosX;
 }
 
 int Pelota::getPosY()
 {
-	return mPosY;
+    return mPosY;
 }
 
 void Pelota::setPosX(int PosX)
 {
-	 mPosX= PosX;
+    mPosX= PosX;
 }
 
 void Pelota::setPosY(int PosY)
 {
-	mPosY=PosY ;
+    mPosY=PosY ;
 }
 
 
@@ -68,27 +68,27 @@ void Pelota::disminuirVelocidadX()
 
 void Pelota::disminuirVelocidadY()
 {
-	mVelY -= VELOCIDAD_PELOTA; ;
+    mVelY -= VELOCIDAD_PELOTA; ;
 }
 
 void Pelota::aumentarVelocidadX()
 {
-	mVelX += VELOCIDAD_PELOTA; ;
+    mVelX += VELOCIDAD_PELOTA; ;
 }
 
 void Pelota::aumentarVelocidadY()
 {
-	mVelY += VELOCIDAD_PELOTA; ;
+    mVelY += VELOCIDAD_PELOTA; ;
 }
 
 int Pelota::getVelX()
 {
-	return mVelX;
+    return mVelX;
 }
 
 int Pelota::getVelY()
 {
-	return mVelY;
+    return mVelY;
 }
 
 

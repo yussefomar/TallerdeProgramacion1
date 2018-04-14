@@ -48,7 +48,7 @@ void Util_Logger::setLoggerPath(string newPath)
 string Util_Logger::getLogFile()
 {
     string fullPathString = getLoggerPath() + getLoggerName();
-	return fullPathString;
+    return fullPathString;
 }
 
 void Util_Logger::writeSingleLine(string line, string type)
@@ -61,28 +61,31 @@ void Util_Logger::writeSingleLine(string line, string type)
 
 void Util_Logger::writeMessageLine(string line)
 {
-	if(getLoggerLevel() >= 3){
+    if(getLoggerLevel() >= 3)
+    {
         writeSingleLine(line, "MESSAGE");
-	}
+    }
 }
 
 void Util_Logger::writeWarningLine(string line)
 {
-	if(getLoggerLevel() >= 2){
+    if(getLoggerLevel() >= 2)
+    {
         writeSingleLine(line, "WARNING");
-	}
+    }
 }
 
 void Util_Logger::writeErrorLine(string line)
 {
-	if(getLoggerLevel() >= 1){
+    if(getLoggerLevel() >= 1)
+    {
         writeSingleLine(line, "ERROR");
-	}
+    }
 }
 
 void Util_Logger::deleteLine()
 {
-	// TODO: De momento no tiene un uso determinado.-
+    // TODO: De momento no tiene un uso determinado.-
 }
 
 void Util_Logger::writeBlock(list<string> lineList)
@@ -92,26 +95,30 @@ void Util_Logger::writeBlock(list<string> lineList)
     pos = lineList.begin();
     while( pos != lineList.end())
     {
-    	cout << *pos;
-    	log_file << std::endl;
-    	log_file << util.currentDateTime() + " || " << *pos << std::endl;
-    	pos++;
+        cout << *pos;
+        log_file << std::endl;
+        log_file << util.currentDateTime() + " || " << *pos << std::endl;
+        pos++;
     }
     log_file.close();
 }
 
 void Util_Logger::deleteBlock()
 {
-	// TODO: De momento no tiene un uso determinado.-
+    // TODO: De momento no tiene un uso determinado.-
 }
 
 // Chequeamos que el archivo exista.
-inline bool file_exists (const std::string& name) {
+inline bool file_exists (const std::string& name)
+{
     ifstream f(name.c_str());
-    if (f.good()) {
+    if (f.good())
+    {
         f.close();
         return true;
-    } else {
+    }
+    else
+    {
         f.close();
         return false;
     }
@@ -119,29 +126,30 @@ inline bool file_exists (const std::string& name) {
 
 void Util_Logger::createFile(unsigned short  newLevel)
 {
-	// Definimos un nombre para el Log de manera que sea UNIVOCO.-
-	string fileDate = "(" + util.currentDateTime() + ") Log.txt";
+    // Definimos un nombre para el Log de manera que sea UNIVOCO.-
+    string fileDate = "(" + util.currentDateTime() + ") Log.txt";
 
-	// Actualizamos la configuración básico del logger.
+    // Actualizamos la configuración básico del logger.
     setLoggerLevel(newLevel);
     setLoggerPath("./Logs/");
     setLoggerName(fileDate.c_str());
 
-	// Creamos e inicializamos nunestro nuevo archivos de log.
-	std::ofstream outfile (getLogFile());
-	//outfile.open(getLogFile());
-	outfile << "Archivo de Log inicializado: " << util.currentDateTime() << std::endl;
-	outfile << std::endl;
-	outfile.close();
+    // Creamos e inicializamos nunestro nuevo archivos de log.
+    std::ofstream outfile (getLogFile());
+    //outfile.open(getLogFile());
+    outfile << "Archivo de Log inicializado: " << util.currentDateTime() << std::endl;
+    outfile << std::endl;
+    outfile.close();
 
-	//Chequeamos que haya sido creado exitosamente.
-	if(!file_exists(getLogFile())){
-		perror(("No existe el archivo de Log que se intento inicializar."));
-		exit(1);
-	}
+    //Chequeamos que haya sido creado exitosamente.
+    if(!file_exists(getLogFile()))
+    {
+        perror(("No existe el archivo de Log que se intento inicializar."));
+        exit(1);
+    }
 }
 
 void Util_Logger::deleteFile()
 {
-	// TODO: De momento no tiene un uso determinado.-
+    // TODO: De momento no tiene un uso determinado.-
 }

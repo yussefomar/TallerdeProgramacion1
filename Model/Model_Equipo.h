@@ -7,16 +7,16 @@
 #include "Model_Jugador.h"
 class Equipo
 {
-    public:
+public:
 
-		//Initializes the variables
-		Equipo();
+    //Initializes the variables
+    Equipo();
 
-        int agregarJugador(Jugador jugador);
+    int agregarJugador(Jugador jugador);
 
-    private:
+private:
 
-		std::list<Jugador> jugadores;
+    std::list<Jugador> jugadores;
 };
 
 #endif

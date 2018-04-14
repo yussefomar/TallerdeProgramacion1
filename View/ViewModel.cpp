@@ -30,5 +30,6 @@ void ViewModel::render()
     {
         this->viewJugadores[i].render( this->camara->x, this->camara->y,this->gRenderer);
     }
+
 }
 

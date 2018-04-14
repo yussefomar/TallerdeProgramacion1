@@ -6,15 +6,15 @@
 
 class CambiarJugador : public Command
 {
-    public:
-        CambiarJugador(Model* model);
-        virtual ~CambiarJugador();
-        void execute();
+public:
+    CambiarJugador(Model* model);
+    virtual ~CambiarJugador();
+    void execute();
 
-    protected:
+protected:
 
-    private:
-        Model* model;
+private:
+    Model* model;
 };
 
 #endif // CAMBIARJUGADOR_H

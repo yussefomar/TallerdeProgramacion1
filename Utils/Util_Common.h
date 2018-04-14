@@ -8,8 +8,8 @@ using namespace std;
 
 class Util_Common
 {
-	public:
-		string currentDateTime();
+public:
+    string currentDateTime();
 };
 
 

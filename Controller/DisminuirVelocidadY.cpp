@@ -11,7 +11,8 @@ DisminuirVelocidadY::~DisminuirVelocidadY()
     //dtor
 }
 
-void DisminuirVelocidadY::execute() {
+void DisminuirVelocidadY::execute()
+{
     Jugador* jugador = this->model->getJugadorActivo();
     jugador->disminuirVelocidadY();
     return;

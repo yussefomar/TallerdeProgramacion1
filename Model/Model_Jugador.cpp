@@ -7,7 +7,7 @@ Jugador::Jugador()
     mPosX = 950;
     mPosY = 678;
     casaca = true;
-
+    activo = false;
     mCollider.x = mPosX;
     mCollider.y = mPosY;
     mCollider.w = ANCHO_JUGADOR;
@@ -22,7 +22,7 @@ void Jugador::move()
 {
     //Move the dot left or right
     mPosX += mVelX;
-	mCollider.x = mPosX;
+    mCollider.x = mPosX;
     //If the dot went too far to the left or right
     if( ( mPosX < 0 ) || ( mPosX + ANCHO_JUGADOR > ANCHO_NIVEL) )
     {
@@ -32,7 +32,7 @@ void Jugador::move()
 
     //Move the dot up or down
     mPosY += mVelY;
-	mCollider.y = mPosY;
+    mCollider.y = mPosY;
     //If the dot went too far up or down
     if( ( mPosY < 0 ) || ( mPosY + ALTO_JUGADOR > ALTO_NIVEL ) )
     {
@@ -43,27 +43,27 @@ void Jugador::move()
 
 int Jugador::getPosX()
 {
-	return mPosX;
+    return mPosX;
 }
 
 int Jugador::getPosY()
 {
-	return mPosY;
+    return mPosY;
 }
 
 void Jugador::setPosX(int PosX)
 {
-	 mPosX= PosX;
+    mPosX= PosX;
 }
 
 void Jugador::setPosY(int PosY)
 {
-	mPosY=PosY ;
+    mPosY=PosY ;
 }
 
 void Jugador::setCasacaAlternativa()
 {
-	casaca=false ;
+    casaca=false ;
 }
 
 
@@ -74,41 +74,53 @@ void Jugador::disminuirVelocidadX()
 
 void Jugador::disminuirVelocidadY()
 {
-	mVelY -= VELOCIDAD_JUGADOR; ;
+    mVelY -= VELOCIDAD_JUGADOR; ;
 }
 
 void Jugador::aumentarVelocidadX()
 {
-	mVelX += VELOCIDAD_JUGADOR; ;
+    mVelX += VELOCIDAD_JUGADOR; ;
 }
 
 void Jugador::aumentarVelocidadY()
 {
-	mVelY += VELOCIDAD_JUGADOR; ;
+    mVelY += VELOCIDAD_JUGADOR; ;
 }
 
 int Jugador::getVelX()
 {
-	return mVelX;
+    return mVelX;
 }
 
 int Jugador::getVelY()
 {
-	return mVelY;
+    return mVelY;
 }
 bool Jugador::casacaPrincipal()
 {
-	return casaca;
+    return casaca;
 }
 
 void Jugador::stop()
 {
-	mVelY = 0;
-	mVelX = 0;
+    mVelY = 0;
+    mVelX = 0;
+}
+bool Jugador::estaActivo()
+{
+   return activo;
+}
+void Jugador::activar()
+{
+   activo=true;
+}
+void Jugador::desactivar()
+{
+   activo=false;
 }
 bool Jugador::collide(SDL_Rect * camara)
 {
- //The sides of the rectangles
+//The sides of the rectangles
     int leftCam, leftJugador;
     int rightCam, rightJugador;
     int topCam, topJugador;
@@ -129,7 +141,7 @@ bool Jugador::collide(SDL_Rect * camara)
     printf("leftJugador - %i\n",leftJugador);
     rightJugador = this->mCollider.x + this->mCollider.w;
     printf("rightCam %i",rightCam);
-     printf("rightJugador %i\n",rightJugador);
+    printf("rightJugador %i\n",rightJugador);
     topJugador = this->mCollider.y;
     printf("topCam %i",topCam);
     printf("topJugador %i\n",topJugador);
@@ -140,7 +152,7 @@ bool Jugador::collide(SDL_Rect * camara)
 
     //If any of the sides from A are outside of B
 
-     if( bottomCam <= topJugador )
+    if( bottomCam <= topJugador )
     {
         return false;
     }

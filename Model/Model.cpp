@@ -7,6 +7,7 @@ Model::Model()
 {
     this->jugadores = new Jugador[CANTJUGADORES]();
     this->nroJugadorActivo = 0;
+    this->getJugadorActivo()->activar();
 }
 
 Model::~Model()
@@ -41,6 +42,7 @@ void Model::cambiarJugadorActivo()
 {
     if ((this->jugadores[(this->nroJugadorActivo + 1) % CANTJUGADORES]).collide(this->camara ))
     {
+         (this->jugadores[(this->nroJugadorActivo)]).desactivar();
         this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
     }
     else
@@ -48,9 +50,12 @@ void Model::cambiarJugadorActivo()
         while (!((this->jugadores[(this->nroJugadorActivo + 1) % CANTJUGADORES]).collide(this->camara )))
         {
             printf("\n\n colision \n\n");
+            (this->jugadores[(this->nroJugadorActivo)]).desactivar();
             this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
+
         }
     }
+    (this->jugadores[(this->nroJugadorActivo)]).activar();
 }
 
 void Model::detenerJugadores()
@@ -76,6 +81,7 @@ void Model::update()
     }
 }
 
-void Model::setCamara(SDL_Rect * camara){
-this->camara = camara;
+void Model::setCamara(SDL_Rect * camara)
+{
+    this->camara = camara;
 }
