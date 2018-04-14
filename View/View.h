@@ -14,7 +14,6 @@ public:
     void render();
     bool inicializar();
     void close();
-
 protected:
 
 private:

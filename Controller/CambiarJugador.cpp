@@ -10,7 +10,10 @@ CambiarJugador::~CambiarJugador()
     //dtor
 }
 
-void CambiarJugador::execute() {
+void CambiarJugador::execute()
+
+{
     this->model->detenerJugadores();
+
     this->model->cambiarJugadorActivo();
 }

@@ -19,6 +19,7 @@ public:
     void cambiarJugadorActivo();
     void detenerJugadores();
     void update();
+    void setCamara(SDL_Rect * camara);
 
 protected:
 
@@ -26,6 +27,7 @@ private:
     Pelota pelota;
     Jugador* jugadores;
     Jugador jugadorActual;
+    SDL_Rect * camara;
     int nroJugadorActivo;
     std::list<Command*> commandsToApply;
 };

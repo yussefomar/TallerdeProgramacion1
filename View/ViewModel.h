@@ -12,7 +12,6 @@ public:
     ViewModel(Model* model, SDL_Renderer* gRenderer, SDL_Rect* camara);
     virtual ~ViewModel();
     void render();
-
 protected:
 
 private:

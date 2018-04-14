@@ -1,5 +1,5 @@
 #include "Model.h"
-
+#include "ViewModel.h"
 #define CANTJUGADORES 7
 
 
@@ -39,7 +39,18 @@ void Model::addCommand(Command* command)
 
 void Model::cambiarJugadorActivo()
 {
-    this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
+    if ((this->jugadores[(this->nroJugadorActivo + 1) % CANTJUGADORES]).collide(this->camara ))
+    {
+        this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
+    }
+    else
+    {
+        while (!((this->jugadores[(this->nroJugadorActivo + 1) % CANTJUGADORES]).collide(this->camara )))
+        {
+            printf("\n\n colision \n\n");
+            this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
+        }
+    }
 }
 
 void Model::detenerJugadores()
@@ -63,4 +74,8 @@ void Model::update()
     {
         this->jugadores[i].move();
     }
+}
+
+void Model::setCamara(SDL_Rect * camara){
+this->camara = camara;
 }
