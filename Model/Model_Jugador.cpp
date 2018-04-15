@@ -4,19 +4,28 @@
 Jugador::Jugador()
 {
     //Initialize the offsets
-    mPosX = 950;
-    mPosY = 678;
-    casaca = true;
-    activo = false;
-    mCollider.x = mPosX;
-    mCollider.y = mPosY;
-    mCollider.w = ANCHO_JUGADOR;
-    mCollider.h = ALTO_JUGADOR;
+    this->posInitX = 0;
+    this->posInitY = 0;
+    this->mPosX = this->posInitX;
+    this->mPosY = this->posInitY;
+    this->casaca = 1;
+    this->activo = false;
+    this->mCollider.x = mPosX;
+    this->mCollider.y = mPosY;
+    this->mCollider.w = ANCHO_JUGADOR;
+    this->mCollider.h = ALTO_JUGADOR;
     //Initialize the velocity
-    mVelX = 0;
-    mVelY = 0;
+    this->mVelX = 0;
+    this->mVelY = 0;
 }
 
+void Jugador::setPosInitX(int posX) {
+    this->posInitX = posX;
+}
+
+void Jugador::setPosInitY(int posY) {
+    this->posInitY = posY;
+}
 
 void Jugador::move()
 {
@@ -63,28 +72,28 @@ void Jugador::setPosY(int PosY)
 
 void Jugador::setCasacaAlternativa()
 {
-    casaca=false ;
+    casaca=0 ;
 }
 
 
 void Jugador::disminuirVelocidadX()
 {
-    mVelX -= VELOCIDAD_JUGADOR;;
+    mVelX -= VELOCIDAD_JUGADOR;
 }
 
 void Jugador::disminuirVelocidadY()
 {
-    mVelY -= VELOCIDAD_JUGADOR; ;
+    mVelY -= VELOCIDAD_JUGADOR;
 }
 
 void Jugador::aumentarVelocidadX()
 {
-    mVelX += VELOCIDAD_JUGADOR; ;
+    mVelX += VELOCIDAD_JUGADOR;
 }
 
 void Jugador::aumentarVelocidadY()
 {
-    mVelY += VELOCIDAD_JUGADOR; ;
+    mVelY += VELOCIDAD_JUGADOR;
 }
 
 int Jugador::getVelX()
@@ -108,15 +117,15 @@ void Jugador::stop()
 }
 bool Jugador::estaActivo()
 {
-   return activo;
+    return activo;
 }
 void Jugador::activar()
 {
-   activo=true;
+    activo=true;
 }
 void Jugador::desactivar()
 {
-   activo=false;
+    activo=false;
 }
 bool Jugador::collide(SDL_Rect * camara)
 {

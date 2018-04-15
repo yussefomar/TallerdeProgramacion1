@@ -42,7 +42,7 @@ void Model::cambiarJugadorActivo()
 {
     if ((this->jugadores[(this->nroJugadorActivo + 1) % CANTJUGADORES]).collide(this->camara ))
     {
-         (this->jugadores[(this->nroJugadorActivo)]).desactivar();
+        (this->jugadores[(this->nroJugadorActivo)]).desactivar();
         this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
     }
     else
@@ -85,3 +85,8 @@ void Model::setCamara(SDL_Rect * camara)
 {
     this->camara = camara;
 }
+
+void Model::setFormacion(Formacion* formacion) {
+    formacion->setPosicionInicial(this->jugadores);
+}
+

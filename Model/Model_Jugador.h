@@ -24,19 +24,20 @@ public:
     //Position accessors
     int getVelX();
     int getVelY();
-    void setPosX(int PosX);
 
+    void setPosX(int PosX);
     void setPosY(int PosY);
+
+    void setPosInitX(int posX);
+    void setPosInitY(int posY);
 
     void setCasacaAlternativa();
 
     void disminuirVelocidadX();
-
     void disminuirVelocidadY();
-
     void aumentarVelocidadX();
-
     void aumentarVelocidadY();
+
     void activar();
     void desactivar();
     bool estaActivo();
@@ -47,11 +48,12 @@ public:
 private:
     //The X and Y offsets of the dot
     int mPosX, mPosY;
+    int posInitX, posInitY;
     bool activo;
     //The velocity of the dot
     int mVelX, mVelY;
     SDL_Rect mCollider;
-    bool casaca;
+    int casaca;
 };
 
 #endif
