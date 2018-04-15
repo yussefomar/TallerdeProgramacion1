@@ -18,7 +18,7 @@ public:
     Jugador* getJugadorActivo();
     void addCommand(Command* command);
     void cambiarJugadorActivo();
-    void detenerJugadores();
+    //void detenerJugadores();
     void update();
     void setCamara(SDL_Rect * camara);
     void setFormacion(Formacion* formacion);

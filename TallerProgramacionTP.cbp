@@ -75,6 +75,10 @@
 		<Unit filename="Images/canchafubol.jpg" />
 		<Unit filename="Images/soccer.png" />
 		<Unit filename="Logs/Log.txt" />
+		<Unit filename="Model/Activo.cpp" />
+		<Unit filename="Model/Activo.h" />
+		<Unit filename="Model/Estado.cpp" />
+		<Unit filename="Model/Estado.h" />
 		<Unit filename="Model/Formacion.cpp" />
 		<Unit filename="Model/Formacion.h" />
 		<Unit filename="Model/Formacion312.cpp" />
@@ -83,6 +87,8 @@
 		<Unit filename="Model/Formacion321.h" />
 		<Unit filename="Model/Formacion33.cpp" />
 		<Unit filename="Model/Formacion33.h" />
+		<Unit filename="Model/Inactivo.cpp" />
+		<Unit filename="Model/Inactivo.h" />
 		<Unit filename="Model/LTexture.cpp" />
 		<Unit filename="Model/LTexture.h" />
 		<Unit filename="Model/Model.cpp" />

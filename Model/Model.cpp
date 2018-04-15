@@ -57,14 +57,15 @@ void Model::cambiarJugadorActivo()
     }
     (this->jugadores[(this->nroJugadorActivo)]).activar();
 }
-
-void Model::detenerJugadores()
-{
-    for(int i = 0; i < CANTJUGADORES; ++i)
-    {
-        this->jugadores[i].stop();
-    }
-}
+//El detener jugadores ya esta implicito en el estado.
+//Y si no, deberia estarlo.s
+//void Model::detenerJugadores()
+//{
+//    for(int i = 0; i < CANTJUGADORES; ++i)
+//    {
+//        this->jugadores[i].stop();
+//    }
+//}
 
 void Model::update()
 {
