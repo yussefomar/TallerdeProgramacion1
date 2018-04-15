@@ -42,7 +42,7 @@ void Model::cambiarJugadorActivo()
 {
     if ((this->jugadores[(this->nroJugadorActivo + 1) % CANTJUGADORES]).collide(this->camara ))
     {
-         (this->jugadores[(this->nroJugadorActivo)]).desactivar();
+        (this->jugadores[(this->nroJugadorActivo)]).desactivar();
         this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
     }
     else
@@ -57,14 +57,15 @@ void Model::cambiarJugadorActivo()
     }
     (this->jugadores[(this->nroJugadorActivo)]).activar();
 }
-
-void Model::detenerJugadores()
-{
-    for(int i = 0; i < CANTJUGADORES; ++i)
-    {
-        this->jugadores[i].stop();
-    }
-}
+//El detener jugadores ya esta implicito en el estado.
+//Y si no, deberia estarlo.s
+//void Model::detenerJugadores()
+//{
+//    for(int i = 0; i < CANTJUGADORES; ++i)
+//    {
+//        this->jugadores[i].stop();
+//    }
+//}
 
 void Model::update()
 {
@@ -85,3 +86,8 @@ void Model::setCamara(SDL_Rect * camara)
 {
     this->camara = camara;
 }
+
+void Model::setFormacion(Formacion* formacion) {
+    formacion->setPosicionInicial(this->jugadores);
+}
+

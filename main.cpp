@@ -7,6 +7,11 @@
 #include "Model.h"
 #include "Controller.h"
 #include "View.h"
+//Solo para probar hasta que pueda manejar el logg y parser
+#include "Formacion312.h"
+#include "Formacion33.h"
+#include "Formacion321.h"
+
 
 
 //unsigned short logLevel;
@@ -40,6 +45,9 @@ int main(int argc, char* args[])
 
 
     Model model;
+    Formacion321 f;
+    //Solo hasta que pueda manejar logger, esto es un asco.
+    model.setFormacion(&f);
     View view(&model);
     Controller controller(&model);
 

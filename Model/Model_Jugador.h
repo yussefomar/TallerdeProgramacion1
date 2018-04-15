@@ -2,6 +2,9 @@
 #define MODEL_JUGADOR_H_
 #include <SDL2/SDL.h>
 #include "LTexture.h"
+#include "Estado.h"
+#include "Activo.h"
+#include "Inactivo.h"
 
 class Jugador
 {
@@ -24,34 +27,34 @@ public:
     //Position accessors
     int getVelX();
     int getVelY();
-    void setPosX(int PosX);
 
+    void setPosX(int PosX);
     void setPosY(int PosY);
 
-    void setCasacaAlternativa();
+    void setPosInitX(int posX);
+    void setPosInitY(int posY);
+
 
     void disminuirVelocidadX();
-
     void disminuirVelocidadY();
-
     void aumentarVelocidadX();
-
     void aumentarVelocidadY();
-    void activar();
-    void desactivar();
     bool estaActivo();
     void stop();
 
+    void activar();
+    void desactivar();
+
+    void setCasacaAlternativa();
     bool casacaPrincipal();
     bool collide(SDL_Rect * camara);
+
 private:
-    //The X and Y offsets of the dot
-    int mPosX, mPosY;
-    bool activo;
-    //The velocity of the dot
-    int mVelX, mVelY;
     SDL_Rect mCollider;
-    bool casaca;
+    int casaca;
+    Estado* estado;
+    Activo activo;
+    Inactivo inactivo;
 };
 
 #endif

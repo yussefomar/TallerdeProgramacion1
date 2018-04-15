@@ -6,6 +6,6 @@ Equipo::Equipo()
 }
 int Equipo::agregarJugador(Jugador jugador)
 {
-//  this->jugadores.assign(jugador);
+    return 0;
 }
 
