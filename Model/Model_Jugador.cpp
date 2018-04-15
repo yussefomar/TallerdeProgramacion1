@@ -142,24 +142,25 @@ bool Jugador::collide(SDL_Rect * camara)
 
     //If any of the sides from A are outside of B
 
-    if( bottomCam <= topJugador )
+    if( bottomJugador <= topCam )
     {
         return false;
     }
 
-    if( topCam >= bottomJugador )
+    if( topJugador>= bottomCam )
     {
         return false;
     }
 
-    if( rightCam <= leftJugador )
+    if( leftJugador >= rightCam )
     {
         return false;
     }
 
-    if( leftCam >= rightJugador )
+    if( rightJugador <= leftCam )
     {
         return false;
     }
+
     return true;
 }

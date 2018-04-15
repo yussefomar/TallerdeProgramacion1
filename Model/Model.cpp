@@ -40,21 +40,15 @@ void Model::addCommand(Command* command)
 
 void Model::cambiarJugadorActivo()
 {
-    if ((this->jugadores[(this->nroJugadorActivo + 1) % CANTJUGADORES]).collide(this->camara ))
-    {
-        (this->jugadores[(this->nroJugadorActivo)]).desactivar();
-        this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
-    }
-    else
-    {
         while (!((this->jugadores[(this->nroJugadorActivo + 1) % CANTJUGADORES]).collide(this->camara )))
         {
-            printf("\n\n colision \n\n");
+            printf("\n\n colision 2\n\n");
             (this->jugadores[(this->nroJugadorActivo)]).desactivar();
             this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
 
         }
-    }
+    (this->jugadores[(this->nroJugadorActivo)]).desactivar();
+     this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
     (this->jugadores[(this->nroJugadorActivo)]).activar();
 }
 //El detener jugadores ya esta implicito en el estado.

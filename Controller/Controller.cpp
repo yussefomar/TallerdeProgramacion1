@@ -92,9 +92,7 @@ Command* Controller::handleEvent(SDL_Event& e)
         case SDLK_RIGHT:
             command = this->commands[DECVELX];
             break;
-        case SDLK_SPACE:
-            command = this->commands[CAMBJUG];
-            break;
+
         }
     }
     return command;
