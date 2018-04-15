@@ -15,32 +15,28 @@ Inactivo::~Inactivo()
 
 void Inactivo::move()
 {
-    if(this->posInitX - this->mPosX > TOLERANCIA)
-    {
-        this->mPosX += VELOCIDAD_JUGADOR;
+    if (posInitX>mPosX){
+        this->mVelX=VELOCIDAD_JUGADOR;
+        this->mPosX += this->mVelX;
     }
-    else if (this->posInitX - this->mPosX < -TOLERANCIA)
-    {
-        this->mPosX -= VELOCIDAD_JUGADOR;
-    }
-    else
-    {
-        this->mVelX = 0;
-        this->mPosX = this->posInitX;
+    if (posInitX<mPosX){
+        this->mVelX=-VELOCIDAD_JUGADOR;
+        this->mPosX += this->mVelX;
     }
 
-    if(this->posInitY - this->mPosY > TOLERANCIA)
-    {
-        this->mPosY += VELOCIDAD_JUGADOR;
+    if (posInitY>mPosY){
+        this->mVelY=VELOCIDAD_JUGADOR;
+        this->mPosY += this->mVelY;
     }
-    else if (this->posInitX - this->mPosX < -TOLERANCIA)
-    {
-        this->mPosY -= VELOCIDAD_JUGADOR;
+     if (posInitY<mPosY){
+        this->mVelY=-VELOCIDAD_JUGADOR;
+        this->mPosY += this->mVelY;
     }
-    else
-    {
-        this->mVelY = 0;
-        this->mPosY = this->posInitY;
+    if (posInitX==mPosX){
+    this->mVelX=0;
+    }
+    if (posInitY==mPosY){
+    this->mVelY=0;
     }
 }
 bool Inactivo::estaActivo()

@@ -58,7 +58,8 @@ void View_Jugador::initialize(Jugador *model,SDL_Renderer * gRenderer)
         // success = false;
     }
     else
-    {   texturaSeleccionado.setAlpha(100);
+    {   texturaSeleccionado.setAlpha(200);
+        texturaSeleccionado.setColor(150,100,150);
         int offset = 0;
         if (!model->casacaPrincipal())
         {
