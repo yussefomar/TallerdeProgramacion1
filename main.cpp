@@ -18,14 +18,14 @@
 using namespace std;
 Util_Logger logger;
 Util_Parser parser;
-
+const std::string pathDefaultConfig = "./Configs/config.yaml";
 
 
 int main(int argc, char* args[])
 {
     /********************************************************************************************/
-    Equipo equipoParseado = parser.read_yaml_Equipo("./Configs/config.yaml");
-    Debug debugParseado = parser.read_yaml_Debug("./Configs/config.yaml");
+   //primer parametros se levanta desde consola
+    Parametros parametrosParseado = parser.read_yaml_Parametros("./Configs/configIndicado.yaml",pathDefaultConfig);
     logger.createFile(3);
     /**
     Si queremos usar el logger mientras leemos el archivo de configuracion debemos crearlo como
@@ -36,9 +36,9 @@ int main(int argc, char* args[])
     por ejemplo en un catch donde saltó una excepción ponemos log.writeErrorLine y si el level
     está configurado para escribir errores los pondra en el archivo.
     **/
-    logger.writeErrorLine("Ejemplo de Error." + equipoParseado.get_formacion()); //nivel bajo, siempre mostramos errores.
-    logger.writeWarningLine("Ejemplo de Warning." + equipoParseado.get_casaca()); //nivel medio, mostramos errores y warnings.
-    logger.writeMessageLine("Ejemplo de linea común." + debugParseado.get_level()); //nivel alto, se escribe todo.
+    //logger.writeErrorLine("Ejemplo de Error." + equipoParseado.get_formacion()); //nivel bajo, siempre mostramos errores.
+    //logger.writeWarningLine("Ejemplo de Warning." + equipoParseado.get_casaca()); //nivel medio, mostramos errores y warnings.
+    //logger.writeMessageLine("Ejemplo de linea común." + debugParseado.get_level()); //nivel alto, se escribe todo.
     /********************************************************************************************/
 
     /********************************************************************************************/
