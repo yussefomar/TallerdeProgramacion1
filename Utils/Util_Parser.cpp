@@ -92,14 +92,14 @@ for(int i = 0; i<name.size(); i++)
 c1[i] = name.at(i);
 }
 char c2[] = "3-3";
-char c3[] = "3-1";
+char c3[] = "3-1-2";
 char c4[] = "3-2-1";
     if((strncasecmp(c1,c2,3))==0){
     name = "3-3";
     return true;}
 
     if((strncasecmp(c1,c3,3))==0){
-    name = "3-1";
+    name = "3-1-2";
     return true;}
 
     if((strncasecmp(c1,c4,3))==0){
