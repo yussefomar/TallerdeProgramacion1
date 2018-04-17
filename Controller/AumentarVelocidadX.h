@@ -16,6 +16,7 @@ protected:
 
 private:
     Model* model;
+
 };
 
 #endif // AUMENTARVELOCIDADX_H

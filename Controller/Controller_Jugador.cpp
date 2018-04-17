@@ -19,6 +19,10 @@ void Controller_Jugador::handleEvent( SDL_Event& e )
 {
     //Jugador jugador = (*this->jugador);
     //If a key was pressed
+
+
+
+
     if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
     {
         //Adjust the velocity
@@ -26,6 +30,9 @@ void Controller_Jugador::handleEvent( SDL_Event& e )
         {
         case SDLK_UP:
             (*this->jugador).disminuirVelocidadY();
+            break;
+        case SDLK_e:
+            (*this->jugador).aumentarVelocidadX();
             break;
         case SDLK_DOWN:
             (*this->jugador).aumentarVelocidadY();

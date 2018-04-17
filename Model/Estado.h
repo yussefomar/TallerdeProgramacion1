@@ -16,6 +16,8 @@ public:
 
     void setPosX(int PosX);
     void setPosY(int PosY);
+    void setCorrer(bool corrio);
+    bool getCorrer();
 
     void setPosInitX(int posX);
     void setPosInitY(int posY);
@@ -36,7 +38,7 @@ protected:
     int posInitX, posInitY;
     //The velocity of the dot
     int mVelX, mVelY;
-
+    bool corrio;
 private:
 };
 

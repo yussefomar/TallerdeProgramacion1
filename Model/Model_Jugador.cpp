@@ -27,7 +27,18 @@ void Jugador::move()
     this->mCollider.x = this->estado->getPosX();
     this->mCollider.y = this->estado->getPosY();
 }
+/*
 
+void  setCorrer(bool corrio){
+ this->estado->setCorrer(corrio);
+
+ }
+
+bool  getCorrer(){
+ return this->estado->getCorrer();
+
+ }
+*/
 int Jugador::getPosX()
 {
     return this->estado->getPosX();
@@ -42,6 +53,8 @@ void Jugador::setPosX(int PosX)
 {
     this->estado->setPosX(PosX);
 }
+
+
 
 void Jugador::setPosY(int PosY)
 {

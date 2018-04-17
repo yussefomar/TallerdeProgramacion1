@@ -34,6 +34,8 @@ public:
     void setPosInitX(int posX);
     void setPosInitY(int posY);
 
+    void setCorrer(bool corrio);
+    bool getCorrer();
 
     void disminuirVelocidadX();
     void disminuirVelocidadY();

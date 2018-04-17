@@ -14,6 +14,7 @@ public:
 
     //Maximum axis velocity of the dot
     static const int VELOCIDAD_JUGADOR = 3;
+    static const int VELOCIDAD_MAX_JUGADOR = 6;
 
 
     Controller_Jugador(  Jugador *model,  View_Jugador *view) ;

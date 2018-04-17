@@ -24,6 +24,16 @@ int Estado::getPosX()
 {
     return this->mPosX;
 }
+
+ void Estado::setCorrer(bool corrio){
+ this->corrio=corrio;
+
+ }
+
+bool Estado::getCorrer(){
+ return  this->corrio;
+
+ }
 int Estado::getPosY()
 {
     return this->mPosY;

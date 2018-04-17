@@ -49,11 +49,145 @@ void Controller::processInput()
 
 }
 
+const Uint8 *state = SDL_GetKeyboardState(NULL);
+
+
+
 Command* Controller::handleEvent(SDL_Event& e)
 {
     Command* command = nullptr;
 
+
+
+        if (state[SDL_SCANCODE_E] && state[SDL_SCANCODE_LEFT]) {
+        command = this->commands[DECVELX];
+        }else if(state[SDL_SCANCODE_E] && state[SDL_SCANCODE_RIGHT]){
+         command = this->commands[INCVELX];
+        }else if((state[SDL_SCANCODE_E] && state[SDL_SCANCODE_UP])){
+            command = this->commands[INCVELY];
+
+        }else if(state[SDL_SCANCODE_E] && state[SDL_SCANCODE_DOWN]){
+        command = this->commands[DECVELY];
+
+
+        }else if( e.type == SDL_KEYUP && e.key.repeat == 0 )/*idea de este if es cuando deje de presionar el E volver a su estado anterior*/
+        {
+            switch( e.key.keysym.sym )
+            {
+
+            case SDLK_UP:
+                command = this->commands[DECVELY];
+                break;
+            case SDLK_DOWN:
+                command = this->commands[INCVELY];
+                break;
+            case SDLK_LEFT:
+                command = this->commands[DECVELX];
+                break;
+            case SDLK_RIGHT:
+                command = this->commands[INCVELX];
+                break;
+
+            }
+        }
+
+
+
+
+        /* NO FUNCIONO PORQUE DETECTA DE A UNA LETRA.
     if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
+    {
+        switch( e.key.keysym.sym )
+        {
+        case SDLK_e:
+            {
+
+
+            switch( e.key.keysym.sym )
+            {
+            case SDLK_UP:
+                command = this->commands[DECVELY];
+                break;
+            case SDLK_DOWN:
+                command = this->commands[INCVELY];
+                break;
+            case SDLK_LEFT:
+                command = this->commands[DECVELX];
+                break;
+            case SDLK_RIGHT:
+                command = this->commands[INCVELX];
+                break;
+
+
+            }
+            break;
+            }
+        case SDLK_UP:
+            command = this->commands[DECVELY];
+            break;
+        case SDLK_DOWN:
+            command = this->commands[INCVELY];
+            break;
+        case SDLK_LEFT:
+            command = this->commands[DECVELX];
+            break;
+        case SDLK_RIGHT:
+            command = this->commands[INCVELX];
+            break;
+
+
+        }
+    }
+    //If a key was released
+    else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
+    {
+        switch( e.key.keysym.sym )
+        {
+        case SDLK_e:
+            {
+
+
+            switch( e.key.keysym.sym )
+            {
+            case SDLK_UP:
+                command = this->commands[INCVELY];
+                break;
+            case SDLK_DOWN:
+                command = this->commands[DECVELY];
+                break;
+            case SDLK_LEFT:
+                command = this->commands[INCVELX];
+                break;
+            case SDLK_RIGHT:
+                command = this->commands[DECVELX];
+                break;
+            }
+            break;
+            }
+        case SDLK_UP:
+            command = this->commands[INCVELY];
+            break;
+        case SDLK_DOWN:
+            command = this->commands[DECVELY];
+            break;
+        case SDLK_LEFT:
+            command = this->commands[INCVELX];
+            break;
+        case SDLK_RIGHT:
+            command = this->commands[DECVELX];
+            break;
+
+        }
+
+    }
+
+
+
+*/
+
+/*ORIGINAL
+
+  if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
     {
         switch( e.key.keysym.sym )
         {
@@ -94,6 +228,12 @@ Command* Controller::handleEvent(SDL_Event& e)
             break;
 
         }
-    }
+}
+
+*/
+
+
+
+
     return command;
 }
