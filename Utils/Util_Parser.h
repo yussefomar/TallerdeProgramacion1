@@ -5,6 +5,7 @@
 #include <string>
 #include <list>
 #include <yaml-cpp/yaml.h>
+#include "Util_LoggerSubject.h"
 
 using namespace std;
 
@@ -64,7 +65,7 @@ struct Parametros
 };
 
 
-class Util_Parser
+class Util_Parser: public Util_LoggerSubject
 {
 public:
     inline bool levelValido(std::string &name);

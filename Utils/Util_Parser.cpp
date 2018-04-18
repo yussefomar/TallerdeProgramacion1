@@ -17,6 +17,7 @@ std::vector<Debug> debugs;
 
 inline bool Util_Parser::fileExists(const std::string& name)
 {
+NotifyMessage("FileExists: comprobando si existe archivo...", "UTILS");
     ifstream f(name.c_str());
     if (f.good())
     {
@@ -33,8 +34,12 @@ inline bool Util_Parser::fileExists(const std::string& name)
 inline bool Util_Parser::levelValido(std::string &name)
 {
 
-//TODO: hacer alguna comprobacion para el size.
-//tu upper
+if (name.size() > 99 )
+{
+NotifyWarning("levelValido: valor de level demasiado largo", "UTILS");
+return false;
+}
+
     char c1[100];
     for(int i = 0; i<name.size(); i++)
     {
@@ -46,33 +51,41 @@ inline bool Util_Parser::levelValido(std::string &name)
     char c3[] = "INFO";
     char c4[] = "ERROR";
 
+NotifyMessage("levelValido: obteniendo level ", "UTILS");
     if((strncasecmp(c1,c2,2))==0)
     {
         name = "debug";
+        NotifyMessage("levelValido: level seteado:" + name, "UTILS");;
         return true;
     }
 
     if((strncasecmp(c1,c3,2))==0)
     {
         name = "info";
+        NotifyMessage("levelValido: level seteado:" + name, "UTILS");
         return true;
     }
 
     if((strncasecmp(c1,c4,2))==0)
     {
         name = "error";
+        NotifyMessage("levelValido: level seteado:" + name, "UTILS");
         return true;
     }
 
     name = "";
+    NotifyWarning("levelValido: valor de level invalido", "UTILS");
     return false;
 
 }
 //pasar por referencia
 inline bool Util_Parser::casacaValido(std::string &name)
 {
-//TODO: hacer alguna comprobacion para el size.
-//tu upper
+if (name.size() > 99 )
+{
+NotifyWarning("casacaValido: valor de casaca demasiado largo", "UTILS");
+return false;
+}
     char c1[100];
     for(int i = 0; i<name.size(); i++)
     {
@@ -82,25 +95,33 @@ inline bool Util_Parser::casacaValido(std::string &name)
 
     char c2[] = "PRINCIPAL";
     char c3[] = "SUPLENTE";
+
+    NotifyMessage("casacaValido: obteniendo casaca ", "UTILS");
     if((strncasecmp(c1,c2,2))==0)
     {
         name = "principal";
+        NotifyMessage("casacaValido: casaca seteado:" + name, "UTILS");
         return true;
     }
 
     if((strncasecmp(c1,c3,2))==0)
     {
         name = "suplente";
+         NotifyMessage("casacaValido: casaca seteado:" + name, "UTILS");
         return true;
     }
     name = "";
+    NotifyWarning("casacaValido: valor de casaca invalido", "UTILS");
     return false;
 }
 //pasar por referencia
 inline bool Util_Parser::formacionValido(std::string &name)
 {
-//TODO: hacer alguna comprobacion para el size.
-//tu upper
+if (name.size() > 99 )
+{
+NotifyWarning("formacionValido: valor de formacion demasiado largo", "UTILS");
+return false;
+}
     char c1[100];
     for(int i = 0; i<name.size(); i++)
     {
@@ -109,24 +130,29 @@ inline bool Util_Parser::formacionValido(std::string &name)
     char c2[] = "3-3";
     char c3[] = "3-1";
     char c4[] = "3-2-1";
+    NotifyMessage("formacionValido: obteniendo formacion ", "UTILS");
     if((strncasecmp(c1,c2,3))==0)
     {
         name = "3-3";
+        NotifyMessage("formacionValido: formacion seteado:" + name, "UTILS");
         return true;
     }
 
     if((strncasecmp(c1,c3,3))==0)
     {
         name = "3-1";
+        NotifyMessage("formacionValido: formacion seteado:" + name, "UTILS");
         return true;
     }
 
     if((strncasecmp(c1,c4,3))==0)
     {
         name = "3-2-1";
+         NotifyMessage("casacaValido: formacion seteado:" + name, "UTILS");
         return true;
     }
     name = "";
+     NotifyWarning("formacionValido: valor de formacion invalido", "UTILS");
     return false;
 }
 
@@ -154,6 +180,7 @@ Debug Util_Parser::read_yaml_Debug(std::vector<YAML::Node> baseNode)
 
 void Util_Parser::mezclar(Parametros &resultado, Parametros superParametros)
 {
+   NotifyMessage("mezclar: obteniendo parametros de memoria", "UTILS");
     if(!levelValido( resultado.level))
     {
         resultado.level = superParametros.level;
@@ -173,6 +200,7 @@ void Util_Parser::mezclar(Parametros &resultado, Parametros superParametros)
 
 void Util_Parser::llenarParametrosObtenidos( std::vector<YAML::Node> baseNode, Parametros &parametrosObtenidos)
 {
+
 //obtener debug
     try
     {
@@ -180,18 +208,18 @@ void Util_Parser::llenarParametrosObtenidos( std::vector<YAML::Node> baseNode, P
         parametrosObtenidos.level = debugParseado.get_level();
         if(levelValido( parametrosObtenidos.level))
         {
+    NotifyMessage("llenarParametrosObtenidos: level obtenido", "UTILS");
 
-            //loguar level obtenido
         }
         else
         {
-            //loguar level invalido
-            parametrosObtenidos.esValido = 0;
+          NotifyWarning("llenarParametrosObtenidos: level invalido", "UTILS");
+         parametrosObtenidos.esValido = 0;
         }
     }
     catch(YAML::Exception ex)
     {
-        //loguear que no se pudo obtener el nodo Debug
+        NotifyError("llenarParametrosObtenidos: no se pudo obtener el nodo Debug", "UTILS");
         parametrosObtenidos.esValido = 0;
     }
 
@@ -202,28 +230,28 @@ void Util_Parser::llenarParametrosObtenidos( std::vector<YAML::Node> baseNode, P
         parametrosObtenidos.casaca = equipoParseado.get_casaca();
         if(casacaValido(parametrosObtenidos.casaca))
         {
-            //loguar casaca obtenido
+             NotifyMessage("llenarParametrosObtenidos: casaca obtenido", "UTILS");
         }
         else
         {
-            //loguar que no se pudo obtener casaca
+            NotifyWarning("llenarParametrosObtenidos: casaca invalido", "UTILS");
             parametrosObtenidos.esValido = 0;
         }
         parametrosObtenidos.formacion = equipoParseado.get_formacion();
         if(formacionValido(parametrosObtenidos.formacion))
         {
-            //loguar formacion obtenido
+            NotifyMessage("llenarParametrosObtenidos: formacion obtenido", "UTILS");
         }
         else
         {
+            NotifyWarning("llenarParametrosObtenidos: formacion invalido", "UTILS");
             parametrosObtenidos.esValido = 0;
-            //loguear que no se pudo obtener formacion
+
         }
     }
     catch(YAML::Exception ex)
     {
-//     loguear que no se pudo obtener el nodo
-        //  probar con ddbug defualt
+    NotifyError("llenarParametrosObtenidos: no se pudo obtener el nodo Equipo", "UTILS");
         parametrosObtenidos.esValido = 0;
 
     }
@@ -241,7 +269,7 @@ Parametros Util_Parser::read_yaml_Parametros(std::string pathIndicado, std::stri
 
         if (fileExists(pathIndicado))
         {
-            //loguear levantar path indicado
+            NotifyMessage("read_yaml_Parametros: cargar path indicado por parametro", "UTILS");
             baseNode = YAML::LoadAllFromFile(pathIndicado);
 
         }
@@ -249,7 +277,7 @@ Parametros Util_Parser::read_yaml_Parametros(std::string pathIndicado, std::stri
         {
             if(fileExists(pathDefault))
             {
-                //loguear levantar path deafult
+               NotifyMessage("read_yaml_Parametros: cargar path indicado por default", "UTILS");
                 baseNode = YAML::LoadAllFromFile(pathDefault);
             }
 
@@ -259,7 +287,7 @@ Parametros Util_Parser::read_yaml_Parametros(std::string pathIndicado, std::stri
 
         if (parametrosObtenidos.esValido == 0)
         {
-            //hacer lo mismo para el nodo defaul
+            NotifyWarning("read_yaml_Parametros: parametros obtenidos invalidos", "UTILS");
             //intenta llenar con defaul
             baseNode = YAML::LoadAllFromFile(pathDefault);
             llenarParametrosObtenidos(baseNode, parametrosObtenidos);
@@ -270,6 +298,7 @@ Parametros Util_Parser::read_yaml_Parametros(std::string pathIndicado, std::stri
     }
     catch(YAML::Exception ex)
     {
+   NotifyError("read_yaml_Parametros: parametros obtenidos invalidos", "UTILS");
         return superParametros;
     }
 }

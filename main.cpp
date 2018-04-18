@@ -28,7 +28,8 @@ int main(int argc, char* args[])
     Model model;
     model.Attach(loggerObserver);
     //Solo hasta que pueda manejar logger, esto es un asco.
-    Util_Configuracion configuracion(&model);
+    Util_Configuracion configuracion(&model, loggerObserver);
+    configuracion.Attach(loggerObserver);
     View view(&model);
     view.Attach(loggerObserver);
     Controller controller(&model);

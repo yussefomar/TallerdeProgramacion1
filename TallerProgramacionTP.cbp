@@ -12,6 +12,7 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add option="-lSDL -lSDL_image -lSDL_ttf" />
 					<Add directory="include" />
@@ -19,9 +20,6 @@
 					<Add directory="View" />
 					<Add directory="Controller" />
 				</Compiler>
-				<ResourceCompiler>
-					<Add option="-lSDL -lSDL_image -lSDL_ttf" />
-				</ResourceCompiler>
 				<Linker>
 					<Add option="-lSDL2" />
 				</Linker>
@@ -33,6 +31,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-std=c++11" />
 					<Add option="-lSDL -lSDL_image -lSDL_ttf" />
 					<Add directory="include" />
 					<Add directory="Model" />
@@ -46,6 +45,7 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-std=c++11" />
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 			<Add option="-lSDL -lSDL_image -lSDL_ttf" />
@@ -102,6 +102,8 @@
 		<Unit filename="Utils/IObserver.h" />
 		<Unit filename="Utils/Util_Common.cpp" />
 		<Unit filename="Utils/Util_Common.h" />
+		<Unit filename="Utils/Util_Configuracion.cpp" />
+		<Unit filename="Utils/Util_Configuracion.h" />
 		<Unit filename="Utils/Util_Logger.cpp" />
 		<Unit filename="Utils/Util_Logger.h" />
 		<Unit filename="Utils/Util_LoggerObserver.cpp" />
