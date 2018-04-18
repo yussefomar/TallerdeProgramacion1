@@ -88,11 +88,9 @@ bool Jugador::casacaPrincipal()
     return this->casaca;
 }
 
-void Jugador::stop()
+void Jugador::detenerVelocidad()
 {
-    //posiblemente este metodo desaparezca ya
-    //no tenga sentido.
-    //Eliminar en cuanto se pueda.
+    this->estado->detenerVelocidad();
 }
 bool Jugador::estaActivo()
 {
@@ -163,4 +161,12 @@ bool Jugador::collide(SDL_Rect * camara)
     }
 
     return true;
+}
+
+void Jugador::acelerar() {
+    this->estado->acelerar();
+}
+
+void Jugador::desacelerar() {
+    this->estado->desacelerar();
 }

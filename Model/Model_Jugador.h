@@ -40,7 +40,7 @@ public:
     void aumentarVelocidadX();
     void aumentarVelocidadY();
     bool estaActivo();
-    void stop();
+    void detenerVelocidad();
 
     void activar();
     void desactivar();
@@ -48,6 +48,8 @@ public:
     void setCasacaAlternativa();
     bool casacaPrincipal();
     bool collide(SDL_Rect * camara);
+    void acelerar();
+    void desacelerar();
 
 private:
     SDL_Rect mCollider;
