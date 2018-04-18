@@ -101,3 +101,8 @@ void Model::setFormacion(Formacion* formacion)
     NotifyMessage("SALIMOS DEL METODO: setFormacion", "MODEL");
 }
 
+void Model::setCasaca(int i)
+{
+    //implementar
+}
+
