@@ -1,14 +1,21 @@
 #include "View_Jugador.h"
 
+#include <sstream>
+
 View_Jugador::View_Jugador()
 {
 
 }
 
-View_Jugador::View_Jugador( Jugador *model,SDL_Renderer * gRenderer)
+View_Jugador::View_Jugador(Jugador* model, SDL_Renderer* gRenderer)
 {
     this->model = model;
-    if( !texturaJugador.loadFromFile( "Images/spritejugador.png",gRenderer) )
+
+    std::stringstream ss;
+    ss << "Images/spritejugador.png";
+    std::string fullPath = ss.str();
+
+    if( !texturaJugador.loadFromFile(fullPath,gRenderer) )
     {
         printf( "Failed to load dot texture!\n" );
         // success = false;
@@ -44,10 +51,15 @@ View_Jugador::View_Jugador( Jugador *model,SDL_Renderer * gRenderer)
     }
 }
 
-void View_Jugador::initialize(Jugador *model,SDL_Renderer * gRenderer)
+void View_Jugador::initialize(Jugador *model,SDL_Renderer * gRenderer, std::string casaca)
 {
+    //TEMPORAL.-
+    std::stringstream ss;
+    ss << "Images/" << casaca << ".png";
+    std::string casacaFinal = ss.str();
+
     this->model = model;
-    if( !texturaJugador.loadFromFile( "Images/spritejugador.png",gRenderer) )
+    if( !texturaJugador.loadFromFile(casacaFinal,gRenderer) )
     {
         printf( "Failed to load dot texture!\n" );
         // success = false;

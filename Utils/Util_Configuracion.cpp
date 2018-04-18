@@ -47,7 +47,7 @@ parser.Attach(loggerObserver);
   NotifyLevel(GenerarLevel(parametros.level));
 
     this->model = model;
-    this->model->setCasaca(GenerarCasaca(parametros.casaca));
+    this->model->setCasaca(parametros.casaca);
     //setear Formacion
     char c1[100];
     string form = parametros.formacion;
@@ -154,6 +154,8 @@ int Util_Configuracion::GenerarCasaca(std::string &name)
 
         char c2[] = "PRINCIPAL";
         char c3[] = "SUPLENTE";
+        char c4[] = "AUXILIAR";
+
         if((strncasecmp(c1,c2,2))==0)
         {
             return 0;
@@ -162,6 +164,13 @@ int Util_Configuracion::GenerarCasaca(std::string &name)
         if((strncasecmp(c1,c3,2))==0)
         {
             name = "suplente";
+            return 1;
+        }
+
+        if((strncasecmp(c1,c4,2))==0)
+        {
+            //CHEQUEAR
+            name = "auxiliar";
             return 1;
         }
 

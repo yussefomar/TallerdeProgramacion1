@@ -101,8 +101,12 @@ void Model::setFormacion(Formacion* formacion)
     NotifyMessage("SALIMOS DEL METODO: setFormacion", "MODEL");
 }
 
-void Model::setCasaca(int i)
+void Model::setCasaca(std::string casacaName)
 {
-    //implementar
+    this->casacaSprite = casacaName;
 }
 
+std::string Model::getCasaca()
+{
+    return this->casacaSprite;
+}

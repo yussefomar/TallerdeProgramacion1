@@ -95,6 +95,7 @@ return false;
 
     char c2[] = "PRINCIPAL";
     char c3[] = "SUPLENTE";
+    char c4[] = "AUXILIAR";
 
     NotifyMessage("casacaValido: obteniendo casaca ", "UTILS");
     if((strncasecmp(c1,c2,2))==0)
@@ -108,6 +109,12 @@ return false;
     {
         name = "suplente";
          NotifyMessage("casacaValido: casaca seteado:" + name, "UTILS");
+        return true;
+    }
+    if((strncasecmp(c1,c4,2))==0)
+    {
+        name = "auxiliar";
+        NotifyWarning("casaca Auxiliar: casaca seteado:" + name, "UTILS");
         return true;
     }
     name = "";
@@ -309,5 +316,5 @@ Parametros Util_Parser::read_yaml_Parametros(std::string pathIndicado, std::stri
 Parametros Util_Parser::CrearSuperConfig()
 {
     //loguar carga de superconfig
-    return Parametros("debug","3-3","Principal");
+    return Parametros("debug","3-3","auxiliar");
 }

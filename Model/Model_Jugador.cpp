@@ -170,3 +170,11 @@ void Jugador::acelerar() {
 void Jugador::desacelerar() {
     this->estado->desacelerar();
 }
+
+void Jugador::setCasacaSprite(std::string casacaName) {
+    this->casacaSprite = casacaName;
+}
+
+std::string Jugador::getCasacaSprite() {
+    return this->casacaSprite;
+}
