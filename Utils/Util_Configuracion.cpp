@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
 #include <boost/algorithm/string.hpp>
 
 Util_Parser parser;
@@ -14,9 +15,27 @@ const std::string pathDefaultConfig = "./Configs/config.yaml";
 Util_Configuracion::Util_Configuracion(Model* model)
 {
    Parametros parametros = parser.CrearSuperConfig();
-   std::string pathIndicado = "./Configs/configIndicado.yaml"; //implementar metodo para levantar de consola
+   std::string pathIndicado = "./Configs/"; //implementar metodo para levantar de consola
+   std::string nameIndicado = "configIndicado.yaml";
+   std::string input = "";
 
-    if(!this->inicializar(pathDefaultConfig, pathIndicado))
+    // How to get a string/sentence with spaces
+    cout << "=================================================================\n";
+    cout << " Ingrese el nombre del archivo de configuracion que corresponda: \n";
+    cout << "=================================================================\n";
+    cout << ">>> ";
+    getline(cin, input);
+    cout << "=================================================================\n";
+    if(input != "")
+    {
+        nameIndicado = input;
+    }
+
+    std::stringstream ss;
+    ss << pathIndicado << nameIndicado;
+    std::string fullPath = ss.str();
+
+    if(!this->inicializar(pathDefaultConfig, fullPath))
     {
         printf( "Fallo al Inicializar!\n" );
         //loguear inicialzacion
@@ -24,7 +43,7 @@ Util_Configuracion::Util_Configuracion(Model* model)
     }
     else
     {
-    parametros = parser.read_yaml_Parametros(pathIndicado,pathDefaultConfig, parametros);
+        parametros = parser.read_yaml_Parametros(fullPath,pathDefaultConfig, parametros);
     }
 
 
