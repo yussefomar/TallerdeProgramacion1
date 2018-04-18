@@ -99,10 +99,15 @@
 		<Unit filename="Model/Model_Jugador.h" />
 		<Unit filename="Model/Model_Pelota.cpp" />
 		<Unit filename="Model/Model_Pelota.h" />
+		<Unit filename="Utils/IObserver.h" />
 		<Unit filename="Utils/Util_Common.cpp" />
 		<Unit filename="Utils/Util_Common.h" />
 		<Unit filename="Utils/Util_Logger.cpp" />
 		<Unit filename="Utils/Util_Logger.h" />
+		<Unit filename="Utils/Util_LoggerObserver.cpp" />
+		<Unit filename="Utils/Util_LoggerObserver.h" />
+		<Unit filename="Utils/Util_LoggerSubject.cpp" />
+		<Unit filename="Utils/Util_LoggerSubject.h" />
 		<Unit filename="Utils/Util_Parser.cpp" />
 		<Unit filename="Utils/Util_Parser.h" />
 		<Unit filename="View/View.cpp" />

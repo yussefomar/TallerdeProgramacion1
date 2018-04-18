@@ -32,24 +32,33 @@ Jugador* Model::getJugadorActivo()
 
 void Model::addCommand(Command* command)
 {
+    NotifyMessage("INGRESAMOS EN EL METODO: addCommand");
     //hay que tirar una excepcion
     if(command == nullptr)
         return;
     this->commandsToApply.push_back(command);
+    NotifyMessage("SALIMOS DEL METODO: addCommand");
 }
 
 void Model::cambiarJugadorActivo()
 {
+    NotifyMessage("INGRESAMOS EN EL METODO: cambiarJugadorActivo");
         while (!((this->jugadores[(this->nroJugadorActivo + 1) % CANTJUGADORES]).collide(this->camara )))
         {
             printf("\n\n colision 2\n\n");
+            NotifyMessage("colision 2");
             (this->jugadores[(this->nroJugadorActivo)]).desactivar();
             this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
 
         }
     (this->jugadores[(this->nroJugadorActivo)]).desactivar();
+
+            NotifyMessage("DESACTIVE ACTUAL JUGADOR");
      this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
     (this->jugadores[(this->nroJugadorActivo)]).activar();
+            NotifyMessage("ACTIVE OTRO JUGADOR");
+
+    NotifyMessage("SALIMOS DEL METODO: cambiarJugadorActivo");
 }
 //El detener jugadores ya esta implicito en el estado.
 //Y si no, deberia estarlo.s
@@ -63,6 +72,7 @@ void Model::cambiarJugadorActivo()
 
 void Model::update()
 {
+    NotifyMessage("INGRESAMOS EN EL METODO: update");
     Command* command = nullptr;
     while(!this->commandsToApply.empty())
     {
@@ -74,14 +84,20 @@ void Model::update()
     {
         this->jugadores[i].move();
     }
+    NotifyMessage("SALIMOS DEL EL METODO: update");
 }
 
 void Model::setCamara(SDL_Rect * camara)
 {
+    NotifyMessage("INGRESAMOS AL METODO: setCamara");
     this->camara = camara;
+    NotifyMessage("SALIMOS DEL METODO: setCamara");
 }
 
-void Model::setFormacion(Formacion* formacion) {
+void Model::setFormacion(Formacion* formacion)
+{
+    NotifyMessage("INGRESAMOS AL METODO: setFormacion");
     formacion->setPosicionInicial(this->jugadores);
+    NotifyMessage("SALIMOS DEL METODO: setFormacion");
 }
 
