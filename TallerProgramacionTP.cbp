@@ -56,6 +56,8 @@
 			<Add option="-lyaml-cpp" />
 		</Linker>
 		<Unit filename="Configs/config.yaml" />
+		<Unit filename="Controller/Acelerar.cpp" />
+		<Unit filename="Controller/Acelerar.h" />
 		<Unit filename="Controller/AumentarVelocidadX.cpp" />
 		<Unit filename="Controller/AumentarVelocidadX.h" />
 		<Unit filename="Controller/AumentarVelocidadY.cpp" />
@@ -68,10 +70,14 @@
 		<Unit filename="Controller/Controller.h" />
 		<Unit filename="Controller/Controller_Jugador.cpp" />
 		<Unit filename="Controller/Controller_Jugador.h" />
+		<Unit filename="Controller/Desacelerar.cpp" />
+		<Unit filename="Controller/Desacelerar.h" />
 		<Unit filename="Controller/DisminuirVelocidadX.cpp" />
 		<Unit filename="Controller/DisminuirVelocidadX.h" />
 		<Unit filename="Controller/DisminuirVelocidadY.cpp" />
 		<Unit filename="Controller/DisminuirVelocidadY.h" />
+		<Unit filename="Controller/StopJugador.cpp" />
+		<Unit filename="Controller/StopJugador.h" />
 		<Unit filename="Images/canchafubol.jpg" />
 		<Unit filename="Images/soccer.png" />
 		<Unit filename="Logs/Log.txt" />
