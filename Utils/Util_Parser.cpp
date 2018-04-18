@@ -128,7 +128,7 @@ return false;
         c1[i] = name.at(i);
     }
     char c2[] = "3-3";
-    char c3[] = "3-1";
+    char c3[] = "3-1-2";
     char c4[] = "3-2-1";
     NotifyMessage("formacionValido: obteniendo formacion ", "UTILS");
     if((strncasecmp(c1,c2,3))==0)

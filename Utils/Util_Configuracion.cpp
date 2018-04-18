@@ -38,9 +38,7 @@ parser.Attach(loggerObserver);
 
     if(!this->inicializar(pathDefaultConfig, fullPath))
     {
-        printf( "Fallo al Inicializar!\n" );
-        //loguear inicialzacion
-
+       NotifyWarning("Inicia: no se pudo levantar ningun archivo", "UTILS");
     }
     else
     {
