@@ -4,8 +4,9 @@
 #include "ViewModel.h"
 #include "Model.h"
 #include "Model_Jugador.h"
+#include "../Utils/Util_LoggerSubject.h"
 
-class View
+class View : public Util_LoggerSubject
 {
 public:
     View(Model* model);

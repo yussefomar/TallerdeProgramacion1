@@ -9,7 +9,7 @@
 
 #include <list>
 
-class Model: public Util_LoggerSubject
+class Model : public Util_LoggerSubject
 {
 public:
     Model();

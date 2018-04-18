@@ -1,13 +1,13 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-
 #include "Model.h"
 #include "Command.h"
 #include <vector>
+#include "../Utils/Util_LoggerSubject.h"
 
 
-class Controller
+class Controller : public Util_LoggerSubject
 {
 public:
     Controller(Model* model);

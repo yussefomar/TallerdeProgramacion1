@@ -31,34 +31,34 @@ std::string Util_LoggerObserver::getLogFile()
     return fullPathString;
 }
 
-void Util_LoggerObserver::writeSingleLine(std::string line, std::string type)
+void Util_LoggerObserver::writeSingleLine(string line, string type, string mvc)
 {
     printf((line + "\n").c_str());
     ofstream log_file(getLogFile(), ios_base::out | ios_base::app );
-    log_file << utils.currentDateTime() + " || " + type + " || " << line << endl;
+    log_file << utils.currentDateTime() + " || " + type + " || " + mvc + " || " << line << endl;
     log_file.close();
 }
 
-void Util_LoggerObserver::writeMessageLine(std::string line)
+void Util_LoggerObserver::writeMessageLine(std::string line, std::string mvc)
 {
     if(getLoggerLevel() >= 3)
     {
-        writeSingleLine(line, "MESSAGE");
+        writeSingleLine(line, "MESSAGE", mvc);
     }
 }
 
-void Util_LoggerObserver::writeWarningLine(std::string line)
+void Util_LoggerObserver::writeWarningLine(std::string line, std::string mvc)
 {
     if(getLoggerLevel() >= 2)
     {
-        writeSingleLine(line, "WARNING");
+        writeSingleLine(line, "WARNING", mvc);
     }
 }
 
-void Util_LoggerObserver::writeErrorLine(std::string line)
+void Util_LoggerObserver::writeErrorLine(std::string line, std::string mvc)
 {
     if(getLoggerLevel() >= 1)
     {
-        writeSingleLine(line, "ERROR");
+        writeSingleLine(line, "ERROR", mvc);
     }
 }

@@ -33,6 +33,7 @@ View::~View()
 
 void View::ajustarCamara()
 {
+    NotifyMessage("Inicia: ajustarCamara", "VIEW");
     Jugador* jugadorActual = this->model->getJugadorActivo();
     //Esto hacerlo con Patron Observer.
     // va a servir mas con los corners, saques de arco, y despues de los goles.
@@ -81,10 +82,12 @@ void View::ajustarCamara()
         this->camara->y = ALTO_NIVEL - this->camara->h;
     }
     this->jugadorAnterior = jugadorActual;
+    NotifyMessage("Finaliza: ajustarCamara", "VIEW");
 }
 
 void View::render()
 {
+    NotifyMessage("Inicia: render", "VIEW");
     this->ajustarCamara();
     SDL_SetRenderDrawColor( this->gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
     SDL_RenderClear( this->gRenderer );
@@ -93,15 +96,19 @@ void View::render()
 
     //Update screen
     SDL_RenderPresent( this->gRenderer );
+    NotifyMessage("Finaliza: render", "VIEW");
 }
 
 bool View::inicializar()
 {
+    NotifyMessage("Inicia: inicializar", "VIEW");
     bool exito = true;
 
     if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
     {
         printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
+        NotifyMessage("SDL could not initialize! SDL Error: %s\n", "VIEW");
+        NotifyMessage(SDL_GetError(), "VIEW");
         exito = false;
     }
     else
@@ -142,11 +149,13 @@ bool View::inicializar()
             }
         }
     }
+    NotifyMessage("Finaliza: inicializar", "VIEW");
     return exito;
 }
 
 void View::close()
 {
+    NotifyMessage("Inicia: close", "VIEW");
     //Destroy this->window}
     SDL_DestroyRenderer( this->gRenderer );
     SDL_DestroyWindow( this->window );
@@ -157,4 +166,5 @@ void View::close()
     //Quit SDL subsystems
     IMG_Quit();
     SDL_Quit();
+    NotifyMessage("Finaliza: close", "VIEW");
 }

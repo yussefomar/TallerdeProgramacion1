@@ -12,8 +12,8 @@ class Util_LoggerSubject
 public:
     void Attach(Util_LoggerObserver* logger);
     void Detach(Util_LoggerObserver* logger);
-    void NotifyMessage(std::string message);
-    void NotifyWarning(std::string message);
-    void NotifyError(std::string message);
+    void NotifyMessage(std::string message, std::string mvc);
+    void NotifyWarning(std::string message, std::string mvc);
+    void NotifyError(std::string message, std::string mvc);
 };
 

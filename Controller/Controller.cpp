@@ -38,6 +38,7 @@ bool Controller::quitPressed()
 
 void Controller::processInput()
 {
+    NotifyMessage("Inicia: processInput", "CONTROLLER");
     while( SDL_PollEvent( &(this->e) ) != 0 )
     {
         if( this->e.type == SDL_QUIT )
@@ -46,15 +47,17 @@ void Controller::processInput()
         }
         this->model->addCommand(this->handleEvent(this->e));
     }
-
+    NotifyMessage("Inicia: processInput", "CONTROLLER");
 }
 
 Command* Controller::handleEvent(SDL_Event& e)
 {
+    NotifyMessage("Inicia: handleEvent", "CONTROLLER");
     Command* command = nullptr;
 
     if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
     {
+        NotifyMessage("Chequeamos: SDL_KEYDOWN", "CONTROLLER");
         switch( e.key.keysym.sym )
         {
         case SDLK_UP:
@@ -78,6 +81,8 @@ Command* Controller::handleEvent(SDL_Event& e)
     //If a key was released
     else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
     {
+
+        NotifyMessage("Chequeamos: SDL_KEYUP", "CONTROLLER");
         switch( e.key.keysym.sym )
         {
         case SDLK_UP:
@@ -95,5 +100,6 @@ Command* Controller::handleEvent(SDL_Event& e)
 
         }
     }
+    NotifyMessage("Finaliza: handleEvent", "CONTROLLER");
     return command;
 }

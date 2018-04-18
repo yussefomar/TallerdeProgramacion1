@@ -15,9 +15,9 @@ class Util_LoggerObserver : IObserver
         int getLoggerLevel();
         std::string getLogFile();
 
-        void writeSingleLine(std::string line, std::string type);
+        void writeSingleLine(std::string line, std::string type, std::string mvc);
 
-        void writeMessageLine(std::string line);
-        void writeWarningLine(std::string line);
-        void writeErrorLine(std::string line);
+        void writeMessageLine(std::string line, std::string mvc);
+        void writeWarningLine(std::string line, std::string mvc);
+        void writeErrorLine(std::string line, std::string mvc);
 };
