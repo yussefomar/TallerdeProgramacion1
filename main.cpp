@@ -10,8 +10,6 @@
 
 #include "Utils/IObserver.h"
 
-
-
 //unsigned short logLevel;
 using namespace std;
 //Util_Logger logger;
