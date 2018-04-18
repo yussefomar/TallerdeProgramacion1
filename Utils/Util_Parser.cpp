@@ -178,22 +178,22 @@ Debug Util_Parser::read_yaml_Debug(std::vector<YAML::Node> baseNode)
 }
 
 
-void Util_Parser::mezclar(Parametros &resultado, Parametros superParametros)
+void Util_Parser::mezclar(Parametros &resultado, Parametros parametro)
 {
    NotifyMessage("mezclar: obteniendo parametros de memoria", "UTILS");
-    if(!levelValido( resultado.level))
+    if(!levelValido(resultado.level))
     {
-        resultado.level = superParametros.level;
+        resultado.level = parametro.level;
     }
 
     if(!formacionValido( resultado.formacion))
     {
-        resultado.formacion = superParametros.formacion;
+        resultado.formacion = parametro.formacion;
     }
 
     if(!casacaValido( resultado.casaca))
     {
-        resultado.casaca = superParametros.casaca;
+        resultado.casaca = parametro.casaca;
     }
 
 }
@@ -208,19 +208,19 @@ void Util_Parser::llenarParametrosObtenidos( std::vector<YAML::Node> baseNode, P
         parametrosObtenidos.level = debugParseado.get_level();
         if(levelValido( parametrosObtenidos.level))
         {
-    NotifyMessage("llenarParametrosObtenidos: level obtenido", "UTILS");
+            NotifyMessage("llenarParametrosObtenidos: level obtenido", "UTILS");
 
         }
         else
         {
-          NotifyWarning("llenarParametrosObtenidos: level invalido", "UTILS");
-         parametrosObtenidos.esValido = 0;
+            NotifyWarning("llenarParametrosObtenidos: level invalido", "UTILS");
+            parametrosObtenidos.esValido = 0;
         }
     }
     catch(YAML::Exception ex)
     {
-        NotifyError("llenarParametrosObtenidos: no se pudo obtener el nodo Debug", "UTILS");
-        parametrosObtenidos.esValido = 0;
+            NotifyError("llenarParametrosObtenidos: no se pudo obtener el nodo Debug", "UTILS");
+            parametrosObtenidos.esValido = 0;
     }
 
 
@@ -265,7 +265,8 @@ Parametros Util_Parser::read_yaml_Parametros(std::string pathIndicado, std::stri
     {
         std::vector<YAML::Node> baseNode;
 
-        Parametros parametrosObtenidos = Parametros("","","");
+        Parametros parametrosObtenidosIndicado = Parametros("","",""); //se crea como valido
+        Parametros parametrosObtenidosDefault = Parametros("","",""); //se crea como valido
 
         if (fileExists(pathIndicado))
         {
@@ -282,19 +283,21 @@ Parametros Util_Parser::read_yaml_Parametros(std::string pathIndicado, std::stri
             }
 
         }
-        llenarParametrosObtenidos(baseNode, parametrosObtenidos);
+        llenarParametrosObtenidos(baseNode, parametrosObtenidosIndicado);
 
 
-        if (parametrosObtenidos.esValido == 0)
+        if (parametrosObtenidosIndicado.esValido == 0)
         {
             NotifyWarning("read_yaml_Parametros: parametros obtenidos invalidos", "UTILS");
             //intenta llenar con defaul
             baseNode = YAML::LoadAllFromFile(pathDefault);
-            llenarParametrosObtenidos(baseNode, parametrosObtenidos);
-            mezclar(parametrosObtenidos, superParametros);
+            llenarParametrosObtenidos(baseNode, parametrosObtenidosDefault);
+
+            mezclar (parametrosObtenidosIndicado, parametrosObtenidosDefault);
+            mezclar(parametrosObtenidosIndicado, superParametros);
         }
 
-        return parametrosObtenidos;
+        return parametrosObtenidosIndicado;
     }
     catch(YAML::Exception ex)
     {
