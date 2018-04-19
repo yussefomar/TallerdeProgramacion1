@@ -14,7 +14,7 @@ ViewModel::ViewModel(Model* model, SDL_Renderer* gRenderer, SDL_Rect* camara)
 
     for(int i = 0; i < CANTVISTASJUG; ++i)
     {
-        this->viewJugadores[i].initialize(model->getJugadorNro(i), gRenderer, model->getCasaca());
+        this->viewJugadores[i].initialize(model->getJugadorNro(i), gRenderer);
     }
 }
 

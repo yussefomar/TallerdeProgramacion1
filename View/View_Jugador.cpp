@@ -7,12 +7,12 @@ View_Jugador::View_Jugador()
 
 }
 
-View_Jugador::View_Jugador(Jugador* model, SDL_Renderer* gRenderer)
+View_Jugador::View_Jugador(Jugador* model)
 {
     this->model = model;
 }
 
-void View_Jugador::initialize(Jugador *model,SDL_Renderer * gRenderer, std::string casaca)
+void View_Jugador::initialize(Jugador *model,SDL_Renderer * gRenderer)
 {
 
     this->model = model;
