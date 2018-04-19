@@ -1,56 +1,39 @@
 #include <iostream>
 
-#include "Utils/Util_Logger.h"
-#include "Utils/Util_Parser.h"
-#include <yaml-cpp/yaml.h>
-
+#include "Utils/Util_LoggerObserver.h"
+#include "Utils/Util_Configuracion.h"
+#include "Utils/Util_Common.h"
 #include "Model.h"
 #include "Controller.h"
 #include "View.h"
 //Solo para probar hasta que pueda manejar el logg y parser
-#include "Formacion312.h"
-#include "Formacion33.h"
-#include "Formacion321.h"
 
-
+#include "Utils/IObserver.h"
 
 //unsigned short logLevel;
 using namespace std;
-Util_Logger logger;
-Util_Parser parser;
+//Util_Logger logger;
 
-
+Util_Common common;
 
 int main(int argc, char* args[])
 {
-    /********************************************************************************************/
-    Equipo equipoParseado = parser.read_yaml_Equipo("./Configs/config.yaml");
-    Debug debugParseado = parser.read_yaml_Debug("./Configs/config.yaml");
-    logger.createFile(3);
-    /**
-    Si queremos usar el logger mientras leemos el archivo de configuracion debemos crearlo como
-    arriba, luego podemos llamar al método updateLevel para ponerle el nivel que corresponda.
+    // Hacemos un backup del log de la ejecucion anterior.
+    common.backupFile();
+    // Hacemos un log de la ejecucion anterior.
+    common.createFile();
 
-    En cualquier parte del código que querramos usar el logger podemos llamar a los siguientes
-    métodos según corresponda, luego según el level del logger, escribirá o no en el archivo.
-    por ejemplo en un catch donde saltó una excepción ponemos log.writeErrorLine y si el level
-    está configurado para escribir errores los pondra en el archivo.
-    **/
-    logger.writeErrorLine("Ejemplo de Error." + equipoParseado.get_formacion()); //nivel bajo, siempre mostramos errores.
-    logger.writeWarningLine("Ejemplo de Warning." + equipoParseado.get_casaca()); //nivel medio, mostramos errores y warnings.
-    logger.writeMessageLine("Ejemplo de linea común." + debugParseado.get_level()); //nivel alto, se escribe todo.
-    /********************************************************************************************/
-
-    /********************************************************************************************/
-
-
+    // Iniciar el logger con el nivel que corresponda segun configuracion.
+    Util_LoggerObserver* loggerObserver = new Util_LoggerObserver(3);
     Model model;
-    Formacion321 f;
+    model.Attach(loggerObserver);
     //Solo hasta que pueda manejar logger, esto es un asco.
-    model.setFormacion(&f);
+    Util_Configuracion configuracion(&model, loggerObserver);
+    configuracion.Attach(loggerObserver);
     View view(&model);
+    view.Attach(loggerObserver);
     Controller controller(&model);
-
+    controller.Attach(loggerObserver);
 
     while( !controller.quitPressed() )
     {
@@ -63,3 +46,4 @@ int main(int argc, char* args[])
     return 0;
 
 }
+

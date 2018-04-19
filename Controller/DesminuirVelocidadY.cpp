@@ -1,9 +1,9 @@
 #include "DesminuirVelocidadY.h"
 #include "Model_Jugador.h"
 
-DesminuirVelocidadY::DesminuirVelocidadY()
+DesminuirVelocidadY::DesminuirVelocidadY(Model* model)
 {
-    //ctor
+    this->model = model;
 }
 
 DesminuirVelocidadY::~DesminuirVelocidadY()
@@ -12,12 +12,10 @@ DesminuirVelocidadY::~DesminuirVelocidadY()
 }
 
 void DesminuirVelocidadY::execute() {
-    Jugador* jugador = this->model.getActivePlayer();
+    Jugador* jugador = this->model->getJugadorActivo();
     jugador->disminuirVelocidadY();
     jugador->move();
     return;
 }
 
-void DesminuirVelocidadY::setModel(Model& model) {
-    this->model = model;
-}
+

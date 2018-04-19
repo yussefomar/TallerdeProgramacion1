@@ -32,24 +32,33 @@ Jugador* Model::getJugadorActivo()
 
 void Model::addCommand(Command* command)
 {
+    NotifyMessage("INGRESAMOS EN EL METODO: addCommand", "MODEL");
     //hay que tirar una excepcion
     if(command == nullptr)
         return;
     this->commandsToApply.push_back(command);
+    NotifyMessage("SALIMOS DEL METODO: addCommand", "MODEL");
 }
 
 void Model::cambiarJugadorActivo()
 {
+    NotifyMessage("INGRESAMOS EN EL METODO: cambiarJugadorActivo", "MODEL");
         while (!((this->jugadores[(this->nroJugadorActivo + 1) % CANTJUGADORES]).collide(this->camara )))
         {
             printf("\n\n colision 2\n\n");
+            NotifyMessage("colision 2", "MODEL");
             (this->jugadores[(this->nroJugadorActivo)]).desactivar();
             this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
 
         }
     (this->jugadores[(this->nroJugadorActivo)]).desactivar();
+
+            NotifyMessage("DESACTIVE ACTUAL JUGADOR", "MODEL");
      this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
     (this->jugadores[(this->nroJugadorActivo)]).activar();
+            NotifyMessage("ACTIVE OTRO JUGADOR", "MODEL");
+
+    NotifyMessage("SALIMOS DEL METODO: cambiarJugadorActivo", "MODEL");
 }
 //El detener jugadores ya esta implicito en el estado.
 //Y si no, deberia estarlo.s
@@ -63,6 +72,7 @@ void Model::cambiarJugadorActivo()
 
 void Model::update()
 {
+    NotifyMessage("INGRESAMOS EN EL METODO: update", "MODEL");
     Command* command = nullptr;
     while(!this->commandsToApply.empty())
     {
@@ -74,14 +84,25 @@ void Model::update()
     {
         this->jugadores[i].move();
     }
+    NotifyMessage("SALIMOS DEL EL METODO: update", "MODEL");
 }
 
 void Model::setCamara(SDL_Rect * camara)
 {
+    NotifyMessage("INGRESAMOS AL METODO: setCamara", "MODEL");
     this->camara = camara;
+    NotifyMessage("SALIMOS DEL METODO: setCamara", "MODEL");
 }
 
-void Model::setFormacion(Formacion* formacion) {
+void Model::setFormacion(Formacion* formacion)
+{
+    NotifyMessage("INGRESAMOS AL METODO: setFormacion", "MODEL");
     formacion->setPosicionInicial(this->jugadores);
+    NotifyMessage("SALIMOS DEL METODO: setFormacion", "MODEL");
+}
+
+void Model::setCasaca(int i)
+{
+    //implementar
 }
 

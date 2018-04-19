@@ -5,11 +5,16 @@
 #include "DisminuirVelocidadX.h"
 #include "AumentarVelocidadX.h"
 #include "CambiarJugador.h"
+#include "StopJugador.h"
+#include "Acelerar.h"
+#include "Desacelerar.h"
+#include "PatearPelota.h"
+#include "RecuperaPelota.h"
 
-#define CANTCOMMANDS 5
+#define CANTCOMMANDS 10
 
 
-enum IDCommand {DECVELX, DECVELY, INCVELX, INCVELY, CAMBJUG};
+enum IDCommand {DECVELX, DECVELY, INCVELX, INCVELY, CAMBJUG, STOPJUG, ACCJUG, DESJUG,PATPELO,RECUPELO};
 
 Controller::Controller(Model* model)
 {
@@ -20,6 +25,12 @@ Controller::Controller(Model* model)
     this->commands[INCVELX] = new AumentarVelocidadX(model);
     this->commands[INCVELY] = new AumentarVelocidadY(model);
     this->commands[CAMBJUG] = new CambiarJugador(model);
+    this->commands[STOPJUG] = new StopJugador(model);
+    this->commands[ACCJUG] = new Acelerar(model);
+    this->commands[DESJUG] = new Desacelerar(model);
+    this->commands[PATPELO] = new PatearPelota(model);
+    this->commands[RECUPELO] = new RecuperaPelota(model);
+
     this->quit = false;
 }
 
@@ -38,6 +49,7 @@ bool Controller::quitPressed()
 
 void Controller::processInput()
 {
+    NotifyMessage("Inicia: processInput", "CONTROLLER");
     while( SDL_PollEvent( &(this->e) ) != 0 )
     {
         if( this->e.type == SDL_QUIT )
@@ -46,151 +58,25 @@ void Controller::processInput()
         }
         this->model->addCommand(this->handleEvent(this->e));
     }
-
+    NotifyMessage("Inicia: processInput", "CONTROLLER");
 }
-
-const Uint8 *state = SDL_GetKeyboardState(NULL);
-
-
 
 Command* Controller::handleEvent(SDL_Event& e)
 {
+    NotifyMessage("Inicia: handleEvent", "CONTROLLER");
     Command* command = nullptr;
 
-
-
-        if (state[SDL_SCANCODE_E] && state[SDL_SCANCODE_LEFT]) {
-        command = this->commands[DECVELX];
-        }else if(state[SDL_SCANCODE_E] && state[SDL_SCANCODE_RIGHT]){
-         command = this->commands[INCVELX];
-        }else if((state[SDL_SCANCODE_E] && state[SDL_SCANCODE_UP])){
-            command = this->commands[INCVELY];
-
-        }else if(state[SDL_SCANCODE_E] && state[SDL_SCANCODE_DOWN]){
-        command = this->commands[DECVELY];
-
-
-        }else if( e.type == SDL_KEYUP && e.key.repeat == 0 )/*idea de este if es cuando deje de presionar el E volver a su estado anterior*/
-        {
-            switch( e.key.keysym.sym )
-            {
-
-            case SDLK_UP:
-                command = this->commands[DECVELY];
-                break;
-            case SDLK_DOWN:
-                command = this->commands[INCVELY];
-                break;
-            case SDLK_LEFT:
-                command = this->commands[DECVELX];
-                break;
-            case SDLK_RIGHT:
-                command = this->commands[INCVELX];
-                break;
-
-            }
-        }
-
-
-
-
-        /* NO FUNCIONO PORQUE DETECTA DE A UNA LETRA.
     if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
     {
+        NotifyMessage("Chequeamos: SDL_KEYDOWN", "CONTROLLER");
         switch( e.key.keysym.sym )
         {
-        case SDLK_e:
-            {
-
-
-            switch( e.key.keysym.sym )
-            {
-            case SDLK_UP:
-                command = this->commands[DECVELY];
-                break;
-            case SDLK_DOWN:
-                command = this->commands[INCVELY];
-                break;
-            case SDLK_LEFT:
-                command = this->commands[DECVELX];
-                break;
-            case SDLK_RIGHT:
-                command = this->commands[INCVELX];
-                break;
-
-
-            }
+        case SDLK_s:
+            command = this->commands[RECUPELO];
             break;
-            }
-        case SDLK_UP:
-            command = this->commands[DECVELY];
+        case SDLK_d:
+            command = this->commands[PATPELO];
             break;
-        case SDLK_DOWN:
-            command = this->commands[INCVELY];
-            break;
-        case SDLK_LEFT:
-            command = this->commands[DECVELX];
-            break;
-        case SDLK_RIGHT:
-            command = this->commands[INCVELX];
-            break;
-
-
-        }
-    }
-    //If a key was released
-    else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
-    {
-        switch( e.key.keysym.sym )
-        {
-        case SDLK_e:
-            {
-
-
-            switch( e.key.keysym.sym )
-            {
-            case SDLK_UP:
-                command = this->commands[INCVELY];
-                break;
-            case SDLK_DOWN:
-                command = this->commands[DECVELY];
-                break;
-            case SDLK_LEFT:
-                command = this->commands[INCVELX];
-                break;
-            case SDLK_RIGHT:
-                command = this->commands[DECVELX];
-                break;
-            }
-            break;
-            }
-        case SDLK_UP:
-            command = this->commands[INCVELY];
-            break;
-        case SDLK_DOWN:
-            command = this->commands[DECVELY];
-            break;
-        case SDLK_LEFT:
-            command = this->commands[INCVELX];
-            break;
-        case SDLK_RIGHT:
-            command = this->commands[DECVELX];
-            break;
-
-        }
-
-    }
-
-
-
-*/
-
-/*ORIGINAL
-
-  if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
-    {
-        switch( e.key.keysym.sym )
-        {
         case SDLK_UP:
             command = this->commands[DECVELY];
             break;
@@ -206,34 +92,33 @@ Command* Controller::handleEvent(SDL_Event& e)
         case SDLK_SPACE:
             command = this->commands[CAMBJUG];
             break;
-
+        case SDLK_f:
+            command = this->commands[ACCJUG];
         }
     }
     //If a key was released
     else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
     {
+
+        NotifyMessage("Chequeamos: SDL_KEYUP", "CONTROLLER");
         switch( e.key.keysym.sym )
         {
         case SDLK_UP:
-            command = this->commands[INCVELY];
+            command = this->commands[STOPJUG];
             break;
         case SDLK_DOWN:
-            command = this->commands[DECVELY];
+            command = this->commands[STOPJUG];
             break;
         case SDLK_LEFT:
-            command = this->commands[INCVELX];
+            command = this->commands[STOPJUG];
             break;
         case SDLK_RIGHT:
-            command = this->commands[DECVELX];
+            command = this->commands[STOPJUG];
             break;
-
+        case SDLK_f:
+            command = this->commands[DESJUG];
         }
-}
-
-*/
-
-
-
-
+    }
+    NotifyMessage("Finaliza: handleEvent", "CONTROLLER");
     return command;
 }

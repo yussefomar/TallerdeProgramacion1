@@ -5,10 +5,11 @@
 #include "Model_Jugador.h"
 #include "Command.h"
 #include "Formacion.h"
+#include "../Utils/Util_LoggerSubject.h"
 
 #include <list>
 
-class Model
+class Model : public Util_LoggerSubject
 {
 public:
     Model();
@@ -32,7 +33,6 @@ private:
     SDL_Rect * camara;
     int nroJugadorActivo;
     std::list<Command*> commandsToApply;
-
 };
 
 #endif // MODEL_H

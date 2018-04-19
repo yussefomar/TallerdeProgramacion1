@@ -39,6 +39,14 @@ void Pelota::move()
 
 }
 
+void Pelota::setVelocidadX(int velocidad){
+     mVelX = velocidad ;
+  }
+    void Pelota::setVelocidadY(int velocidad){
+        mVelY = velocidad;
+    }
+
+
 int Pelota::getPosX()
 {
     return mPosX;

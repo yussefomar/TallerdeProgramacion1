@@ -8,15 +8,14 @@
 class DesminuirVelocidadY : public Command
 {
     public:
-        DesminuirVelocidadY();
+        DesminuirVelocidadY(Model* model);
         virtual ~DesminuirVelocidadY();
         void execute();
-        void setModel(Model& model);
 
     protected:
 
     private:
-        Model model;
+        Model* model;
 };
 
 #endif // DESMINUIRVELOCIDADY_H

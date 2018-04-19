@@ -5,6 +5,7 @@
 #include <string>
 #include <list>
 #include <yaml-cpp/yaml.h>
+#include "Util_LoggerSubject.h"
 
 using namespace std;
 
@@ -41,11 +42,43 @@ private:
     std::string level;
 };
 
-class Util_Parser
+struct Parametros
+{
+    Parametros()
+    {
+        level= "";
+        formacion="";
+        casaca ="";
+        esValido = 1; //1 para valido 0 para invalido
+    }
+    Parametros(std::string p_level,std::string p_formacion, std::string p_casaca)
+    {
+        level= p_level;
+        formacion=p_formacion;
+        casaca =p_casaca;
+        esValido = 1; //1 para valido 0 para invalido
+    }
+    std::string level;
+    std::string formacion;
+    std::string casaca;
+    bool esValido;
+};
+
+
+class Util_Parser: public Util_LoggerSubject
 {
 public:
-    Equipo read_yaml_Equipo(std::string path);
-    Debug read_yaml_Debug(std::string path);
+    inline bool levelValido(std::string &name);
+    inline bool casacaValido(std::string &name);
+    inline bool formacionValido(std::string &name);
+    inline bool fileExists(const std::string& name);
+    void mezclar(Parametros &resultado, Parametros parametros);
+    void llenarParametrosObtenidos( std::vector<YAML::Node> baseNode, Parametros &parametrosObtenidos);
+    Equipo read_yaml_Equipo(std::vector<YAML::Node> baseNode);
+    Debug read_yaml_Debug(std::vector<YAML::Node> baseNode);
+    Parametros read_yaml_Parametros(std::string pathIndicado, std::string pathDefault, Parametros superParametros);
+    Parametros CrearSuperConfig();
+
 };
 
 #endif

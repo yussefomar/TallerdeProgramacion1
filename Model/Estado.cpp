@@ -12,6 +12,7 @@ Estado::Estado()
     //Initialize the velocity
     this->mVelX = 0;
     this->mVelY = 0;
+    this->aceleracion = VELOCIDAD_NORMAL;
 }
 
 Estado::~Estado()
@@ -24,16 +25,6 @@ int Estado::getPosX()
 {
     return this->mPosX;
 }
-
- void Estado::setCorrer(bool corrio){
- this->corrio=corrio;
-
- }
-
-bool Estado::getCorrer(){
- return  this->corrio;
-
- }
 int Estado::getPosY()
 {
     return this->mPosY;
@@ -76,17 +67,26 @@ void Estado::copiarEstado(Estado* estado)
 }
 void Estado::disminuirVelocidadX()
 {
-    this->mVelX -= VELOCIDAD_JUGADOR;
+    this->mVelX -= this->aceleracion;
 }
 void Estado::disminuirVelocidadY()
 {
-    this->mVelY -= VELOCIDAD_JUGADOR;
+    this->mVelY -= this->aceleracion;
 }
 void Estado::aumentarVelocidadX()
 {
-    this->mVelX += VELOCIDAD_JUGADOR;
+    this->mVelX += this->aceleracion;
 }
 void Estado::aumentarVelocidadY()
 {
-    this->mVelY += VELOCIDAD_JUGADOR;
+    this->mVelY += this->aceleracion;
+}
+
+void Estado::detenerVelocidad() {
+    this->mVelX = 0;
+    this->mVelY = 0;
+}
+
+void Estado::desacelerar() {
+    this->aceleracion = VELOCIDAD_NORMAL;
 }

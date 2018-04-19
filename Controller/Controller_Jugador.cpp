@@ -1,4 +1,5 @@
 #include "Controller_Jugador.h"
+#include "Model_Pelota.h"
 
 Controller_Jugador::Controller_Jugador( Jugador *model,  View_Jugador *view)
 {
@@ -17,22 +18,22 @@ void Controller_Jugador::SetView( View_Jugador *view)
 //Takes key presses and adjusts the dot's velocity
 void Controller_Jugador::handleEvent( SDL_Event& e )
 {
+     Pelota* pelota=NULL;
     //Jugador jugador = (*this->jugador);
     //If a key was pressed
-
-
-
-
     if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
     {
         //Adjust the velocity
         switch( e.key.keysym.sym )
         {
+        case SDLK_s:
+             (*this->jugador).recuperaPelota(pelota);
+            break;
+        case SDLK_d:
+             (*this->jugador).patearPelota(pelota);
+            break;
         case SDLK_UP:
             (*this->jugador).disminuirVelocidadY();
-            break;
-        case SDLK_e:
-            (*this->jugador).aumentarVelocidadX();
             break;
         case SDLK_DOWN:
             (*this->jugador).aumentarVelocidadY();
