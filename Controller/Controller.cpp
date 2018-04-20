@@ -8,6 +8,7 @@
 #include "StopJugador.h"
 #include "Acelerar.h"
 #include "Desacelerar.h"
+ 
 #include "PatearPelota.h"
 #include "RecuperaPelota.h"
 
@@ -15,6 +16,7 @@
 
 
 enum IDCommand {DECVELX, DECVELY, INCVELX, INCVELY, CAMBJUG, STOPJUG, ACCJUG, DESJUG,PATPELO,RECUPELO};
+ 
 
 Controller::Controller(Model* model)
 {
@@ -28,8 +30,10 @@ Controller::Controller(Model* model)
     this->commands[STOPJUG] = new StopJugador(model);
     this->commands[ACCJUG] = new Acelerar(model);
     this->commands[DESJUG] = new Desacelerar(model);
+ 
     this->commands[PATPELO] = new PatearPelota(model);
     this->commands[RECUPELO] = new RecuperaPelota(model);
+ 
 
     this->quit = false;
 }

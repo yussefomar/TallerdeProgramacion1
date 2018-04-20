@@ -35,6 +35,55 @@ inline bool Util_Parser::levelValido(std::string &name)
 {
 
 if (name.size() > 99 )
+ 
+ /* 
+{
+NotifyWarning("levelValido: valor de level demasiado largo", "UTILS");
+return false;
+}
+
+    char c1[100];
+    for(int i = 0; i<name.size(); i++)
+    {
+        name.at(i) = toupper(name.at(i));
+        c1[i] = name.at(i);
+    }
+
+    char c2[] = "DEBUG";
+    char c3[] = "INFO";
+    char c4[] = "ERROR";
+
+NotifyMessage("levelValido: obteniendo level ", "UTILS");
+    if((strncasecmp(c1,c2,2))==0)
+    {
+        name = "debug";
+        NotifyMessage("levelValido: level seteado:" + name, "UTILS");;
+        return true;
+    }
+
+    if((strncasecmp(c1,c3,2))==0)
+    {
+        name = "info";
+        NotifyMessage("levelValido: level seteado:" + name, "UTILS");
+        return true;
+    }
+*/
+   // if((strncasecmp(c1,c4,2))==0)
+   // {
+     //   name = "error";
+    //    NotifyMessage("levelValido: level seteado:" + name, "UTILS");
+   //     return true;
+  //  }
+
+  //  name = "";
+  //  NotifyWarning("levelValido: valor de level invalido", "UTILS");
+  //  return false;
+
+//}
+//pasar por referencia
+//inline bool Util_Parser::casacaValido(std::string &name)
+//{
+ 
 {
 NotifyWarning("levelValido: valor de level demasiado largo", "UTILS");
 return false;
@@ -81,6 +130,7 @@ NotifyMessage("levelValido: obteniendo level ", "UTILS");
 //pasar por referencia
 inline bool Util_Parser::casacaValido(std::string &name)
 {
+ 
 if (name.size() > 99 )
 {
 NotifyWarning("casacaValido: valor de casaca demasiado largo", "UTILS");
@@ -95,6 +145,9 @@ return false;
 
     char c2[] = "PRINCIPAL";
     char c3[] = "SUPLENTE";
+ 
+    char c4[] = "AUXILIAR";
+ 
 
     NotifyMessage("casacaValido: obteniendo casaca ", "UTILS");
     if((strncasecmp(c1,c2,2))==0)
@@ -110,6 +163,14 @@ return false;
          NotifyMessage("casacaValido: casaca seteado:" + name, "UTILS");
         return true;
     }
+ 
+    if((strncasecmp(c1,c4,2))==0)
+    {
+        name = "auxiliar";
+        NotifyWarning("casaca Auxiliar: casaca seteado:" + name, "UTILS");
+        return true;
+    }
+ 
     name = "";
     NotifyWarning("casacaValido: valor de casaca invalido", "UTILS");
     return false;
@@ -309,5 +370,7 @@ Parametros Util_Parser::read_yaml_Parametros(std::string pathIndicado, std::stri
 Parametros Util_Parser::CrearSuperConfig()
 {
     //loguar carga de superconfig
-    return Parametros("debug","3-3","Principal");
+ 
+    return Parametros("debug","3-3","auxiliar");
+ 
 }

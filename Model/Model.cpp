@@ -43,20 +43,24 @@ void Model::addCommand(Command* command)
 void Model::cambiarJugadorActivo()
 {
     NotifyMessage("INGRESAMOS EN EL METODO: cambiarJugadorActivo", "MODEL");
-        while (!((this->jugadores[(this->nroJugadorActivo + 1) % CANTJUGADORES]).collide(this->camara )))
-        {
-            printf("\n\n colision 2\n\n");
-            NotifyMessage("colision 2", "MODEL");
-            (this->jugadores[(this->nroJugadorActivo)]).desactivar();
-            this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
+ 
+    while (!((this->jugadores[(this->nroJugadorActivo + 1) % CANTJUGADORES]).collide(this->camara )))
+    {
+        printf("\n\n colision 2\n\n");
+        NotifyMessage("colision 2", "MODEL");
+        (this->jugadores[(this->nroJugadorActivo)]).desactivar();
+        this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
+ 
 
-        }
+    }
     (this->jugadores[(this->nroJugadorActivo)]).desactivar();
 
-            NotifyMessage("DESACTIVE ACTUAL JUGADOR", "MODEL");
-     this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
+ 
+    NotifyMessage("DESACTIVE ACTUAL JUGADOR", "MODEL");
+    this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
     (this->jugadores[(this->nroJugadorActivo)]).activar();
-            NotifyMessage("ACTIVE OTRO JUGADOR", "MODEL");
+    NotifyMessage("ACTIVE OTRO JUGADOR", "MODEL");
+ 
 
     NotifyMessage("SALIMOS DEL METODO: cambiarJugadorActivo", "MODEL");
 }
@@ -99,10 +103,29 @@ void Model::setFormacion(Formacion* formacion)
     NotifyMessage("INGRESAMOS AL METODO: setFormacion", "MODEL");
     formacion->setPosicionInicial(this->jugadores);
     NotifyMessage("SALIMOS DEL METODO: setFormacion", "MODEL");
+ 
 }
 
-void Model::setCasaca(int i)
+void Model::setCasaca(std::string casacaName)
 {
-    //implementar
+    char c1[100];
+    for(int i = 0; i<casacaName.size(); i++)
+    {
+        casacaName.at(i) = toupper(casacaName.at(i));
+        c1[i] = casacaName.at(i);
+    }
+    char c3[] = "suplente";
+
+    if((strncasecmp(c1,c3,2))==0)
+    {
+        for(int i = 0; i < CANTJUGADORES; ++i)
+        {
+            this->jugadores[i].setCasacaAlternativa();
+        }
+    }
 }
 
+std::string Model::getCasaca()
+{
+    return this->casacaSprite;
+}

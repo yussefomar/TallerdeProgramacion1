@@ -52,11 +52,17 @@ public:
     bool collide(SDL_Rect * camara);
     void acelerar();
     void desacelerar();
+ 
      bool checkCollisionPelota(SDL_Rect *pelota);
+ 
+    void setCasacaSprite(std::string casacaName);
+    std::string getCasacaSprite();
+ 
 
 private:
     SDL_Rect mCollider;
     int casaca;
+    std::string casacaSprite;
     Estado* estado;
     Activo activo;
     Inactivo inactivo;
