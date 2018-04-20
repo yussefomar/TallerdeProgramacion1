@@ -28,6 +28,113 @@ void Jugador::move()
     this->mCollider.y = this->estado->getPosY();
 }
 
+
+void Jugador::patearPelota(Pelota* pelota)
+{
+    SDL_Rect colli_pelo;
+    colli_pelo.x=pelota->getPosX();
+    colli_pelo.y=pelota->getPosY();
+    colli_pelo.h=pelota->ANCHO_PELOTA;
+    colli_pelo.w=pelota->ANCHO_PELOTA;
+    if(this->checkCollisionPelota(&colli_pelo))
+    {
+
+        pelota->move();//mueve en cualquier direccion,no tiene logica la pelota segun el tp.
+
+    }
+
+
+}
+
+void Jugador::recuperaPelota(Pelota* pelota)
+{
+    SDL_Rect colli_pelo;
+    colli_pelo.x=pelota->getPosX();
+    colli_pelo.y=pelota->getPosY();
+    colli_pelo.h=pelota->ANCHO_PELOTA;
+    colli_pelo.w=pelota->ANCHO_PELOTA;
+
+
+    if(this->checkCollisionPelota((&colli_pelo)))
+    {
+        printf("detecto pelota para mantenerla");
+        // pelota->aumentarVelocidadX();
+        //pelota->aumentarVelocidadY();
+
+        //pelota->aumentarVelocidadY();
+        //pelota->aumentarVelocidadX();
+//pelota->setPosX(this->activo.getPosX());
+//          pelota->setPosY(this->activo.getPosY());
+        /*               pelota->setVelocidadX(this->activo.getVelX());
+                       pelota->setVelocidadY(this->activo.getVelY());
+                     pelota->move();*/
+        /*
+                      pelota->setPosX(this->activo.getPosX());
+                      pelota->setPosY(this->activo.getPosY());
+                      pelota->setVelocidadX(this->activo.getVelX());
+                        pelota->setVelocidadY(this->activo.getVelY());
+                        pelota->move();*/
+
+//pelota->setVelocidadX(this->getVelX());
+        //            pelota->setVelocidadY(this->getVelY());
+
+        //ver que ejecta si es aumentavelocidax entonces aumento la pelota en x
+    }
+
+}
+
+
+bool Jugador::checkCollisionPelota( SDL_Rect* pelota)
+{
+    //The sides of the rectangles
+    int leftPelota, leftJugador;
+    int rightPelota, rightJugador;
+    int topPelota, topJugador;
+    int bottomPelota, bottomJugador;
+
+    //Calculate the sides of rect A
+    leftPelota = pelota->x;
+    rightPelota = pelota->x + pelota->w;
+    topPelota = pelota->y;
+    bottomPelota = pelota->y + pelota->h;
+
+    //Calculate the sides of rect B
+    leftJugador = this->mCollider.x;
+
+    rightJugador = this->mCollider.x + this->mCollider.w;
+
+    topJugador = this->mCollider.y;
+
+    bottomJugador = this->mCollider.y + this->mCollider.h;
+
+
+
+    //If any of the sides from A are outside of B
+    if( bottomJugador <= topPelota )
+    {
+        return false;
+    }
+
+    if( topJugador>=  bottomPelota )
+    {
+        return false;
+    }
+
+    if( leftJugador >=  rightPelota  )
+    {
+        return false;
+    }
+
+    if( rightJugador <= leftPelota )
+    {
+        return false;
+    }
+
+
+    //If none of the sides from A are outside B
+    return true;
+}
+
 int Jugador::getPosX()
 {
     return this->estado->getPosX();
@@ -170,6 +277,7 @@ void Jugador::acelerar() {
 void Jugador::desacelerar() {
     this->estado->desacelerar();
 }
+ 
 
 void Jugador::setCasacaSprite(std::string casacaName) {
 
@@ -180,3 +288,4 @@ void Jugador::setCasacaSprite(std::string casacaName) {
 std::string Jugador::getCasacaSprite() {
     return this->casacaSprite;
 }
+ 

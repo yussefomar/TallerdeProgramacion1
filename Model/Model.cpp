@@ -43,20 +43,24 @@ void Model::addCommand(Command* command)
 void Model::cambiarJugadorActivo()
 {
     NotifyMessage("INGRESAMOS EN EL METODO: cambiarJugadorActivo", "MODEL");
+ 
     while (!((this->jugadores[(this->nroJugadorActivo + 1) % CANTJUGADORES]).collide(this->camara )))
     {
         printf("\n\n colision 2\n\n");
         NotifyMessage("colision 2", "MODEL");
         (this->jugadores[(this->nroJugadorActivo)]).desactivar();
         this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
+ 
 
     }
     (this->jugadores[(this->nroJugadorActivo)]).desactivar();
 
+ 
     NotifyMessage("DESACTIVE ACTUAL JUGADOR", "MODEL");
     this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
     (this->jugadores[(this->nroJugadorActivo)]).activar();
     NotifyMessage("ACTIVE OTRO JUGADOR", "MODEL");
+ 
 
     NotifyMessage("SALIMOS DEL METODO: cambiarJugadorActivo", "MODEL");
 }
@@ -99,6 +103,7 @@ void Model::setFormacion(Formacion* formacion)
     NotifyMessage("INGRESAMOS AL METODO: setFormacion", "MODEL");
     formacion->setPosicionInicial(this->jugadores);
     NotifyMessage("SALIMOS DEL METODO: setFormacion", "MODEL");
+ 
 }
 
 void Model::setCasaca(std::string casacaName)

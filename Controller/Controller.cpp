@@ -8,11 +8,15 @@
 #include "StopJugador.h"
 #include "Acelerar.h"
 #include "Desacelerar.h"
+ 
+#include "PatearPelota.h"
+#include "RecuperaPelota.h"
 
-#define CANTCOMMANDS 8
+#define CANTCOMMANDS 10
 
 
-enum IDCommand {DECVELX, DECVELY, INCVELX, INCVELY, CAMBJUG, STOPJUG, ACCJUG, DESJUG};
+enum IDCommand {DECVELX, DECVELY, INCVELX, INCVELY, CAMBJUG, STOPJUG, ACCJUG, DESJUG,PATPELO,RECUPELO};
+ 
 
 Controller::Controller(Model* model)
 {
@@ -26,6 +30,10 @@ Controller::Controller(Model* model)
     this->commands[STOPJUG] = new StopJugador(model);
     this->commands[ACCJUG] = new Acelerar(model);
     this->commands[DESJUG] = new Desacelerar(model);
+ 
+    this->commands[PATPELO] = new PatearPelota(model);
+    this->commands[RECUPELO] = new RecuperaPelota(model);
+ 
 
     this->quit = false;
 }
@@ -67,6 +75,12 @@ Command* Controller::handleEvent(SDL_Event& e)
         NotifyMessage("Chequeamos: SDL_KEYDOWN", "CONTROLLER");
         switch( e.key.keysym.sym )
         {
+        case SDLK_s:
+            command = this->commands[RECUPELO];
+            break;
+        case SDLK_d:
+            command = this->commands[PATPELO];
+            break;
         case SDLK_UP:
             command = this->commands[DECVELY];
             break;

@@ -76,6 +76,12 @@
 		<Unit filename="Controller/DisminuirVelocidadX.h" />
 		<Unit filename="Controller/DisminuirVelocidadY.cpp" />
 		<Unit filename="Controller/DisminuirVelocidadY.h" />
+ 
+		<Unit filename="Controller/PatearPelota.cpp" />
+		<Unit filename="Controller/PatearPelota.h" />
+		<Unit filename="Controller/RecuperaPelota.cpp" />
+		<Unit filename="Controller/RecuperaPelota.h" />
+ 
 		<Unit filename="Controller/StopJugador.cpp" />
 		<Unit filename="Controller/StopJugador.h" />
 		<Unit filename="Images/canchafubol.jpg" />

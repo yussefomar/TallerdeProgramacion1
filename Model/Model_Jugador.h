@@ -5,6 +5,7 @@
 #include "Estado.h"
 #include "Activo.h"
 #include "Inactivo.h"
+#include "Model_Pelota.h"
 
 class Jugador
 {
@@ -27,7 +28,8 @@ public:
     //Position accessors
     int getVelX();
     int getVelY();
-
+    void recuperaPelota(Pelota* pelota);
+    void patearPelota(Pelota* pelota );
     void setPosX(int PosX);
     void setPosY(int PosY);
 
@@ -50,8 +52,12 @@ public:
     bool collide(SDL_Rect * camara);
     void acelerar();
     void desacelerar();
+ 
+     bool checkCollisionPelota(SDL_Rect *pelota);
+ 
     void setCasacaSprite(std::string casacaName);
     std::string getCasacaSprite();
+ 
 
 private:
     SDL_Rect mCollider;

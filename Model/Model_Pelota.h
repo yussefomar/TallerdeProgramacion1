@@ -37,6 +37,9 @@ public:
     void aumentarVelocidadX();
 
     void aumentarVelocidadY();
+     void setVelocidadX(int velocidad);
+    void setVelocidadY(int velocidad);
+
 
 private:
     //The X and Y offsets of the dot
