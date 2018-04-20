@@ -67,19 +67,19 @@ void Estado::copiarEstado(Estado* estado)
 }
 void Estado::disminuirVelocidadX()
 {
-    this->mVelX -= this->aceleracion;
+    this->mVelX = -this->aceleracion;
 }
 void Estado::disminuirVelocidadY()
 {
-    this->mVelY -= this->aceleracion;
+    this->mVelY = -this->aceleracion;
 }
 void Estado::aumentarVelocidadX()
 {
-    this->mVelX += this->aceleracion;
+    this->mVelX = this->aceleracion;
 }
 void Estado::aumentarVelocidadY()
 {
-    this->mVelY += this->aceleracion;
+    this->mVelY = this->aceleracion;
 }
 
 void Estado::detenerVelocidad() {

@@ -53,7 +53,7 @@ string Util_Logger::getLogFile()
 
 void Util_Logger::writeSingleLine(string line, string type)
 {
-    printf((line + "\n").c_str());
+    printf("%s", (line + "\n").c_str());
     ofstream log_file(getLogFile(), ios_base::out | ios_base::app );
     log_file << util.currentDateTime() + " || " + type + " || " << line << endl;
     log_file.close();
