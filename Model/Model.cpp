@@ -6,7 +6,7 @@
 Model::Model()
 {
     this->jugadores = new Jugador[CANTJUGADORES]();
-    this->nroJugadorActivo = 0;
+    this->nroJugadorActivo = 4;
     this->getJugadorActivo()->activar();
 }
 
@@ -46,7 +46,6 @@ void Model::cambiarJugadorActivo()
 
     while (!((this->jugadores[(this->nroJugadorActivo + 1) % CANTJUGADORES]).collide(this->camara )))
     {
-        printf("\n\n colision 2\n\n");
         NotifyMessage("colision 2", "MODEL");
         (this->jugadores[(this->nroJugadorActivo)]).desactivar();
         this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
@@ -88,6 +87,7 @@ void Model::update()
     {
         this->jugadores[i].move();
     }
+    this->pelota.move();
     NotifyMessage("SALIMOS DEL EL METODO: update", "MODEL");
 }
 
@@ -123,9 +123,4 @@ void Model::setCasaca(std::string casacaName)
             this->jugadores[i].setCasacaAlternativa();
         }
     }
-}
-
-std::string Model::getCasaca()
-{
-    return this->casacaSprite;
 }

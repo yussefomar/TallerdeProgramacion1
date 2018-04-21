@@ -39,7 +39,7 @@ void Jugador::patearPelota(Pelota* pelota)
     if(this->checkCollisionPelota(&colli_pelo))
     {
 
-        pelota->move();//mueve en cualquier direccion,no tiene logica la pelota segun el tp.
+        pelota->setVelocidadX(20);//mueve en cualquier direccion,no tiene logica la pelota segun el tp.
 
     }
 
@@ -232,18 +232,9 @@ bool Jugador::collide(SDL_Rect * camara)
 
     //Calculate the sides of rect B
     leftJugador = this->mCollider.x;
-    printf("leftcam %i - ",leftCam);
-    printf("leftJugador - %i\n",leftJugador);
     rightJugador = this->mCollider.x + this->mCollider.w;
-    printf("rightCam %i",rightCam);
-    printf("rightJugador %i\n",rightJugador);
     topJugador = this->mCollider.y;
-    printf("topCam %i",topCam);
-    printf("topJugador %i\n",topJugador);
     bottomJugador = this->mCollider.y + this->mCollider.h;
-    printf("bottomCam %i",topCam);
-    printf("bottomJugador %i\n\n\n",bottomJugador);
-
 
     //If any of the sides from A are outside of B
 
@@ -277,7 +268,7 @@ void Jugador::acelerar() {
 void Jugador::desacelerar() {
     this->estado->desacelerar();
 }
- 
+
 
 void Jugador::setCasacaSprite(std::string casacaName) {
 
@@ -288,4 +279,4 @@ void Jugador::setCasacaSprite(std::string casacaName) {
 std::string Jugador::getCasacaSprite() {
     return this->casacaSprite;
 }
- 
+

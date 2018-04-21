@@ -8,8 +8,8 @@ Pelota::Pelota()
     mPosY = (ALTO_NIVEL/2)-(ANCHO_PELOTA/2);
 
     //Initialize the velocity
-    mVelX = 50;
-    mVelY = 50;
+    mVelX = 0;
+    mVelY = 0;
 }
 
 void Pelota::move()
@@ -36,7 +36,18 @@ void Pelota::move()
         mPosY -= mVelY;
         mVelY=(-1)*mVelY;
     }
-
+    if (mVelX>0){
+        mVelX--;
+    }
+    if (mVelX<0){
+        mVelX++;
+    }
+     if (mVelY>0){
+        mVelY--;
+    }
+    if (mVelY<0){
+        mVelY++;
+    }
 }
 
 void Pelota::setVelocidadX(int velocidad){
