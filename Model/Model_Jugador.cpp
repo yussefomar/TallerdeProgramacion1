@@ -13,11 +13,13 @@ Jugador::Jugador()
 
 }
 
-void Jugador::setPosInitX(int posX) {
+void Jugador::setPosInitX(int posX)
+{
     this->estado->setPosInitX(posX);
 }
 
-void Jugador::setPosInitY(int posY) {
+void Jugador::setPosInitY(int posY)
+{
     this->estado->setPosInitY(posY);
 }
 
@@ -34,18 +36,41 @@ void Jugador::patearPelota(Pelota* pelota)
 
     if(this->checkCollisionPelota((pelota->getCollider())))
     {
-        if (((this->mCollider.x+this->mCollider.w)/2)  < ((pelota->getCollider()->x + pelota->getCollider()->w))/2){
-        pelota->setVelocidadX(20);//mueve en cualquier direccion,no tiene logica la pelota segun el tp.
+        if (this->getVelX()>0)
+        {
+            pelota->setVelocidadX(20); //direccion = 90;
+            if (this->getVelY()>0)
+            {
+                pelota->setVelocidadY(20);//  direccion += 45;
+            }
+            if (this->getVelY()<0)
+            {
+                pelota->setVelocidadY(-20);//direccion -= 45;
+            }
+
         }
-      /*  if (((this->mCollider.y+this->mCollider.h)/2)  < ((pelota->getCollider()->y + pelota->getCollider()->h))/2){
-        pelota->setVelocidadY(20);
-        }*/
-        if (((this->mCollider.x+this->mCollider.w)/2)  > ((pelota->getCollider()->x + pelota->getCollider()->w))/2){
-        pelota->setVelocidadX(80);//mueve en cualquier direccion,no tiene logica la pelota segun el tp.
+
+        if (this->getVelX()<0)
+        {
+            pelota->setVelocidadX(-20);//direccion = 270;
+            if (this->getVelY()<0)
+            {
+                pelota->setVelocidadY(-20);// direccion += 45;
+            }
+            if (this->getVelY()>0)
+            {
+                pelota->setVelocidadY(20); // direccion -= 45;
+            }
+
         }
-        /*if (((this->mCollider.y+this->mCollider.h)/2)  > ((pelota->getCollider()->y + pelota->getCollider()->h))/2){
-        pelota->setVelocidadY(-20);
-        }*/
+        if ((this->getVelY()<0) && (this->getVelX()==0))
+        {
+            pelota->setVelocidadY(-20);
+        }
+        if ((this->getVelY()>0) && (this->getVelX()==0))
+        {
+            pelota->setVelocidadY(20);
+        }
 
     }
 
@@ -266,22 +291,26 @@ bool Jugador::collide(SDL_Rect * camara)
     return true;
 }
 
-void Jugador::acelerar() {
+void Jugador::acelerar()
+{
     this->estado->acelerar();
 }
 
-void Jugador::desacelerar() {
+void Jugador::desacelerar()
+{
     this->estado->desacelerar();
 }
 
 
-void Jugador::setCasacaSprite(std::string casacaName) {
+void Jugador::setCasacaSprite(std::string casacaName)
+{
 
 
     this->casacaSprite = casacaName;
 }
 
-std::string Jugador::getCasacaSprite() {
+std::string Jugador::getCasacaSprite()
+{
     return this->casacaSprite;
 }
 
