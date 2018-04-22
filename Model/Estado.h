@@ -2,7 +2,7 @@
 #define ESTADO_H
 
 #define VELOCIDAD_NORMAL 3
-#define VELOCIDAD_ACELERADA 6
+#define VELOCIDAD_ACELERACION 2
 
 class Estado
 {

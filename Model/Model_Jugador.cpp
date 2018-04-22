@@ -31,15 +31,21 @@ void Jugador::move()
 
 void Jugador::patearPelota(Pelota* pelota)
 {
-    SDL_Rect colli_pelo;
-    colli_pelo.x=pelota->getPosX();
-    colli_pelo.y=pelota->getPosY();
-    colli_pelo.h=pelota->ANCHO_PELOTA;
-    colli_pelo.w=pelota->ANCHO_PELOTA;
-    if(this->checkCollisionPelota(&colli_pelo))
-    {
 
+    if(this->checkCollisionPelota((pelota->getCollider())))
+    {
+        if (((this->mCollider.x+this->mCollider.w)/2)  < ((pelota->getCollider()->x + pelota->getCollider()->w))/2){
         pelota->setVelocidadX(20);//mueve en cualquier direccion,no tiene logica la pelota segun el tp.
+        }
+      /*  if (((this->mCollider.y+this->mCollider.h)/2)  < ((pelota->getCollider()->y + pelota->getCollider()->h))/2){
+        pelota->setVelocidadY(20);
+        }*/
+        if (((this->mCollider.x+this->mCollider.w)/2)  > ((pelota->getCollider()->x + pelota->getCollider()->w))/2){
+        pelota->setVelocidadX(80);//mueve en cualquier direccion,no tiene logica la pelota segun el tp.
+        }
+        /*if (((this->mCollider.y+this->mCollider.h)/2)  > ((pelota->getCollider()->y + pelota->getCollider()->h))/2){
+        pelota->setVelocidadY(-20);
+        }*/
 
     }
 
@@ -82,7 +88,6 @@ void Jugador::recuperaPelota(Pelota* pelota)
     }
 
 }
-
 
 bool Jugador::checkCollisionPelota( SDL_Rect* pelota)
 {

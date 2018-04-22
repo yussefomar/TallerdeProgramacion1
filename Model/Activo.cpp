@@ -17,21 +17,21 @@ Activo::~Activo()
 }
 
 void Activo::move() {
-    this->mPosX += this->mVelX;
+    this->mPosX += this->mVelX * aceleracion;
     //If the dot went too far to the left or right
     if( ( mPosX < 0 ) || ( mPosX + ANCHO_JUGADOR >= ANCHO_NIVEL) )
     {
         //Move back
-        mPosX -= mVelX;
+        mPosX -= mVelX*aceleracion;
     }
 
     //Move the dot up or down
-    mPosY += mVelY;
+    mPosY += mVelY * aceleracion;
     //If the dot went too far up or down
     if( ( mPosY < 0 ) || ( mPosY + ALTO_JUGADOR >= ALTO_NIVEL ) )
     {
         //Move back
-        mPosY -= mVelY;
+        mPosY -= mVelY*aceleracion;
     }
 }
 bool Activo::estaActivo() {
@@ -39,5 +39,5 @@ bool Activo::estaActivo() {
 }
 
 void Activo::acelerar() {
-    this->aceleracion = VELOCIDAD_ACELERADA;
+    this->aceleracion = VELOCIDAD_ACELERACION;
 }
