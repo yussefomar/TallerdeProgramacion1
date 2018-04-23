@@ -10,7 +10,7 @@ Jugador::Jugador()
     this->mCollider.y = this->estado->getPosY();
     this->mCollider.w = ANCHO_JUGADOR;
     this->mCollider.h = ALTO_JUGADOR;
-
+    this->direccion=90.0;
 }
 
 void Jugador::setPosInitX(int posX)
@@ -28,6 +28,46 @@ void Jugador::move()
     this->estado->move();
     this->mCollider.x = this->estado->getPosX();
     this->mCollider.y = this->estado->getPosY();
+    if (this->estado->getVelX()>0)
+    {
+        direccion = 90;
+        if (this->estado->getVelY()>0)
+        {
+            direccion += 45;
+        }
+        if (this->estado->getVelY()<0)
+        {
+            direccion -= 45;
+        }
+    }
+
+    if (this->estado->getVelX()<0)
+    {
+        direccion = 270;
+        if (this->estado->getVelY()<0)
+        {
+            direccion += 45;
+        }
+        if (this->estado->getVelY()>0)
+        {
+            direccion -= 45;
+        }
+    }
+
+
+    if ((this->estado->getVelX()==0 )&& (this->estado->getVelY()!=0))
+    {
+        direccion = 90;
+        if (this->estado->getVelY()<0)
+        {
+            direccion -= 90;
+        }
+        if (this->estado->getVelY()>0)
+        {
+            direccion += 90;
+        }
+    }
+
 }
 
 
@@ -36,6 +76,27 @@ void Jugador::patearPelota(Pelota* pelota)
 
     if(this->checkCollisionPelota((pelota->getCollider())))
     {
+        if (((this->direccion) >0)  && ((this->direccion)<180)){
+
+        pelota->setVelocidadX(20);
+        }
+
+        if (((this->direccion) >180)  && ((this->direccion)<360)){
+
+        pelota->setVelocidadX(-20);
+        }
+
+        if ((((this->direccion) >=0)  && ((this->direccion)<90)) ||  ((((this->direccion) <=360)  && ((this->direccion)>270))) ) {
+
+        pelota->setVelocidadY(-20);
+        }
+        if (((this->direccion) >90)  && ((this->direccion)<270)){
+
+        pelota->setVelocidadY(20);
+        }
+
+
+  /*
         if (this->getVelX()>0)
         {
             pelota->setVelocidadX(20); //direccion = 90;
@@ -70,7 +131,7 @@ void Jugador::patearPelota(Pelota* pelota)
         if ((this->getVelY()>0) && (this->getVelX()==0))
         {
             pelota->setVelocidadY(20);
-        }
+        }*/
 
     }
 
@@ -300,7 +361,10 @@ void Jugador::desacelerar()
 {
     this->estado->desacelerar();
 }
-
+double Jugador::getDireccion()
+{
+    return this->direccion;
+}
 
 void Jugador::setCasacaSprite(std::string casacaName)
 {

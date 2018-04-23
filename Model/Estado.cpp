@@ -90,3 +90,4 @@ void Estado::detenerVelocidad() {
 void Estado::desacelerar() {
     this->aceleracion = 1;
 }
+

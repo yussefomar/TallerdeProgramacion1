@@ -33,6 +33,7 @@ void Activo::move() {
         //Move back
         mPosY -= mVelY*aceleracion;
     }
+
 }
 bool Activo::estaActivo() {
     return true;
