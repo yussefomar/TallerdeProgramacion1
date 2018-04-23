@@ -30,8 +30,8 @@ void Jugador::move()
     this->mCollider.x = this->estado->getPosX();
     this->mCollider.y = this->estado->getPosY();
     if (this->getPosesion()){
-    pelota->setVelocidadX(this->getVelX());
-    pelota->setVelocidadY(this->getVelY());
+    pelota->setVelocidadX(this->getVelX()*this->getAceleracion());
+    pelota->setVelocidadY(this->getVelY()*this->getAceleracion());
     }
     updateDirection();
 
