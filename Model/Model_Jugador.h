@@ -58,7 +58,9 @@ public:
     void setCasacaSprite(std::string casacaName);
     std::string getCasacaSprite();
     int getAceleracion();
-
+    void poseePelota();
+    void noPoseePelota();
+    bool getPosesion();
 private:
     SDL_Rect mCollider;
     int casaca;
@@ -67,6 +69,8 @@ private:
     Activo activo;
     Inactivo inactivo;
     double direccion;
+    bool conPelota;
+    Pelota * pelota;
 };
 
 #endif

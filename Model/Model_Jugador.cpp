@@ -11,6 +11,7 @@ Jugador::Jugador()
     this->mCollider.w = ANCHO_JUGADOR;
     this->mCollider.h = ALTO_JUGADOR;
     this->direccion=90.0;
+    this->conPelota=false;
 }
 
 void Jugador::setPosInitX(int posX)
@@ -28,14 +29,20 @@ void Jugador::move()
     this->estado->move();
     this->mCollider.x = this->estado->getPosX();
     this->mCollider.y = this->estado->getPosY();
+    if (this->getPosesion()){
+    pelota->setVelocidadX(this->getVelX());
+    pelota->setVelocidadY(this->getVelY());
+    }
     updateDirection();
+
 }
 
 
 void Jugador::patearPelota(Pelota* pelota)
 {
-
-    if(this->checkCollisionPelota((pelota->getCollider())))
+///va a cambiar por posee pelota
+ //   if(this->checkCollisionPelota((pelota->getCollider())))
+    if(this->getPosesion() && (this->checkCollisionPelota((pelota->getCollider()))))
     {
         if (((this->direccion) >0)  && ((this->direccion)<180)){
 
@@ -56,43 +63,17 @@ void Jugador::patearPelota(Pelota* pelota)
         pelota->setVelocidadY(20);
         }
     }
-
+this->noPoseePelota();
 
 }
 
 void Jugador::recuperaPelota(Pelota* pelota)
 {
-    SDL_Rect colli_pelo;
-    colli_pelo.x=pelota->getPosX();
-    colli_pelo.y=pelota->getPosY();
-    colli_pelo.h=pelota->ANCHO_PELOTA;
-    colli_pelo.w=pelota->ANCHO_PELOTA;
 
-
-    if(this->checkCollisionPelota((&colli_pelo)))
+    if(this->checkCollisionPelota((pelota->getCollider())))
     {
-        printf("detecto pelota para mantenerla");
-        // pelota->aumentarVelocidadX();
-        //pelota->aumentarVelocidadY();
-
-        //pelota->aumentarVelocidadY();
-        //pelota->aumentarVelocidadX();
-//pelota->setPosX(this->activo.getPosX());
-//          pelota->setPosY(this->activo.getPosY());
-        /*               pelota->setVelocidadX(this->activo.getVelX());
-                       pelota->setVelocidadY(this->activo.getVelY());
-                     pelota->move();*/
-        /*
-                      pelota->setPosX(this->activo.getPosX());
-                      pelota->setPosY(this->activo.getPosY());
-                      pelota->setVelocidadX(this->activo.getVelX());
-                        pelota->setVelocidadY(this->activo.getVelY());
-                        pelota->move();*/
-
-//pelota->setVelocidadX(this->getVelX());
-        //            pelota->setVelocidadY(this->getVelY());
-
-        //ver que ejecta si es aumentavelocidax entonces aumento la pelota en x
+        this->poseePelota();
+        this->pelota=pelota;
     }
 
 }
@@ -303,6 +284,19 @@ std::string Jugador::getCasacaSprite()
 int Jugador::getAceleracion(){
 return this->estado->getAceleracion();
 }
+
+void Jugador::poseePelota(){
+ this->conPelota=true;
+}
+void Jugador::noPoseePelota(){
+ this->conPelota=false;
+}
+
+bool Jugador::getPosesion(){
+return this->conPelota;
+}
+
+
 void Jugador::updateDirection(){
 
     if (this->estado->getVelX()>0)
