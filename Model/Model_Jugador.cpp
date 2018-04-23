@@ -300,6 +300,9 @@ std::string Jugador::getCasacaSprite()
     return this->casacaSprite;
 }
 
+int Jugador::getAceleracion(){
+return this->estado->getAceleracion();
+}
 void Jugador::updateDirection(){
 
     if (this->estado->getVelX()>0)

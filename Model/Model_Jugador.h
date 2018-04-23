@@ -57,7 +57,7 @@ public:
     void updateDirection();
     void setCasacaSprite(std::string casacaName);
     std::string getCasacaSprite();
-
+    int getAceleracion();
 
 private:
     SDL_Rect mCollider;

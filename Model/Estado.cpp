@@ -91,3 +91,7 @@ void Estado::desacelerar() {
     this->aceleracion = 1;
 }
 
+int Estado::getAceleracion()
+{
+    return this->aceleracion;
+}

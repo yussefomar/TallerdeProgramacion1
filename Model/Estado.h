@@ -33,7 +33,7 @@ public:
     virtual bool estaActivo() = 0;
 
     virtual void acelerar() = 0;
-
+    int getAceleracion();
     void desacelerar();
     //virtual void stop() = 0;
 

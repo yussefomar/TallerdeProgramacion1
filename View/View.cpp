@@ -51,20 +51,20 @@ void View::ajustarCamara()
         //Center the this->camara->over the dot
         if ( (this->camara->x + ANCHO_VENTANA-MARGEN)<(jugadorActual->getPosX() + Jugador::ANCHO_JUGADOR / 2 ))
         {
-            this->camara->x +=Jugador::VELOCIDAD_JUGADOR; //=( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
+            this->camara->x +=Jugador::VELOCIDAD_JUGADOR*this->model->getJugadorActivo()->getAceleracion(); //=( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
         }
         if ( (this->camara->x + MARGEN)>(jugadorActual->getPosX() + Jugador::ANCHO_JUGADOR / 2 ))
         {
-            this->camara->x -=Jugador::VELOCIDAD_JUGADOR;// ( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
+            this->camara->x -=Jugador::VELOCIDAD_JUGADOR*this->model->getJugadorActivo()->getAceleracion();// ( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
         }
 
         if ((this->camara->y + ALTO_VENTANA-MARGEN)<(jugadorActual->getPosY() + Jugador::ALTO_JUGADOR / 2 ))
         {
-            this->camara->y +=Jugador::VELOCIDAD_JUGADOR;//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
+            this->camara->y +=Jugador::VELOCIDAD_JUGADOR*this->model->getJugadorActivo()->getAceleracion();//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
         }
         if ((this->camara->y + MARGEN)>(jugadorActual->getPosY() + Jugador::ALTO_JUGADOR / 2 ))
         {
-            this->camara->y -=Jugador::VELOCIDAD_JUGADOR;//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
+            this->camara->y -=Jugador::VELOCIDAD_JUGADOR*this->model->getJugadorActivo()->getAceleracion();//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
         }
         //Keep the this->camara->in bounds
         if( this->camara->x < 0 )
