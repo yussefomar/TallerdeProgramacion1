@@ -54,7 +54,7 @@ public:
     void desacelerar();
     double getDireccion();
      bool checkCollisionPelota(SDL_Rect *pelota);
-
+    void updateDirection();
     void setCasacaSprite(std::string casacaName);
     std::string getCasacaSprite();
 
