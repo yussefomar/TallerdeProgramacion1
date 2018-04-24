@@ -19,13 +19,26 @@ bool Util_Parser::fileExists(const std::string& name)
 {
     NotifyMessage("FileExists: comprobando si existe archivo...", "UTILS");
     ifstream f(name.c_str());
+
     if (f.good())
     {
-        f.close();
-        return true;
+        f.seekg(0, ios::end); // va al final de archivo
+        if(f.tellg()==0)
+        {
+            NotifyError("fileExists: archivo "+ name +" vacio", "UTILS");
+            f.close();
+            return false;
+        }
+        else
+        {
+            NotifyWarning("fileExists: archivo "+ name +" obtenido correctamente", "UTILS");
+            f.close();
+            return true;
+        }
     }
     else
     {
+        NotifyError("fileExists: archivo "+ name +" inválido", "UTILS");
         f.close();
         return false;
     }
