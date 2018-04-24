@@ -20,6 +20,11 @@ Util_LoggerObserver::Util_LoggerObserver(int myLevel)
     this->level = myLevel;
 }
 
+Util_LoggerObserver::~Util_LoggerObserver()
+{
+    //dtor
+}
+
 int Util_LoggerObserver::getLoggerLevel()
 {
     return this->level;

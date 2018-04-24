@@ -38,7 +38,7 @@ int main(int argc, char* args[])
         model.update();
         view.render();
     }
-
+    delete loggerObserver;
     return 0;
 }
 
