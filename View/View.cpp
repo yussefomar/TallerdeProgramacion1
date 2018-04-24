@@ -35,7 +35,7 @@ void View::ajustarCamara()
 {
     try
     {
-        NotifyMessage("Inicia: ajustarCamara", "VIEW");
+        NotifyMessage("Inicia: ajustarCamara", "View.cpp");
         Jugador* jugadorActual = this->model->getJugadorActivo();
         //Esto hacerlo con Patron Observer.
         // va a servir mas con los corners, saques de arco, y despues de los goles.
@@ -84,21 +84,21 @@ void View::ajustarCamara()
             this->camara->y = ALTO_NIVEL - this->camara->h;
         }
         this->jugadorAnterior = jugadorActual;
-        NotifyMessage("Finaliza: ajustarCamara", "VIEW");
+        NotifyMessage("Finaliza: ajustarCamara", "View.cpp");
     }
     catch(const std::runtime_error& re)
     {
-        NotifyError("Error en Runtime: ", "VIEW");
-        NotifyError(re.what(), "VIEW");
+        NotifyError("Error en Runtime: ", "View.cpp");
+        NotifyError(re.what(), "View.cpp");
     }
     catch(const std::exception& ex)
     {
-        NotifyError("Ha ocurrido un error: ", "VIEW");
-        NotifyError(ex.what(), "VIEW");
+        NotifyError("Ha ocurrido un error: ", "View.cpp");
+        NotifyError(ex.what(), "View.cpp");
     }
     catch(...)
     {
-        NotifyError("Error desconocido que no se ha podido especificar.", "VIEW");
+        NotifyError("Error desconocido que no se ha podido especificar.", "View.cpp");
     }
 }
 
@@ -106,7 +106,7 @@ void View::render()
 {
     try
     {
-        NotifyMessage("Inicia: render", "VIEW");
+        NotifyMessage("Inicia: render", "View.cpp");
         this->ajustarCamara();
         SDL_SetRenderDrawColor( this->gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
         SDL_RenderClear( this->gRenderer );
@@ -115,21 +115,21 @@ void View::render()
 
         //Update screen
         SDL_RenderPresent( this->gRenderer );
-        NotifyMessage("Finaliza: render", "VIEW");
+        NotifyMessage("Finaliza: render", "View.cpp");
     }
     catch(const std::runtime_error& re)
     {
-        NotifyError("Error en Runtime: ", "VIEW");
-        NotifyError(re.what(), "VIEW");
+        NotifyError("Error en Runtime: ", "View.cpp");
+        NotifyError(re.what(), "View.cpp");
     }
     catch(const std::exception& ex)
     {
-        NotifyError("Ha ocurrido un error: ", "VIEW");
-        NotifyError(ex.what(), "VIEW");
+        NotifyError("Ha ocurrido un error: ", "View.cpp");
+        NotifyError(ex.what(), "View.cpp");
     }
     catch(...)
     {
-        NotifyError("Error desconocido que no se ha podido especificar.", "VIEW");
+        NotifyError("Error desconocido que no se ha podido especificar.", "View.cpp");
     }
 }
 
@@ -138,13 +138,13 @@ bool View::inicializar()
     bool exito = true;
     try
     {
-        NotifyMessage("Inicia: inicializar", "VIEW");
+        NotifyMessage("Inicia: inicializar", "View.cpp");
 
         if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
         {
             printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
-            NotifyError("SDL could not initialize! SDL Error: ", "VIEW");
-            NotifyError(SDL_GetError(), "VIEW");
+            NotifyError("SDL could not initialize! SDL Error: ", "View.cpp");
+            NotifyError(SDL_GetError(), "View.cpp");
             exito = false;
         }
         else
@@ -152,7 +152,7 @@ bool View::inicializar()
             if( !SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" ) )
             {
                 printf( "Warning: Linear texture filtering not enabled!" );
-                NotifyWarning("Warning: Linear texture filtering not enabled!", "VIEW");
+                NotifyWarning("Warning: Linear texture filtering not enabled!", "View.cpp");
             }
 
             //Create window
@@ -160,8 +160,8 @@ bool View::inicializar()
             if( this->window == NULL )
             {
                 printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
-                NotifyError("Window could not be created! SDL Error: ", "VIEW");
-                NotifyError(SDL_GetError(), "VIEW");
+                NotifyError("Window could not be created! SDL Error: ", "View.cpp");
+                NotifyError(SDL_GetError(), "View.cpp");
                 exito = false;
             }
             else
@@ -171,8 +171,8 @@ bool View::inicializar()
                 if( this->gRenderer == NULL )
                 {
                     printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
-                    NotifyError("Renderer could not be created! SDL Error: ", "VIEW");
-                    NotifyError(SDL_GetError(), "VIEW");
+                    NotifyError("Renderer could not be created! SDL Error: ", "View.cpp");
+                    NotifyError(SDL_GetError(), "View.cpp");
                     exito = false;
                 }
                 else
@@ -185,28 +185,28 @@ bool View::inicializar()
                     if( !( IMG_Init( imgFlags ) & imgFlags ) )
                     {
                         printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
-                        NotifyError("SDL_image could not initialize! SDL_image Error: ", "VIEW");
-                        NotifyError(IMG_GetError(), "VIEW");
+                        NotifyError("SDL_image could not initialize! SDL_image Error: ", "View.cpp");
+                        NotifyError(IMG_GetError(), "View.cpp");
                         exito = false;
                     }
                 }
             }
         }
-        NotifyMessage("Finaliza: inicializar", "VIEW");
+        NotifyMessage("Finaliza: inicializar", "View.cpp");
     }
     catch(const std::runtime_error& re)
     {
-        NotifyError("Error en Runtime: ", "VIEW");
-        NotifyError(re.what(), "VIEW");
+        NotifyError("Error en Runtime: ", "View.cpp");
+        NotifyError(re.what(), "View.cpp");
     }
     catch(const std::exception& ex)
     {
-        NotifyError("Ha ocurrido un error: ", "VIEW");
-        NotifyError(ex.what(), "VIEW");
+        NotifyError("Ha ocurrido un error: ", "View.cpp");
+        NotifyError(ex.what(), "View.cpp");
     }
     catch(...)
     {
-        NotifyError("Error desconocido que no se ha podido especificar.", "VIEW");
+        NotifyError("Error desconocido que no se ha podido especificar.", "View.cpp");
     }
     return exito;
 }
@@ -215,7 +215,7 @@ void View::close()
 {
     try
     {
-        NotifyMessage("Inicia: close", "VIEW");
+        NotifyMessage("Inicia: close", "View.cpp");
         //Destroy this->window}
         SDL_DestroyRenderer( this->gRenderer );
         SDL_DestroyWindow( this->window );
@@ -226,20 +226,20 @@ void View::close()
         //Quit SDL subsystems
         IMG_Quit();
         SDL_Quit();
-        NotifyMessage("Finaliza: close", "VIEW");
+        NotifyMessage("Finaliza: close", "View.cpp");
     }
     catch(const std::runtime_error& re)
     {
-        NotifyError("Error en Runtime: ", "VIEW");
-        NotifyError(re.what(), "VIEW");
+        NotifyError("Error en Runtime: ", "View.cpp");
+        NotifyError(re.what(), "View.cpp");
     }
     catch(const std::exception& ex)
     {
-        NotifyError("Ha ocurrido un error: ", "VIEW");
-        NotifyError(ex.what(), "VIEW");
+        NotifyError("Ha ocurrido un error: ", "View.cpp");
+        NotifyError(ex.what(), "View.cpp");
     }
     catch(...)
     {
-        NotifyError("Error desconocido que no se ha podido especificar.", "VIEW");
+        NotifyError("Error desconocido que no se ha podido especificar.", "View.cpp");
     }
 }

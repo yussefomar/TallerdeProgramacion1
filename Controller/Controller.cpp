@@ -55,7 +55,7 @@ void Controller::processInput()
 {
     try
     {
-        NotifyMessage("Inicia: processInput", "CONTROLLER");
+        NotifyMessage("Inicia: processInput", "Controller.cpp");
         while( SDL_PollEvent( &(this->e) ) != 0 )
         {
             if( this->e.type == SDL_QUIT )
@@ -64,21 +64,21 @@ void Controller::processInput()
             }
             this->model->addCommand(this->handleEvent(this->e));
         }
-        NotifyMessage("Inicia: processInput", "CONTROLLER");
+        NotifyMessage("Inicia: processInput", "Controller.cpp");
     }
     catch(const std::runtime_error& re)
     {
-        NotifyError("Error en Runtime: ", "CONTROLLER");
-        NotifyError(re.what(), "CONTROLLER");
+        NotifyError("Error en Runtime: ", "Controller.cpp");
+        NotifyError(re.what(), "Controller.cpp");
     }
     catch(const std::exception& ex)
     {
-        NotifyError("Ha ocurrido un error: ", "CONTROLLER");
-        NotifyError(ex.what(), "CONTROLLER");
+        NotifyError("Ha ocurrido un error: ", "Controller.cpp");
+        NotifyError(ex.what(), "Controller.cpp");
     }
     catch(...)
     {
-        NotifyError("Error desconocido que no se ha podido especificar.", "CONTROLLER");
+        NotifyError("Error desconocido que no se ha podido especificar.", "Controller.cpp");
     }
 }
 
@@ -87,11 +87,11 @@ Command* Controller::handleEvent(SDL_Event& e)
     Command* command = nullptr;
     try
     {
-        NotifyMessage("Inicia: handleEvent", "CONTROLLER");
+        NotifyMessage("Inicia: handleEvent", "Controller.cpp");
 
         if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
         {
-            NotifyMessage("Chequeamos: SDL_KEYDOWN", "CONTROLLER");
+            NotifyMessage("Chequeamos: SDL_KEYDOWN", "Controller.cpp");
             switch( e.key.keysym.sym )
             {
             case SDLK_s:
@@ -123,7 +123,7 @@ Command* Controller::handleEvent(SDL_Event& e)
         else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
         {
 
-            NotifyMessage("Chequeamos: SDL_KEYUP", "CONTROLLER");
+            NotifyMessage("Chequeamos: SDL_KEYUP", "Controller.cpp");
             switch( e.key.keysym.sym )
             {
             case SDLK_UP:
@@ -142,21 +142,21 @@ Command* Controller::handleEvent(SDL_Event& e)
                 command = this->commands[DESJUG];
             }
         }
-        NotifyMessage("Finaliza: handleEvent", "CONTROLLER");
+        NotifyMessage("Finaliza: handleEvent", "Controller.cpp");
     }
     catch(const std::runtime_error& re)
     {
-        NotifyError("Error en Runtime: ", "CONTROLLER");
-        NotifyError(re.what(), "CONTROLLER");
+        NotifyError("Error en Runtime: ", "Controller.cpp");
+        NotifyError(re.what(), "Controller.cpp");
     }
     catch(const std::exception& ex)
     {
-        NotifyError("Ha ocurrido un error: ", "CONTROLLER");
-        NotifyError(ex.what(), "CONTROLLER");
+        NotifyError("Ha ocurrido un error: ", "Controller.cpp");
+        NotifyError(ex.what(), "Controller.cpp");
     }
     catch(...)
     {
-        NotifyError("Error desconocido que no se ha podido especificar.", "CONTROLLER");
+        NotifyError("Error desconocido que no se ha podido especificar.", "Controller.cpp");
     }
     return command;
 }
