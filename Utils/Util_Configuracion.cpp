@@ -13,6 +13,7 @@ const std::string pathDefaultConfig = "./Configs/config.yaml";
 
 Util_Configuracion::Util_Configuracion(Model* model, Util_LoggerObserver* loggerObserver)
 {
+   this->Attach(loggerObserver);
    parser.Attach(loggerObserver);
    try
    {
