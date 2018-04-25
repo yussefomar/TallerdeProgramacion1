@@ -4,22 +4,13 @@
 
 View_Jugador::View_Jugador() {}
 
-void View_Jugador::initialize(Jugador *model,SDL_Renderer * gRenderer)
+void View_Jugador::initialize(Jugador *model,SDL_Renderer * gRenderer,LTexture * texturaJugador,LTexture * texturaSeleccionado)
 {
-    double direccion=90.0;
+    this->texturaJugador=texturaJugador;
+    this->texturaSeleccionado=texturaSeleccionado;
     this->model = model;
-    if( !texturaJugador.loadFromFile("Images/spritejugador.png",gRenderer) )
-    {
-        NotifyError("No se pudo cargar la Imagen del jugador, se usara una imagen por defecto", "View_Jugador");
-        texturaJugador.loadFromFile("Images/pelota.png",gRenderer);
-    }
-    if( !texturaSeleccionado.loadFromFile( "Images/jugadorseleccionado.png",gRenderer) )
-    {
-        NotifyError("No se pudo cargar la Imagen de jugador seleccionado, se usara una imagen por defecto", "View_Jugador");
-        texturaJugador.loadFromFile("Images/pelota.png",gRenderer);
-    }
-    texturaSeleccionado.setAlpha(200);
-    texturaSeleccionado.setColor(150,100,150);
+    texturaSeleccionado->setAlpha(200);
+    texturaSeleccionado->setColor(150,100,150);
     int offset = 0;
     if (!model->casacaPrincipal())
     {
@@ -70,9 +61,9 @@ void View_Jugador::render( int camX, int camY,SDL_Renderer * gRenderer )
 
     if ((this->model)->estaActivo())
     {
-        this->texturaSeleccionado.render( (*this->model).getPosX() - camX, (*this->model).getPosY() - camY,NULL,this->model->getDireccion(),NULL,SDL_FLIP_NONE,gRenderer);
+        this->texturaSeleccionado->render( (*this->model).getPosX() - camX, (*this->model).getPosY() - camY,NULL,this->model->getDireccion(),NULL,SDL_FLIP_NONE,gRenderer);
     }
-    this->texturaJugador.render( (*this->model).getPosX() - camX, (*this->model).getPosY() - camY,currentClip,this->model->getDireccion(),NULL,SDL_FLIP_NONE,gRenderer);
+    this->texturaJugador->render( (*this->model).getPosX() - camX, (*this->model).getPosY() - camY,currentClip,this->model->getDireccion(),NULL,SDL_FLIP_NONE,gRenderer);
 
 }
 

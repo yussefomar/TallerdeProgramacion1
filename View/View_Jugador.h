@@ -11,14 +11,14 @@ public:
     View_Jugador( Jugador *model);
     View_Jugador();
 
-    void initialize(Jugador *model,SDL_Renderer * gRenderer);
+    void initialize(Jugador *model,SDL_Renderer * gRenderer,LTexture * texturaJugador,LTexture * texturaSeleccionado);
     void SetModel( Jugador *model);
     void render( int camX, int camY,SDL_Renderer * gRenderer );
 
 private:
     Jugador *model;
-    LTexture texturaJugador;
-    LTexture texturaSeleccionado;
+    LTexture * texturaJugador;
+    LTexture * texturaSeleccionado;
     int frame = 4;
     double direccion;
     SDL_Rect gSpriteClips[ 4 ];

@@ -3,7 +3,7 @@
 
 #define CANTVISTASJUG 7
 
-ViewModel::ViewModel(Model* model, SDL_Renderer* gRenderer, SDL_Rect* camara,LTexture * texturaCancha,LTexture * texturaPelota)
+ViewModel::ViewModel(Model* model, SDL_Renderer* gRenderer, SDL_Rect* camara,LTexture * texturaCancha,LTexture * texturaPelota,LTexture * texturaJugador,LTexture * texturaSeleccionado)
 {
 
     this->viewPelota.initialize(model->getPelota(), gRenderer,texturaPelota);
@@ -14,7 +14,7 @@ ViewModel::ViewModel(Model* model, SDL_Renderer* gRenderer, SDL_Rect* camara,LTe
 
     for(int i = 0; i < CANTVISTASJUG; ++i)
     {
-        this->viewJugadores[i].initialize(model->getJugadorNro(i), gRenderer);
+        this->viewJugadores[i].initialize(model->getJugadorNro(i), gRenderer,texturaJugador,texturaSeleccionado);
     }
 }
 

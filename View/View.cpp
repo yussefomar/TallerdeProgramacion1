@@ -20,7 +20,7 @@ View::View(Model* model)
         this->camaraStatic = { CAMARAPOSICIONINICIALX,CAMARAPOSICIONINICIALY, ANCHO_VENTANA, ALTO_VENTANA };
         this->camara = &(this->camaraStatic);
         this->model->setCamara(this->camara);
-        this->viewModel = new ViewModel(this->model, this->gRenderer, this->camara,&(this->texturaCancha),&(this->texturaPelota));
+        this->viewModel = new ViewModel(this->model, this->gRenderer, this->camara,&(this->texturaCancha),&(this->texturaPelota),&(this->texturaJugador),&(this->texturaSeleccionado));
     }
 
 }
