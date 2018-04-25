@@ -15,7 +15,8 @@ View::View(Model* model)
         NotifyError("SDL no se inicio: ", "View.cpp");
     }
     else
-    {   this->loadMedia();
+    {
+        this->loadMedia();
         this->model = model;
         this->camaraStatic = { CAMARAPOSICIONINICIALX,CAMARAPOSICIONINICIALY, ANCHO_VENTANA, ALTO_VENTANA };
         this->camara = &(this->camaraStatic);
@@ -210,7 +211,8 @@ bool View::inicializar()
     }
     return exito;
 }
-void View::loadMedia(){
+void View::loadMedia()
+{
     if( !texturaJugador.loadFromFile("Images/spritejugador.png",this->gRenderer) )
     {
         NotifyMessage("No se pudo cargar la Imagen del jugador, se usara una imagen por defecto", "View.cpp");
@@ -221,13 +223,13 @@ void View::loadMedia(){
         NotifyMessage("No se pudo cargar la Imagen de jugador seleccionado, se usara una imagen por defecto", "View.cpp");
         texturaSeleccionado.loadFromFile("Images/jugadorseleccionadoerror.png",this->gRenderer);
     }
-     if( !texturaPelota.loadFromFile( "Images/pelota2.png",this->gRenderer) )
+    if( !texturaPelota.loadFromFile( "Images/pelota2.png",this->gRenderer) )
     {
         NotifyMessage("No se pudo cargar la Imagen de la pelota, se usara una imagen por defecto", "View.cpp");
         texturaPelota.loadFromFile("Images/pelota2error.png",this->gRenderer);
         texturaPelota.setColor(200,100,150);
     }
-  if( !texturaCancha.loadFromFile( "Images/canchafubol.jpg",gRenderer) )
+    if( !texturaCancha.loadFromFile( "Images/canchafubol.jpg",gRenderer) )
     {
         NotifyMessage("No se pudo cargar la Imagen de la cancha, se usara una imagen por defecto", "View.cpp");
         texturaCancha.loadFromFile("Images/canchafubolerror.jpg",this->gRenderer);

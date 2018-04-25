@@ -125,16 +125,23 @@ Command* Controller::handleEvent(SDL_Event& e)
             switch( e.key.keysym.sym )
             {
             case SDLK_UP:
-                command = this->commands[STOPJUG];
+                if (this->model->getJugadorActivo()->getVelY()<0){
+                command = this->commands[INCVELY];}
                 break;
             case SDLK_DOWN:
-                command = this->commands[STOPJUG];
+             if (this->model->getJugadorActivo()->getVelY()>0){
+                command = this->commands[DECVELY];
+                }
                 break;
             case SDLK_LEFT:
-                command = this->commands[STOPJUG];
+             if (this->model->getJugadorActivo()->getVelX()<0){
+                command = this->commands[INCVELX];
+                }
                 break;
             case SDLK_RIGHT:
-                command = this->commands[STOPJUG];
+            if (this->model->getJugadorActivo()->getVelX()>0){
+                command = this->commands[DECVELX];
+                }
                 break;
             case SDLK_f:
                 command = this->commands[DESJUG];

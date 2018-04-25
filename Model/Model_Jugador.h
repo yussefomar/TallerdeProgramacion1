@@ -57,8 +57,6 @@ public:
     double getDireccion();
      bool checkCollisionPelota(SDL_Rect *pelota);
     void updateDirection();
-    void setCasacaSprite(std::string casacaName);
-    std::string getCasacaSprite();
     int getAceleracion();
     void poseePelota();
     void noPoseePelota();
@@ -66,7 +64,6 @@ public:
 private:
     SDL_Rect mCollider;
     int casaca;
-    std::string casacaSprite;
     Estado* estado;
     Activo activo;
     Inactivo inactivo;
