@@ -8,6 +8,7 @@
 #include "Model/Model.h"
 #include "View/View.h"
 
+
 using namespace std;
 
 Util_Common common;
@@ -19,18 +20,18 @@ int main(int argc, char* args[])
     // Hacemos un log de la ejecucion anterior.
     common.createFile();
     // Creamos el logger con el nivel más bajo.
-    Util_LoggerObserver* loggerObserver = new Util_LoggerObserver(3);
+    Util_LoggerObserver loggerObserver(3);
 
     Model model;
-    model.Attach(loggerObserver);
+    model.Attach(&loggerObserver);
 
-    Util_Configuracion configuracion(&model, loggerObserver);
+    Util_Configuracion configuracion(&model, &loggerObserver);
 
     View view(&model);
-    view.Attach(loggerObserver);
+    view.Attach(&loggerObserver);
 
     Controller controller(&model);
-    controller.Attach(loggerObserver);
+    controller.Attach(&loggerObserver);
 
     while( !controller.quitPressed() )
     {
@@ -38,7 +39,7 @@ int main(int argc, char* args[])
         model.update();
         view.render();
     }
-    delete loggerObserver;
+    //delete loggerObserver;
     return 0;
 }
 

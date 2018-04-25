@@ -116,7 +116,8 @@ void Util_Configuracion::close()
 
 Util_Configuracion::~Util_Configuracion()
 {
-    //this->close();
+
+    this->close();
 }
 
 
