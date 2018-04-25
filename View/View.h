@@ -14,6 +14,7 @@ public:
     void ajustarCamara();
     void render();
     bool inicializar();
+    void loadMedia();
     void close();
 protected:
 
@@ -25,6 +26,10 @@ private:
     SDL_Rect camaraStatic;
     SDL_Renderer* gRenderer;
     SDL_Window* window;
+    LTexture texturaJugador;
+    LTexture texturaSeleccionado;
+    LTexture texturaPelota;
+    LTexture texturaCancha;
 };
 
 #endif // VIEW_H

@@ -3,19 +3,16 @@
 View_Cancha::View_Cancha() {}
 
 
-void View_Cancha::initialize(SDL_Renderer * gRenderer)
+void View_Cancha::initialize(SDL_Renderer * gRenderer,LTexture * texturaCancha)
 {
-    if( !texturaCancha.loadFromFile( "Images/canchafubol.jpg",gRenderer) )
-    {
-        NotifyError("No se pudo cargar la Imagen de la cancha, se usara una imagen por defecto", "View_Jugador");
-        texturaCancha.loadFromFile("Images/pelota.png",gRenderer);
-    }
+    this->texturaCancha=texturaCancha;
+
 }
 
 
 void View_Cancha::render( SDL_Rect * camara,SDL_Renderer * gRenderer )
 {
-    this->texturaCancha.render( 0, 0,camara,0.0,NULL,SDL_FLIP_NONE,gRenderer);
+    this->texturaCancha->render( 0, 0,camara,0.0,NULL,SDL_FLIP_NONE,gRenderer);
 }
 
 

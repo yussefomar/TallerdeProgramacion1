@@ -9,12 +9,12 @@ class View_Cancha : public Util_LoggerSubject
 public:
     View_Cancha();
 
-    void initialize(SDL_Renderer * gRenderer);
+    void initialize(SDL_Renderer * gRenderer,LTexture * texturaCancha);
 
     void render( SDL_Rect * camara,SDL_Renderer * gRenderer );
 
 private:
-    LTexture texturaCancha;
+    LTexture * texturaCancha;
 };
 
 #endif
