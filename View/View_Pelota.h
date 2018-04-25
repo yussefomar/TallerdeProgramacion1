@@ -13,14 +13,14 @@ public:
     View_Pelota();
 
     void SetModel( Pelota * model);
-    void initialize(Pelota * model,SDL_Renderer * gRenderer);
+    void initialize(Pelota * model,SDL_Renderer * gRenderer,LTexture * texturaPelota);
 
     //esto va a la vista
     void render( int camX, int camY,SDL_Renderer * gRenderer );
 
 private:
     Pelota *model;
-    LTexture texturaPelota;
+    LTexture * texturaPelota;
     int frame;
     double direccion;
     SDL_Rect gSpriteClips[ 4 ];

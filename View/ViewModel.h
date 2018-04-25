@@ -9,7 +9,7 @@
 class ViewModel
 {
 public:
-    ViewModel(Model* model, SDL_Renderer* gRenderer, SDL_Rect* camara,LTexture * texturaCancha);
+    ViewModel(Model* model, SDL_Renderer* gRenderer, SDL_Rect* camara,LTexture * texturaCancha,LTexture * texturaPelota);
     virtual ~ViewModel();
     void render();
 protected:

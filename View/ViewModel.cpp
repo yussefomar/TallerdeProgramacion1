@@ -3,10 +3,10 @@
 
 #define CANTVISTASJUG 7
 
-ViewModel::ViewModel(Model* model, SDL_Renderer* gRenderer, SDL_Rect* camara,LTexture * texturaCancha)
+ViewModel::ViewModel(Model* model, SDL_Renderer* gRenderer, SDL_Rect* camara,LTexture * texturaCancha,LTexture * texturaPelota)
 {
 
-    this->viewPelota.initialize(model->getPelota(), gRenderer);
+    this->viewPelota.initialize(model->getPelota(), gRenderer,texturaPelota);
     this->viewCancha.initialize(gRenderer,texturaCancha);
     this->viewJugadores = new View_Jugador[CANTVISTASJUG];
     this->camara = camara;

@@ -2,16 +2,12 @@
 
 View_Pelota::View_Pelota() {}
 
-void View_Pelota::initialize(Pelota *model,SDL_Renderer * gRenderer)
+void View_Pelota::initialize(Pelota *model,SDL_Renderer * gRenderer,LTexture * texturaPelota)
 {
     int frame = 4;
     double direccion=90.0;
     this->model = model;
-    if( !texturaPelota.loadFromFile( "Images/pelota2.png",gRenderer) )
-    {
-        NotifyError("No se pudo cargar la Imagen de la pelota, se usara una imagen por defecto", "View_Jugador");
-        texturaPelota.loadFromFile("Images/pelota.png",gRenderer);
-    }
+    this->texturaPelota=texturaPelota;
     //Set sprite clips
     gSpriteClips[ 0 ].x =   0;
     gSpriteClips[ 0 ].y =   0;
@@ -83,7 +79,7 @@ void View_Pelota::render( int camX, int camY,SDL_Renderer * gRenderer )
     }
 
     //Show the dot relative to the camera
-    this->texturaPelota.render( (*this->model).getPosX() - camX, (*this->model).getPosY() - camY,NULL,direccion,NULL,SDL_FLIP_NONE,gRenderer);
+    this->texturaPelota->render( (*this->model).getPosX() - camX, (*this->model).getPosY() - camY,NULL,direccion,NULL,SDL_FLIP_NONE,gRenderer);
 }
 
 
