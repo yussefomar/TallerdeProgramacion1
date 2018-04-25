@@ -213,23 +213,24 @@ bool View::inicializar()
 void View::loadMedia(){
     if( !texturaJugador.loadFromFile("Images/spritejugador.png",this->gRenderer) )
     {
-        NotifyError("No se pudo cargar la Imagen del jugador, se usara una imagen por defecto", "View_Jugador");
-        texturaJugador.loadFromFile("Images/pelota.png",this->gRenderer);
+        NotifyMessage("No se pudo cargar la Imagen del jugador, se usara una imagen por defecto", "View.cpp");
+        texturaJugador.loadFromFile("Images/spritejugador2.png",this->gRenderer);
     }
     if( !texturaSeleccionado.loadFromFile( "Images/jugadorseleccionado.png",this->gRenderer) )
     {
-        NotifyError("No se pudo cargar la Imagen de jugador seleccionado, se usara una imagen por defecto", "View_Jugador");
-        texturaJugador.loadFromFile("Images/pelota.png",this->gRenderer);
+        NotifyMessage("No se pudo cargar la Imagen de jugador seleccionado, se usara una imagen por defecto", "View.cpp");
+        texturaSeleccionado.loadFromFile("Images/jugadorseleccionadoerror.png",this->gRenderer);
     }
      if( !texturaPelota.loadFromFile( "Images/pelota2.png",this->gRenderer) )
     {
-        NotifyError("No se pudo cargar la Imagen de la pelota, se usara una imagen por defecto", "View_Pelota");
-        texturaPelota.loadFromFile("Images/pelota.png",this->gRenderer);
+        NotifyMessage("No se pudo cargar la Imagen de la pelota, se usara una imagen por defecto", "View.cpp");
+        texturaPelota.loadFromFile("Images/pelota2error.png",this->gRenderer);
+        texturaPelota.setColor(200,100,150);
     }
   if( !texturaCancha.loadFromFile( "Images/canchafubol.jpg",gRenderer) )
     {
-        NotifyError("No se pudo cargar la Imagen de la cancha, se usara una imagen por defecto", "View_Cancha");
-        texturaCancha.loadFromFile("Images/pelota.png",this->gRenderer);
+        NotifyMessage("No se pudo cargar la Imagen de la cancha, se usara una imagen por defecto", "View.cpp");
+        texturaCancha.loadFromFile("Images/canchafubolerror.jpg",this->gRenderer);
     }
 
 

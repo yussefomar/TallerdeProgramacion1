@@ -4,8 +4,8 @@ View_Pelota::View_Pelota() {}
 
 void View_Pelota::initialize(Pelota *model,SDL_Renderer * gRenderer,LTexture * texturaPelota)
 {
-    int frame = 4;
-    double direccion=90.0;
+//    int frame = 4;
+  //  double direccion=90.0;
     this->model = model;
     this->texturaPelota=texturaPelota;
     //Set sprite clips
