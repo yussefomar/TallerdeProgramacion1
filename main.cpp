@@ -1,12 +1,12 @@
 #include <iostream>
 
-#include "../Utils/Util_LoggerObserver.h"
-#include "../Utils/Util_Configuracion.h"
-#include "../Utils/Util_Common.h"
-#include "../Utils/IObserver.h"
-#include "../Controller/Controller.h"
-#include "../Model/Model.h"
-#include "../View/View.h"
+#include "Utils/Util_LoggerObserver.h"
+#include "Utils/Util_Configuracion.h"
+#include "Utils/Util_Common.h"
+#include "Utils/IObserver.h"
+#include "Controller/Controller.h"
+#include "Model/Model.h"
+#include "View/View.h"
 
 using namespace std;
 
