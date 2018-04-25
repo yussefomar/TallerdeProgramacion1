@@ -1,5 +1,5 @@
-#include "AumentarVelocidadY.h"
-#include "Model_Jugador.h"
+#include "../Controller/AumentarVelocidadY.h"
+#include "../Model/Model_Jugador.h"
 
 AumentarVelocidadY::AumentarVelocidadY(Model* model)
 {

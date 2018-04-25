@@ -1,5 +1,5 @@
 #include <yaml-cpp/yaml.h>
-#include  <yaml-cpp/exceptions.h>
+#include <yaml-cpp/exceptions.h>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -7,7 +7,7 @@
 
 using namespace std;
 
-#include "Util_Parser.h"
+#include "../Utils/Util_Parser.h"
 //#include "Util_Logger.h"
 
 std::vector<Equipo> equipos;

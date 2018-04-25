@@ -1,7 +1,9 @@
 #ifndef MODEL_LTEXTURE_H_
 #define MODEL_LTEXTURE_H_
+
 #include <SDL2/SDL.h>
-#include<SDL2/SDL_image.h>
+#include <SDL2/SDL_image.h>
+
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>

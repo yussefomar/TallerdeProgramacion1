@@ -1,10 +1,10 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include "Model_Pelota.h"
-#include "Model_Jugador.h"
-#include "Command.h"
-#include "Formacion.h"
+#include "../Model/Model_Pelota.h"
+#include "../Model/Model_Jugador.h"
+#include "../Controller/Command.h"
+#include "../Model/Formacion.h"
 #include "../Utils/Util_LoggerSubject.h"
 
 #include <list>

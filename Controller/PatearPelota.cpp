@@ -1,5 +1,5 @@
-#include "PatearPelota.h"
-#include "Model_Jugador.h"
+#include "../Controller/PatearPelota.h"
+#include "../Model/Model_Jugador.h"
 
 PatearPelota::PatearPelota(Model *model)
 {

@@ -1,8 +1,8 @@
 #ifndef OBSERVER_H
 #define OBSERVER_H
 
-#include "Entity.h"
-#include "Event.h"
+#include "../View/Entity.h"
+#include "../View/Event.h"
 
 class Observer
 {

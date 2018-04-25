@@ -1,4 +1,4 @@
-#include "Formacion312.h"
+#include "../Model/Formacion312.h"
 
 Formacion312::Formacion312()
 {

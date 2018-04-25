@@ -1,5 +1,5 @@
-#include "Desacelerar.h"
-#include "Model_Jugador.h"
+#include "../Controller/Desacelerar.h"
+#include "../Model/Model_Jugador.h"
 #include <stdio.h>
 
 Desacelerar::Desacelerar(Model* model)

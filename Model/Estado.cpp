@@ -1,4 +1,4 @@
-#include "Estado.h"
+#include "../Model/Estado.h"
 
 #define VELOCIDAD_JUGADOR 3
 

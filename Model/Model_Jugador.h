@@ -1,11 +1,13 @@
 #ifndef MODEL_JUGADOR_H_
 #define MODEL_JUGADOR_H_
+
 #include <SDL2/SDL.h>
-#include "LTexture.h"
-#include "Estado.h"
-#include "Activo.h"
-#include "Inactivo.h"
-#include "Model_Pelota.h"
+
+#include "../Model/LTexture.h"
+#include "../Model/Estado.h"
+#include "../Model/Activo.h"
+#include "../Model/Inactivo.h"
+#include "../Model/Model_Pelota.h"
 
 class Jugador
 {

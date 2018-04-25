@@ -1,4 +1,4 @@
-#include "View_Pelota.h"
+#include "../View/View_Pelota.h"
 
 View_Pelota::View_Pelota() {}
 

@@ -1,5 +1,5 @@
-#include "RecuperaPelota.h"
-#include "Model_Jugador.h"
+#include "../Controller/RecuperaPelota.h"
+#include "../Model/Model_Jugador.h"
 
 
 RecuperaPelota::RecuperaPelota(Model* model)

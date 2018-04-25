@@ -1,7 +1,7 @@
 #ifndef FORMACION312_H
 #define FORMACION312_H
 
-#include <Formacion.h>
+#include "../Model/Formacion.h"
 
 
 class Formacion312 : public Formacion

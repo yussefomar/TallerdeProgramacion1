@@ -1,4 +1,4 @@
-#include "ViewModel.h"
+#include "../View/ViewModel.h"
 #include <SDL2/SDL.h>
 
 #define CANTVISTASJUG 7

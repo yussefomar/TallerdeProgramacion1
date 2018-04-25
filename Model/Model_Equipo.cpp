@@ -1,4 +1,4 @@
-#include "Model_Equipo.h"
+#include "../Model/Model_Equipo.h"
 
 Equipo::Equipo()
 {

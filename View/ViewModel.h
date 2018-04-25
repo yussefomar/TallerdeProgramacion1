@@ -1,10 +1,10 @@
 #ifndef VIEWMODEL_H
 #define VIEWMODEL_H
 
-#include "View_Pelota.h"
-#include "View_Jugador.h"
-#include "View_Cancha.h"
-#include "Model.h"
+#include "../View/View_Pelota.h"
+#include "../View/View_Jugador.h"
+#include "../View/View_Cancha.h"
+#include "../Model/Model.h"
 
 class ViewModel
 {

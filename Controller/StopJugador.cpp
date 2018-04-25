@@ -1,5 +1,5 @@
-#include "StopJugador.h"
-#include "Model_Jugador.h"
+#include "../Controller/StopJugador.h"
+#include "../Model/Model_Jugador.h"
 
 StopJugador::StopJugador(Model* model)
 {

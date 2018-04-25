@@ -1,10 +1,12 @@
 #ifndef MODEL_EQUIPO_H_
 #define MODEL_EQUIPO_H_
+
 #include <SDL2/SDL.h>
-#include "LTexture.h"
+
+#include "../Model/LTexture.h"
+#include "../Model/Model_Jugador.h"
 #include <iostream>
 #include <list>
-#include "Model_Jugador.h"
 class Equipo
 {
 public:

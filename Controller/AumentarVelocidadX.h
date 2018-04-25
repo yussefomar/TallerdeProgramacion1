@@ -1,8 +1,8 @@
 #ifndef AUMENTARVELOCIDADX_H
 #define AUMENTARVELOCIDADX_H
 
-#include <Command.h>
-#include "Model.h"
+#include "../Controller/Command.h"
+#include "../Model/Model.h"
 
 
 class AumentarVelocidadX : public Command

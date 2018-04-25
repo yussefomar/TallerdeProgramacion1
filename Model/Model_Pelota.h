@@ -1,7 +1,9 @@
 #ifndef MODEL_PELOTA_H_
 #define MODEL_PELOTA_H_
+
 #include <SDL2/SDL.h>
-#include "LTexture.h"
+
+#include "../Model/LTexture.h"
 
 class Pelota
 {

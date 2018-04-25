@@ -1,5 +1,5 @@
-#include "Controller_Jugador.h"
-#include "Model_Pelota.h"
+#include "../Controller/Controller_Jugador.h"
+#include "../Model/Model_Pelota.h"
 
 Controller_Jugador::Controller_Jugador( Jugador *model,  View_Jugador *view)
 {

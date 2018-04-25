@@ -1,5 +1,6 @@
-#include "Model.h"
-#include "ViewModel.h"
+#include "../Model/Model.h"
+#include "../View/ViewModel.h"
+
 #define CANTJUGADORES 7
 
 

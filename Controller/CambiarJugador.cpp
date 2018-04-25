@@ -1,4 +1,4 @@
-#include "CambiarJugador.h"
+#include "../Controller/CambiarJugador.h"
 
 CambiarJugador::CambiarJugador(Model* model)
 {

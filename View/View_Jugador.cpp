@@ -1,4 +1,4 @@
-#include "View_Jugador.h"
+#include "../View/View_Jugador.h"
 
 #include <sstream>
 

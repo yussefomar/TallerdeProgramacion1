@@ -1,4 +1,4 @@
-#include "Inactivo.h"
+#include "../Model/Inactivo.h"
 
 #define VELOCIDAD_JUGADOR 3
 #define TOLERANCIA 1

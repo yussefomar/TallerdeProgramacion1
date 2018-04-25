@@ -1,4 +1,4 @@
-#include "Activo.h"
+#include "../Model/Activo.h"
 
 #define ANCHO_JUGADOR 62
 #define ALTO_JUGADOR 62

@@ -1,5 +1,4 @@
-#include "Model_Pelota.h"
-
+#include "../Model/Model_Pelota.h"
 
 Pelota::Pelota()
 {

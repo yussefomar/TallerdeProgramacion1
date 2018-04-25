@@ -1,8 +1,8 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include "Model.h"
-#include "Command.h"
+#include "../Model/Model.h"
+#include "../Controller/Command.h"
 #include <vector>
 #include "../Utils/Util_LoggerSubject.h"
 

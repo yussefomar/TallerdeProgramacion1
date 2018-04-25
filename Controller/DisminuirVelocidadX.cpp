@@ -1,5 +1,5 @@
-#include "DisminuirVelocidadX.h"
-#include "Model_Jugador.h"
+#include "../Controller/DisminuirVelocidadX.h"
+#include "../Model/Model_Jugador.h"
 
 DisminuirVelocidadX::DisminuirVelocidadX(Model* model)
 {

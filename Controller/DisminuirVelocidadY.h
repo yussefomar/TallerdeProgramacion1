@@ -1,8 +1,8 @@
 #ifndef DISMINUIRVELOCIDADY_H
 #define DISMINUIRVELOCIDADY_H
 
-#include "Command.h"
-#include "Model.h"
+#include "../Controller/Command.h"
+#include "../Model/Model.h"
 
 
 class DisminuirVelocidadY : public Command

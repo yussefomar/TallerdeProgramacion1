@@ -1,5 +1,5 @@
-#include "View.h"
-#include "Model_Jugador.h"
+#include "../View/View.h"
+#include "../Model/Model_Jugador.h"
 #include <SDL2/SDL.h>
 
 #define MARGEN 200

@@ -1,16 +1,14 @@
-#include "Controller.h"
-
-#include "DisminuirVelocidadY.h"
-#include "AumentarVelocidadY.h"
-#include "DisminuirVelocidadX.h"
-#include "AumentarVelocidadX.h"
-#include "CambiarJugador.h"
-#include "StopJugador.h"
-#include "Acelerar.h"
-#include "Desacelerar.h"
-
-#include "PatearPelota.h"
-#include "RecuperaPelota.h"
+#include "../Controller/Controller.h"
+#include "../Controller/DisminuirVelocidadY.h"
+#include "../Controller/AumentarVelocidadY.h"
+#include "../Controller/DisminuirVelocidadX.h"
+#include "../Controller/AumentarVelocidadX.h"
+#include "../Controller/CambiarJugador.h"
+#include "../Controller/StopJugador.h"
+#include "../Controller/Acelerar.h"
+#include "../Controller/Desacelerar.h"
+#include "../Controller/PatearPelota.h"
+#include "../Controller/RecuperaPelota.h"
 
 #define CANTCOMMANDS 10
 

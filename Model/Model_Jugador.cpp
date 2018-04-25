@@ -1,4 +1,4 @@
-#include "Model_Jugador.h"
+#include "../Model/Model_Jugador.h"
 
 
 Jugador::Jugador()

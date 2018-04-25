@@ -1,4 +1,4 @@
-#include "Formacion321.h"
+#include "../Model/Formacion321.h"
 
 Formacion321::Formacion321()
 {

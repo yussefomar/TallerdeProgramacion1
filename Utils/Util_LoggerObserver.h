@@ -3,7 +3,8 @@
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
-#include "IObserver.h"
+
+#include "../Utils/IObserver.h"
 
 class Util_LoggerObserver : IObserver
 {

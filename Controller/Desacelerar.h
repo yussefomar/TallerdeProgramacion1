@@ -1,9 +1,8 @@
 #ifndef DESACELERAR_H
 #define DESACELERAR_H
 
-#include <Command.h>
-#include "Model.h"
-
+#include "../Controller/Command.h"
+#include "../Model/Model.h"
 
 class Desacelerar : public Command
 {
