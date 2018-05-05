@@ -183,18 +183,42 @@ void Model::setCasaca(std::string casacaName)
     }
 }
 
-void Model::aumentarVelocidadJugadorActivoEnX() {
+std::string Model::getCasaca() {
+    return this->casacaSprite;
+}
+
+void Model::jugadorActivoAumentaVelocidadEnX() {
     this->jugadores[this->nroJugadorActivo].aumentarVelocidadX();
 }
 
-void Model::aumentarVelocidadJugadorActivoEnY() {
+void Model::jugadorActivoAumentaVelocidadEnY() {
     this->jugadores[this->nroJugadorActivo].aumentarVelocidadY();
 }
 
-void Model::disminuirVelocidadJugadorActivoEnX() {
+void Model::jugadorActivoDisminuyeVelocidadEnX() {
     this->jugadores[this->nroJugadorActivo].disminuirVelocidadX();
 }
 
-void Model::disminuirVelocidadJugadorActivoEnY() {
+void Model::jugadorActivoDisminuyeVelocidadEnY() {
     this->jugadores[this->nroJugadorActivo].disminuirVelocidadY();
+}
+
+void Model::jugadorActivoAcelera() {
+    this->jugadores[this->nroJugadorActivo].acelerar();
+}
+
+void Model::jugadorActivoDesacelera() {
+    this->jugadores[this->nroJugadorActivo].desacelerar();
+}
+
+void Model::jugadorActivoPateaPelota() {
+    this->jugadores[this->nroJugadorActivo].patearPelota(&(this->pelota));
+}
+
+void Model::jugadorActivoRecuperaPelota() {
+    this->jugadores[this->nroJugadorActivo].recuperaPelota(&(this->pelota));
+}
+
+void Model::jugadorActivoDetener() {
+    this->jugadores[this->nroJugadorActivo].detenerVelocidad();
 }

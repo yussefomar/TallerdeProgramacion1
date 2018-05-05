@@ -6,14 +6,14 @@
 
 class RecuperaPelota  : public Command
 {
-    public:
-        RecuperaPelota(Model* model);
-        virtual ~RecuperaPelota();
-        void execute();
-    protected:
+public:
+    RecuperaPelota(Model* model);
+    virtual ~RecuperaPelota();
+    void execute();
+protected:
 
-    private:
-        Model* model;
+private:
+    Model* model;
 };
 
 #endif // RECUPERAPELOTA_H

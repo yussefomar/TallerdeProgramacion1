@@ -13,5 +13,5 @@ AumentarVelocidadY::~AumentarVelocidadY()
 
 void AumentarVelocidadY::execute()
 {
-    this->model->aumentarVelocidadJugadorActivoEnY();
+    this->model->jugadorActivoAumentaVelocidadEnY();
 }

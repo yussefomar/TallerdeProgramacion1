@@ -12,6 +12,5 @@ Acelerar::~Acelerar()
 }
 
 void Acelerar::execute() {
-    Jugador* jugador = this->model->getJugadorActivo();
-    jugador->acelerar();
+    this->model->jugadorActivoAcelera();
 }

@@ -16,24 +16,27 @@ public:
     virtual ~Model();
 
     /*Datos del Modelo*/
-    Pelota* getPelota();
-    Jugador* getJugadorNro(int i);
-    Jugador* getJugadorActivo();
-    std::string  getCasaca();
-    void setCamara(SDL_Rect * camara);
-    void setFormacion(Formacion* formacion);
-    void setCasaca(std::string casacaName);
+    virtual Pelota* getPelota();
+    virtual Jugador* getJugadorNro(int i);
+    virtual Jugador* getJugadorActivo();
+    virtual std::string  getCasaca();
+    virtual void setCamara(SDL_Rect * camara);
+    virtual void setFormacion(Formacion* formacion);
+    virtual void setCasaca(std::string casacaName);
 
     /*Servicios del Modelo*/
-    void addCommand(Command* command);
-
-    void aumentarVelocidadJugadorActivoEnX();
-    void aumentarVelocidadJugadorActivoEnY();
-    void disminuirVelocidadJugadorActivoEnX();
-    void disminuirVelocidadJugadorActivoEnY();
-
-    void cambiarJugadorActivo();
-    void update();
+    virtual void addCommand(Command* command);
+    virtual void jugadorActivoAumentaVelocidadEnX();
+    virtual void jugadorActivoAumentaVelocidadEnY();
+    virtual void jugadorActivoDisminuyeVelocidadEnX();
+    virtual void jugadorActivoDisminuyeVelocidadEnY();
+    virtual void jugadorActivoAcelera();
+    virtual void jugadorActivoDesacelera();
+    virtual void jugadorActivoPateaPelota();
+    virtual void jugadorActivoRecuperaPelota();
+    virtual void jugadorActivoDetener();
+    virtual void cambiarJugadorActivo();
+    virtual void update();
 
 
 protected:

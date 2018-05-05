@@ -12,7 +12,5 @@ StopJugador::~StopJugador()
 }
 
 void StopJugador::execute() {
-    Jugador* jugador = this->model->getJugadorActivo();
-    jugador->detenerVelocidad();
-    return;
+    this->model->jugadorActivoDetener();
 }

@@ -14,10 +14,5 @@ RecuperaPelota::~RecuperaPelota()
 
 void RecuperaPelota ::execute()//La mantiene en su pie
 {
-    Pelota*  pelota = this->model->getPelota();
-    Jugador* jugador = this->model->getJugadorActivo();
-    jugador->recuperaPelota(pelota);
-
-
-    return;
+    this->model->jugadorActivoRecuperaPelota();
 }

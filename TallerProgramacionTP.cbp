@@ -18,6 +18,7 @@
 					<Add directory="Model" />
 					<Add directory="View" />
 					<Add directory="Controller" />
+					<Add directory="Network" />
 				</Compiler>
 				<ResourceCompiler>
 					<Add option="-lSDL -lSDL_image -lSDL_ttf" />
@@ -38,6 +39,7 @@
 					<Add directory="Model" />
 					<Add directory="View" />
 					<Add directory="Controller" />
+					<Add directory="Network" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -72,6 +74,8 @@
 		<Unit filename="Controller/Controller_Jugador.h" />
 		<Unit filename="Controller/Desacelerar.cpp" />
 		<Unit filename="Controller/Desacelerar.h" />
+		<Unit filename="Controller/DesminuirVelocidadY.cpp" />
+		<Unit filename="Controller/DesminuirVelocidadY.h" />
 		<Unit filename="Controller/DisminuirVelocidadX.cpp" />
 		<Unit filename="Controller/DisminuirVelocidadX.h" />
 		<Unit filename="Controller/DisminuirVelocidadY.cpp" />
@@ -109,6 +113,8 @@
 		<Unit filename="Model/Model_Jugador.h" />
 		<Unit filename="Model/Model_Pelota.cpp" />
 		<Unit filename="Model/Model_Pelota.h" />
+		<Unit filename="Network/ModeloCliente.cpp" />
+		<Unit filename="Network/ModeloCliente.h" />
 		<Unit filename="Utils/IObserver.h" />
 		<Unit filename="Utils/Util_Common.cpp" />
 		<Unit filename="Utils/Util_Common.h" />

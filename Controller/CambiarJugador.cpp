@@ -13,7 +13,5 @@ CambiarJugador::~CambiarJugador()
 void CambiarJugador::execute()
 
 {
-    //this->model->detenerJugadores();
-
     this->model->cambiarJugadorActivo();
 }
