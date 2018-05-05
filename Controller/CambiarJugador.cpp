@@ -13,5 +13,5 @@ CambiarJugador::~CambiarJugador()
 void CambiarJugador::execute()
 
 {
-    this->model->cambiarJugadorActivo();
+    this->model->jugadorActivoCambia();
 }

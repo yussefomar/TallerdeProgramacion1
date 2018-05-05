@@ -23,8 +23,9 @@ public:
     virtual void setCamara(SDL_Rect * camara);
     virtual void setFormacion(Formacion* formacion);
     virtual void setCasaca(std::string casacaName);
+    virtual char getCodigoJugadorActivo();
 
-    /*Servicios del Modelo*/
+    /*Servicios del Modelo en Offline*/
     virtual void addCommand(Command* command);
     virtual void jugadorActivoAumentaVelocidadEnX();
     virtual void jugadorActivoAumentaVelocidadEnY();
@@ -35,7 +36,10 @@ public:
     virtual void jugadorActivoPateaPelota();
     virtual void jugadorActivoRecuperaPelota();
     virtual void jugadorActivoDetener();
-    virtual void cambiarJugadorActivo();
+    virtual void jugadorActivoCambia();
+
+
+
     virtual void update();
 
 
@@ -46,7 +50,7 @@ private:
     Jugador* jugadores;
     std::string casacaSprite; // TEMPORAL.
     SDL_Rect * camara;
-    int nroJugadorActivo;
+    unsigned int nroJugadorActivo;
     std::list<Command*> commandsToApply;
 };
 

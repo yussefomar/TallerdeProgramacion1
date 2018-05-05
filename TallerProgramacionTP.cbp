@@ -74,8 +74,6 @@
 		<Unit filename="Controller/Controller_Jugador.h" />
 		<Unit filename="Controller/Desacelerar.cpp" />
 		<Unit filename="Controller/Desacelerar.h" />
-		<Unit filename="Controller/DesminuirVelocidadY.cpp" />
-		<Unit filename="Controller/DesminuirVelocidadY.h" />
 		<Unit filename="Controller/DisminuirVelocidadX.cpp" />
 		<Unit filename="Controller/DisminuirVelocidadX.h" />
 		<Unit filename="Controller/DisminuirVelocidadY.cpp" />

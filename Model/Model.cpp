@@ -58,11 +58,11 @@ void Model::addCommand(Command* command)
     }
 }
 
-void Model::cambiarJugadorActivo()
+void Model::jugadorActivoCambia()
 {
     try
     {
-        NotifyMessage("Iniciamos: cambiarJugadorActivo", "Model.cpp");
+        NotifyMessage("Iniciamos: jugadorActivoCambia", "Model.cpp");
 
         while (!((this->jugadores[(this->nroJugadorActivo + 1) % CANTJUGADORES]).collide(this->camara )))
         {
@@ -77,7 +77,7 @@ void Model::cambiarJugadorActivo()
         (this->jugadores[(this->nroJugadorActivo)]).activar();
         NotifyMessage("Active otro jugador", "Model.cpp");
 
-        NotifyMessage("Terminamos: cambiarJugadorActivo", "Model.cpp");
+        NotifyMessage("Terminamos: jugadorActivoCambia", "Model.cpp");
     }
     catch(const std::runtime_error& re)
     {
@@ -185,6 +185,13 @@ void Model::setCasaca(std::string casacaName)
 
 std::string Model::getCasaca() {
     return this->casacaSprite;
+}
+
+char Model::getCodigoJugadorActivo() {
+    /*Esto debe adecuarse al momento de tener equipos
+    y seguir usando char*/
+    char codigo = 0x00;
+    return (codigo + this->nroJugadorActivo);
 }
 
 void Model::jugadorActivoAumentaVelocidadEnX() {
