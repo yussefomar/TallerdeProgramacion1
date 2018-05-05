@@ -14,17 +14,27 @@ class Model : public Util_LoggerSubject
 public:
     Model();
     virtual ~Model();
+
+    /*Datos del Modelo*/
     Pelota* getPelota();
     Jugador* getJugadorNro(int i);
     Jugador* getJugadorActivo();
-    void addCommand(Command* command);
-    void cambiarJugadorActivo();
-    //void detenerJugadores();
-    void update();
+    std::string  getCasaca();
     void setCamara(SDL_Rect * camara);
     void setFormacion(Formacion* formacion);
     void setCasaca(std::string casacaName);
-    std::string  getCasaca();
+
+    /*Servicios del Modelo*/
+    void addCommand(Command* command);
+
+    void aumentarVelocidadJugadorActivoEnX();
+    void aumentarVelocidadJugadorActivoEnY();
+    void disminuirVelocidadJugadorActivoEnX();
+    void disminuirVelocidadJugadorActivoEnY();
+
+    void cambiarJugadorActivo();
+    void update();
+
 
 protected:
 

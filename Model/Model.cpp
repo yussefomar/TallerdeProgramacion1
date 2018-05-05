@@ -37,7 +37,8 @@ void Model::addCommand(Command* command)
     {
         NotifyMessage("Iniciamos: addCommand", "Model.cpp");
         //hay que tirar una excepcion
-        if(command == nullptr) return;
+        if(command == nullptr)
+            return;
         this->commandsToApply.push_back(command);
         NotifyMessage("Terminamos: addCommand", "Model.cpp");
     }
@@ -180,4 +181,20 @@ void Model::setCasaca(std::string casacaName)
     {
         NotifyError("Error desconocido que no se ha podido especificar.", "CONTROLLER");
     }
+}
+
+void Model::aumentarVelocidadJugadorActivoEnX() {
+    this->jugadores[this->nroJugadorActivo].aumentarVelocidadX();
+}
+
+void Model::aumentarVelocidadJugadorActivoEnY() {
+    this->jugadores[this->nroJugadorActivo].aumentarVelocidadY();
+}
+
+void Model::disminuirVelocidadJugadorActivoEnX() {
+    this->jugadores[this->nroJugadorActivo].disminuirVelocidadX();
+}
+
+void Model::disminuirVelocidadJugadorActivoEnY() {
+    this->jugadores[this->nroJugadorActivo].disminuirVelocidadY();
 }
