@@ -1,19 +1,14 @@
-#ifndef MODEL_H
-#define MODEL_H
+#ifndef MODELOCLIENTE_H
+#define MODELOCLIENTE_H
 
-#include "../Model/Model_Pelota.h"
-#include "../Model/Model_Jugador.h"
-#include "../Controller/Command.h"
-#include "../Model/Formacion.h"
-#include "../Utils/Util_LoggerSubject.h"
+#include <Model.h>
 
-#include <list>
 
-class Model : public Util_LoggerSubject
+class ModeloCliente : public Model
 {
 public:
-    Model();
-    virtual ~Model();
+    ModeloCliente(Model* model);
+    virtual ~ModeloCliente();
 
     /*Datos del Modelo*/
     virtual Pelota* getPelota();
@@ -23,9 +18,8 @@ public:
     virtual void setCamara(SDL_Rect * camara);
     virtual void setFormacion(Formacion* formacion);
     virtual void setCasaca(std::string casacaName);
-    virtual char getCodigoJugadorActivo();
 
-    /*Servicios del Modelo en Offline*/
+    /*Servicios del Modelo*/
     virtual void addCommand(Command* command);
     virtual void jugadorActivoAumentaVelocidadEnX();
     virtual void jugadorActivoAumentaVelocidadEnY();
@@ -36,22 +30,13 @@ public:
     virtual void jugadorActivoPateaPelota();
     virtual void jugadorActivoRecuperaPelota();
     virtual void jugadorActivoDetener();
-    virtual void jugadorActivoCambia();
-
-
-
+    virtual void cambiarJugadorActivo();
     virtual void update();
-
 
 protected:
 
 private:
-    Pelota pelota;
-    Jugador* jugadores;
-    std::string casacaSprite; // TEMPORAL.
-    SDL_Rect * camara;
-    unsigned int nroJugadorActivo;
-    std::list<Command*> commandsToApply;
+    Model* model;
 };
 
-#endif // MODEL_H
+#endif // MODELOCLIENTE_H

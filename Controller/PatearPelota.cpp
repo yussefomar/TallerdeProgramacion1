@@ -13,11 +13,5 @@ PatearPelota::~PatearPelota()
 
 void PatearPelota ::execute()
 {
-        Pelota*  pelota = this->model->getPelota();
-
-    Jugador* jugador = this->model->getJugadorActivo();
-     jugador->patearPelota(pelota);
-
-
-    return;
+    this->model->jugadorActivoPateaPelota();
 }

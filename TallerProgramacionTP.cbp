@@ -19,6 +19,7 @@
 					<Add directory="Model" />
 					<Add directory="View" />
 					<Add directory="Controller" />
+					<Add directory="Network" />
 				</Compiler>
 				<Linker>
 					<Add option="-lSDL2" />
@@ -37,6 +38,7 @@
 					<Add directory="Model" />
 					<Add directory="View" />
 					<Add directory="Controller" />
+					<Add directory="Network" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -109,6 +111,8 @@
 		<Unit filename="Model/Model_Jugador.h" />
 		<Unit filename="Model/Model_Pelota.cpp" />
 		<Unit filename="Model/Model_Pelota.h" />
+		<Unit filename="Network/ModeloCliente.cpp" />
+		<Unit filename="Network/ModeloCliente.h" />
 		<Unit filename="Utils/IObserver.h" />
 		<Unit filename="Utils/Util_Common.cpp" />
 		<Unit filename="Utils/Util_Common.h" />

@@ -62,6 +62,8 @@ void Controller::processInput()
             }
             this->model->addCommand(this->handleEvent(this->e));
         }
+        //agregarComandoNUll para forzar el flujo de datos
+        //tanto en el modelo offline como en el online
         NotifyMessage("Inicia: processInput", "Controller.cpp");
     }
     catch(const std::runtime_error& re)

@@ -6,6 +6,7 @@
 #include "Utils/IObserver.h"
 #include "Controller/Controller.h"
 #include "Model/Model.h"
+#include "Network/ModeloCliente.h"
 #include "View/View.h"
 
 
@@ -31,8 +32,16 @@ int main(int argc, char* args[])
     View view(&model);
     view.Attach(&loggerObserver);
 
+    /*Para Modo offline, descomentar estas lineas y comentar
+    las del modo online*/
     Controller controller(&model);
     controller.Attach(&loggerObserver);
+
+    /*Para Modo online, descomentar estas lineas y comentar
+    las del modo offline*/
+    //ModeloCliente modelCliente(&model);
+    //Controller controller(&modelCliente);
+    //controller.Attach(&loggerObserver);
 
     while( !controller.quitPressed() )
     {
