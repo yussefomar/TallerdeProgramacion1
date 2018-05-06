@@ -5,7 +5,6 @@
 #include <string>
 #include <sstream>
 #include <boost/algorithm/string.hpp>
-
 #include "../Utils/Util_Configuracion.h"
 
 Util_Parser parser;

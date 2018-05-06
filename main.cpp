@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "Utils/Util_LoggerObserver.h"
-#include "Utils/Util_Configuracion.h"
+#include "Utils/Util_Persitencia.h"
 #include "Utils/Util_Common.h"
 #include "Utils/IObserver.h"
 #include "Controller/Controller.h"
@@ -25,7 +25,8 @@ int main(int argc, char* args[])
     Model model;
     model.Attach(&loggerObserver);
 
-    Util_Configuracion configuracion(&model, &loggerObserver);
+   // Util_Configuracion configuracion(&model, &loggerObserver);
+    Util_Persistencia  persistencia(&model, &loggerObserver);
 
     View view(&model);
     view.Attach(&loggerObserver);

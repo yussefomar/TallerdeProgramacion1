@@ -8,7 +8,6 @@
 using namespace std;
 
 #include "../Utils/Util_Parser.h"
-//#include "Util_Logger.h"
 
 std::vector<Equipo> equipos;
 std::vector<Debug> debugs;
