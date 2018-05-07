@@ -23,6 +23,7 @@ public:
     virtual void setCamara(SDL_Rect * camara);
     virtual void setFormacion(Formacion* formacion);
     virtual void setCasaca(std::string casacaName);
+    //virtual void setIp(std::string ipName); va a ser un string???
     virtual char getCodigoJugadorActivo();
 
     /*Servicios del Modelo en Offline*/

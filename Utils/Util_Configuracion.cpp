@@ -60,6 +60,7 @@ Util_Configuracion::Util_Configuracion(Model* model, Util_LoggerObserver* logger
         NotifyMessage("La casaca a usara es: ", "Util_Configuracion.cpp");
         NotifyMessage(parametros.casaca, "Util_Configuracion.cpp");
         this->model->setCasaca(parametros.casaca);
+        //this->model->setIp(parametros.ip);
 
         //setear Formacion
         char c1[100];

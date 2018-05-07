@@ -11,6 +11,7 @@ using namespace std;
 
 std::vector<Equipo> equipos;
 std::vector<Debug> debugs;
+std::vector<Conexion> conexion;
 
 bool Util_Parser::fileExists(const std::string& name)
 {
@@ -254,6 +255,37 @@ inline bool Util_Parser::formacionValido(std::string &name)
     }
 }
 
+inline bool Util_Parser::ipValido(std::string &name)
+{
+    try
+    {
+        if (name.size() > 99 )
+        {
+            NotifyWarning("ipValido: valor de ip demasiado largo", "Util_Parser.cpp");
+            return false;
+        }
+        //nada que hacer por aqui aun
+        return true;
+    }
+    catch(const std::runtime_error& re)
+    {
+        NotifyError("Error en Runtime: ", "Util_Parser.cpp");
+        NotifyError(re.what(), "Util_Parser.cpp");
+        return false;
+    }
+    catch(const std::exception& ex)
+    {
+        NotifyError("Ha ocurrido un error: ", "Util_Parser.cpp");
+        NotifyError(ex.what(), "Util_Parser.cpp");
+        return false;
+    }
+    catch(...)
+    {
+        NotifyError("Error desconocido que no se ha podido especificar.", "Util_Parser.cpp");
+        return false;
+    }
+}
+
 Equipo Util_Parser::read_yaml_Equipo(std::vector<YAML::Node> baseNode)
 {
     try
@@ -308,10 +340,37 @@ Debug Util_Parser::read_yaml_Debug(std::vector<YAML::Node> baseNode)
     return debugs.at(0);
 }
 
+Conexion Util_Parser::read_yaml_Conexion(std::vector<YAML::Node> baseNode)
+{
+    try
+    {
+        conexion.clear();
+        for (auto &document : baseNode)
+        {
+            conexion.emplace_back(document["conexion"]);
+        }
+    }
+    catch(const std::runtime_error& re)
+    {
+        NotifyError("Error en Runtime: ", "Util_Parser.cpp");
+        NotifyError(re.what(), "Util_Parser.cpp");
+    }
+    catch(const std::exception& ex)
+    {
+        NotifyError("Ha ocurrido un error: ", "Util_Parser.cpp");
+        NotifyError(ex.what(), "Util_Parser.cpp");
+    }
+    catch(...)
+    {
+        NotifyError("Error desconocido que no se ha podido especificar.", "Util_Parser.cpp");
+    }
+    return conexion.at(0);
+}
+
 void Util_Parser::mezclar(Parametros &resultado, Parametros parametro)
 {
-   try
-   {
+    try
+    {
         NotifyMessage("mezclar: obteniendo parametros de memoria", "Util_Parser.cpp");
         if(!levelValido(resultado.level))
         {
@@ -326,6 +385,10 @@ void Util_Parser::mezclar(Parametros &resultado, Parametros parametro)
         if(!casacaValido( resultado.casaca))
         {
             resultado.casaca = parametro.casaca;
+        }
+        if(!ipValido( resultado.ip))
+        {
+            resultado.ip = parametro.ip;
         }
     }
     catch(const std::runtime_error& re)
@@ -429,6 +492,44 @@ void Util_Parser::llenarParametrosObtenidos( std::vector<YAML::Node> baseNode, P
         NotifyError("Error desconocido que no se ha podido especificar.", "Util_Parser.cpp");
         parametrosObtenidos.esValido = 0;
     }
+
+    try
+    {
+        Conexion conexionParseado = read_yaml_Conexion(baseNode);
+        parametrosObtenidos.ip = conexionParseado.get_ip();
+        if(ipValido(parametrosObtenidos.ip))
+        {
+            NotifyMessage("llenarParametrosObtenidos: ip obtenido", "Util_Parser.cpp");
+        }
+        else
+        {
+            NotifyWarning("llenarParametrosObtenidos: ip invalido", "Util_Parser.cpp");
+            parametrosObtenidos.esValido = 0;
+        }
+    }
+    catch(YAML::Exception ex)
+    {
+        NotifyError("llenarParametrosObtenidos: no se pudo obtener el nodo Debug", "Util_Parser.cpp");
+        parametrosObtenidos.esValido = 0;
+    }
+    catch(const std::runtime_error& re)
+    {
+        NotifyError("Error en Runtime: ", "Util_Parser.cpp");
+        NotifyError(re.what(), "Util_Parser.cpp");
+        parametrosObtenidos.esValido = 0;
+    }
+    catch(const std::exception& ex)
+    {
+        NotifyError("Ha ocurrido un error: ", "Util_Parser.cpp");
+        NotifyError(ex.what(), "Util_Parser.cpp");
+        parametrosObtenidos.esValido = 0;
+    }
+    catch(...)
+    {
+        NotifyError("Error desconocido que no se ha podido especificar.", "Util_Parser.cpp");
+        parametrosObtenidos.esValido = 0;
+    }
+
 }
 
 Parametros Util_Parser::read_yaml_Parametros(std::string pathIndicado, std::string pathDefault, Parametros superParametros)
@@ -437,8 +538,8 @@ Parametros Util_Parser::read_yaml_Parametros(std::string pathIndicado, std::stri
     {
         std::vector<YAML::Node> baseNode;
 
-        Parametros parametrosObtenidosIndicado = Parametros("","",""); //se crea como valido
-        Parametros parametrosObtenidosDefault = Parametros("","",""); //se crea como valido
+        Parametros parametrosObtenidosIndicado = Parametros("","","",""); //se crea como valido
+        Parametros parametrosObtenidosDefault = Parametros("","","",""); //se crea como valido
 
         if (fileExists(pathIndicado))
         {
@@ -493,5 +594,5 @@ Parametros Util_Parser::read_yaml_Parametros(std::string pathIndicado, std::stri
 Parametros Util_Parser::CrearSuperConfig()
 {
     NotifyMessage("Creamos una configuración por si todos los archivos de configuración fallan.", "Util_Parser.cpp");
-    return Parametros("debug","3-3","auxiliar");
+    return Parametros("debug","3-3","auxiliar", "192.168.10.10");
 }
