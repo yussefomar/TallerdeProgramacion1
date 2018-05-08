@@ -1,5 +1,5 @@
-#include "Desacelerar.h"
-#include "Model_Jugador.h"
+#include "../Controller/Desacelerar.h"
+#include "../Model/Model_Jugador.h"
 #include <stdio.h>
 
 Desacelerar::Desacelerar(Model* model)
@@ -13,7 +13,13 @@ Desacelerar::~Desacelerar()
 }
 
 void Desacelerar::execute() {
-    printf("desaceleAR");
     Jugador* jugador = this->model->getJugadorActivo();
     jugador->desacelerar();
 }
+
+char Desacelerar::getCodigoComando(){
+
+return NDECVELX;
+
+}
+

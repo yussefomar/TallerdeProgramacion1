@@ -1,7 +1,7 @@
 #ifndef PATEARPELOTA_H
 #define PATEARPELOTA_H
-#include <Command.h>
-#include "Model.h"
+#include "../Controller/Command.h"
+#include "../Model/Model.h"
 #include "iostream"
 
 class PatearPelota : public Command
@@ -10,6 +10,7 @@ class PatearPelota : public Command
         PatearPelota(Model* model);
         virtual ~PatearPelota();
         void execute();
+         char getCodigoComando();
 
     protected:
 

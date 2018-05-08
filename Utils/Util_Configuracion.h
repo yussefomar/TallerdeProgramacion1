@@ -1,17 +1,17 @@
 #ifndef UTIL_CONFIGURACION_H_
 #define UTIL_CONFIGURACION_H_
 
-#include "Model.h"
-#include "Model_Jugador.h"
-#include "Formacion312.h"
-#include "Formacion33.h"
-#include "Formacion321.h"
-#include "Util_Parser.h"
+#include "../Model/Model.h"
+#include "../Model/Model_Jugador.h"
+#include "../Model/Formacion312.h"
+#include "../Model/Formacion33.h"
+#include "../Model/Formacion321.h"
+#include "../Utils/Util_Parser.h"
+#include "../Utils/Util_LoggerSubject.h"
 
 #include <iostream>
 #include <string>
 #include <list>
-#include "../Utils/Util_LoggerSubject.h"
 
 using namespace std;
 

@@ -1,20 +1,20 @@
-#include "ViewModel.h"
+#include "../View/ViewModel.h"
 #include <SDL2/SDL.h>
 
 #define CANTVISTASJUG 7
 
-ViewModel::ViewModel(Model* model, SDL_Renderer* gRenderer, SDL_Rect* camara)
+ViewModel::ViewModel(Model* model, SDL_Renderer* gRenderer, SDL_Rect* camara,LTexture * texturaCancha,LTexture * texturaPelota,LTexture * texturaJugador,LTexture * texturaSeleccionado)
 {
 
-    this->viewPelota.initialize(model->getPelota(), gRenderer);
-    this->viewCancha.initialize(gRenderer);
+    this->viewPelota.initialize(model->getPelota(), gRenderer,texturaPelota);
+    this->viewCancha.initialize(gRenderer,texturaCancha);
     this->viewJugadores = new View_Jugador[CANTVISTASJUG];
     this->camara = camara;
     this->gRenderer = gRenderer;
 
     for(int i = 0; i < CANTVISTASJUG; ++i)
     {
-        this->viewJugadores[i].initialize(model->getJugadorNro(i), gRenderer);
+        this->viewJugadores[i].initialize(model->getJugadorNro(i), gRenderer,texturaJugador,texturaSeleccionado);
     }
 }
 

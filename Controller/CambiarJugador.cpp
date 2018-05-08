@@ -1,4 +1,4 @@
-#include "CambiarJugador.h"
+#include "../Controller/CambiarJugador.h"
 
 CambiarJugador::CambiarJugador(Model* model)
 {
@@ -13,7 +13,10 @@ CambiarJugador::~CambiarJugador()
 void CambiarJugador::execute()
 
 {
-    //this->model->detenerJugadores();
+    this->model->jugadorActivoCambia();
+}
+char CambiarJugador::getCodigoComando() {
 
-    this->model->cambiarJugadorActivo();
+return NCAMBJUG;
+
 }

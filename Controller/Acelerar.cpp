@@ -1,6 +1,5 @@
-#include "Acelerar.h"
-
-#include "Model_Jugador.h"
+#include "../Controller/Acelerar.h"
+#include "../Model/Model_Jugador.h"
 
 Acelerar::Acelerar(Model* model)
 {
@@ -13,6 +12,14 @@ Acelerar::~Acelerar()
 }
 
 void Acelerar::execute() {
-    Jugador* jugador = this->model->getJugadorActivo();
-    jugador->acelerar();
+    this->model->jugadorActivoAcelera();
+}
+
+char Acelerar::getCodigoComando()
+{
+
+    return  NACCJUG ;
+
+
+
 }

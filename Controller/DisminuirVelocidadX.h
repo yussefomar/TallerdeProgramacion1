@@ -1,8 +1,8 @@
 #ifndef DISMINUIRVELOCIDADX_H
 #define DISMINUIRVELOCIDADX_H
 
-#include <Command.h>
-#include "Model.h"
+#include "../Controller/Command.h"
+#include "../Model/Model.h"
 
 
 class DisminuirVelocidadX : public Command
@@ -11,6 +11,7 @@ public:
     DisminuirVelocidadX(Model* model);
     virtual ~DisminuirVelocidadX();
     void execute();
+     char getCodigoComando();
 
 protected:
 

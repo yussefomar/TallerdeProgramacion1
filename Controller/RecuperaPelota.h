@@ -1,18 +1,20 @@
 #ifndef RECUPERAPELOTA_H
 #define RECUPERAPELOTA_H
-#include <Command.h>
-#include "Model.h"
+
+#include "../Controller/Command.h"
+#include "../Model/Model.h"
 
 class RecuperaPelota  : public Command
 {
-    public:
-        RecuperaPelota(Model* model);
-        virtual ~RecuperaPelota();
-        void execute();
-    protected:
+public:
+    RecuperaPelota(Model* model);
+     char getCodigoComando();
+    virtual ~RecuperaPelota();
+    void execute();
+protected:
 
-    private:
-        Model* model;
+private:
+    Model* model;
 };
 
 #endif // RECUPERAPELOTA_H

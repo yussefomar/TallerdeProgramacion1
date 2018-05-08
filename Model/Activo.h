@@ -1,8 +1,7 @@
 #ifndef ACTIVO_H
 #define ACTIVO_H
 
-#include <Estado.h>
-
+#include "../Model/Estado.h"
 
 class Activo : public Estado
 {

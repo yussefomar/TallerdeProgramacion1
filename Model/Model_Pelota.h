@@ -1,7 +1,9 @@
 #ifndef MODEL_PELOTA_H_
 #define MODEL_PELOTA_H_
+
 #include <SDL2/SDL.h>
-#include "LTexture.h"
+
+#include "../Model/LTexture.h"
 
 class Pelota
 {
@@ -39,7 +41,7 @@ public:
     void aumentarVelocidadY();
      void setVelocidadX(int velocidad);
     void setVelocidadY(int velocidad);
-
+        SDL_Rect * getCollider();
 
 private:
     //The X and Y offsets of the dot
@@ -47,7 +49,7 @@ private:
 
     //The velocity of the dot
     int mVelX, mVelY;
-
+    SDL_Rect colli_pelo;
 };
 
 #endif

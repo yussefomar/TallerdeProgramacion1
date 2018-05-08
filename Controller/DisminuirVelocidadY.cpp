@@ -1,5 +1,5 @@
-#include "DisminuirVelocidadY.h"
-#include "Model_Jugador.h"
+#include "../Controller/DisminuirVelocidadY.h"
+#include "../Model/Model_Jugador.h"
 
 DisminuirVelocidadY::DisminuirVelocidadY(Model* model)
 {
@@ -13,7 +13,12 @@ DisminuirVelocidadY::~DisminuirVelocidadY()
 
 void DisminuirVelocidadY::execute()
 {
-    Jugador* jugador = this->model->getJugadorActivo();
-    jugador->disminuirVelocidadY();
-    return;
+    this->model->jugadorActivoDisminuyeVelocidadEnY();
+}
+
+char DisminuirVelocidadY::getCodigoComando() {
+
+return NDECVELY;
+
+
 }

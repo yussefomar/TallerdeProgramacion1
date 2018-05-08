@@ -1,8 +1,11 @@
 equipo:
- 
  formacion: '3-3'
  casaca: 'principal'
+
 debug:
  level: 'debug'
+
+conexion:
+ ip: '192.168.10.20'
  
 

@@ -1,5 +1,5 @@
-#include "StopJugador.h"
-#include "Model_Jugador.h"
+#include "../Controller/StopJugador.h"
+#include "../Model/Model_Jugador.h"
 
 StopJugador::StopJugador(Model* model)
 {
@@ -12,7 +12,11 @@ StopJugador::~StopJugador()
 }
 
 void StopJugador::execute() {
-    Jugador* jugador = this->model->getJugadorActivo();
-    jugador->detenerVelocidad();
-    return;
+    this->model->jugadorActivoDetener();
+}
+
+char StopJugador::getCodigoComando(){
+
+return NSTOPJUG;
+
 }

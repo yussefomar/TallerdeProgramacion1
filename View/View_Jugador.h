@@ -1,29 +1,29 @@
 #ifndef VIEW_JUGADOR_H_
 #define VIEW_JUGADOR_H_
+
 #include <SDL2/SDL.h>
+
 #include "../Model/LTexture.h"
 #include "../Model/Model_Jugador.h"
+#include "../Utils/Util_LoggerSubject.h"
 
-class View_Jugador
+class View_Jugador : public Util_LoggerSubject
 {
 public:
 
     View_Jugador( Jugador *model);
     View_Jugador();
 
-    void initialize(Jugador *model,SDL_Renderer * gRenderer);
+    void initialize(Jugador *model,SDL_Renderer * gRenderer,LTexture * texturaJugador,LTexture * texturaSeleccionado);
     void SetModel( Jugador *model);
-
-    //esto va a la vista
     void render( int camX, int camY,SDL_Renderer * gRenderer );
 
 private:
     Jugador *model;
-    LTexture texturaJugador;
-    LTexture texturaSeleccionado;
+    LTexture * texturaJugador;
+    LTexture * texturaSeleccionado;
     int frame = 4;
-    double direccion=90.0;
-    //  int WALKING_ANIMATION_FRAMES = 4;
+    double direccion;
     SDL_Rect gSpriteClips[ 4 ];
 };
 

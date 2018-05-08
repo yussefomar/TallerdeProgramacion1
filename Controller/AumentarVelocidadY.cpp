@@ -1,5 +1,5 @@
-#include "AumentarVelocidadY.h"
-#include "Model_Jugador.h"
+#include "../Controller/AumentarVelocidadY.h"
+#include "../Model/Model_Jugador.h"
 
 AumentarVelocidadY::AumentarVelocidadY(Model* model)
 {
@@ -13,7 +13,14 @@ AumentarVelocidadY::~AumentarVelocidadY()
 
 void AumentarVelocidadY::execute()
 {
-    Jugador* jugador = this->model->getJugadorActivo();
-    jugador->aumentarVelocidadY();
-    return;
+    this->model->jugadorActivoAumentaVelocidadEnY();
 }
+
+char AumentarVelocidadY::getCodigoComando(){
+
+
+return NINCVELY;
+
+
+}
+

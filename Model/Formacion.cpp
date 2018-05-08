@@ -1,4 +1,4 @@
-#include "Formacion.h"
+#include "../Model/Formacion.h"
 
 Formacion::Formacion()
 {

@@ -1,4 +1,4 @@
-#include "Formacion33.h"
+#include "../Model/Formacion33.h"
 
 Formacion33::Formacion33()
 {

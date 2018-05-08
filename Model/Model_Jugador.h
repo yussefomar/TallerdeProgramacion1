@@ -1,11 +1,13 @@
 #ifndef MODEL_JUGADOR_H_
 #define MODEL_JUGADOR_H_
+
 #include <SDL2/SDL.h>
-#include "LTexture.h"
-#include "Estado.h"
-#include "Activo.h"
-#include "Inactivo.h"
-#include "Model_Pelota.h"
+
+#include "../Model/LTexture.h"
+#include "../Model/Estado.h"
+#include "../Model/Activo.h"
+#include "../Model/Inactivo.h"
+#include "../Model/Model_Pelota.h"
 
 class Jugador
 {
@@ -52,20 +54,22 @@ public:
     bool collide(SDL_Rect * camara);
     void acelerar();
     void desacelerar();
- 
+    double getDireccion();
      bool checkCollisionPelota(SDL_Rect *pelota);
- 
-    void setCasacaSprite(std::string casacaName);
-    std::string getCasacaSprite();
- 
-
+    void updateDirection();
+    int getAceleracion();
+    void poseePelota();
+    void noPoseePelota();
+    bool getPosesion();
 private:
     SDL_Rect mCollider;
     int casaca;
-    std::string casacaSprite;
     Estado* estado;
     Activo activo;
     Inactivo inactivo;
+    double direccion;
+    bool conPelota;
+    Pelota * pelota;
 };
 
 #endif

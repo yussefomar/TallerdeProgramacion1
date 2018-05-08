@@ -1,6 +1,8 @@
 #ifndef VIEW_PELOTA_H_
 #define VIEW_PELOTA_H_
+
 #include <SDL2/SDL.h>
+
 #include "../Model/LTexture.h"
 #include "../Model/Model_Pelota.h"
 

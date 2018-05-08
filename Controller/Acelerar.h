@@ -1,8 +1,8 @@
 #ifndef ACELERAR_H
 #define ACELERAR_H
 
-#include <Command.h>
-#include "Model.h"
+#include "../Controller/Command.h"
+#include "../Model/Model.h"
 
 
 class Acelerar : public Command
@@ -11,6 +11,7 @@ public:
     Acelerar(Model* model);
     virtual ~Acelerar();
     void execute();
+     char getCodigoComando();
 
 
 protected:

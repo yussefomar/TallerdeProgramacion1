@@ -1,15 +1,15 @@
 #ifndef VIEWMODEL_H
 #define VIEWMODEL_H
 
-#include "View_Pelota.h"
-#include "View_Jugador.h"
-#include "View_Cancha.h"
-#include "Model.h"
+#include "../View/View_Pelota.h"
+#include "../View/View_Jugador.h"
+#include "../View/View_Cancha.h"
+#include "../Model/Model.h"
 
 class ViewModel
 {
 public:
-    ViewModel(Model* model, SDL_Renderer* gRenderer, SDL_Rect* camara);
+    ViewModel(Model* model, SDL_Renderer* gRenderer, SDL_Rect* camara,LTexture * texturaCancha,LTexture * texturaPelota,LTexture * texturaJugador,LTexture * texturaSeleccionado);
     virtual ~ViewModel();
     void render();
 protected:

@@ -19,6 +19,7 @@
 					<Add directory="Model" />
 					<Add directory="View" />
 					<Add directory="Controller" />
+					<Add directory="Network" />
 				</Compiler>
 				<Linker>
 					<Add option="-lSDL2" />
@@ -37,6 +38,7 @@
 					<Add directory="Model" />
 					<Add directory="View" />
 					<Add directory="Controller" />
+					<Add directory="Network" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -76,12 +78,10 @@
 		<Unit filename="Controller/DisminuirVelocidadX.h" />
 		<Unit filename="Controller/DisminuirVelocidadY.cpp" />
 		<Unit filename="Controller/DisminuirVelocidadY.h" />
- 
 		<Unit filename="Controller/PatearPelota.cpp" />
 		<Unit filename="Controller/PatearPelota.h" />
 		<Unit filename="Controller/RecuperaPelota.cpp" />
 		<Unit filename="Controller/RecuperaPelota.h" />
- 
 		<Unit filename="Controller/StopJugador.cpp" />
 		<Unit filename="Controller/StopJugador.h" />
 		<Unit filename="Images/canchafubol.jpg" />
@@ -111,19 +111,49 @@
 		<Unit filename="Model/Model_Jugador.h" />
 		<Unit filename="Model/Model_Pelota.cpp" />
 		<Unit filename="Model/Model_Pelota.h" />
+		<Unit filename="Network/CommandNet.cpp" />
+		<Unit filename="Network/CommandNet.h" />
+		<Unit filename="Network/ControllerNet/AcelerarNet.cpp" />
+		<Unit filename="Network/ControllerNet/AcelerarNet.h" />
+		<Unit filename="Network/ControllerNet/AumentarVelocidadXNet.cpp" />
+		<Unit filename="Network/ControllerNet/AumentarVelocidadXNet.h" />
+		<Unit filename="Network/ControllerNet/AumentarVelocidadYNet.cpp" />
+		<Unit filename="Network/ControllerNet/AumentarVelocidadYNet.h" />
+		<Unit filename="Network/ControllerNet/CambiarJugadorNet.cpp" />
+		<Unit filename="Network/ControllerNet/CambiarJugadorNet.h" />
+		<Unit filename="Network/ControllerNet/DesacelerarNet.cpp" />
+		<Unit filename="Network/ControllerNet/DesacelerarNet.h" />
+		<Unit filename="Network/ControllerNet/DisminuirVelocidadXNet.cpp" />
+		<Unit filename="Network/ControllerNet/DisminuirVelocidadXNet.h" />
+		<Unit filename="Network/ControllerNet/DisminuirVelocidadYNet.cpp" />
+		<Unit filename="Network/ControllerNet/DisminuirVelocidadYNet.h" />
+		<Unit filename="Network/ControllerNet/PatearPelotaNet.cpp" />
+		<Unit filename="Network/ControllerNet/PatearPelotaNet.h" />
+		<Unit filename="Network/ControllerNet/RecuperarPelotaNet.cpp" />
+		<Unit filename="Network/ControllerNet/RecuperarPelotaNet.h" />
+		<Unit filename="Network/ControllerNet/StopJugadorNet.cpp" />
+		<Unit filename="Network/ControllerNet/StopJugadorNet.h" />
+		<Unit filename="Network/ModeloCliente.cpp" />
+		<Unit filename="Network/ModeloCliente.h" />
 		<Unit filename="Utils/IObserver.h" />
 		<Unit filename="Utils/Util_Common.cpp" />
 		<Unit filename="Utils/Util_Common.h" />
 		<Unit filename="Utils/Util_Configuracion.cpp" />
 		<Unit filename="Utils/Util_Configuracion.h" />
-		<Unit filename="Utils/Util_Logger.cpp" />
-		<Unit filename="Utils/Util_Logger.h" />
 		<Unit filename="Utils/Util_LoggerObserver.cpp" />
 		<Unit filename="Utils/Util_LoggerObserver.h" />
 		<Unit filename="Utils/Util_LoggerSubject.cpp" />
 		<Unit filename="Utils/Util_LoggerSubject.h" />
 		<Unit filename="Utils/Util_Parser.cpp" />
 		<Unit filename="Utils/Util_Parser.h" />
+		<Unit filename="Utils/Util_Persistencia.cpp" />
+		<Unit filename="Utils/Util_Persistencia.h" />
+		<Unit filename="View/Entity.cpp" />
+		<Unit filename="View/Entity.h" />
+		<Unit filename="View/Event.cpp" />
+		<Unit filename="View/Event.h" />
+		<Unit filename="View/Observer.cpp" />
+		<Unit filename="View/Observer.h" />
 		<Unit filename="View/View.cpp" />
 		<Unit filename="View/View.h" />
 		<Unit filename="View/ViewModel.cpp" />
@@ -134,6 +164,8 @@
 		<Unit filename="View/View_Jugador.h" />
 		<Unit filename="View/View_Pelota.cpp" />
 		<Unit filename="View/View_Pelota.h" />
+		<Unit filename="View/View_Seleccionado.cpp" />
+		<Unit filename="View/View_Seleccionado.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

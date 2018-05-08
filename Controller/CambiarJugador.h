@@ -1,8 +1,8 @@
 #ifndef CAMBIARJUGADOR_H
 #define CAMBIARJUGADOR_H
 
-#include <Command.h>
-#include "Model.h"
+#include "../Controller/Command.h"
+#include "../Model/Model.h"
 
 class CambiarJugador : public Command
 {
@@ -10,6 +10,7 @@ public:
     CambiarJugador(Model* model);
     virtual ~CambiarJugador();
     void execute();
+     char getCodigoComando();
 
 protected:
 

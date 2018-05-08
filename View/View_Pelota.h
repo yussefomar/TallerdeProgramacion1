@@ -1,10 +1,13 @@
 #ifndef VIEW_PELOTA_H_
 #define VIEW_PELOTA_H_
+
 #include <SDL2/SDL.h>
+
 #include "../Model/LTexture.h"
 #include "../Model/Model_Pelota.h"
+#include "../Utils/Util_LoggerSubject.h"
 
-class View_Pelota
+class View_Pelota : public Util_LoggerSubject
 {
 public:
 
@@ -12,17 +15,16 @@ public:
     View_Pelota();
 
     void SetModel( Pelota * model);
-    void initialize(Pelota * model,SDL_Renderer * gRenderer);
+    void initialize(Pelota * model,SDL_Renderer * gRenderer,LTexture * texturaPelota);
 
     //esto va a la vista
     void render( int camX, int camY,SDL_Renderer * gRenderer );
 
 private:
     Pelota *model;
-    LTexture texturaPelota;
-    int frame = 4;
-    double direccion=90.0;
-    //  int WALKING_ANIMATION_FRAMES = 4;
+    LTexture * texturaPelota;
+    int frame;
+    double direccion;
     SDL_Rect gSpriteClips[ 4 ];
 };
 

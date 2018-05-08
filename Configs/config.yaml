@@ -1,7 +1,9 @@
 equipo:
- 
- formacion: '3-2-1'
- 
- casaca: 'suplente'
+  formacion: '3-2-1'
+  casaca: 'suplente'
+
 debug:
  level: 'info'
+
+conexion:
+ ip: '192.168.10.20'

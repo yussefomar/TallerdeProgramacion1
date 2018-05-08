@@ -1,7 +1,7 @@
 #ifndef FORMACION33_H
 #define FORMACION33_H
 
-#include <Formacion.h>
+#include "../Model/Formacion.h"
 
 
 class Formacion33 : public Formacion

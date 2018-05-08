@@ -1,18 +1,16 @@
 #include <iostream>
 
 #include "Utils/Util_LoggerObserver.h"
-#include "Utils/Util_Configuracion.h"
+//#include "Utils/Util_Persitencia.h"
 #include "Utils/Util_Common.h"
-#include "Model.h"
-#include "Controller.h"
-#include "View.h"
-//Solo para probar hasta que pueda manejar el logg y parser
-
 #include "Utils/IObserver.h"
+#include "Controller/Controller.h"
+#include "Model/Model.h"
+#include "Network/ModeloCliente.h"
+#include "View/View.h"
 
-//unsigned short logLevel;
+
 using namespace std;
-//Util_Logger logger;
 
 Util_Common common;
 
@@ -22,18 +20,28 @@ int main(int argc, char* args[])
     common.backupFile();
     // Hacemos un log de la ejecucion anterior.
     common.createFile();
+    // Creamos el logger con el nivel más bajo.
+    Util_LoggerObserver loggerObserver(3);
 
-    // Iniciar el logger con el nivel que corresponda segun configuracion.
-    Util_LoggerObserver* loggerObserver = new Util_LoggerObserver(3);
     Model model;
-    model.Attach(loggerObserver);
-    //Solo hasta que pueda manejar logger, esto es un asco.
-    Util_Configuracion configuracion(&model, loggerObserver);
-    configuracion.Attach(loggerObserver);
+    model.Attach(&loggerObserver);
+
+   // Util_Configuracion configuracion(&model, &loggerObserver);
+  //  Util_Persistencia  persistencia(&model, &loggerObserver);
+
     View view(&model);
-    view.Attach(loggerObserver);
+    view.Attach(&loggerObserver);
+
+    /*Para Modo offline, descomentar estas lineas y comentar
+    las del modo online*/
     Controller controller(&model);
-    controller.Attach(loggerObserver);
+    controller.Attach(&loggerObserver);
+
+    /*Para Modo online, descomentar estas lineas y comentar
+    las del modo offline*/
+    //ModeloCliente modelCliente(&model);
+    //Controller controller(&modelCliente);
+    //controller.Attach(&loggerObserver);
 
     while( !controller.quitPressed() )
     {
@@ -41,9 +49,7 @@ int main(int argc, char* args[])
         model.update();
         view.render();
     }
-
-
+    //delete loggerObserver;
     return 0;
-
 }
 

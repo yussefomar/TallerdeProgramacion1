@@ -1,7 +1,7 @@
 #ifndef INACTIVO_H
 #define INACTIVO_H
 
-#include <Estado.h>
+#include "../Model/Estado.h"
 
 
 class Inactivo : public Estado
