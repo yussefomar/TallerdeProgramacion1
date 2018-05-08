@@ -8,6 +8,7 @@ class RecuperaPelota  : public Command
 {
 public:
     RecuperaPelota(Model* model);
+     char getCodigoComando();
     virtual ~RecuperaPelota();
     void execute();
 protected:

@@ -16,3 +16,10 @@ void Desacelerar::execute() {
     Jugador* jugador = this->model->getJugadorActivo();
     jugador->desacelerar();
 }
+
+char Desacelerar::getCodigoComando(){
+
+return NDECVELX;
+
+}
+

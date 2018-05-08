@@ -15,3 +15,11 @@ void PatearPelota ::execute()
 {
     this->model->jugadorActivoPateaPelota();
 }
+
+char PatearPelota ::getCodigoComando()
+{
+
+   return NPATPELO;
+
+}
+

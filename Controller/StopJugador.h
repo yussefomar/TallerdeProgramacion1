@@ -8,6 +8,7 @@ class StopJugador : public Command
 {
 public:
     StopJugador(Model* model);
+     char getCodigoComando();
     virtual ~StopJugador();
     void execute();
 

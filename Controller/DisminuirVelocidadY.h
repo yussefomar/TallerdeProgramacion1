@@ -9,6 +9,7 @@ class DisminuirVelocidadY : public Command
 {
 public:
     DisminuirVelocidadY(Model* model);
+     char getCodigoComando();
     virtual ~DisminuirVelocidadY();
     void execute();
 

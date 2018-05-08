@@ -14,3 +14,12 @@ Acelerar::~Acelerar()
 void Acelerar::execute() {
     this->model->jugadorActivoAcelera();
 }
+
+char Acelerar::getCodigoComando()
+{
+
+    return  NACCJUG ;
+
+
+
+}

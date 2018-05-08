@@ -16,3 +16,11 @@ void AumentarVelocidadX::execute()
     this->model->jugadorActivoAumentaVelocidadEnX();
 }
 
+char AumentarVelocidadX::getCodigoComando()
+{
+
+    return  NINCVELX ;
+
+
+
+}

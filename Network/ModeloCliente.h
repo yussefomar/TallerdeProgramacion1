@@ -1,6 +1,6 @@
 #ifndef MODELOCLIENTE_H
 #define MODELOCLIENTE_H
-
+#include "../Network/CommandNet.h"
 #include <Model.h>
 
 
@@ -37,6 +37,7 @@ protected:
 
 private:
     Model* model;
+   std::vector<CommandNet*> commands;
 };
 
 #endif // MODELOCLIENTE_H

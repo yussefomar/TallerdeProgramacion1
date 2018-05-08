@@ -11,6 +11,7 @@ public:
     AumentarVelocidadX(Model* model);
     virtual ~AumentarVelocidadX();
     void execute();
+     char getCodigoComando();
 
 protected:
 

@@ -10,6 +10,7 @@ class PatearPelota : public Command
         PatearPelota(Model* model);
         virtual ~PatearPelota();
         void execute();
+         char getCodigoComando();
 
     protected:
 

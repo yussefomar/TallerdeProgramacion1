@@ -10,6 +10,7 @@ public:
     CambiarJugador(Model* model);
     virtual ~CambiarJugador();
     void execute();
+     char getCodigoComando();
 
 protected:
 

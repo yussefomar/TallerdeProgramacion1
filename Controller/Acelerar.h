@@ -11,6 +11,7 @@ public:
     Acelerar(Model* model);
     virtual ~Acelerar();
     void execute();
+     char getCodigoComando();
 
 
 protected:

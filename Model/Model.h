@@ -39,7 +39,16 @@ public:
     virtual void jugadorActivoDetener();
     virtual void jugadorActivoCambia();
 
-
+     /*servicios del Modelo en online*/
+    virtual void aumentarVelocidadEnX(char codigoJugador);
+    virtual void disminuirVelocidadY(char codigojugador);
+    virtual void aumentarVelocidadEnY(char codigojugador);
+    virtual void disminuirVelocidadX(char codigojugador);
+    virtual void desacelerar(char codigojugador);
+    virtual void patearPelota(char codigojugador);
+    virtual void recuperaPelota(char codigojugador);
+    virtual void stopJugador(char codigojugador);
+    virtual void acelerar(char codigojugador);
 
     virtual void update();
 

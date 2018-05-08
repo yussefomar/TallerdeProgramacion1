@@ -10,6 +10,7 @@ class Desacelerar : public Command
         Desacelerar(Model* model);
         virtual ~Desacelerar();
             void execute();
+            char getCodigoComando();
 
 
     protected:

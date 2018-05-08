@@ -16,3 +16,9 @@ void RecuperaPelota ::execute()//La mantiene en su pie
 {
     this->model->jugadorActivoRecuperaPelota();
 }
+
+char RecuperaPelota ::getCodigoComando(){
+
+return NRECUPELO;
+
+}

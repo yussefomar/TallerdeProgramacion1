@@ -14,3 +14,9 @@ StopJugador::~StopJugador()
 void StopJugador::execute() {
     this->model->jugadorActivoDetener();
 }
+
+char StopJugador::getCodigoComando(){
+
+return NSTOPJUG;
+
+}

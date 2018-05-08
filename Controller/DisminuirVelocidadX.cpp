@@ -15,3 +15,9 @@ void DisminuirVelocidadX::execute()
 {
     this->model->jugadorActivoDisminuyeVelocidadEnX();
 }
+
+char DisminuirVelocidadX::getCodigoComando() {
+ return NDECVELX;
+
+
+ }
