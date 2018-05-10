@@ -8,6 +8,7 @@
 #include "Model/Model.h"
 #include "Network/ModeloCliente.h"
 #include "View/View.h"
+#include "Utils/Util_Configuracion.h"
 
 
 using namespace std;
@@ -26,7 +27,7 @@ int main(int argc, char* args[])
     Model model;
     model.Attach(&loggerObserver);
 
-   // Util_Configuracion configuracion(&model, &loggerObserver);
+    Util_Configuracion configuracion(&model, &loggerObserver);
 //    Util_Persistencia  persistencia(&model, &loggerObserver);
 
     View view(&model);
