@@ -6,18 +6,15 @@
 
 class RecuperarPelotaNet : public CommandNet
 {
-    public:
-        RecuperarPelotaNet(Model* model);
-        virtual ~RecuperarPelotaNet();
+public:
+    RecuperarPelotaNet(Model* model);
+    virtual ~RecuperarPelotaNet();
+    void execute() ;
+    char  getCodigoComando() ;
 
-void execute() ;
+protected:
 
-char  getCodigoComando() ;
-
-    protected:
-
-    private:
-         Model* model;
+private:
 };
 
 #endif // RECUPERARPELOTANET_H

@@ -11,12 +11,12 @@ StopJugador::~StopJugador()
 
 }
 
-void StopJugador::execute() {
+void StopJugador::execute()
+{
     this->model->jugadorActivoDetener();
 }
 
-char StopJugador::getCodigoComando(){
-
-return NSTOPJUG;
-
+char StopJugador::getCodigoComando()
+{
+    return STOPJUG;
 }

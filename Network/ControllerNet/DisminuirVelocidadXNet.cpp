@@ -1,6 +1,6 @@
 #include "DisminuirVelocidadXNet.h"
 
-DisminuirVelocidadXNet::DisminuirVelocidadXNet(Model* model)
+DisminuirVelocidadXNet::DisminuirVelocidadXNet(Model* model) : CommandNet(model)
 {
     this->model = model;
 }
@@ -12,11 +12,10 @@ DisminuirVelocidadXNet::~DisminuirVelocidadXNet()
 
 void DisminuirVelocidadXNet::execute()
 {
-    this->model->disminuirVelocidadX(this->codigoJugador);
+    this->model->disminuirVelocidadX(this->getCodigoJugador());
 }
 
-char DisminuirVelocidadXNet::getCodigoComando() {
- return NDECVELX;
-
-
- }
+char DisminuirVelocidadXNet::getCodigoComando()
+{
+    return DECVELX;
+}

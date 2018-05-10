@@ -16,11 +16,8 @@ void AumentarVelocidadY::execute()
     this->model->jugadorActivoAumentaVelocidadEnY();
 }
 
-char AumentarVelocidadY::getCodigoComando(){
-
-
-return NINCVELY;
-
-
+char AumentarVelocidadY::getCodigoComando()
+{
+    return INCVELY;
 }
 

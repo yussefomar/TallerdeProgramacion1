@@ -17,9 +17,5 @@ void Acelerar::execute() {
 
 char Acelerar::getCodigoComando()
 {
-
-    return  NACCJUG ;
-
-
-
+    return  ACCJUG ;
 }

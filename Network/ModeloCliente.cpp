@@ -1,38 +1,42 @@
 #include "ModeloCliente.h"
 #include "../Network/ControllerNet/DisminuirVelocidadYNet.h"
-#include "../Network//ControllerNet/AumentarVelocidadYNet.h"
-#include "../Network//ControllerNet/DisminuirVelocidadXNet.h"
-#include "../Network//ControllerNet/AumentarVelocidadXNet.h"
-#include "../Network//ControllerNet/CambiarJugadorNet.h"
-#include "../Network//ControllerNet/StopJugadorNet.h"
-#include "../Network//ControllerNet/AcelerarNet.h"
-#include "../Network//ControllerNet/DesacelerarNet.h"
-#include "../Network//ControllerNet/PatearPelotaNet.h"
-
-#include "../Network/CommandNet.h"
+#include "../Network/ControllerNet/AumentarVelocidadYNet.h"
+#include "../Network/ControllerNet/DisminuirVelocidadXNet.h"
+#include "../Network/ControllerNet/AumentarVelocidadXNet.h"
+#include "../Network/ControllerNet/CambiarJugadorNet.h"
+#include "../Network/ControllerNet/StopJugadorNet.h"
+#include "../Network/ControllerNet/AcelerarNet.h"
+#include "../Network/ControllerNet/DesacelerarNet.h"
+#include "../Network/ControllerNet/PatearPelotaNet.h"
 #include "../Network/ControllerNet/RecuperarPelotaNet.h"
-#define CANTCOMMANDS 10
 
+#define CANTCOMMANDSNET 10
+
+/*Cuidado... la cantidad de comandos en modelCliente puede y
+va a diferir del de controller*/
 ModeloCliente::ModeloCliente(Model* model)
 {
     this->model = model;
-     this->commands = std::vector<CommandNet*>(CANTCOMMANDS);
-    this->commands[NDECVELX] = new DisminuirVelocidadXNet(model);
-    this->commands[NDECVELY] = new DisminuirVelocidadYNet(model);
-    this->commands[NINCVELX] = new AumentarVelocidadXNet(model);
-    this->commands[NINCVELY] = new AumentarVelocidadYNet(model);
-    this->commands[NCAMBJUG] = new CambiarJugadorNet(model);
-    this->commands[NSTOPJUG] = new StopJugadorNet(model);
-    this->commands[NACCJUG] = new AcelerarNet(model);
-    this->commands[NDESJUG] = new DesacelerarNet(model);
+    this->commands = std::vector<CommandNet*>(CANTCOMMANDSNET);
+    this->commands[DECVELX] = new DisminuirVelocidadXNet(model);
+    this->commands[DECVELY] = new DisminuirVelocidadYNet(model);
+    this->commands[INCVELX] = new AumentarVelocidadXNet(model);
+    this->commands[INCVELY] = new AumentarVelocidadYNet(model);
+    this->commands[CAMBJUG] = new CambiarJugadorNet(model);
+    this->commands[STOPJUG] = new StopJugadorNet(model);
+    this->commands[ACCJUG] = new AcelerarNet(model);
+    this->commands[DESJUG] = new DesacelerarNet(model);
 
-    this->commands[ NPATPELO] = new PatearPelotaNet(model);
-    this->commands[NRECUPELO] = new RecuperarPelotaNet(model);
+    this->commands[PATPELO] = new PatearPelotaNet(model);
+    this->commands[RECUPELO] = new RecuperarPelotaNet(model);
 }
 
 ModeloCliente::~ModeloCliente()
 {
-    //dtor
+    for(unsigned i = 0; i < CANTCOMMANDSNET; ++i)
+    {
+        delete this->commands[i];
+    }
 }
 
 /*El modelo cliente puede devolver datos que son necesarios*/
@@ -55,6 +59,7 @@ std::string ModeloCliente::getCasaca()
 {
     return this->model->getCasaca();
 }
+
 /*El modelo cliente no deberia modificar al modelo*/
 void ModeloCliente::setCamara(SDL_Rect* camara)
 {
@@ -121,62 +126,18 @@ void ModeloCliente::update()
 /*Network*/
 void ModeloCliente::addCommand(Command* command)
 {
-
-    //char codigoComando = command->getCodigoComando();
-    //char codigoJugador = this->model->getCodigoJugadorActivo();
-    //se envia por socket al servidor ambos codigos,
-
-    //Se reciben de socket otros dos codigos
-
-    //El codgoComando que se reciba se tiene que decodificar
-    //para saber que comando enviar al model
-
-    //El codigoJugador que se reciba se setea el commando y luego se envia al modelo...
-
-    //EL comando ejecuta en el modelo el metodo apropiado y le pasa el
-    //codigo de jugador... el modelo sabe decodificar codigos de jugador
-
-
-    /* ejemplo aumentarVelocidadEnX(char codigoJugador)
-             aumentarVelocidadEnY(char codigoJugador)*/
-
-
-/*
-
-#define NDECVELX 0x01
-#define NDECVELY 0x02
-#define NINCVELX 0x03
-#define NINCVELY 0x04
-#define NSTOPJUG 0x05
-#define NACCJUG 0x06
-#define NDESJUG 0x07
-#define NPATPELO 0x08
-#define NRECUPELO 0x09
-#define NCAMBJUG 0x0A
-
-
-*/
-
-
-    CommandNet* commandNet=nullptr;
-    commandNet=this->commands[NINCVELX];
-
-
-
-
-
-
-     for( int a = 1; a < 6; a = a + 1 ) {
-             commandNet->setearCodigoJugador(6);
-     commandNet=this->commands[NINCVELX];
-     this->model->addCommand(commandNet);
-     this->model->update();
-
-
-   }
-
-    //this->model->addCommand(commandNet);
-    //this->model->update();
-
+    /*Esta comprobacion debe desaparecer por algun metodo*/
+    if(command == nullptr)
+    {
+        return;
+    }
+    /*Recibo codigo comando y lo decodifico*/
+    char codigoComando = command->getCodigoComando();
+    CommandNet* comando = this->commands[codigoComando];
+    /*Seteo al jugador activo en el comando*/
+    comando->setCodigoJugador(this->model->getCodigoJugadorActivo());
+    /*Agrego comando al modelo sin cambiar nada*/
+    this->model->addCommand(comando);
+    //Command* comandoNet = this->
 
 }

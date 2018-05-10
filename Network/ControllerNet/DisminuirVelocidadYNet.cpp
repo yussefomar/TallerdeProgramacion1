@@ -1,8 +1,7 @@
 #include "DisminuirVelocidadYNet.h"
 
-DisminuirVelocidadYNet::DisminuirVelocidadYNet(Model* model)
+DisminuirVelocidadYNet::DisminuirVelocidadYNet(Model* model) : CommandNet(model)
 {
-    this->model = model;
 }
 
 DisminuirVelocidadYNet::~DisminuirVelocidadYNet()
@@ -13,13 +12,11 @@ DisminuirVelocidadYNet::~DisminuirVelocidadYNet()
 
 void DisminuirVelocidadYNet::execute()
 {
-    this->model->disminuirVelocidadY(this->codigoJugador);
+    this->model->disminuirVelocidadY(this->getCodigoJugador());
 }
 
 
-char DisminuirVelocidadYNet::getCodigoComando() {
-
-return NDECVELY;
-
-
+char DisminuirVelocidadYNet::getCodigoComando()
+{
+    return DECVELY;
 }

@@ -19,7 +19,7 @@ void AumentarVelocidadX::execute()
 char AumentarVelocidadX::getCodigoComando()
 {
 
-    return  NINCVELX ;
+    return  INCVELX ;
 
 
 

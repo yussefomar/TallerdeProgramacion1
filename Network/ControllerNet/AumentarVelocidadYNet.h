@@ -6,21 +6,15 @@
 
 class AumentarVelocidadYNet : public CommandNet
 {
-    public:
-        AumentarVelocidadYNet(Model* model);
-        virtual ~AumentarVelocidadYNet();
-        void  execute();
+public:
+    AumentarVelocidadYNet(Model* model);
+    virtual ~AumentarVelocidadYNet();
+    void  execute();
+    char getCodigoComando() ;
 
+protected:
 
-char getCodigoComando() ;
-
-
-
-
-    protected:
-
-    private:
-        Model* model;
+private:
 };
 
 #endif // AUMENTARVELOCIDADYNET_H

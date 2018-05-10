@@ -12,14 +12,14 @@ Desacelerar::~Desacelerar()
     //dtor
 }
 
-void Desacelerar::execute() {
+void Desacelerar::execute()
+{
     Jugador* jugador = this->model->getJugadorActivo();
     jugador->desacelerar();
 }
 
-char Desacelerar::getCodigoComando(){
-
-return NDECVELX;
-
+char Desacelerar::getCodigoComando()
+{
+    return DESJUG;
 }
 

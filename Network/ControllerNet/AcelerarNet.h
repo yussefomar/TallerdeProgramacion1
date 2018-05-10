@@ -6,22 +6,15 @@
 
 class AcelerarNet : public CommandNet
 {
-    public:
-        AcelerarNet(Model* model);
-        virtual ~AcelerarNet();
-        void  execute() ;
+public:
+    AcelerarNet(Model* model);
+    virtual ~AcelerarNet();
+    void  execute() ;
+    char  getCodigoComando() ;
 
-char  getCodigoComando() ;
+protected:
 
-
-
-
-
-
-    protected:
-
-    private:
-        Model* model;
+private:
 };
 
 #endif // ACELERARNET_H

@@ -16,9 +16,7 @@ void DisminuirVelocidadY::execute()
     this->model->jugadorActivoDisminuyeVelocidadEnY();
 }
 
-char DisminuirVelocidadY::getCodigoComando() {
-
-return NDECVELY;
-
-
+char DisminuirVelocidadY::getCodigoComando()
+{
+    return DECVELY;
 }

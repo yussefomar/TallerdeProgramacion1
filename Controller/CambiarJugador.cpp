@@ -15,8 +15,7 @@ void CambiarJugador::execute()
 {
     this->model->jugadorActivoCambia();
 }
-char CambiarJugador::getCodigoComando() {
-
-return NCAMBJUG;
-
+char CambiarJugador::getCodigoComando()
+{
+    return CAMBJUG;
 }

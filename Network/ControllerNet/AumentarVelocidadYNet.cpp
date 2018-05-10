@@ -1,8 +1,7 @@
 #include "AumentarVelocidadYNet.h"
 
-AumentarVelocidadYNet::AumentarVelocidadYNet(Model* model)
+AumentarVelocidadYNet::AumentarVelocidadYNet(Model* model) : CommandNet(model)
 {
-    this->model = model;
 }
 AumentarVelocidadYNet::~AumentarVelocidadYNet()
 {
@@ -11,14 +10,11 @@ AumentarVelocidadYNet::~AumentarVelocidadYNet()
 
 void AumentarVelocidadYNet::execute()
 {
-    this->model->aumentarVelocidadEnY(this->codigoJugador);
+    this->model->aumentarVelocidadEnY(this->getCodigoJugador());
 }
 
-char AumentarVelocidadYNet::getCodigoComando(){
-
-
-return NINCVELY;
-
-
+char AumentarVelocidadYNet::getCodigoComando()
+{
+    return INCVELY;
 }
 

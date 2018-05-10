@@ -40,9 +40,9 @@ int main(int argc, char* args[])
 
     /*Para Modo online, descomentar estas lineas y comentar
     las del modo offline*/
-    //ModeloCliente modelCliente(&model);
-    //Controller controller(&modelCliente);
-    //controller.Attach(&loggerObserver);
+//    ModeloCliente modelCliente(&model);
+//    Controller controller(&modelCliente);
+//    controller.Attach(&loggerObserver);
 
     while( !controller.quitPressed() )
     {

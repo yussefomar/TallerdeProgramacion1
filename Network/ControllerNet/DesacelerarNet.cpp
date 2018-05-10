@@ -1,8 +1,7 @@
 #include "DesacelerarNet.h"
 
-DesacelerarNet::DesacelerarNet(Model* model)
+DesacelerarNet::DesacelerarNet(Model* model) : CommandNet(model)
 {
-    this->model = model;
 }
 
 DesacelerarNet::~DesacelerarNet()
@@ -10,11 +9,11 @@ DesacelerarNet::~DesacelerarNet()
     //dtor
 }
 
-void DesacelerarNet::execute() {
-    this->model->desacelerar(this->codigoJugador);
+void DesacelerarNet::execute()
+{
+    this->model->desacelerar(this->getCodigoJugador());
 }
-char DesacelerarNet::getCodigoComando(){
-
-return NDECVELX;
-
+char DesacelerarNet::getCodigoComando()
+{
+    return DECVELX;
 }

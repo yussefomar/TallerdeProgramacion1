@@ -6,21 +6,15 @@
 
 class PatearPelotaNet : public CommandNet
 {
-    public:
-        PatearPelotaNet(Model* model);
-        virtual ~PatearPelotaNet();
+public:
+    PatearPelotaNet(Model* model);
+    virtual ~PatearPelotaNet();
+    void  execute();
+    char  getCodigoComando();
 
-        void  execute();
+protected:
 
-
- char  getCodigoComando();
-
-
-
-    protected:
-
-    private:
-        Model* model;
+private:
 };
 
 #endif // PATEARPELOTANET_H

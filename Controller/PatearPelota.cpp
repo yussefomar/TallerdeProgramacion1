@@ -18,8 +18,6 @@ void PatearPelota ::execute()
 
 char PatearPelota ::getCodigoComando()
 {
-
-   return NPATPELO;
-
+    return PATPELO;
 }
 

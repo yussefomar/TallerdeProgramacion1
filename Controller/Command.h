@@ -3,16 +3,21 @@
 
 /*Los codigos de los comandos deberian figurar aqui.*/
 /*Los codigos de los comandos deberian figurar aqui.*/
-#define NDECVELX 0x01
-#define NDECVELY 0x02
-#define NINCVELX 0x03
-#define NINCVELY 0x04
-#define NSTOPJUG 0x05
-#define NACCJUG 0x06
-#define NDESJUG 0x07
-#define NPATPELO 0x08
-#define NRECUPELO 0x09
-#define NCAMBJUG 0x0A
+
+/*Los codigos deberian ser los mismos para controller
+como para net*/
+#define DECVELX 0x00
+#define DECVELY 0x01
+#define INCVELX 0x02
+#define INCVELY 0x03
+#define STOPJUG 0x04
+#define ACCJUG 0x05
+#define DESJUG 0x06
+#define PATPELO 0x07
+#define RECUPELO 0x08
+#define CAMBJUG 0x09
+
+
 
 class Command
 {
@@ -20,9 +25,7 @@ public:
     Command();
     virtual ~Command();
     virtual void execute() = 0;
-    //Despues agregar el = 0 para asegurarse de que todo
-    //todo comando tenga un codigo apropiado
-    virtual char getCodigoComando()=0;;
+    virtual char getCodigoComando()=0;
 
 protected:
 

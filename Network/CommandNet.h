@@ -1,24 +1,27 @@
 #ifndef COMMANDNET_H
 #define COMMANDNET_H
 
+#include "../Model/Model.h"
+
 #include <Command.h>
-#include <map>
+#include <queue>
 
 
 class CommandNet : public Command
 {
-    public:
-        CommandNet();
-        virtual ~CommandNet();
-        void setCodigoComando(char codigoComando);
+public:
+    CommandNet(Model* model);
+    virtual ~CommandNet();
 
-        void setearCodigoJugador(char codigoJugador);
-       /* char getCodigoComando();
-    void execute();*/
-    protected:
-     char codigoJugador;
-    private:
-        char codigoComando;
+    void setCodigoJugador(char codigoJugador);
+    char getCodigoJugador();
+
+protected:
+    std::queue<char> codigoJugador;
+    Model* model;
+
+private:
+
 
 };
 

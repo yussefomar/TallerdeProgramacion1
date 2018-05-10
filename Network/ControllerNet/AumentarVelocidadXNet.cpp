@@ -1,8 +1,7 @@
 #include "AumentarVelocidadXNet.h"
 
-AumentarVelocidadXNet::AumentarVelocidadXNet(Model* model)
+AumentarVelocidadXNet::AumentarVelocidadXNet(Model* model) : CommandNet(model)
 {
-    this->model = model;
 }
 
 AumentarVelocidadXNet::~AumentarVelocidadXNet()
@@ -13,16 +12,12 @@ AumentarVelocidadXNet::~AumentarVelocidadXNet()
 
 void AumentarVelocidadXNet::execute()
 {
-    this->model->aumentarVelocidadEnX(this->codigoJugador);
+    this->model->aumentarVelocidadEnX(this->getCodigoJugador());
 }
 
 char AumentarVelocidadXNet::getCodigoComando()
 {
-
-    return  NINCVELX ;
-
-
-
+    return  INCVELX;
 }
 
 

@@ -6,19 +6,15 @@
 
 class DesacelerarNet : public CommandNet
 {
-    public:
-        DesacelerarNet(Model* model);
-        virtual ~DesacelerarNet();
-        void  execute();
+public:
+    DesacelerarNet(Model* model);
+    virtual ~DesacelerarNet();
+    void  execute();
+    char  getCodigoComando();
 
-char  getCodigoComando();
+protected:
 
-
-
-    protected:
-
-    private:
-        Model* model;
+private:
 };
 
 #endif // DESACELERARNET_H

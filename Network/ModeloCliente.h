@@ -1,9 +1,8 @@
 #ifndef MODELOCLIENTE_H
 #define MODELOCLIENTE_H
-#include "../Network/CommandNet.h"
 #include <Model.h>
 
-
+#include "CommandNet.h"
 class ModeloCliente : public Model
 {
 public:
@@ -37,7 +36,7 @@ protected:
 
 private:
     Model* model;
-   std::vector<CommandNet*> commands;
+    std::vector<CommandNet*> commands;
 };
 
 #endif // MODELOCLIENTE_H

@@ -1,6 +1,6 @@
 #include "RecuperarPelotaNet.h"
 
-RecuperarPelotaNet::RecuperarPelotaNet(Model* model)
+RecuperarPelotaNet::RecuperarPelotaNet(Model* model) : CommandNet(model)
 {
     //ctor
 }
@@ -13,10 +13,11 @@ RecuperarPelotaNet::~RecuperarPelotaNet()
 
 void RecuperarPelotaNet ::execute()//La mantiene en su pie
 {
-    this->model->recuperaPelota( this->codigoJugador);
+    this->model->recuperaPelota( this->getCodigoJugador());
 }
-char RecuperarPelotaNet ::getCodigoComando(){
+char RecuperarPelotaNet ::getCodigoComando()
+{
 
-return NRECUPELO;
+    return RECUPELO;
 
 }

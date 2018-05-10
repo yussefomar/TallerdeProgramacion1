@@ -6,24 +6,15 @@
 
 class DisminuirVelocidadXNet : public CommandNet
 {
-    public:
-        DisminuirVelocidadXNet(Model* model);
-        virtual ~DisminuirVelocidadXNet();
-        void  execute();
+public:
+    DisminuirVelocidadXNet(Model* model);
+    virtual ~DisminuirVelocidadXNet();
+    void  execute();
+    char  getCodigoComando() ;
 
+protected:
 
-char  getCodigoComando() ;
-
-
-
-
-
-
-    protected:
-
-
-    private:
-        Model* model;
+private:
 };
 
 #endif // DISMINUIRVELOCIDADXNET_H

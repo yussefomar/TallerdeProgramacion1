@@ -1,5 +1,4 @@
 #include "CommandNet.h"
-#include "../Model/Model.h"
 #include "../Controller/DisminuirVelocidadY.h"
 #include "../Controller/AumentarVelocidadY.h"
 #include "../Controller/DisminuirVelocidadX.h"
@@ -10,10 +9,9 @@
 #include "../Controller/Desacelerar.h"
 #include "../Controller/PatearPelota.h"
 #include "../Controller/RecuperaPelota.h"
-#include <map>
-CommandNet::CommandNet()
+
+CommandNet::CommandNet(Model* model) : model(model)
 {
-    //ctor
 }
 
 CommandNet::~CommandNet()
@@ -21,14 +19,14 @@ CommandNet::~CommandNet()
     //dtor
 }
 
- void CommandNet::setCodigoComando(char codigoComando){
+ void CommandNet::setCodigoJugador(char codigoJugador){
 
-
-
+     this->codigoJugador.push(codigoJugador);
  }
 
- void CommandNet::setearCodigoJugador(char codigoJugador){
-
-     this->codigoJugador=codigoJugador;
+ char CommandNet::getCodigoJugador() {
+    char codigo = this->codigoJugador.front();
+    this->codigoJugador.pop();
+    return codigo;
  }
 

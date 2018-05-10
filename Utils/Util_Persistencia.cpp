@@ -11,8 +11,8 @@
 
 Util_Persistencia::Util_Persistencia(Model* model, Util_LoggerObserver* loggerObserver)
 {
-   Util_Configuracion configuracion(model, loggerObserver);
-   configuracion.Attach(loggerObserver); //es necesario hacer esto?
+    Util_Configuracion configuracion(model, loggerObserver);
+    configuracion.Attach(loggerObserver); //es necesario hacer esto?
 
 }
 
@@ -31,5 +31,6 @@ Util_Persistencia::~Util_Persistencia()
 bool Util_Persistencia::inicializar()
 {
 //llamo aca al inicializar de configuracion??????
+    return true;
 }
 

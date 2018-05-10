@@ -183,122 +183,142 @@ void Model::setCasaca(std::string casacaName)
     }
 }
 
-std::string Model::getCasaca() {
+std::string Model::getCasaca()
+{
     return this->casacaSprite;
 }
 
-char Model::getCodigoJugadorActivo() {
+char Model::getCodigoJugadorActivo()
+{
     /*Esto debe adecuarse al momento de tener equipos
     y seguir usando char*/
     char codigo = 0x00;
     return (codigo + this->nroJugadorActivo);
 }
 
-void Model::jugadorActivoAumentaVelocidadEnX() {
+void Model::jugadorActivoAumentaVelocidadEnX()
+{
     this->jugadores[this->nroJugadorActivo].aumentarVelocidadX();
 }
 
-void Model::jugadorActivoAumentaVelocidadEnY() {
+void Model::jugadorActivoAumentaVelocidadEnY()
+{
     this->jugadores[this->nroJugadorActivo].aumentarVelocidadY();
 }
 
-void Model::jugadorActivoDisminuyeVelocidadEnX() {
+void Model::jugadorActivoDisminuyeVelocidadEnX()
+{
     this->jugadores[this->nroJugadorActivo].disminuirVelocidadX();
 }
 
-void Model::jugadorActivoDisminuyeVelocidadEnY() {
+void Model::jugadorActivoDisminuyeVelocidadEnY()
+{
     this->jugadores[this->nroJugadorActivo].disminuirVelocidadY();
 }
 
-void Model::jugadorActivoAcelera() {
+void Model::jugadorActivoAcelera()
+{
     this->jugadores[this->nroJugadorActivo].acelerar();
 }
 
-void Model::jugadorActivoDesacelera() {
+void Model::jugadorActivoDesacelera()
+{
     this->jugadores[this->nroJugadorActivo].desacelerar();
 }
 
-void Model::jugadorActivoPateaPelota() {
+void Model::jugadorActivoPateaPelota()
+{
     this->jugadores[this->nroJugadorActivo].patearPelota(&(this->pelota));
 }
 
-void Model::jugadorActivoRecuperaPelota() {
+void Model::jugadorActivoRecuperaPelota()
+{
     this->jugadores[this->nroJugadorActivo].recuperaPelota(&(this->pelota));
 }
 
-void Model::jugadorActivoDetener() {
+void Model::jugadorActivoDetener()
+{
     this->jugadores[this->nroJugadorActivo].detenerVelocidad();
 }
 
 /*Servicios del modelo en modo online*/
-void Model::aumentarVelocidadEnX(char codigojugador){
+void Model::aumentarVelocidadEnX(char codigojugador)
+{
 
-unsigned nrojugador=codigojugador;
-this->jugadores[nrojugador].aumentarVelocidadX();
-
-
-}
-
-void Model::aumentarVelocidadEnY(char codigojugador){
-
-unsigned nrojugador=codigojugador;
-this->jugadores[nrojugador].aumentarVelocidadY();
+    unsigned nrojugador=codigojugador;
+    this->jugadores[nrojugador].aumentarVelocidadX();
 
 
 }
 
-void Model:: disminuirVelocidadY(char codigojugador){
+void Model::aumentarVelocidadEnY(char codigojugador)
+{
 
-unsigned nrojugador=codigojugador;
-this->jugadores[nrojugador].disminuirVelocidadY();
-
-
-}
-
-void Model:: disminuirVelocidadX(char codigojugador){
-
-unsigned nrojugador=codigojugador;
-this->jugadores[nrojugador].disminuirVelocidadX();
+    unsigned nrojugador=codigojugador;
+    this->jugadores[nrojugador].aumentarVelocidadY();
 
 
 }
 
-void Model:: desacelerar(char codigojugador){
+void Model:: disminuirVelocidadY(char codigojugador)
+{
 
-unsigned nrojugador=codigojugador;
-this->jugadores[nrojugador].desacelerar();
-
-
-}
-
-void Model:: patearPelota(char codigojugador){
-
-unsigned nrojugador=codigojugador;
-this->jugadores[nrojugador].patearPelota(this->getPelota());
+    unsigned nrojugador=codigojugador;
+    this->jugadores[nrojugador].disminuirVelocidadY();
 
 
 }
 
-void Model:: recuperaPelota(char codigojugador){
+void Model:: disminuirVelocidadX(char codigojugador)
+{
 
-unsigned nrojugador=codigojugador;
-this->jugadores[nrojugador].recuperaPelota(this->getPelota());
-
-
-}
-
-void Model:: stopJugador(char codigojugador){
-
-unsigned nrojugador=codigojugador;
-this->jugadores[nrojugador].detenerVelocidad();
+    unsigned nrojugador=codigojugador;
+    this->jugadores[nrojugador].disminuirVelocidadX();
 
 
 }
 
-void Model::acelerar(char codigojugador){
+void Model:: desacelerar(char codigojugador)
+{
 
-unsigned nrojugador=codigojugador;
-this->jugadores[nrojugador].acelerar();
+    unsigned nrojugador=codigojugador;
+    this->jugadores[nrojugador].desacelerar();
+
+
+}
+
+void Model:: patearPelota(char codigojugador)
+{
+
+    unsigned nrojugador=codigojugador;
+    this->jugadores[nrojugador].patearPelota(this->getPelota());
+
+
+}
+
+void Model:: recuperaPelota(char codigojugador)
+{
+
+    unsigned nrojugador=codigojugador;
+    this->jugadores[nrojugador].recuperaPelota(this->getPelota());
+
+
+}
+
+void Model:: stopJugador(char codigojugador)
+{
+
+    unsigned nrojugador=codigojugador;
+    this->jugadores[nrojugador].detenerVelocidad();
+
+
+}
+
+void Model::acelerar(char codigojugador)
+{
+
+    unsigned nrojugador=codigojugador;
+    this->jugadores[nrojugador].acelerar();
 
 
 }

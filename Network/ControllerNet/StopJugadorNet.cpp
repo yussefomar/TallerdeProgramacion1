@@ -1,8 +1,7 @@
 #include "StopJugadorNet.h"
 
-StopJugadorNet::StopJugadorNet(Model* model)
+StopJugadorNet::StopJugadorNet(Model* model) : CommandNet(model)
 {
-    this->model = model;
 }
 
 StopJugadorNet::~StopJugadorNet()
@@ -12,12 +11,13 @@ StopJugadorNet::~StopJugadorNet()
 
 
 
-void StopJugadorNet::execute() {
-    this->model->stopJugador(this->codigoJugador);
+void StopJugadorNet::execute()
+{
+    this->model->stopJugador(this->getCodigoJugador());
 }
-char StopJugadorNet::getCodigoComando(){
 
-return NSTOPJUG;
-
+char StopJugadorNet::getCodigoComando()
+{
+    return STOPJUG;
 }
 

@@ -6,19 +6,15 @@
 
 class StopJugadorNet : public CommandNet
 {
-    public:
-        StopJugadorNet(Model* model);
-        virtual ~StopJugadorNet();
-        void  execute() ;
+public:
+    StopJugadorNet(Model* model);
+    virtual ~StopJugadorNet();
+    void  execute() ;
+    char  getCodigoComando() ;
 
-char  getCodigoComando() ;
+protected:
 
-
-
-    protected:
-
-    private:
-        Model* model;
+private:
 };
 
 #endif // STOPJUGADORNET_H

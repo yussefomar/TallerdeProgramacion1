@@ -6,22 +6,15 @@
 
 class CambiarJugadorNet : public CommandNet
 {
-    public:
-        CambiarJugadorNet(Model* model);
-        virtual ~CambiarJugadorNet();
-        void  execute();
+public:
+    CambiarJugadorNet(Model* model);
+    virtual ~CambiarJugadorNet();
+    void  execute();
+    char  getCodigoComando();
 
+protected:
 
-
-
-char  getCodigoComando()  ;
-
-
-
-    protected:
-
-    private:
-        Model* model;
+private:
 };
 
 #endif // CAMBIARJUGADORNET_H

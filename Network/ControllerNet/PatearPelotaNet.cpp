@@ -1,6 +1,6 @@
 #include "PatearPelotaNet.h"
 
-PatearPelotaNet::PatearPelotaNet(Model* model)
+PatearPelotaNet::PatearPelotaNet(Model* model) : CommandNet(model)
 {
     this->model = model;
 }
@@ -12,12 +12,10 @@ PatearPelotaNet::~PatearPelotaNet()
 
 void PatearPelotaNet ::execute()
 {
-    this->model->patearPelota(this->codigoJugador);
+    this->model->patearPelota(this->getCodigoJugador());
 }
 
  char PatearPelotaNet ::getCodigoComando()
 {
-
-   return NPATPELO;
-
+   return PATPELO;
 }

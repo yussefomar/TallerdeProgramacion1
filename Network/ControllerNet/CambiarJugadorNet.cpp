@@ -1,8 +1,7 @@
 #include "CambiarJugadorNet.h"
 
-CambiarJugadorNet::CambiarJugadorNet(Model* model)
+CambiarJugadorNet::CambiarJugadorNet(Model* model) : CommandNet(model)
 {
-    this->model = model;
 }
 
 CambiarJugadorNet::~CambiarJugadorNet()
@@ -17,8 +16,7 @@ void CambiarJugadorNet::execute()
 }
 
 
-char CambiarJugadorNet::getCodigoComando() {
-
-return NCAMBJUG;
-
+char CambiarJugadorNet::getCodigoComando()
+{
+    return CAMBJUG;
 }

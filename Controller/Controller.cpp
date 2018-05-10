@@ -12,10 +12,6 @@
 
 #define CANTCOMMANDS 10
 
-
-enum IDCommand {DECVELX, DECVELY, INCVELX, INCVELY, CAMBJUG, STOPJUG, ACCJUG, DESJUG,PATPELO,RECUPELO};
-
-
 Controller::Controller(Model* model)
 {
     this->model = model;
@@ -126,6 +122,7 @@ Command* Controller::handleEvent(SDL_Event& e)
             NotifyMessage("Chequeamos: SDL_KEYUP", "Controller.cpp");
             switch( e.key.keysym.sym )
             {
+                /*Los if que se hacen aqui, se podrian hacer directamente en el modelo, sacarlos*/
             case SDLK_UP:
                 if (this->model->getJugadorActivo()->getVelY()<0){
                 command = this->commands[INCVELY];}

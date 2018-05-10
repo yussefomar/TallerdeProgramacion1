@@ -1,8 +1,7 @@
 #include "AcelerarNet.h"
 
-AcelerarNet::AcelerarNet(Model* model)
+AcelerarNet::AcelerarNet(Model* model) : CommandNet(model)
 {
-    this->model = model;
 }
 
 AcelerarNet::~AcelerarNet()
@@ -11,12 +10,12 @@ AcelerarNet::~AcelerarNet()
 }
 
 
-void AcelerarNet::execute() {
-    this->model->acelerar(this->codigoJugador);
+void AcelerarNet::execute()
+{
+    this->model->acelerar(this->getCodigoJugador());
 }
 
-char AcelerarNet::getCodigoComando() {
-
-return NCAMBJUG;
-
+char AcelerarNet::getCodigoComando()
+{
+    return DESJUG;
 }

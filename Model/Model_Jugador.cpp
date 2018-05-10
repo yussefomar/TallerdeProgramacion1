@@ -198,7 +198,7 @@ void Jugador::activar()
 {
     this->activo.copiarEstado(this->estado);
     this->estado = &(this->activo);
-   this->detenerVelocidad();
+    this->detenerVelocidad();
 }
 void Jugador::desactivar()
 {

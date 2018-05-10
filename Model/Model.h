@@ -26,7 +26,7 @@ public:
     //virtual void setIp(std::string ipName); va a ser un string???
     virtual char getCodigoJugadorActivo();
 
-    /*Servicios del Modelo en Offline*/
+    /*Servicios del Modelo en modo Offline*/
     virtual void addCommand(Command* command);
     virtual void jugadorActivoAumentaVelocidadEnX();
     virtual void jugadorActivoAumentaVelocidadEnY();
@@ -49,6 +49,7 @@ public:
     virtual void recuperaPelota(char codigojugador);
     virtual void stopJugador(char codigojugador);
     virtual void acelerar(char codigojugador);
+
 
     virtual void update();
 
