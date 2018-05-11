@@ -38,7 +38,7 @@ SocketCliente::SocketCliente()
 
     resultado = getaddrinfo(ip.c_str(), puerto.c_str(), &hints, &posibilidades);
 
-    /*Pasar esto a un tipo de enunciado de error en logg del servidor*/
+    /*Pasar esto a un tipo de enunciado de error en logg del cliente*/
     if (resultado != 0)
     {
         std::cerr << "ERROR EN ADDRINFO: " << gai_strerror(resultado) << std::endl;
@@ -112,19 +112,6 @@ void SocketCliente::enviarCodigoComando(std::string comando)
     /*recibimos el segundo byte: el evento*/
     byte = comando[1];
     if(send(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL) <= 0)
-    {
-        this->socketConectado = false;
-    }
-}
-
-void SocketCliente::enviarCodigoComandoNulo()
-{
-    char byteNulo = 0xFF;
-    if(send(this->socketFD, &byteNulo, sizeof(char), MSG_NOSIGNAL) <= 0)
-    {
-        this->socketConectado = false;
-    }
-    if(send(this->socketFD, &byteNulo, sizeof(char), MSG_NOSIGNAL) <= 0)
     {
         this->socketConectado = false;
     }

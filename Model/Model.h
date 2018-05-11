@@ -7,7 +7,7 @@
 #include "../Model/Formacion.h"
 #include "../Utils/Util_LoggerSubject.h"
 
-#include <list>
+#include <queue>
 
 class Model : public Util_LoggerSubject
 {
@@ -27,7 +27,7 @@ public:
     virtual char getCodigoJugadorActivo();
 
     /*Servicios del Modelo en modo Offline*/
-    virtual void addCommand(Command* command);
+    virtual void agregarCambio(Command* cambio);
     virtual void jugadorActivoAumentaVelocidadEnX();
     virtual void jugadorActivoAumentaVelocidadEnY();
     virtual void jugadorActivoDisminuyeVelocidadEnX();
@@ -62,7 +62,7 @@ private:
     std::string casacaSprite; // TEMPORAL.
     SDL_Rect * camara;
     unsigned int nroJugadorActivo;
-    std::list<Command*> commandsToApply;
+    std::queue<Command*> cambios;
 };
 
 #endif // MODEL_H

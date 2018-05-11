@@ -1,21 +1,22 @@
 #include "../Controller/Controller.h"
-#include "../Command/CommandCtrl/DisminuirVelocidadY.h"
-#include "../Command/CommandCtrl/AumentarVelocidadY.h"
-#include "../Command/CommandCtrl/DisminuirVelocidadX.h"
-#include "../Command/CommandCtrl/AumentarVelocidadX.h"
-#include "../Command/CommandCtrl/CambiarJugador.h"
-#include "../Command/CommandCtrl/StopJugador.h"
-#include "../Command/CommandCtrl/Acelerar.h"
-#include "../Command/CommandCtrl/Desacelerar.h"
-#include "../Command/CommandCtrl/PatearPelota.h"
-#include "../Command/CommandCtrl/RecuperaPelota.h"
+#include "DisminuirVelocidadY.h"
+#include "AumentarVelocidadY.h"
+#include "DisminuirVelocidadX.h"
+#include "AumentarVelocidadX.h"
+#include "CambiarJugador.h"
+#include "StopJugador.h"
+#include "Acelerar.h"
+#include "Desacelerar.h"
+#include "PatearPelota.h"
+#include "RecuperaPelota.h"
+#include "CommandNull.h"
 
-#define CANTCOMMANDS 10
+#define CANTCOMMANDS 11
 
 Controller::Controller(Model* model)
 {
     this->model = model;
-    this->commands = std::vector<Command*>(CANTCOMMANDS);
+    this->commands = std::vector<CommandCtrl*>(CANTCOMMANDS);
     this->commands[DECVELX] = new DisminuirVelocidadX(model);
     this->commands[DECVELY] = new DisminuirVelocidadY(model);
     this->commands[INCVELX] = new AumentarVelocidadX(model);
@@ -24,9 +25,9 @@ Controller::Controller(Model* model)
     this->commands[STOPJUG] = new StopJugador(model);
     this->commands[ACCJUG] = new Acelerar(model);
     this->commands[DESJUG] = new Desacelerar(model);
-
     this->commands[PATPELO] = new PatearPelota(model);
     this->commands[RECUPELO] = new RecuperaPelota(model);
+    this->commands[COMMNULL] = new CommandNull(model);
 
 
     this->quit = false;
@@ -56,7 +57,7 @@ void Controller::processInput()
             {
                 this->quit = true;
             }
-            this->model->addCommand(this->handleEvent(this->e));
+            this->model->agregarCambio(this->handleEvent(this->e));
         }
         NotifyMessage("Inicia: processInput", "Controller.cpp");
     }
@@ -78,7 +79,7 @@ void Controller::processInput()
 
 Command* Controller::handleEvent(SDL_Event& e)
 {
-    Command* command = nullptr;
+    Command* command = this->commands[COMMNULL];
     try
     {
         NotifyMessage("Inicia: handleEvent", "Controller.cpp");

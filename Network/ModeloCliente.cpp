@@ -1,16 +1,17 @@
 #include "ModeloCliente.h"
-#include "../Command/CommandNet/DisminuirVelocidadYNet.h"
-#include "../Command/CommandNet/AumentarVelocidadYNet.h"
-#include "../Command/CommandNet/DisminuirVelocidadXNet.h"
-#include "../Command/CommandNet/AumentarVelocidadXNet.h"
-#include "../Command/CommandNet/CambiarJugadorNet.h"
-#include "../Command/CommandNet/StopJugadorNet.h"
-#include "../Command/CommandNet/AcelerarNet.h"
-#include "../Command/CommandNet/DesacelerarNet.h"
-#include "../Command/CommandNet/PatearPelotaNet.h"
-#include "../Command/CommandNet/RecuperarPelotaNet.h"
+#include "DisminuirVelocidadYNet.h"
+#include "AumentarVelocidadYNet.h"
+#include "DisminuirVelocidadXNet.h"
+#include "AumentarVelocidadXNet.h"
+#include "CambiarJugadorNet.h"
+#include "StopJugadorNet.h"
+#include "AcelerarNet.h"
+#include "DesacelerarNet.h"
+#include "PatearPelotaNet.h"
+#include "RecuperarPelotaNet.h"
+#include "CommandNullNet.h"
 
-#define CANTCOMMANDSNET 10
+#define CANTCOMMANDSNET 11
 #define ENTIDAD 0
 #define EVENTO 1
 
@@ -28,9 +29,9 @@ ModeloCliente::ModeloCliente(Model* model)
     this->comandos[STOPJUG] = new StopJugadorNet(model);
     this->comandos[ACCJUG] = new AcelerarNet(model);
     this->comandos[DESJUG] = new DesacelerarNet(model);
-
     this->comandos[PATPELO] = new PatearPelotaNet(model);
     this->comandos[RECUPELO] = new RecuperarPelotaNet(model);
+    this->comandos[COMMNULL]  = new CommandNullNet(model);
 }
 
 ModeloCliente::~ModeloCliente()
@@ -126,25 +127,22 @@ void ModeloCliente::update()
 
 
 /*Network*/
-void ModeloCliente::addCommand(Command* command)
+void ModeloCliente::agregarCambio(Command* cambio)
 {
-    /*Zona critica... aun no sabemos reconectarnos*/
-    /*Debemos implementar comandosNULL para identificar desconexion*/
     std::string codigoComando;
     CommandNet* comando;
-    if(command == nullptr) {
-        this->socket.enviarCodigoComandoNulo();
-    } else {
-        codigoComando.push_back(this->model->getCodigoJugadorActivo());
-        codigoComando.push_back(command->getCodigoComando());
-        this->socket.enviarCodigoComando(codigoComando);
-    }
+
+    codigoComando.push_back(this->model->getCodigoJugadorActivo());
+    codigoComando.push_back(cambio->getCodigoComando());
+    this->socket.enviarCodigoComando(codigoComando);
+
 
     unsigned cantidad = this->socket.recibirCantidadCambios();
-    for (unsigned i = 0; i < cantidad && this->socket.estaConectado(); ++i) {
+    for (unsigned i = 0; i < cantidad && this->socket.estaConectado(); ++i)
+    {
         codigoComando = this->socket.recibirCodigoComando();
         comando = this->comandos[codigoComando[EVENTO]];
         comando->setCodigoJugador(codigoComando[ENTIDAD]);
-        this->model->addCommand(comando);
+        this->model->agregarCambio(comando);
     }
 }

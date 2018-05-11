@@ -31,15 +31,12 @@ Jugador* Model::getJugadorActivo()
     return &(this->jugadores[this->nroJugadorActivo]);
 }
 
-void Model::addCommand(Command* command)
+void Model::agregarCambio(Command* cambio)
 {
     try
     {
         NotifyMessage("Iniciamos: addCommand", "Model.cpp");
-        //hay que tirar una excepcion
-        if(command == nullptr)
-            return;
-        this->commandsToApply.push_back(command);
+        this->cambios.push(cambio);
         NotifyMessage("Terminamos: addCommand", "Model.cpp");
     }
     catch(const std::runtime_error& re)
@@ -101,11 +98,11 @@ void Model::update()
     {
         NotifyMessage("Iniciamos: update", "Model.cpp");
         Command* command = nullptr;
-        while(!this->commandsToApply.empty())
+        while(!this->cambios.empty())
         {
-            command = this->commandsToApply.front();
+            command = this->cambios.front();
             command->execute();
-            this->commandsToApply.pop_front();
+            this->cambios.pop();
         }
         for(int i = 0; i < CANTJUGADORES; ++i)
         {

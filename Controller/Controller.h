@@ -2,7 +2,7 @@
 #define CONTROLLER_H
 
 #include "../Model/Model.h"
-#include "../Command/Command.h"
+#include "CommandCtrl.h"
 #include <vector>
 #include "../Utils/Util_LoggerSubject.h"
 
@@ -20,7 +20,7 @@ protected:
 
 private:
     Model* model;
-    std::vector<Command*> commands;
+    std::vector<CommandCtrl*> commands;
     bool quit;
     SDL_Event e;
 };

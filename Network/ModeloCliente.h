@@ -21,7 +21,7 @@ public:
     virtual void setCasaca(std::string casacaName);
 
     /*Servicios del Modelo*/
-    virtual void addCommand(Command* command);
+    virtual void agregarCambio(Command* cambio);
     virtual void jugadorActivoAumentaVelocidadEnX();
     virtual void jugadorActivoAumentaVelocidadEnY();
     virtual void jugadorActivoDisminuyeVelocidadEnX();
