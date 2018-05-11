@@ -1,14 +1,14 @@
 #include "../Controller/Controller.h"
-#include "../Controller/DisminuirVelocidadY.h"
-#include "../Controller/AumentarVelocidadY.h"
-#include "../Controller/DisminuirVelocidadX.h"
-#include "../Controller/AumentarVelocidadX.h"
-#include "../Controller/CambiarJugador.h"
-#include "../Controller/StopJugador.h"
-#include "../Controller/Acelerar.h"
-#include "../Controller/Desacelerar.h"
-#include "../Controller/PatearPelota.h"
-#include "../Controller/RecuperaPelota.h"
+#include "../Command/CommandCtrl/DisminuirVelocidadY.h"
+#include "../Command/CommandCtrl/AumentarVelocidadY.h"
+#include "../Command/CommandCtrl/DisminuirVelocidadX.h"
+#include "../Command/CommandCtrl/AumentarVelocidadX.h"
+#include "../Command/CommandCtrl/CambiarJugador.h"
+#include "../Command/CommandCtrl/StopJugador.h"
+#include "../Command/CommandCtrl/Acelerar.h"
+#include "../Command/CommandCtrl/Desacelerar.h"
+#include "../Command/CommandCtrl/PatearPelota.h"
+#include "../Command/CommandCtrl/RecuperaPelota.h"
 
 #define CANTCOMMANDS 10
 
@@ -58,8 +58,6 @@ void Controller::processInput()
             }
             this->model->addCommand(this->handleEvent(this->e));
         }
-        //agregarComandoNUll para forzar el flujo de datos
-        //tanto en el modelo offline como en el online
         NotifyMessage("Inicia: processInput", "Controller.cpp");
     }
     catch(const std::runtime_error& re)

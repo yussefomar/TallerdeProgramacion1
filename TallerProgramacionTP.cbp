@@ -135,6 +135,8 @@
 		<Unit filename="Network/ControllerNet/StopJugadorNet.h" />
 		<Unit filename="Network/ModeloCliente.cpp" />
 		<Unit filename="Network/ModeloCliente.h" />
+		<Unit filename="Network/SocketCliente.cpp" />
+		<Unit filename="Network/SocketCliente.h" />
 		<Unit filename="Utils/IObserver.h" />
 		<Unit filename="Utils/Util_Common.cpp" />
 		<Unit filename="Utils/Util_Common.h" />

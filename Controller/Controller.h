@@ -2,7 +2,7 @@
 #define CONTROLLER_H
 
 #include "../Model/Model.h"
-#include "../Controller/Command.h"
+#include "../Command/Command.h"
 #include <vector>
 #include "../Utils/Util_LoggerSubject.h"
 

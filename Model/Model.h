@@ -3,7 +3,7 @@
 
 #include "../Model/Model_Pelota.h"
 #include "../Model/Model_Jugador.h"
-#include "../Controller/Command.h"
+#include "../Command/Command.h"
 #include "../Model/Formacion.h"
 #include "../Utils/Util_LoggerSubject.h"
 

@@ -32,6 +32,7 @@ SocketCliente::SocketCliente()
     hints.ai_socktype = SOCK_STREAM; /* Protocolo TCP */
     hints.ai_flags = 0;
 
+    /*Por el momento, hardcodeamos*/
     std::string ip = LOCALHOST;
     std::string puerto = PUERTOSERVER;
 
@@ -103,25 +104,45 @@ void SocketCliente::enviarCodigoComando(std::string comando)
 
     /*envia el primer byte: la entidad*/
     byte = comando[0];
-    if(send(this->socketFD, &byte, SIZEBYTE, MSG_NOSIGNAL) <= 0)
+    if(send(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL) <= 0)
     {
-        std::cerr << "ERROR EN SEND" << std::endl;
         this->socketConectado = false;
     }
 
     /*recibimos el segundo byte: el evento*/
     byte = comando[1];
-    if(send(this->socketFD, &byte, SIZEBYTE, MSG_NOSIGNAL) <= 0)
+    if(send(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL) <= 0)
     {
-        std::cerr << "ERROR EN SEND" << std::endl;
         this->socketConectado = false;
     }
+}
 
-    if(!this->socketConectado)
+void SocketCliente::enviarCodigoComandoNulo()
+{
+    char byteNulo = 0xFF;
+    if(send(this->socketFD, &byteNulo, sizeof(char), MSG_NOSIGNAL) <= 0)
     {
-        //hacer algo al respecto
+        this->socketConectado = false;
     }
+    if(send(this->socketFD, &byteNulo, sizeof(char), MSG_NOSIGNAL) <= 0)
+    {
+        this->socketConectado = false;
+    }
+}
 
+char SocketCliente::recibirCantidadCambios()
+{
+    char cantidadCambios = 0x00;
+    if(recv(this->socketFD, &cantidadCambios, sizeof(char), MSG_NOSIGNAL) <= 0)
+    {
+        this->socketConectado = false;
+    }
+    return cantidadCambios;
+}
+
+bool SocketCliente::estaConectado()
+{
+    return this->socketConectado;
 }
 
 std::string SocketCliente::recibirCodigoComando()
@@ -130,28 +151,19 @@ std::string SocketCliente::recibirCodigoComando()
     char byte;
 
     /*recibimos el primer byte: la entidad*/
-    if(recv(this->socketFD, &byte, SIZEBYTE, MSG_NOSIGNAL) <= 0)
+    if(recv(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL) <= 0)
     {
-        std::cerr << "ERROR EN RECV" << std::endl;
         this->socketConectado = false;
     }
     comando.push_back(byte);
 
     /*recibimos el segundo byte: el evento*/
-    if(recv(this->socketFD, &byte, SIZEBYTE, MSG_NOSIGNAL) <= 0)
+    if(recv(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL) <= 0)
     {
-        std::cerr << "ERROR EN RECV" << std::endl;
         this->socketConectado = false;
     }
     comando.push_back(byte);
 
 
-    if(!this->socketConectado)
-    {
-        //hacer algo al respecto
-    }
-
-
     return comando;
 }
-

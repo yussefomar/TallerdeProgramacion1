@@ -2,7 +2,9 @@
 #define MODELOCLIENTE_H
 #include <Model.h>
 
-#include "CommandNet.h"
+#include "../Command/CommandNet.h"
+#include "SocketCliente.h"
+
 class ModeloCliente : public Model
 {
 public:
@@ -36,7 +38,9 @@ protected:
 
 private:
     Model* model;
-    std::vector<CommandNet*> commands;
+    std::vector<CommandNet*> comandos;
+    SocketCliente socket;
+
 };
 
 #endif // MODELOCLIENTE_H
