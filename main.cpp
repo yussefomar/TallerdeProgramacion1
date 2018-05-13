@@ -19,6 +19,7 @@ void modoOnline();
 
 int main(int argc, char* args[])
 {
+    //modoOnline();
     modoOffline();
     return 0;
 }
@@ -61,12 +62,29 @@ void modoOnline()
     Controller controller(&modelCliente);
     controller.Attach(&loggerObserver);
 
+    //MSPORUPDATE CONTROLA EN CIERTA FORMA EL FPS DEL JUEGO... NO SE ASUSTEN
+    long double MSPORUPDATE = 0.7;
+    long double tiempoActual = 0.0;
+    long double lapsoDeTiempo = 0.0;
+    long double tiempoPrevio = clock();
+    long double lag = 0.0;
 
 
     while( !controller.quitPressed() )
     {
+        tiempoActual = clock();
+        lapsoDeTiempo = (tiempoActual - tiempoPrevio) / (CLOCKS_PER_SEC / 1000);
+        tiempoPrevio = tiempoActual;
+        lag += lapsoDeTiempo;
+
         controller.processInput();
-        modelCliente.update();
+
+        while (lag >= MSPORUPDATE)
+        {
+            modelCliente.update();
+            lag -= MSPORUPDATE;
+        }
+
         view.render();
     }
 }

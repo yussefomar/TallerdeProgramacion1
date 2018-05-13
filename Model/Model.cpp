@@ -130,12 +130,13 @@ void Model::update()
     }
 }
 
-void Model::moverJuego() {
-        for(int i = 0; i < CANTJUGADORES; ++i)
-        {
-            this->jugadores[i].move();
-        }
-        this->pelota.move();
+void Model::moverJuego()
+{
+    for(int i = 0; i < CANTJUGADORES; ++i)
+    {
+        this->jugadores[i].move();
+    }
+    this->pelota.move();
 }
 
 void Model::setCamara(SDL_Rect * camara)

@@ -15,6 +15,10 @@
 #define ENTIDAD 0
 #define EVENTO 1
 
+#define ENVIAR 0
+#define RECIBIR 1
+#define EJECUTAR 2
+
 /*Cuidado... la cantidad de comandos en modelCliente puede y
 va a diferir del de controller*/
 ModeloCliente::ModeloCliente(Model* model)
@@ -32,6 +36,7 @@ ModeloCliente::ModeloCliente(Model* model)
     this->comandos[PATPELO] = new PatearPelotaNet(model);
     this->comandos[RECUPELO] = new RecuperarPelotaNet(model);
     this->comandos[COMMNULL]  = new CommandNullNet(model);
+    this->tareaAEjecutar = 0;
 }
 
 ModeloCliente::~ModeloCliente()
@@ -123,25 +128,65 @@ void ModeloCliente::cambiarJugadorActivo()
 
 void ModeloCliente::update()
 {
-    CommandNet* cambio;
-    std::string codigoComando;
-    do
+    this->tareaAEjecutar = this->tareaAEjecutar % 3;
+    if(this->tareaAEjecutar == ENVIAR)
     {
-        codigoComando = this->socket.recibirCodigoComando();
-        cambio = this->comandos[codigoComando[EVENTO]];
-        cambio->setCodigoJugador(codigoComando[ENTIDAD]);
-        this->model->agregarCambio(cambio);
-        this->model->update();
-    }while(codigoComando[1] != 0x0A);
-
+        this->tareaAEjecutar += this->enviarUnComando();
+        this->model->moverJuego();
+    }
+    else if (this->tareaAEjecutar == RECIBIR)
+    {
+        this->tareaAEjecutar += this->recibirUnComando();
+        this->model->moverJuego();
+    }
+    else if (this->tareaAEjecutar == EJECUTAR)
+    {
+        this->tareaAEjecutar += this->ejecutarUnComando();
+    }
 }
 
 
 
 void ModeloCliente::agregarCambio(Command* cambio)
 {
+    if(cambio->getCodigoComando() == COMMNULL)
+        return;
     std::string codigoComando;
     codigoComando.push_back(this->model->getCodigoJugadorActivo());
     codigoComando.push_back(cambio->getCodigoComando());
-    this->socket.enviarCodigoComando(codigoComando);
+    this->codigosAEnviar.push(codigoComando);
+}
+
+
+unsigned ModeloCliente::enviarUnComando()
+{
+    std::string codigo;
+    if(this->codigosAEnviar.empty())
+    {
+        codigo.push_back(this->model->getCodigoJugadorActivo());
+        codigo.push_back(COMMNULL);
+    }
+    else
+    {
+        codigo = this->codigosAEnviar.front();
+        this->codigosAEnviar.pop();
+    }
+
+    this->socket.enviarCodigoComando(codigo);
+    return 1;
+}
+
+unsigned ModeloCliente::recibirUnComando()
+{
+    std::string codigoRecibido = this->socket.recibirCodigoComando();
+    CommandNet* comando = this->comandos[codigoRecibido[EVENTO]];
+    comando->setCodigoJugador(codigoRecibido[ENTIDAD]);
+    this->model->agregarCambio(comando);
+    return 1;
+}
+
+unsigned ModeloCliente::ejecutarUnComando()
+{
+    this->model->update();
+    return 1;
 }

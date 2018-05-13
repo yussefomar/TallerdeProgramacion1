@@ -20,6 +20,9 @@
 #define SIZECOMMAND 2
 #define SIZEBYTE 1
 
+#define ENTIDAD 0
+#define EVENTO 1
+
 SocketCliente::SocketCliente()
 {
     struct addrinfo hints;
@@ -102,12 +105,10 @@ void SocketCliente::enviarCodigoComando(std::string comando)
 {
     char byte;
 
-    /*envia el primer byte: la entidad*/
-    byte = comando[0];
-    this->enviarByte(byte);
-
-    /*recibimos el segundo byte: el evento*/
-    byte = comando[1];
+    char entidad = comando[ENTIDAD];
+    char evento = comando[EVENTO];
+    byte = entidad << 4;
+    byte = byte | evento;
     this->enviarByte(byte);
 }
 
@@ -128,14 +129,11 @@ std::string SocketCliente::recibirCodigoComando()
     std::string comando;
     char byte;
 
-    /*recibimos el primer byte: la entidad*/
     byte = this->recibirByte();
-    comando.push_back(byte);
-
-    /*recibimos el segundo byte: el evento*/
-    byte = this->recibirByte();
-    comando.push_back(byte);
-
+    char entidad = byte >> 4;
+    comando.push_back(entidad);
+    char evento = byte & 0x0F;
+    comando.push_back(evento);
 
     return comando;
 }
@@ -149,4 +147,10 @@ char SocketCliente::recibirByte() {
     char byte;
     this->socketConectado = recv(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL) > 0;
     return byte;
+}
+
+void SocketCliente::enviarPedidoDeCambios() {
+    char byte = 0xFF;
+    this->enviarByte(byte);
+    this->enviarByte(byte);
 }

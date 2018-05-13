@@ -34,13 +34,18 @@ public:
     virtual void cambiarJugadorActivo();
     virtual void update();
 
+    unsigned enviarUnComando();
+    unsigned recibirUnComando();
+    unsigned ejecutarUnComando();
+
 protected:
 
 private:
     Model* model;
     std::vector<CommandNet*> comandos;
+    std::queue<std::string> codigosAEnviar;
     SocketCliente socket;
-
+    unsigned tareaAEjecutar;
 };
 
 #endif // MODELOCLIENTE_H

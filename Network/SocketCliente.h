@@ -15,6 +15,7 @@ public:
     std::string recibirCodigoComando();
     char recibirByte();
     void enviarByte(char byte);
+    void enviarPedidoDeCambios();
 
 protected:
 
