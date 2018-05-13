@@ -92,24 +92,40 @@ void Model::jugadorActivoCambia()
     }
 }
 
+bool Model::hayCambiosPorRealizar() {
+    return !this->cambios.empty();
+}
+
 void Model::update()
 {
     try
     {
         NotifyMessage("Iniciamos: update", "Model.cpp");
-        Command* command = nullptr;
-        while(!this->cambios.empty())
+//        Command* command = nullptr;
+//        while(!this->cambios.empty())
+//        {
+//            command = this->cambios.front();
+//            command->execute();
+//            this->cambios.pop();
+//        }
+
+
+        if(!this->cambios.empty())
         {
-            command = this->cambios.front();
-            command->execute();
+
+            Command* cambio = this->cambios.front();
+            cambio->execute();
             this->cambios.pop();
         }
+
+
         for(int i = 0; i < CANTJUGADORES; ++i)
         {
             this->jugadores[i].move();
         }
         this->pelota.move();
         NotifyMessage("Terminamos: update", "Model.cpp");
+
     }
     catch(const std::runtime_error& re)
     {
@@ -125,6 +141,14 @@ void Model::update()
     {
         NotifyError("Error desconocido que no se ha podido especificar.", "Model.cpp");
     }
+}
+
+void Model::moverJuego() {
+        for(int i = 0; i < CANTJUGADORES; ++i)
+        {
+            this->jugadores[i].move();
+        }
+        this->pelota.move();
 }
 
 void Model::setCamara(SDL_Rect * camara)

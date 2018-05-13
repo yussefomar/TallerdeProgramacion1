@@ -121,25 +121,18 @@ Command* Controller::handleEvent(SDL_Event& e)
             NotifyMessage("Chequeamos: SDL_KEYUP", "Controller.cpp");
             switch( e.key.keysym.sym )
             {
-                /*Los if que se hacen aqui, se podrian hacer directamente en el modelo, sacarlos*/
+            /*Los if que se hacen aqui, se podrian hacer directamente en el modelo, sacarlos*/
             case SDLK_UP:
-                if (this->model->getJugadorActivo()->getVelY()<0){
-                command = this->commands[INCVELY];}
+                command = this->commands[INCVELY];
                 break;
             case SDLK_DOWN:
-             if (this->model->getJugadorActivo()->getVelY()>0){
                 command = this->commands[DECVELY];
-                }
                 break;
             case SDLK_LEFT:
-             if (this->model->getJugadorActivo()->getVelX()<0){
                 command = this->commands[INCVELX];
-                }
                 break;
             case SDLK_RIGHT:
-            if (this->model->getJugadorActivo()->getVelX()>0){
                 command = this->commands[DECVELX];
-                }
                 break;
             case SDLK_f:
                 command = this->commands[DESJUG];

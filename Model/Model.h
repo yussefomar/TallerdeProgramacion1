@@ -50,8 +50,10 @@ public:
     virtual void stopJugador(char codigojugador);
     virtual void acelerar(char codigojugador);
 
-
     virtual void update();
+
+    virtual void moverJuego();
+    virtual bool hayCambiosPorRealizar();
 
 
 protected:

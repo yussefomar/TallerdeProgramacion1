@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include <time.h>       /* clock_t, clock, CLOCKS_PER_SEC */
 #include "Utils/Util_LoggerObserver.h"
 //#include "Utils/Util_Persitencia.h"
 #include "Utils/Util_Common.h"
@@ -10,9 +11,6 @@
 #include "View/View.h"
 #include "View/View_Loguin.h"
 #include "Utils/Util_Configuracion.h"
-
-
-using namespace std;
 
 Util_Common common;
 
@@ -61,13 +59,30 @@ int main(int argc, char* args[])
 //    Controller controller(&modelCliente);
 //    controller.Attach(&loggerObserver);
 
+
+    long double MSPORUPDATE = 0.50;
+    long double tiempoActual = 0.0;
+    long double lapsoDeTiempo = 0.0;
+    long double tiempoPrevio = clock();
+    long double lag = 0.0;
+
     while( !controller.quitPressed() )
     {
+        tiempoActual = clock();
+        lapsoDeTiempo = (tiempoActual - tiempoPrevio) / (CLOCKS_PER_SEC / 1000);
+        tiempoPrevio = tiempoActual;
+        lag += lapsoDeTiempo;
+
         controller.processInput();
-        model.update();
+
+
+        while (lag >= MSPORUPDATE)
+        {
+            model.update();
+            lag -= MSPORUPDATE;
+        }
         view.render();
     }
-    //delete loggerObserver;
     return 0;
 }
 
