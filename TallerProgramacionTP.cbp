@@ -25,9 +25,6 @@
 					<Add directory="Command/CommandNet" />
 				</Compiler>
 				<Linker>
-					<Add option="-lSDL" />
-					<Add option="-lSDL_image" />
-					<Add option="-lSDL_ttf" />
 					<Add option="-lSDL2" />
 				</Linker>
 			</Target>
@@ -51,9 +48,6 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add option="-lSDL" />
-					<Add option="-lSDL_image" />
-					<Add option="-lSDL_ttf" />
 					<Add option="-lSDL2" />
 				</Linker>
 			</Target>
@@ -65,9 +59,6 @@
 			<Add option="-lSDL -lSDL_image -lSDL_ttf" />
 		</Compiler>
 		<Linker>
-			<Add option="-lSDL" />
-			<Add option="-lSDL_image" />
-			<Add option="-lSDL_ttf" />
 			<Add option="-lSDL2" />
 			<Add option="-lSDL2_image" />
 			<Add option="-lyaml-cpp" />
