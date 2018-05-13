@@ -37,36 +37,10 @@ void View::ajustarCamara()
     try
     {
         NotifyMessage("Inicia: ajustarCamara", "View.cpp");
-        Jugador* jugadorActual = this->model->getJugadorActivo();
-        //Esto hacerlo con Patron Observer.
-        // va a servir mas con los corners, saques de arco, y despues de los goles.
-        /* if(this->jugadorAnterior != jugadorActual)
-         {
-             //Posiblemente esto solo se haga cada vez que se cambia de jugador
-             this->camara->x = ( jugadorActual->getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
-             this->camara->y = ( jugadorActual->getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA/ 2;
 
-         }*/
+        this->camara->x = ( model->getPelota()->getPosX() + 12/ 2 ) - ANCHO_VENTANA/ 2;
+        this->camara->y = ( model->getPelota()->getPosY() + 12 / 2 ) - ALTO_VENTANA/ 2;
 
-        //Esto siempre
-        //Center the this->camara->over the dot
-        if ( (this->camara->x + ANCHO_VENTANA-MARGEN)<(jugadorActual->getPosX() + Jugador::ANCHO_JUGADOR / 2 ))
-        {
-            this->camara->x +=Jugador::VELOCIDAD_JUGADOR*this->model->getJugadorActivo()->getAceleracion(); //=( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
-        }
-        if ( (this->camara->x + MARGEN)>(jugadorActual->getPosX() + Jugador::ANCHO_JUGADOR / 2 ))
-        {
-            this->camara->x -=Jugador::VELOCIDAD_JUGADOR*this->model->getJugadorActivo()->getAceleracion();// ( jugador.getPosX() + Jugador::ANCHO_JUGADOR / 2 ) - ANCHO_VENTANA/ 2;
-        }
-
-        if ((this->camara->y + ALTO_VENTANA-MARGEN)<(jugadorActual->getPosY() + Jugador::ALTO_JUGADOR / 2 ))
-        {
-            this->camara->y +=Jugador::VELOCIDAD_JUGADOR*this->model->getJugadorActivo()->getAceleracion();//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
-        }
-        if ((this->camara->y + MARGEN)>(jugadorActual->getPosY() + Jugador::ALTO_JUGADOR / 2 ))
-        {
-            this->camara->y -=Jugador::VELOCIDAD_JUGADOR*this->model->getJugadorActivo()->getAceleracion();//= ( jugador.getPosY() + Jugador::ALTO_JUGADOR / 2 ) - ALTO_VENTANA / 2;
-        }
         //Keep the this->camara->in bounds
         if( this->camara->x < 0 )
         {
@@ -84,7 +58,6 @@ void View::ajustarCamara()
         {
             this->camara->y = ALTO_NIVEL - this->camara->h;
         }
-        this->jugadorAnterior = jugadorActual;
         NotifyMessage("Finaliza: ajustarCamara", "View.cpp");
     }
     catch(const std::runtime_error& re)
