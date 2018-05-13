@@ -8,6 +8,7 @@
 #include "Model/Model.h"
 #include "Network/ModeloCliente.h"
 #include "View/View.h"
+#include "View/View_Loguin.h"
 #include "Utils/Util_Configuracion.h"
 
 
@@ -30,6 +31,22 @@ int main(int argc, char* args[])
     Util_Configuracion configuracion(&model, &loggerObserver);
 //    Util_Persistencia  persistencia(&model, &loggerObserver);
 
+    /***********************************************************************************/
+    /**EJEMPLO**/
+    /***********************************************************************************/
+    /*
+    std::string temp = "";
+    View_Loguin loguin(1);
+    temp = loguin.procesar();
+
+    cout << "=================================================================\n";
+    cout << " El usuario se intentó loguear con la siguiente información: \n";
+    cout << "=================================================================\n";
+    cout << temp;
+    cout << "\n=================================================================\n";
+    */
+    /***********************************************************************************/
+    /***********************************************************************************/
     View view(&model);
     view.Attach(&loggerObserver);
 

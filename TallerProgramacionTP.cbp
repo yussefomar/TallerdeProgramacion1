@@ -25,6 +25,9 @@
 					<Add directory="Command/CommandNet" />
 				</Compiler>
 				<Linker>
+					<Add option="-lSDL" />
+					<Add option="-lSDL_image" />
+					<Add option="-lSDL_ttf" />
 					<Add option="-lSDL2" />
 				</Linker>
 			</Target>
@@ -48,17 +51,23 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add option="-lSDL" />
+					<Add option="-lSDL_image" />
+					<Add option="-lSDL_ttf" />
 					<Add option="-lSDL2" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-std=c++11" />
 			<Add option="-Wall" />
+			<Add option="-std=c++11" />
 			<Add option="-fexceptions" />
 			<Add option="-lSDL -lSDL_image -lSDL_ttf" />
 		</Compiler>
 		<Linker>
+			<Add option="-lSDL" />
+			<Add option="-lSDL_image" />
+			<Add option="-lSDL_ttf" />
 			<Add option="-lSDL2" />
 			<Add option="-lSDL2_image" />
 			<Add option="-lyaml-cpp" />
@@ -189,6 +198,8 @@
 		<Unit filename="View/Event.h" />
 		<Unit filename="View/Observer.cpp" />
 		<Unit filename="View/Observer.h" />
+		<Unit filename="View/StringInput.cpp" />
+		<Unit filename="View/StringInput.h" />
 		<Unit filename="View/View.cpp" />
 		<Unit filename="View/View.h" />
 		<Unit filename="View/ViewModel.cpp" />
@@ -197,6 +208,8 @@
 		<Unit filename="View/View_Cancha.h" />
 		<Unit filename="View/View_Jugador.cpp" />
 		<Unit filename="View/View_Jugador.h" />
+		<Unit filename="View/View_Loguin.cpp" />
+		<Unit filename="View/View_Loguin.h" />
 		<Unit filename="View/View_Pelota.cpp" />
 		<Unit filename="View/View_Pelota.h" />
 		<Unit filename="View/View_Seleccionado.cpp" />
