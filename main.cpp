@@ -19,8 +19,8 @@ void modoOnline();
 
 int main(int argc, char* args[])
 {
-    //modoOnline();
-    modoOffline();
+    modoOnline();
+    //modoOffline();
     return 0;
 }
 

@@ -160,19 +160,16 @@ void ModeloCliente::agregarCambio(Command* cambio)
 
 unsigned ModeloCliente::enviarUnComando()
 {
-    std::string codigo;
     if(this->codigosAEnviar.empty())
     {
-        codigo.push_back(this->model->getCodigoJugadorActivo());
-        codigo.push_back(COMMNULL);
-    }
-    else
-    {
-        codigo = this->codigosAEnviar.front();
-        this->codigosAEnviar.pop();
+        this->socket.enviarByte(0x0A);
+        return 1;
     }
 
+    std::string codigo = this->codigosAEnviar.front();
+    this->codigosAEnviar.pop();
     this->socket.enviarCodigoComando(codigo);
+
     return 1;
 }
 
