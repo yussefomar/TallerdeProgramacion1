@@ -53,7 +53,6 @@ public:
     virtual void update();
 
     virtual void moverJuego();
-    virtual bool hayCambiosPorRealizar();
 
 
 protected:

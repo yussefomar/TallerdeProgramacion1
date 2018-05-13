@@ -92,27 +92,14 @@ void Model::jugadorActivoCambia()
     }
 }
 
-bool Model::hayCambiosPorRealizar() {
-    return !this->cambios.empty();
-}
-
 void Model::update()
 {
     try
     {
         NotifyMessage("Iniciamos: update", "Model.cpp");
-//        Command* command = nullptr;
-//        while(!this->cambios.empty())
-//        {
-//            command = this->cambios.front();
-//            command->execute();
-//            this->cambios.pop();
-//        }
-
 
         if(!this->cambios.empty())
         {
-
             Command* cambio = this->cambios.front();
             cambio->execute();
             this->cambios.pop();

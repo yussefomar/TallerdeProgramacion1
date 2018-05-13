@@ -104,26 +104,17 @@ void SocketCliente::enviarCodigoComando(std::string comando)
 
     /*envia el primer byte: la entidad*/
     byte = comando[0];
-    if(send(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL) <= 0)
-    {
-        this->socketConectado = false;
-    }
+    this->enviarByte(byte);
 
     /*recibimos el segundo byte: el evento*/
     byte = comando[1];
-    if(send(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL) <= 0)
-    {
-        this->socketConectado = false;
-    }
+    this->enviarByte(byte);
 }
 
-char SocketCliente::recibirCantidadCambios()
+unsigned SocketCliente::recibirCantidadCambios()
 {
     char cantidadCambios = 0x00;
-    if(recv(this->socketFD, &cantidadCambios, sizeof(char), MSG_NOSIGNAL) <= 0)
-    {
-        this->socketConectado = false;
-    }
+    cantidadCambios = this->recibirByte();
     return cantidadCambios;
 }
 
@@ -138,19 +129,24 @@ std::string SocketCliente::recibirCodigoComando()
     char byte;
 
     /*recibimos el primer byte: la entidad*/
-    if(recv(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL) <= 0)
-    {
-        this->socketConectado = false;
-    }
+    byte = this->recibirByte();
     comando.push_back(byte);
 
     /*recibimos el segundo byte: el evento*/
-    if(recv(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL) <= 0)
-    {
-        this->socketConectado = false;
-    }
+    byte = this->recibirByte();
     comando.push_back(byte);
 
 
     return comando;
+}
+
+void SocketCliente::enviarByte(char byte)
+{
+    this->socketConectado = send(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL) > 0;
+}
+
+char SocketCliente::recibirByte() {
+    char byte;
+    this->socketConectado = recv(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL) > 0;
+    return byte;
 }

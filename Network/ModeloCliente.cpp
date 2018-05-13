@@ -119,34 +119,29 @@ void ModeloCliente::cambiarJugadorActivo()
 {
     return;
 }
+/*Network*/
+
 void ModeloCliente::update()
 {
-    return;
+    CommandNet* cambio;
+    std::string codigoComando;
+    do
+    {
+        codigoComando = this->socket.recibirCodigoComando();
+        cambio = this->comandos[codigoComando[EVENTO]];
+        cambio->setCodigoJugador(codigoComando[ENTIDAD]);
+        this->model->agregarCambio(cambio);
+        this->model->update();
+    }while(codigoComando[1] != 0x0A);
+
 }
 
 
 
-/*Network*/
 void ModeloCliente::agregarCambio(Command* cambio)
 {
     std::string codigoComando;
-    CommandNet* comando;
-
     codigoComando.push_back(this->model->getCodigoJugadorActivo());
     codigoComando.push_back(cambio->getCodigoComando());
     this->socket.enviarCodigoComando(codigoComando);
-//
-//
-//    unsigned cantidad = this->socket.recibirCantidadCambios();
-//    for (unsigned i = 0; i < cantidad && this->socket.estaConectado(); ++i)
-//    {
-//        codigoComando = this->socket.recibirCodigoComando();
-//        comando = this->comandos[codigoComando[EVENTO]];
-//        comando->setCodigoJugador(codigoComando[ENTIDAD]);
-//        this->model->agregarCambio(comando);
-//    }
-    codigoComando = this->socket.recibirCodigoComando();
-    comando = this->comandos[codigoComando[EVENTO]];
-    comando->setCodigoJugador(codigoComando[ENTIDAD]);
-    this->model->agregarCambio(comando);
 }
