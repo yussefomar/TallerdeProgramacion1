@@ -135,14 +135,18 @@ void ModeloCliente::agregarCambio(Command* cambio)
     codigoComando.push_back(this->model->getCodigoJugadorActivo());
     codigoComando.push_back(cambio->getCodigoComando());
     this->socket.enviarCodigoComando(codigoComando);
-
-
-    unsigned cantidad = this->socket.recibirCantidadCambios();
-    for (unsigned i = 0; i < cantidad && this->socket.estaConectado(); ++i)
-    {
-        codigoComando = this->socket.recibirCodigoComando();
-        comando = this->comandos[codigoComando[EVENTO]];
-        comando->setCodigoJugador(codigoComando[ENTIDAD]);
-        this->model->agregarCambio(comando);
-    }
+//
+//
+//    unsigned cantidad = this->socket.recibirCantidadCambios();
+//    for (unsigned i = 0; i < cantidad && this->socket.estaConectado(); ++i)
+//    {
+//        codigoComando = this->socket.recibirCodigoComando();
+//        comando = this->comandos[codigoComando[EVENTO]];
+//        comando->setCodigoJugador(codigoComando[ENTIDAD]);
+//        this->model->agregarCambio(comando);
+//    }
+    codigoComando = this->socket.recibirCodigoComando();
+    comando = this->comandos[codigoComando[EVENTO]];
+    comando->setCodigoJugador(codigoComando[ENTIDAD]);
+    this->model->agregarCambio(comando);
 }

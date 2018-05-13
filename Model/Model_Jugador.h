@@ -55,12 +55,13 @@ public:
     void acelerar();
     void desacelerar();
     double getDireccion();
-     bool checkCollisionPelota(SDL_Rect *pelota);
+    bool checkCollisionPelota(SDL_Rect *pelota);
     void updateDirection();
     int getAceleracion();
     void poseePelota();
     void noPoseePelota();
     bool getPosesion();
+
 private:
     SDL_Rect mCollider;
     int casaca;

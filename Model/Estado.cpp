@@ -68,26 +68,44 @@ void Estado::copiarEstado(Estado* estado)
 void Estado::disminuirVelocidadX()
 {
     this->mVelX -=VELOCIDAD_JUGADOR ;
+    if(this->mVelX < -VELOCIDAD_JUGADOR)
+    {
+        this->mVelX = -VELOCIDAD_JUGADOR;
+    }
 }
 void Estado::disminuirVelocidadY()
 {
     this->mVelY -=VELOCIDAD_JUGADOR;
+    if(this->mVelY < -VELOCIDAD_JUGADOR)
+    {
+        this->mVelY = -VELOCIDAD_JUGADOR;
+    }
 }
 void Estado::aumentarVelocidadX()
 {
     this->mVelX +=VELOCIDAD_JUGADOR;
+    if(this->mVelX > VELOCIDAD_JUGADOR)
+    {
+        this->mVelX = VELOCIDAD_JUGADOR;
+    }
 }
 void Estado::aumentarVelocidadY()
 {
-    this->mVelY+=VELOCIDAD_JUGADOR;
+    this->mVelY +=VELOCIDAD_JUGADOR;
+    if(this->mVelX > VELOCIDAD_JUGADOR)
+    {
+        this->mVelX = VELOCIDAD_JUGADOR;
+    }
 }
 
-void Estado::detenerVelocidad() {
+void Estado::detenerVelocidad()
+{
     this->mVelX = 0;
     this->mVelY = 0;
 }
 
-void Estado::desacelerar() {
+void Estado::desacelerar()
+{
     this->aceleracion = 1;
 }
 
