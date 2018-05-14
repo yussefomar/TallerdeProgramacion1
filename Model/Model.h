@@ -21,7 +21,7 @@ public:
     virtual Jugador* getJugadorActivo();
     virtual std::string  getCasaca();
     virtual void setCamara(SDL_Rect * camara);
-    virtual void setFormacion(Formacion* formacion);
+    virtual void setFormacion(Formacion* formacion, bool local);
     virtual void setCasaca(std::string casacaName);
     //virtual void setIp(std::string ipName); va a ser un string???
     virtual char getCodigoJugadorActivo();

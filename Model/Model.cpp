@@ -7,7 +7,7 @@
 Model::Model()
 {
     this->jugadores = new Jugador[CANTJUGADORES]();
-    this->nroJugadorActivo = 4;
+    this->nroJugadorActivo = 6;
     this->getJugadorActivo()->activar();
 }
 
@@ -146,10 +146,10 @@ void Model::setCamara(SDL_Rect * camara)
     NotifyMessage("Terminamos: setCamara", "Model.cpp");
 }
 
-void Model::setFormacion(Formacion* formacion)
+void Model::setFormacion(Formacion* formacion,bool local)
 {
     NotifyMessage("Iniciamos: setFormacion", "Model.cpp");
-    formacion->setPosicionInicial(this->jugadores);
+    formacion->setPosicionInicial(this->jugadores,local);
     NotifyMessage("Terminamos: setFormacion", "Model.cpp");
 
 }
