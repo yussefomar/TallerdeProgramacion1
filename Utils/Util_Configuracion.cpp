@@ -78,19 +78,19 @@ Util_Configuracion::Util_Configuracion(Model* model, Util_LoggerObserver* logger
         if((strncasecmp(c1,c2, 3))==0)
         {
             NotifyMessage("Seteamos la formación: 3-3", "Util_Configuracion.cpp");
-            this->model->setFormacion(&(this->formacion33));
+            this->model->setFormacion(&(this->formacion33),false);
         }
 
         if((strncasecmp(c1,c3, 3))==0)
         {
             NotifyMessage("Seteamos la formación: 3-1-2", "Util_Configuracion.cpp");
-            this->model->setFormacion(&(this->formacion312));
+            this->model->setFormacion(&(this->formacion312),false);
         }
 
         if((strncasecmp(c1,c4, 3))==0)
         {
             NotifyMessage("Seteamos la formación: 3-2-1", "Util_Configuracion.cpp");
-            this->model->setFormacion(&(this->formacion321));
+            this->model->setFormacion(&(this->formacion321),false);
         }
     }
     catch(const std::runtime_error& re)

@@ -19,6 +19,22 @@ void modoOnline();
 
 int main(int argc, char* args[])
 {
+
+    /***********************************************************************************/
+    /**EJEMPLO**/
+    /***********************************************************************************/
+    bool quit = false;
+    View_Loguin loguinScreen(1);
+    std::string ejemplo = "";
+    std::string mensajeError = "";
+    while( quit == false )
+    {
+        ejemplo = loguinScreen.Procesar(mensajeError);
+        mensajeError = "mal ingreso de datos";
+    }
+    /***********************************************************************************/
+    /***********************************************************************************/
+
     modoOnline();
     //modoOffline();
     return 0;
@@ -39,22 +55,6 @@ void modoOnline()
     Util_Configuracion configuracion(&model, &loggerObserver);
 //    Util_Persistencia  persistencia(&model, &loggerObserver);
 
-    /***********************************************************************************/
-    /**EJEMPLO**/
-    /***********************************************************************************/
-    /*
-    std::string temp = "";
-    View_Loguin loguin(1);
-    temp = loguin.procesar();
-
-    cout << "=================================================================\n";
-    cout << " El usuario se intentó loguear con la siguiente información: \n";
-    cout << "=================================================================\n";
-    cout << temp;
-    cout << "\n=================================================================\n";
-    */
-    /***********************************************************************************/
-    /***********************************************************************************/
     View view(&model);
     view.Attach(&loggerObserver);
 

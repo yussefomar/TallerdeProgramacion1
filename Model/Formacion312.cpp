@@ -10,16 +10,19 @@ Formacion312::~Formacion312()
     //dtor
 }
 
-void Formacion312::setPosicionInicial(Jugador* jugadores)
+void Formacion312::setPosicionInicial(Jugador* jugadores,bool local)
 {
     int posX;
     int posY;
-    int posicionesX[] = {1, 4, 3, 4, 6, 9, 9};
-    int posicionesY[] = {3, 1, 3, 5, 3, 2, 4};
-
+    int posicionesX[] = { 8,  5,  5,  6,  0,  0, 0};
+    int posicionesY[] = { 0, -3,  3,  0, -3,  3, 0};
+    int multiplo = 1;
+   if (local) {
+    multiplo= -1;
+    }
     for(int i = 0; i < CANTJUGADORES; ++i) {
-        posX = (posicionesX[i] * ANCHO_NIVEL) / CANTDIVANCHO;
-        posY = (posicionesY[i] * ALTO_NIVEL) / CANTDIVALTO;
+        posX = ((ANCHO_NIVEL/2)-(31))+posicionesX[i]*100*multiplo;//cambiar 31 por ancho jugador
+        posY = ((ALTO_NIVEL/2)-(31))+posicionesY[i]*100;
         jugadores[i].setPosInitX(posX);
         jugadores[i].setPosInitY(posY);
         jugadores[i].setPosX(posX);
