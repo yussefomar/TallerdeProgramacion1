@@ -1,8 +1,10 @@
-/**
+#ifndef VIEW_LOGUIN_H_
+#define VIEW_LOGUIN_H_
+
 //The headers
-#include "SDL/SDL.h"
-#include "SDL/SDL_image.h"
-#include "SDL/SDL_ttf.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #include <string>
 
 using namespace std;
@@ -15,8 +17,8 @@ class View_Loguin
     View_Loguin(int i);
     //Destructor
     ~View_Loguin();
-    //Procesamos la llamada del loguin
-    //devolvemos un string con lo ingresado por el usuario
-    std::string procesar();
+    //Procesamos la información.
+    std::string Procesar(std::string mensajeError);
 };
-**/
+
+#endif /* VIEW_LOGUIN_H_ */

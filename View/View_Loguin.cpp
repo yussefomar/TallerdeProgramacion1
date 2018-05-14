@@ -1,216 +1,86 @@
 //The headers
-/** #include "SDL/SDL.h"
-#include "SDL/SDL_image.h"
-#include "SDL/SDL_ttf.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #include <string>
-#include <stdexcept>
 
 using namespace std;
 
-#include "../View/StringInput.h"
 #include "../View/View_Loguin.h"
+#include "../View/StringInput.h"
 
-//Screen attributes
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
-const int SCREEN_BPP = 32;
+#include <iostream>
 
-//The surfaces
-SDL_Surface *message_equipo = NULL;
-SDL_Surface *message_password = NULL;
-SDL_Surface *message = NULL;
-SDL_Surface *background = NULL;
-SDL_Surface *tittle = NULL;
-SDL_Surface *screen = NULL;
+// Setup
+bool InitEverything();
+bool InitSDL();
+bool CreateWindow();
+bool CreateRenderer();
+void SetupRenderer();
+// Setup Texto
+bool SetupTTF( const std::string &fontNamePeticion,  const std::string &fontNameRespuesta );
+SDL_Texture* LoadTexture( const std::string &str );
+SDL_Texture* SurfaceToTexture( SDL_Surface* surf );
+void CreateTextTextures();
+// Update and Render
+void Render();
+void RunGame();
+void UpdateInputUsuario(std::string value);
+void UpdateInputPassword(std::string value);
+void UpdateInputEquipo(std::string value);
+void UpdateInputPeticionPassword(std::string value);
+void UpdateInputPeticionEquipo(std::string value);
+void UpdateSalida(std::string value);
+// Stuff for text rendering
+TTF_Font* fontPeticion;
+TTF_Font* fontRespuesta;
 
-//The event structure
-SDL_Event event;
+SDL_Color textColor = { 255, 255, 255, 255 }; // white
+SDL_Color backgroundColor = { 0, 0, 0, 255 }; // red
 
-//The font
-TTF_Font *fontBienvenida = NULL;
-TTF_Font *fontUsuario = NULL;
-TTF_Font *fontPassword = NULL;
-TTF_Font *fontEquipo = NULL;
-TTF_Font *fontRespuesta = NULL;
+SDL_Texture* bienvenidaTexture;
+SDL_Texture* peticionUsuarioTexture;
+SDL_Texture* peticionPasswordTexture;
+SDL_Texture* peticionEquipoTexture;
+SDL_Texture* ingresoUsuarioTexture;
+SDL_Texture* ingresoPasswordTexture;
+SDL_Texture* ingresoEquipoTexture;
+SDL_Texture* backgroundTexture;
+SDL_Texture* salidaTexture;
 
-//The color of the font
-SDL_Color textColor = { 0xFF, 0xFF, 0xFF };
+SDL_Rect bienvenidaRect;
+SDL_Rect peticionUsuarioRect;
+SDL_Rect peticionPasswordRect;
+SDL_Rect peticionEquipoRect;
+SDL_Rect ingresoUsuarioRect;
+SDL_Rect ingresoPasswordRect;
+SDL_Rect ingresoEquipoRect;
+SDL_Rect backgroundRect;
+SDL_Rect salidaRect;
 
+SDL_Rect windowRect = { 300, 300, 800, 600 };
 
-SDL_Surface *load_image( std::string filename )
-{
-    //The image that's loaded
-    SDL_Surface* loadedImage = NULL;
-
-    //The optimized surface that will be used
-    SDL_Surface* optimizedImage = NULL;
-
-    //Load the image
-    loadedImage = IMG_Load( filename.c_str() );
-
-    //If the image loaded
-    if( loadedImage != NULL )
-    {
-        //Create an optimized surface
-        optimizedImage = SDL_DisplayFormat( loadedImage );
-
-        //Free the old surface
-        SDL_FreeSurface( loadedImage );
-
-        //If the surface was optimized
-        if( optimizedImage != NULL )
-        {
-            //Color key surface
-            SDL_SetColorKey( optimizedImage, SDL_SRCCOLORKEY, SDL_MapRGB( optimizedImage->format, 0, 0xFF, 0xFF ) );
-        }
-    }
-
-    //Return the optimized surface
-    return optimizedImage;
-}
+SDL_Window* window;
+SDL_Renderer* renderer;
 
 
-// Imprime por pantalla cierto texto específico.
-void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL )
-{
-    //Holds offsets
-    SDL_Rect offset;
-
-    //Get offsets
-    offset.x = x;
-    offset.y = y;
-
-    //Blit
-    SDL_BlitSurface( source, clip, destination, &offset );
-}
-
-bool init()
-{
-    //Initialize all SDL subsystems
-    if( SDL_Init( SDL_INIT_EVERYTHING ) == -1 )
-    {
-        return false;
-    }
-
-    //Set up the screen
-    screen = SDL_SetVideoMode( SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_SWSURFACE );
-
-    //If there was an error in setting up the screen
-    if( screen == NULL )
-    {
-        return false;
-    }
-
-    //Initialize SDL_ttf
-    if( TTF_Init() == -1 )
-    {
-        return false;
-    }
-
-    //Set the window caption
-    SDL_WM_SetCaption( "TALLER DE PROGRAMACION I", NULL );
-
-    //If everything initialized fine
-    return true;
-}
-
-
-//Limpiamos todo aquello que hemos cargado.
-void clean_up()
-{
-    //Free the surfaces
-    SDL_FreeSurface( background );
-    SDL_FreeSurface( message );
-    SDL_FreeSurface( message_password );
-    SDL_FreeSurface( tittle );
-
-    //Close the font that was used
-    TTF_CloseFont( fontBienvenida );
-    TTF_CloseFont( fontUsuario );
-    TTF_CloseFont( fontPassword );
-    TTF_CloseFont( fontRespuesta );
-    TTF_CloseFont( fontEquipo );
-
-    //Quit SDL_ttf
-    TTF_Quit();
-
-    //Quit SDL
-    SDL_Quit();
-}
-
-//Cargamos todos los archivos que fuesen necesarios.
-bool load_files()
-{
-    //Load the background image
-    background = load_image( "../Images/background.jpg" );
-    //Open the font
-    fontBienvenida = TTF_OpenFont( "../Images/peticion.ttf", 42 );
-    fontUsuario = TTF_OpenFont( "../Images/peticion.ttf", 42 );
-    fontPassword = TTF_OpenFont( "../Images/peticion.ttf", 42 );
-    fontEquipo = TTF_OpenFont( "../Images/peticion.ttf", 42 );
-    fontRespuesta = TTF_OpenFont( "../Images/respuesta.otf", 42 );
-
-    //If there was a problem in loading the background
-    if( background == NULL )
-    {
-        return false;
-    }
-    //If there was an error in loading the font
-    if( fontBienvenida == NULL )
-    {
-        return false;
-    }
-    if( fontUsuario == NULL )
-    {
-        return false;
-    }
-    if( fontPassword == NULL )
-    {
-        return false;
-    }
-    if( fontRespuesta == NULL )
-    {
-        return false;
-    }
-    if( fontEquipo == NULL )
-    {
-        return false;
-    }
-
-    //If everything loaded fine
-    return true;
-}
-//Constructor
 View_Loguin::View_Loguin(int i)
 {
-    //Initialize
-    if( init() == false )
-    {
-        throw std::invalid_argument( "falla el init del viewLoguin" );
-    }
 
-    //Load the files
-    if( load_files() == false )
-    {
-        throw std::invalid_argument( "falla el loadFiles del viewLoguin" );
-    }
 }
-//Destructor
+
 View_Loguin::~View_Loguin()
 {
-    //Clean up
-    clean_up();
+
 }
-std::string View_Loguin::procesar()
+
+std::string View_Loguin::Procesar(std::string mensajeError)
 {
-    //Enable Unicode
-    SDL_EnableUNICODE( SDL_ENABLE );
+if ( !InitEverything() )
+		return "";
 
-    //Quit flag
-    bool quit = false;
     std::string temp = "";
-
-    //Keep track if whether or not the user has entered their name
+    bool quit = false;
     bool nameEntered = false;
     bool passwordEntered = false;
     bool teamEntered = false;
@@ -224,14 +94,11 @@ std::string View_Loguin::procesar()
     //The gets the user's name
     StringInput actualTeam(1);
 
-    tittle = TTF_RenderText_Solid( fontBienvenida, "bienvenidos a correlatividad:", textColor );
+    UpdateSalida(mensajeError);
 
-    //Set the message
-    message = TTF_RenderText_Solid( fontUsuario, "usuario:", textColor );
-
-    //While the user hasn't quit
     while( quit == false )
     {
+		SDL_Event event;
         //While there's events to handle
         while( SDL_PollEvent( &event ) )
         {
@@ -246,11 +113,7 @@ std::string View_Loguin::procesar()
                 //If the string was changed
                 if( actualUsuario.str != temp )
                 {
-                    //Free the old surface
-                    SDL_FreeSurface( actualUsuario.text );
-
-                    //Render a new text surface
-                    actualUsuario.text = TTF_RenderText_Solid( fontRespuesta, actualUsuario.str.c_str(), textColor );
+                    UpdateInputUsuario(actualUsuario.str);
                 }
 
                 //If the enter key was pressed
@@ -258,11 +121,7 @@ std::string View_Loguin::procesar()
                 {
                      //Change the flag
                      nameEntered = true;
-
-                     SDL_FreeSurface( message_password );
-
-                    //Change the message
-                     message_password = TTF_RenderText_Solid( fontPassword, "password:", textColor );
+                     UpdateInputPeticionPassword("password:");
                 }
             }
             else if( passwordEntered == false )
@@ -275,11 +134,7 @@ std::string View_Loguin::procesar()
                 //If the string was changed
                 if( actualPassword.str != temp )
                 {
-                    //Free the old surface
-                    SDL_FreeSurface( actualPassword.text );
-
-                    //Render a new text surface
-                    actualPassword.text = TTF_RenderText_Solid( fontRespuesta, actualPassword.str.c_str(), textColor );
+                    UpdateInputPassword(actualPassword.str);
                 }
 
                 //If the enter key was pressed
@@ -287,14 +142,10 @@ std::string View_Loguin::procesar()
                 {
                     //Change the flag
                     passwordEntered = true;
-
-                     SDL_FreeSurface( message_equipo );
-
-                    //Change the message
-                     message_equipo = TTF_RenderText_Solid( fontEquipo, "ingrese equipo 1 o 2:", textColor );
+                    UpdateInputPeticionEquipo("ingrese equipo 1 o 2:");
                 }
-
-            }else if( teamEntered == false )
+            }
+            else if( teamEntered == false )
             {
 
                 //Keep a copy of the current version of the string
@@ -305,11 +156,7 @@ std::string View_Loguin::procesar()
                 //If the string was changed
                 if( actualTeam.str != temp )
                 {
-                    //Free the old surface
-                    SDL_FreeSurface( actualTeam.text );
-
-                    //Render a new text surface
-                    actualTeam.text = TTF_RenderText_Solid( fontRespuesta, actualTeam.str.c_str(), textColor );
+                    UpdateInputEquipo(actualTeam.str);
                 }
 
                 //If the enter key was pressed
@@ -325,37 +172,300 @@ std::string View_Loguin::procesar()
             {
                 //Quit the program
                 quit = true;
+                return "";
             }
         }
-
-        //Apply the background
-        apply_surface( 0, 0, background, screen );
-
-        //Show the message
-        apply_surface( 30, 20, tittle, screen );
-
-        //Show the name on the screen
-        apply_surface( 30, 100, message, screen );
-        apply_surface( 30, 150, actualUsuario.text, screen );
-
-        //Show the password on the screen
-        apply_surface( 30, 200, message_password, screen );
-        apply_surface( 30, 250, actualPassword.text, screen );
-        //Show the team on the screen
-        apply_surface( 30, 300, message_equipo, screen );
-        apply_surface( 30, 350, actualTeam.text, screen );
-
+        /*
         //Update the screen
         if( SDL_Flip( screen ) == -1 )
         {
-            return "";
-        }
+            return false;
+        }*/
+      /**************************************/
+      Render();
     }
 
     std::string datos = actualUsuario.str + ";" + actualPassword.str + ";" + actualTeam.str;
-    //Disable Unicode
-    SDL_EnableUNICODE( SDL_DISABLE );
+    // Clean up font
+    TTF_CloseFont( fontPeticion );
+    TTF_CloseFont( fontRespuesta );
+    //Quit SDL_ttf
+    TTF_Quit();
+    //Quit SDL
+    SDL_Quit();
 
     return datos;
 }
-**/
+
+
+/*****************************************************************************/
+/*****************************************************************************/
+/**** METODOS AUXILIARES PROPIOS DE ESTA CLASE.  *******/
+/*****************************************************************************/
+/*****************************************************************************/
+
+void RunGame()
+{
+	//Render();
+//	std::cout << "Press any key to exit\n";
+	//std::cin.ignore();
+}
+
+void Render()
+{
+	// Clear the window and make it all red
+	SDL_RenderClear( renderer );
+
+    //Para el backgroundImage
+	SDL_RenderCopy( renderer, backgroundTexture, NULL, &backgroundRect );
+
+	// Render our text objects ( like normal )
+	SDL_RenderCopy( renderer, bienvenidaTexture, nullptr, &bienvenidaRect );
+	SDL_RenderCopy( renderer, peticionUsuarioTexture, nullptr, &peticionUsuarioRect );
+	SDL_RenderCopy( renderer, peticionPasswordTexture, nullptr, &peticionPasswordRect );
+	SDL_RenderCopy( renderer, peticionEquipoTexture, nullptr, &peticionEquipoRect );
+	SDL_RenderCopy( renderer, ingresoUsuarioTexture, nullptr, &ingresoUsuarioRect );
+	SDL_RenderCopy( renderer, ingresoPasswordTexture, nullptr, &ingresoPasswordRect );
+	SDL_RenderCopy( renderer, ingresoEquipoTexture, nullptr, &ingresoEquipoRect );
+	SDL_RenderCopy( renderer, salidaTexture, nullptr, &salidaRect );
+
+	// Render the changes above
+	SDL_RenderPresent( renderer );
+}
+
+// Initialization ++
+// ==================================================================
+bool SetupTTF(const std::string &fontNamePeticion,const std::string &fontNameRespuesta)
+{
+	// SDL2_TTF needs to be initialized just like SDL2
+	if ( TTF_Init() == -1 )
+	{
+		std::cout << " Falla al inicializar el TTF : " << SDL_GetError() << std::endl;
+		return false;
+	}
+
+	// Load our fonts, with a huge size
+	fontPeticion = TTF_OpenFont( fontNamePeticion.c_str(), 45 );
+	fontRespuesta = TTF_OpenFont( fontNameRespuesta.c_str(), 30 );
+
+	// Error check
+	if ( fontPeticion == nullptr || fontRespuesta == nullptr )
+	{
+		std::cout << " Falla al cargar una fuente : " << SDL_GetError() << std::endl;
+		return false;
+	}
+
+	return true;
+}
+
+void UpdateInputUsuario(std::string value)
+{
+	SDL_Surface* ingresoUsuario = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColor );
+	ingresoUsuarioTexture = SurfaceToTexture( ingresoUsuario );
+	SDL_QueryTexture( ingresoUsuarioTexture, NULL, NULL, &ingresoUsuarioRect.w, &ingresoUsuarioRect.h );
+	ingresoUsuarioRect.x = 30;
+	ingresoUsuarioRect.y = peticionUsuarioRect.y + 50;
+}
+
+void UpdateInputPassword(std::string value)
+{
+	SDL_Surface* ingresoPassword = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColor );
+	ingresoPasswordTexture = SurfaceToTexture( ingresoPassword );
+	SDL_QueryTexture( ingresoPasswordTexture, NULL, NULL, &ingresoPasswordRect.w, &ingresoPasswordRect.h );
+	ingresoPasswordRect.x = 30;
+	ingresoPasswordRect.y = peticionPasswordRect.y + 50;
+}
+
+void UpdateInputEquipo(std::string value)
+{
+	SDL_Surface* ingresoEquipo = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColor );
+	ingresoEquipoTexture = SurfaceToTexture( ingresoEquipo );
+	SDL_QueryTexture( ingresoEquipoTexture, NULL, NULL, &ingresoEquipoRect.w, &ingresoEquipoRect.h );
+	ingresoEquipoRect.x = 30;
+	ingresoEquipoRect.y = peticionEquipoRect.y + 50;
+}
+
+void UpdateInputPeticionPassword(std::string value)
+{
+	SDL_Surface* peticionPassword = TTF_RenderText_Solid( fontPeticion, value.c_str(), textColor );
+	peticionPasswordTexture = SurfaceToTexture( peticionPassword );
+	SDL_QueryTexture( peticionPasswordTexture, NULL, NULL, &peticionPasswordRect.w, &peticionPasswordRect.h );
+	peticionPasswordRect.x = 30;
+	peticionPasswordRect.y = ingresoUsuarioRect.y + 50;
+}
+
+void UpdateInputPeticionEquipo(std::string value)
+{
+	SDL_Surface* peticionEquipo = TTF_RenderText_Solid( fontPeticion, value.c_str(), textColor );
+	peticionEquipoTexture = SurfaceToTexture( peticionEquipo );
+	SDL_QueryTexture( peticionEquipoTexture, NULL, NULL, &peticionEquipoRect.w, &peticionEquipoRect.h );
+	peticionEquipoRect.x = 30;
+	peticionEquipoRect.y = ingresoPasswordRect.y + 50;
+}
+
+void UpdateSalida(std::string value)
+{
+	SDL_Surface* salida = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColor );
+	salidaTexture = SurfaceToTexture( salida );
+	SDL_QueryTexture( salidaTexture, NULL, NULL, &salidaRect.w, &salidaRect.h );
+	salidaRect.x = 100;
+	salidaRect.y = ingresoEquipoRect.y + 50;
+}
+
+void CreateTextTextures()
+{
+	SDL_Surface* mensajeBienvenida = TTF_RenderText_Solid( fontPeticion, "BIENVENIDO A CORRELATIVIDAD!", textColor );
+	bienvenidaTexture = SurfaceToTexture( mensajeBienvenida );
+	SDL_QueryTexture( bienvenidaTexture, NULL, NULL, &bienvenidaRect.w, &bienvenidaRect.h );
+	bienvenidaRect.x = 30;
+	bienvenidaRect.y = 30;
+
+	SDL_Surface* peticionUsuario = TTF_RenderText_Solid( fontPeticion, "INGRESE USUARIO:", textColor );
+	peticionUsuarioTexture = SurfaceToTexture( peticionUsuario );
+	SDL_QueryTexture( peticionUsuarioTexture, NULL, NULL, &peticionUsuarioRect.w, &peticionUsuarioRect.h );
+	peticionUsuarioRect.x = 30;
+	peticionUsuarioRect.y = bienvenidaRect.y + 80;
+
+	SDL_Surface* ingresoUsuario = TTF_RenderText_Solid( fontRespuesta, "", textColor );
+	ingresoUsuarioTexture = SurfaceToTexture( ingresoUsuario );
+	SDL_QueryTexture( ingresoUsuarioTexture, NULL, NULL, &ingresoUsuarioRect.w, &ingresoUsuarioRect.h );
+	ingresoUsuarioRect.x = 30;
+	ingresoUsuarioRect.y = peticionUsuarioRect.y + 50;
+
+	SDL_Surface* peticionPassword = TTF_RenderText_Solid( fontPeticion, "", textColor );
+	peticionPasswordTexture = SurfaceToTexture( peticionPassword );
+	SDL_QueryTexture( peticionPasswordTexture, NULL, NULL, &peticionPasswordRect.w, &peticionPasswordRect.h );
+	peticionPasswordRect.x = 30;
+	peticionPasswordRect.y = ingresoUsuarioRect.y + 50;
+
+	SDL_Surface* ingresoPassword = TTF_RenderText_Solid( fontRespuesta, "", textColor );
+	ingresoPasswordTexture = SurfaceToTexture( ingresoPassword );
+	SDL_QueryTexture( ingresoPasswordTexture, NULL, NULL, &ingresoPasswordRect.w, &ingresoPasswordRect.h );
+	ingresoPasswordRect.x = 30;
+	ingresoPasswordRect.y = peticionPasswordRect.y + 50;
+
+	SDL_Surface* peticionEquipo = TTF_RenderText_Solid( fontPeticion, "", textColor );
+	peticionEquipoTexture = SurfaceToTexture( peticionEquipo );
+	SDL_QueryTexture( peticionEquipoTexture, NULL, NULL, &peticionEquipoRect.w, &peticionEquipoRect.h );
+	peticionEquipoRect.x = 30;
+	peticionEquipoRect.y = ingresoPasswordRect.y + 50;
+
+	SDL_Surface* ingresoEquipo = TTF_RenderText_Solid( fontRespuesta, "", textColor );
+	ingresoEquipoTexture = SurfaceToTexture( ingresoEquipo );
+	SDL_QueryTexture( ingresoEquipoTexture, NULL, NULL, &ingresoEquipoRect.w, &ingresoEquipoRect.h );
+	ingresoEquipoRect.x = 30;
+	ingresoEquipoRect.y = peticionEquipoRect.y + 50;
+
+	SDL_Surface* salida = TTF_RenderText_Solid( fontRespuesta, "", textColor );
+	salidaTexture = SurfaceToTexture( salida );
+	SDL_QueryTexture( salidaTexture, NULL, NULL, &salidaRect.w, &salidaRect.h );
+	salidaRect.x = 100;
+	salidaRect.y = ingresoEquipoRect.y + 50;
+}
+
+// Convert an SDL_Surface to SDL_Texture. We've done this before, so I'll keep it short
+SDL_Texture* SurfaceToTexture( SDL_Surface* surf )
+{
+	SDL_Texture* text;
+
+	text = SDL_CreateTextureFromSurface( renderer, surf );
+
+	SDL_FreeSurface( surf );
+
+	return text;
+}
+
+
+bool InitEverything()
+{
+	if ( !InitSDL() )
+		return false;
+
+	if ( !CreateWindow() )
+		return false;
+
+	if ( !CreateRenderer() )
+		return false;
+
+	SetupRenderer();
+
+    //Iniciamos las fuentes
+	if ( !SetupTTF("Images/peticion.ttf", "Images/respuesta.otf") )
+		return false;
+
+	CreateTextTextures();
+
+	backgroundRect.x = 0;
+	backgroundRect.y = 0;
+	backgroundRect.w = windowRect.w;
+	backgroundRect.h = windowRect.h;
+
+	backgroundTexture = LoadTexture( "Images/background.jpg" );
+
+	return true;
+}
+
+
+bool InitSDL()
+{
+	if ( SDL_Init( SDL_INIT_EVERYTHING ) == -1 )
+	{
+		std::cout << " Failed to initialize SDL : " << SDL_GetError() << std::endl;
+		return false;
+	}
+
+	return true;
+}
+
+
+bool CreateWindow()
+{
+	window = SDL_CreateWindow( "TALLER DE PROGRAMACION I", windowRect.x, windowRect.y, windowRect.w, windowRect.h, 0 );
+
+	if ( window == nullptr )
+	{
+		std::cout << "Falla al crear la ventana de loguin : " << SDL_GetError();
+		return false;
+	}
+
+	return true;
+}
+
+
+bool CreateRenderer()
+{
+	renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED );
+
+	if ( renderer == nullptr )
+	{
+		std::cout << "Failed to create renderer : " << SDL_GetError();
+		return false;
+	}
+
+	return true;
+}
+
+
+void SetupRenderer()
+{
+	// Set size of renderer to the same as window
+	SDL_RenderSetLogicalSize( renderer, windowRect.w, windowRect.h );
+
+	// Set color of renderer to red
+	SDL_SetRenderDrawColor( renderer, 255, 0, 0, 255 );
+}
+
+SDL_Texture* LoadTexture( const std::string &str )
+{
+	// Load image as SDL_Surface
+	SDL_Surface* surface = IMG_Load( str.c_str() );
+
+	// SDL_Surface is just the raw pixels
+	// Convert it to a hardware-optimzed texture so we can render it
+	SDL_Texture* texture = SDL_CreateTextureFromSurface( renderer, surface );
+
+	// Don't need the orignal texture, release the memory
+	SDL_FreeSurface( surface );
+
+	return texture;
+}
