@@ -20,6 +20,8 @@ void modoOnline();
 int main(int argc, char* args[])
 {
 
+try{
+
     /***********************************************************************************/
     /**EJEMPLO**/
     /***********************************************************************************/
@@ -38,6 +40,24 @@ int main(int argc, char* args[])
     modoOnline();
     //modoOffline();
     return 0;
+
+     }
+    catch(const std::runtime_error& re)
+    {
+//        NotifyError("Error en Runtime: ", "View.cpp");
+//        NotifyError(re.what(), "View.cpp");
+    }
+    catch(const std::exception& ex)
+    {
+//        NotifyError("Ha ocurrido un error: ", "View.cpp");
+//        NotifyError(ex.what(), "View.cpp");
+    }
+    catch(...)
+    {
+//        NotifyError("Error desconocido que no se ha podido especificar.", "View.cpp");
+    }
+
+
 }
 
 void modoOnline()
