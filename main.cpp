@@ -25,7 +25,7 @@ try{
     /***********************************************************************************/
     /**EJEMPLO**/
     /***********************************************************************************/
-    bool quit = false;
+    /*bool quit = false;
     View_Loguin loguinScreen(1);
     std::string ejemplo = "";
     std::string mensajeError = "";
@@ -74,6 +74,22 @@ void modoOnline()
 
     Util_Configuracion configuracion(&model, &loggerObserver);
 //    Util_Persistencia  persistencia(&model, &loggerObserver);
+
+    /***********************************************************************************/
+    /**EJEMPLO**/
+    /***********************************************************************************/
+    bool quit = false;
+    View_Loguin loguinScreen(1);
+    std::string ejemplo = "";
+    std::string mensajeError = "";
+    while( quit == false )
+    {
+        ejemplo = loguinScreen.Procesar(mensajeError);
+        mensajeError = "mal ingreso de datos";
+    }
+    /***********************************************************************************/
+    /***********************************************************************************/
+
 
     View view(&model);
     view.Attach(&loggerObserver);
