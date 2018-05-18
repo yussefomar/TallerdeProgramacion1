@@ -41,4 +41,5 @@ bool Activo::estaActivo() {
 
 void Activo::acelerar() {
     this->aceleracion = VELOCIDAD_ACELERACION;
+    this->acelero=true;
 }

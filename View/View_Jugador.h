@@ -7,6 +7,15 @@
 #include "../Model/Model_Jugador.h"
 #include "../Utils/Util_LoggerSubject.h"
 
+#define CANTSPRITECLIP 14
+#define MINFRAMECAMINA 4
+#define MAXFRAMECAMINA 16
+#define MINFRAMEACELE 12
+#define MAXFRAMEACELE 28
+#define MINFRAMEPATEPELO 32
+#define MAXFRAMEPATEPELO 36
+#define MAXSPRITEUTILIZADO 9
+
 class View_Jugador : public Util_LoggerSubject
 {
 public:
@@ -24,7 +33,7 @@ private:
     LTexture * texturaSeleccionado;
     int frame = 4;
     double direccion;
-    SDL_Rect gSpriteClips[ 4 ];
+    SDL_Rect gSpriteClips[ CANTSPRITECLIP];
 };
 
 #endif
