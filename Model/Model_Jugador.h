@@ -61,6 +61,9 @@ public:
     void poseePelota();
     void noPoseePelota();
     bool getPosesion();
+    bool getAcelero();
+    void terminoDePatearPelota();
+    bool patearPelota();
 
 private:
     SDL_Rect mCollider;
@@ -71,6 +74,7 @@ private:
     double direccion;
     bool conPelota;
     Pelota * pelota;
+    bool pateoPelota;
 };
 
 #endif

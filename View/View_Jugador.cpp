@@ -36,6 +36,64 @@ void View_Jugador::initialize(Jugador *model,SDL_Renderer * gRenderer,LTexture *
     gSpriteClips[ 3 ].y =   128;
     gSpriteClips[ 3 ].w =  62;
     gSpriteClips[ 3 ].h = 62;
+    //correr
+
+    gSpriteClips[ 4].x =   offset+0;
+    gSpriteClips[ 4 ].y =   192;
+    gSpriteClips[ 4 ].w =  62;
+    gSpriteClips[ 4 ].h = 62;
+
+    gSpriteClips[ 5 ].x =  offset+64;
+    gSpriteClips[ 5 ].y =  192;
+    gSpriteClips[ 5 ].w =  62;
+    gSpriteClips[ 5 ].h = 62;
+
+    gSpriteClips[ 6 ].x = offset+128;
+    gSpriteClips[ 6 ].y =   192;
+    gSpriteClips[ 6 ].w =  62;
+    gSpriteClips[ 6 ].h = 62;
+
+    gSpriteClips[ 7 ].x = offset+192;
+    gSpriteClips[ 7 ].y =   192;
+    gSpriteClips[ 7 ].w =  62;
+    gSpriteClips[ 7 ].h = 62;
+
+
+
+
+    //patear
+
+
+
+    gSpriteClips[ 8 ].x =  offset+0;
+    gSpriteClips[  8].y =  640;
+    gSpriteClips[ 8].w =  62;
+    gSpriteClips[ 8 ].h = 62;
+
+
+
+    //nadar o cabecear , sin uso por ahora
+    gSpriteClips[ 9 ].x =   offset+0; //si sumo 256 en X tengo la otra camiseta
+    gSpriteClips[ 9].y =   256;
+    gSpriteClips[ 9 ].w =  62;
+    gSpriteClips[ 9 ].h = 62;
+
+    gSpriteClips[ 10 ].x =  offset+64;
+    gSpriteClips[  10].y =  256;
+    gSpriteClips[ 10 ].w =  62;
+    gSpriteClips[ 10 ].h = 62;
+
+    gSpriteClips[ 11 ].x = offset+128;
+    gSpriteClips[ 12 ].y =   256;
+    gSpriteClips[ 12 ].w =  62;
+    gSpriteClips[ 12 ].h = 62;
+
+    gSpriteClips[ 13 ].x = offset+192;
+    gSpriteClips[ 13 ].y =   256;
+    gSpriteClips[ 13 ].w =  62;
+    gSpriteClips[ 13 ].h = 62;
+
+
 
 
 
@@ -47,16 +105,59 @@ void View_Jugador::SetModel( Jugador * model)
 }
 void View_Jugador::render( int camX, int camY,SDL_Renderer * gRenderer )
 {
-    SDL_Rect* currentClip = &gSpriteClips[frame / 4 ];
 
-    if((this->model->getVelX()!=0) || (this->model->getVelY()!=0))
+
+    SDL_Rect* currentClip = &gSpriteClips[frame / 4 ];
+    int acelera=this->model->getAcelero();
+    int velocidadX=this->model->getVelX();
+    int velocidadY=this->model->getVelY();
+
+    //caminar
+    if((velocidadX!=0&&acelera==false ) || (velocidadY!=0&&acelera==false ))
     {
+        if(frame<=MINFRAMECAMINA|| frame>=MAXFRAMECAMINA)
+        {
+            frame=MINFRAMECAMINA;
+        } ;
+        frame=frame + 1 ;
+
+    }
+
+
+    //pateo pelota
+
+    if(this->model->patearPelota())
+    {
+
+        if(frame<=MINFRAMEPATEPELO || frame>=MAXFRAMEPATEPELO)
+        {
+            frame=MINFRAMEPATEPELO;
+        }
+        ++frame;
+
+        this->model->terminoDePatearPelota();
+    }
+
+
+    //acelero
+    if(this->model->getAcelero())
+    {
+
+        if(frame<=MINFRAMEACELE || frame>MAXFRAMEACELE) //frame/4=numero de spritted
+        {
+            frame=MINFRAMEACELE;
+        }
         ++frame;
     }
 
-    if (frame / 4 >= 4)
+
+
+    if (frame / 4 > MAXSPRITEUTILIZADO) //inicializo en 0 cuando ya me sobrepase en la cantidad de spritt(son 8 )
+
+
     {
-        frame = 0;
+        frame=0;
+
     }
 
     if ((this->model)->estaActivo())

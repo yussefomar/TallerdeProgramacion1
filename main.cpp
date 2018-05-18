@@ -29,16 +29,16 @@ try{
     View_Loguin loguinScreen(1);
     std::string ejemplo = "";
     std::string mensajeError = "";
-    while( quit == false )
-    {
-        ejemplo = loguinScreen.Procesar(mensajeError);
+   // while( quit == false )
+    //{
+     //   ejemplo = loguinScreen.Procesar(mensajeError);
         mensajeError = "mal ingreso de datos";
-    }
+    //}
     /***********************************************************************************/
     /***********************************************************************************/
 
-    modoOnline();
-    //modoOffline();
+    //modoOnline();
+    modoOffline();
     return 0;
 
      }

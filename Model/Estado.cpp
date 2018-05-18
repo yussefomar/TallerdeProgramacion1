@@ -13,6 +13,7 @@ Estado::Estado()
     this->mVelX = 0;
     this->mVelY = 0;
     this->aceleracion = 1;
+     this->acelero=false;
 }
 
 Estado::~Estado()
@@ -107,9 +108,14 @@ void Estado::detenerVelocidad()
 void Estado::desacelerar()
 {
     this->aceleracion = 1;
+    this->acelero=false;
 }
 
 int Estado::getAceleracion()
 {
     return this->aceleracion;
+        this->acelero=true;
+}
+bool Estado::getAcelero(){
+    return this->acelero;
 }

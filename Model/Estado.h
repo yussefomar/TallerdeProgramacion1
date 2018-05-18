@@ -35,6 +35,7 @@ public:
     virtual void acelerar() = 0;
     int getAceleracion();
     void desacelerar();
+        bool getAcelero();
     //virtual void stop() = 0;
 
 protected:
@@ -44,6 +45,7 @@ protected:
     //The velocity of the dot
     int mVelX, mVelY;
     int aceleracion;
+    bool acelero;
 
 private:
 };

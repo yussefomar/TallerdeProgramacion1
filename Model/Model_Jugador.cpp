@@ -12,6 +12,7 @@ Jugador::Jugador()
     this->mCollider.h = ALTO_JUGADOR;
     this->direccion=90.0;
     this->conPelota=false;
+    this->pateoPelota=false;
 }
 
 void Jugador::setPosInitX(int posX)
@@ -35,6 +36,12 @@ void Jugador::move()
         pelota->setVelocidadY(this->getVelY()*this->getAceleracion());
     }
     updateDirection();
+
+}
+
+
+bool Jugador::getAcelero(){
+return this->estado->getAcelero();
 
 }
 
@@ -66,9 +73,29 @@ void Jugador::patearPelota(Pelota* pelota)
         {
 
             pelota->setVelocidadY(20);
+
         }
+
+         this->pateoPelota=true;
+    }else{
+
+    this->pateoPelota=false;
     }
     this->noPoseePelota();
+
+}
+
+void Jugador::terminoDePatearPelota(){
+
+this->pateoPelota=false;
+}
+
+bool Jugador::patearPelota()
+{
+///va a cambiar por posee pelota
+//   if(this->checkCollisionPelota((pelota->getCollider())))
+
+    return this->pateoPelota;
 
 }
 
