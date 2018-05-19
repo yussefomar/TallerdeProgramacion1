@@ -140,7 +140,7 @@ void View_Jugador::render( int camX, int camY,SDL_Renderer * gRenderer )
 
 
     //acelero
-    if(this->model->getAcelero())
+    if(this->model->getAcelero() && ((velocidadX != 0)||(velocidadY != 0)))
     {
 
         if(frame<=MINFRAMEACELE || frame>MAXFRAMEACELE) //frame/4=numero de spritted
