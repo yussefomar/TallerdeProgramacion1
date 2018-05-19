@@ -44,22 +44,21 @@ void Model::jugadorActivoCambia()
 {
 
 //        NotifyMessage("Iniciamos: jugadorActivoCambia", "Model.cpp");
-
-        while (!((this->jugadores[(this->nroJugadorActivo + 1) % CANTJUGADORES]).collide(this->camara )))
+        int i = this->nroJugadorActivo+1;
+        bool encontrado = false;
+        while ((i != this->nroJugadorActivo) && !encontrado)
         {
-//            NotifyMessage("Colision 2", "Model.cpp");
-            (this->jugadores[(this->nroJugadorActivo)]).desactivar();
-            this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
+            if ((this->jugadores[i].collide(this->camara )) && (this->nroJugadorActivo!=i)) {
+                (this->jugadores[(this->nroJugadorActivo)]).desactivar();
+                (this->jugadores[i]).activar();
+                this->nroJugadorActivo = i;
+                encontrado = true;
+            }
+            ++i;
+            if (i > CANTJUGADORES){
+                i= 0;
+            }
         }
-        (this->jugadores[(this->nroJugadorActivo)]).desactivar();
-
-//        NotifyMessage("Desactive el jugador actual", "Model.cpp");
-        this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
-        (this->jugadores[(this->nroJugadorActivo)]).activar();
-//        NotifyMessage("Active otro jugador", "Model.cpp");
-
-//        NotifyMessage("Terminamos: jugadorActivoCambia", "Model.cpp");
-
 }
 
 void Model::update()
@@ -178,6 +177,7 @@ void Model::jugadorActivoAcelera()
 void Model::jugadorActivoDesacelera()
 {
     this->jugadores[this->nroJugadorActivo].desacelerar();
+    this->Notify(this->nroJugadorActivo, DESJUG);
     this->Notify(this->nroJugadorActivo, DESJUG);
 }
 
