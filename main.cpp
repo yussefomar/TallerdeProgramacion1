@@ -70,7 +70,7 @@ void modoOnline()
     Util_LoggerObserver loggerObserver(3);
 
     Model model;
-    model.Attach(&loggerObserver);
+    //model.Attach(&loggerObserver);
 
     Util_Configuracion configuracion(&model, &loggerObserver);
 //    Util_Persistencia  persistencia(&model, &loggerObserver);
@@ -135,7 +135,7 @@ void modoOffline()
     Util_LoggerObserver loggerObserver(3);
 
     Model model;
-    model.Attach(&loggerObserver);
+//    model.Attach(&loggerObserver);
 
     Util_Configuracion configuracion(&model, &loggerObserver);
 //    Util_Persistencia  persistencia(&model, &loggerObserver);

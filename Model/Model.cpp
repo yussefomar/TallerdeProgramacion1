@@ -34,38 +34,38 @@ Jugador* Model::getJugadorActivo()
 void Model::agregarCambio(Command* cambio)
 {
 
-        NotifyMessage("Iniciamos: addCommand", "Model.cpp");
+//        NotifyMessage("Iniciamos: addCommand", "Model.cpp");
         this->cambios.push(cambio);
-        NotifyMessage("Terminamos: addCommand", "Model.cpp");
+//        NotifyMessage("Terminamos: addCommand", "Model.cpp");
 
 }
 
 void Model::jugadorActivoCambia()
 {
 
-        NotifyMessage("Iniciamos: jugadorActivoCambia", "Model.cpp");
+//        NotifyMessage("Iniciamos: jugadorActivoCambia", "Model.cpp");
 
         while (!((this->jugadores[(this->nroJugadorActivo + 1) % CANTJUGADORES]).collide(this->camara )))
         {
-            NotifyMessage("Colision 2", "Model.cpp");
+//            NotifyMessage("Colision 2", "Model.cpp");
             (this->jugadores[(this->nroJugadorActivo)]).desactivar();
             this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
         }
         (this->jugadores[(this->nroJugadorActivo)]).desactivar();
 
-        NotifyMessage("Desactive el jugador actual", "Model.cpp");
+//        NotifyMessage("Desactive el jugador actual", "Model.cpp");
         this->nroJugadorActivo = (this->nroJugadorActivo + 1) % CANTJUGADORES;
         (this->jugadores[(this->nroJugadorActivo)]).activar();
-        NotifyMessage("Active otro jugador", "Model.cpp");
+//        NotifyMessage("Active otro jugador", "Model.cpp");
 
-        NotifyMessage("Terminamos: jugadorActivoCambia", "Model.cpp");
+//        NotifyMessage("Terminamos: jugadorActivoCambia", "Model.cpp");
 
 }
 
 void Model::update()
 {
 
-        NotifyMessage("Iniciamos: update", "Model.cpp");
+//        NotifyMessage("Iniciamos: update", "Model.cpp");
 
         if(!this->cambios.empty())
         {
@@ -80,7 +80,7 @@ void Model::update()
             this->jugadores[i].move();
         }
         this->pelota.move();
-        NotifyMessage("Terminamos: update", "Model.cpp");
+//        NotifyMessage("Terminamos: update", "Model.cpp");
 
 
 }
@@ -96,23 +96,23 @@ void Model::moverJuego()
 
 void Model::setCamara(SDL_Rect * camara)
 {
-    NotifyMessage("Iniciamos: setCamara", "Model.cpp");
+//    NotifyMessage("Iniciamos: setCamara", "Model.cpp");
     this->camara = camara;
-    NotifyMessage("Terminamos: setCamara", "Model.cpp");
+//    NotifyMessage("Terminamos: setCamara", "Model.cpp");
 }
 
 void Model::setFormacion(Formacion* formacion,bool local)
 {
-    NotifyMessage("Iniciamos: setFormacion", "Model.cpp");
+//    NotifyMessage("Iniciamos: setFormacion", "Model.cpp");
     formacion->setPosicionInicial(this->jugadores,local);
-    NotifyMessage("Terminamos: setFormacion", "Model.cpp");
+//    NotifyMessage("Terminamos: setFormacion", "Model.cpp");
 
 }
 
 void Model::setCasaca(std::string casacaName)
 {
 
-        NotifyMessage("Iniciamos: setCasaca", "Model.cpp");
+       // NotifyMessage("Iniciamos: setCasaca", "Model.cpp");
         char c1[100];
         for(unsigned i = 0; i<casacaName.size(); i++)
         {
@@ -128,7 +128,7 @@ void Model::setCasaca(std::string casacaName)
                 this->jugadores[i].setCasacaAlternativa();
             }
         }
-        NotifyMessage("Terminamos: setCasaca", "Model.cpp");
+        //NotifyMessage("Terminamos: setCasaca", "Model.cpp");
 
 }
 

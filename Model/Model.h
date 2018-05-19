@@ -5,11 +5,11 @@
 #include "../Model/Model_Jugador.h"
 #include "../Command/Command.h"
 #include "../Model/Formacion.h"
-#include "../Utils/Util_LoggerSubject.h"
+#include "../Utils/Util_Subject.h"
 
 #include <queue>
 
-class Model : public Util_LoggerSubject
+class Model : public Util_Subject
 {
 public:
     Model();
