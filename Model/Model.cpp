@@ -148,46 +148,55 @@ char Model::getCodigoJugadorActivo()
 void Model::jugadorActivoAumentaVelocidadEnX()
 {
     this->jugadores[this->nroJugadorActivo].aumentarVelocidadX();
+    this->Notify(this->nroJugadorActivo, INCVELX);
 }
 
 void Model::jugadorActivoAumentaVelocidadEnY()
 {
     this->jugadores[this->nroJugadorActivo].aumentarVelocidadY();
+    this->Notify(this->nroJugadorActivo, INCVELY);
 }
 
 void Model::jugadorActivoDisminuyeVelocidadEnX()
 {
     this->jugadores[this->nroJugadorActivo].disminuirVelocidadX();
+    this->Notify(this->nroJugadorActivo, DECVELX);
 }
 
 void Model::jugadorActivoDisminuyeVelocidadEnY()
 {
     this->jugadores[this->nroJugadorActivo].disminuirVelocidadY();
+    this->Notify(this->nroJugadorActivo, DECVELY);
 }
 
 void Model::jugadorActivoAcelera()
 {
     this->jugadores[this->nroJugadorActivo].acelerar();
+    this->Notify(this->nroJugadorActivo, ACCJUG);
 }
 
 void Model::jugadorActivoDesacelera()
 {
     this->jugadores[this->nroJugadorActivo].desacelerar();
+    this->Notify(this->nroJugadorActivo, DESJUG);
 }
 
 void Model::jugadorActivoPateaPelota()
 {
     this->jugadores[this->nroJugadorActivo].patearPelota(&(this->pelota));
+    this->Notify(this->nroJugadorActivo, PATPELO);
 }
 
 void Model::jugadorActivoRecuperaPelota()
 {
     this->jugadores[this->nroJugadorActivo].recuperaPelota(&(this->pelota));
+    this->Notify(this->nroJugadorActivo, RECUPELO);
 }
 
 void Model::jugadorActivoDetener()
 {
     this->jugadores[this->nroJugadorActivo].detenerVelocidad();
+    this->Notify(this->nroJugadorActivo, STOPJUG);
 }
 
 /*Servicios del modelo en modo online*/
