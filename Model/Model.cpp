@@ -178,7 +178,6 @@ void Model::jugadorActivoDesacelera()
 {
     this->jugadores[this->nroJugadorActivo].desacelerar();
     this->Notify(this->nroJugadorActivo, DESJUG);
-    this->Notify(this->nroJugadorActivo, DESJUG);
 }
 
 void Model::jugadorActivoPateaPelota()
@@ -202,84 +201,65 @@ void Model::jugadorActivoDetener()
 /*Servicios del modelo en modo online*/
 void Model::aumentarVelocidadEnX(char codigojugador)
 {
-
     unsigned nrojugador=codigojugador;
     this->jugadores[nrojugador].aumentarVelocidadX();
     this->Notify(nrojugador, INCVELX);
-
 }
 
 void Model::aumentarVelocidadEnY(char codigojugador)
 {
-
     unsigned nrojugador=codigojugador;
     this->jugadores[nrojugador].aumentarVelocidadY();
     this->Notify(nrojugador, INCVELY);
-
 }
 
 void Model:: disminuirVelocidadY(char codigojugador)
 {
-
     unsigned nrojugador=codigojugador;
     this->jugadores[nrojugador].disminuirVelocidadY();
     this->Notify(nrojugador, DECVELY);
-
 }
 
 void Model:: disminuirVelocidadX(char codigojugador)
 {
-
     unsigned nrojugador=codigojugador;
     this->jugadores[nrojugador].disminuirVelocidadX();
     this->Notify(nrojugador, DECVELX);
-
 }
 
 void Model:: desacelerar(char codigojugador)
 {
-
     unsigned nrojugador=codigojugador;
     this->jugadores[nrojugador].desacelerar();
     this->Notify(nrojugador, DESJUG);
-
 }
 
 void Model:: patearPelota(char codigojugador)
 {
-
     unsigned nrojugador=codigojugador;
     this->jugadores[nrojugador].patearPelota(this->getPelota());
     this->Notify(nrojugador, PATPELO);
-
 }
 
 void Model:: recuperaPelota(char codigojugador)
 {
-
     unsigned nrojugador=codigojugador;
     this->jugadores[nrojugador].recuperaPelota(this->getPelota());
     this->Notify(nrojugador, RECUPELO);
-
 }
 
 void Model:: stopJugador(char codigojugador)
 {
-
     unsigned nrojugador=codigojugador;
     this->jugadores[nrojugador].detenerVelocidad();
     this->Notify(nrojugador, STOPJUG);
-
 }
 
 void Model::acelerar(char codigojugador)
 {
-
     unsigned nrojugador=codigojugador;
     this->jugadores[nrojugador].acelerar();
     this->Notify(nrojugador, ACCJUG);
-
-
 }
 
 
