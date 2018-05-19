@@ -35,7 +35,7 @@ void Model::agregarCambio(Command* cambio)
 {
 
 //        NotifyMessage("Iniciamos: addCommand", "Model.cpp");
-        this->cambios.push(cambio);
+    this->cambios.push(cambio);
 //        NotifyMessage("Terminamos: addCommand", "Model.cpp");
 
 }
@@ -44,21 +44,23 @@ void Model::jugadorActivoCambia()
 {
 
 //        NotifyMessage("Iniciamos: jugadorActivoCambia", "Model.cpp");
-        int i = this->nroJugadorActivo+1;
-        bool encontrado = false;
-        while ((i != this->nroJugadorActivo) && !encontrado)
+    unsigned i = this->nroJugadorActivo+1;
+    bool encontrado = false;
+    while ((i != this->nroJugadorActivo) && !encontrado)
+    {
+        if ((this->jugadores[i].collide(this->camara )) && (this->nroJugadorActivo!=i))
         {
-            if ((this->jugadores[i].collide(this->camara )) && (this->nroJugadorActivo!=i)) {
-                (this->jugadores[(this->nroJugadorActivo)]).desactivar();
-                (this->jugadores[i]).activar();
-                this->nroJugadorActivo = i;
-                encontrado = true;
-            }
-            ++i;
-            if (i > CANTJUGADORES){
-                i= 0;
-            }
+            (this->jugadores[(this->nroJugadorActivo)]).desactivar();
+            (this->jugadores[i]).activar();
+            this->nroJugadorActivo = i;
+            encontrado = true;
         }
+        ++i;
+        if (i > CANTJUGADORES)
+        {
+            i= 0;
+        }
+    }
 }
 
 void Model::update()
@@ -66,19 +68,19 @@ void Model::update()
 
 //        NotifyMessage("Iniciamos: update", "Model.cpp");
 
-        if(!this->cambios.empty())
-        {
-            Command* cambio = this->cambios.front();
-            cambio->execute();
-            this->cambios.pop();
-        }
+    if(!this->cambios.empty())
+    {
+        Command* cambio = this->cambios.front();
+        cambio->execute();
+        this->cambios.pop();
+    }
 
 
-        for(int i = 0; i < CANTJUGADORES; ++i)
-        {
-            this->jugadores[i].move();
-        }
-        this->pelota.move();
+    for(int i = 0; i < CANTJUGADORES; ++i)
+    {
+        this->jugadores[i].move();
+    }
+    this->pelota.move();
 //        NotifyMessage("Terminamos: update", "Model.cpp");
 
 
@@ -111,23 +113,23 @@ void Model::setFormacion(Formacion* formacion,bool local)
 void Model::setCasaca(std::string casacaName)
 {
 
-       // NotifyMessage("Iniciamos: setCasaca", "Model.cpp");
-        char c1[100];
-        for(unsigned i = 0; i<casacaName.size(); i++)
-        {
-            casacaName.at(i) = toupper(casacaName.at(i));
-            c1[i] = casacaName.at(i);
-        }
-        char c3[] = "suplente";
+    // NotifyMessage("Iniciamos: setCasaca", "Model.cpp");
+    char c1[100];
+    for(unsigned i = 0; i<casacaName.size(); i++)
+    {
+        casacaName.at(i) = toupper(casacaName.at(i));
+        c1[i] = casacaName.at(i);
+    }
+    char c3[] = "suplente";
 
-        if((strncasecmp(c1,c3,2))==0)
+    if((strncasecmp(c1,c3,2))==0)
+    {
+        for(int i = 0; i < CANTJUGADORES; ++i)
         {
-            for(int i = 0; i < CANTJUGADORES; ++i)
-            {
-                this->jugadores[i].setCasacaAlternativa();
-            }
+            this->jugadores[i].setCasacaAlternativa();
         }
-        //NotifyMessage("Terminamos: setCasaca", "Model.cpp");
+    }
+    //NotifyMessage("Terminamos: setCasaca", "Model.cpp");
 
 }
 
@@ -260,6 +262,22 @@ void Model::acelerar(char codigojugador)
     unsigned nrojugador=codigojugador;
     this->jugadores[nrojugador].acelerar();
     this->Notify(nrojugador, ACCJUG);
+
+    //this->notificarAObservadores(nrojugador, ACCJUG);
 }
+
+//void Model::agregarObservador(IObserver* observador)
+//{
+//    this->observadores.push_back(observador);
+//}
+//
+//void notificarAObservadores(char entidad, char evento)
+//{
+//    for (std::list<IObserver*>::iterator it=this->observadores.begin(); it != this->observadores.end(); ++it)
+//    {
+//        (*it)->notificar(entidad, evento);
+//    }
+//
+//}
 
 

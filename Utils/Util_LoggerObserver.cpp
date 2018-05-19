@@ -72,3 +72,11 @@ void Util_LoggerObserver::updateLevel(int newLevel)
 {
     this->level = newLevel;
 }
+
+//void notificar(char entidad, char evento) {
+//    if(evento == STOPJUG) {
+//
+//        printf("se detuvo el jugador: %c", entidad);
+//        printf("hubo el siguiente cambio: %", this->model->pedirAlgunDato())
+//    }
+//}

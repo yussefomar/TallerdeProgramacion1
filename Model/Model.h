@@ -49,6 +49,9 @@ public:
     virtual void recuperaPelota(char codigojugador);
     virtual void stopJugador(char codigojugador);
     virtual void acelerar(char codigojugador);
+    //agrego y uso IObserver porque es lo que hay
+//    virtual void agregarObservador(IObserver* observador);
+//    virtual void notificarAObservadores(char entidad, char evento);
 
     virtual void update();
 
@@ -64,6 +67,7 @@ private:
     SDL_Rect * camara;
     unsigned int nroJugadorActivo;
     std::queue<Command*> cambios;
+    //std::list<IObservaor*> observadores;
 };
 
 #endif // MODEL_H

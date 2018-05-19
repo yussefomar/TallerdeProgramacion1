@@ -21,11 +21,8 @@ int main(int argc, char* args[])
 {
 
 try{
-
-    /***********************************************************************************/
-    /**EJEMPLO**/
-    /***********************************************************************************/
-    /*bool quit = false;
+    /*
+    bool quit = false;
     View_Loguin loguinScreen(1);
     std::string ejemplo = "";
     std::string mensajeError = "";
@@ -34,8 +31,7 @@ try{
      //   ejemplo = loguinScreen.Procesar(mensajeError);
         mensajeError = "mal ingreso de datos";
     //}
-    /***********************************************************************************/
-    /***********************************************************************************/
+    */
 
     //modoOnline();
     modoOffline();
@@ -138,6 +134,8 @@ void modoOffline()
 //    model.Attach(&loggerObserver);
 
     Util_Configuracion configuracion(&model, &loggerObserver);
+    //y si queres tambien podes loggerObserver(3, &model) para asi tener acceso al modelo.
+    //model.agregarObservador(&loggerObserver);
 //    Util_Persistencia  persistencia(&model, &loggerObserver);
 
     /***********************************************************************************/
