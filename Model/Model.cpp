@@ -45,6 +45,10 @@ void Model::jugadorActivoCambia()
 
 //        NotifyMessage("Iniciamos: jugadorActivoCambia", "Model.cpp");
     unsigned i = this->nroJugadorActivo+1;
+    if (i == CANTJUGADORES)
+    {
+        i= 0;
+    }
     bool encontrado = false;
     while ((i != this->nroJugadorActivo) && !encontrado)
     {
@@ -56,7 +60,7 @@ void Model::jugadorActivoCambia()
             encontrado = true;
         }
         ++i;
-        if (i > CANTJUGADORES)
+        if (i == CANTJUGADORES)
         {
             i= 0;
         }

@@ -1,5 +1,5 @@
 #include "../Model/Model_Jugador.h"
-
+#define MARGENDESELECCION 100
 
 Jugador::Jugador()
 {
@@ -240,13 +240,13 @@ bool Jugador::collide(SDL_Rect * camara)
     int topCam, topJugador;
     int bottomCam, bottomJugador;
 
-    leftCam = camara->x;
+    leftCam = camara->x +MARGENDESELECCION;
 
-    rightCam = camara->x + camara->w;
+    rightCam = camara->x + camara->w -MARGENDESELECCION;
 
-    topCam = camara->y;
+    topCam = camara->y +MARGENDESELECCION;
 
-    bottomCam = camara->y + camara->h;
+    bottomCam = camara->y + camara->h -MARGENDESELECCION;
 
     leftJugador = this->mCollider.x;
     rightJugador = this->mCollider.x + this->mCollider.w;
