@@ -11,7 +11,9 @@ DisminuirVelocidadY::~DisminuirVelocidadY()
 
 void DisminuirVelocidadY::execute()
 {
+    if(this->model->pelotaEnMovimiento()){
     this->model->jugadorActivoDisminuyeVelocidadEnY();
+    }
 }
 
 char DisminuirVelocidadY::getCodigoComando()

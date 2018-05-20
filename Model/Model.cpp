@@ -9,6 +9,7 @@ Model::Model()
     this->jugadores = new Jugador[CANTJUGADORES]();
     this->nroJugadorActivo = 6;
     this->getJugadorActivo()->activar();
+    this->juegoIniciado=false;
 }
 
 Model::~Model()
@@ -106,12 +107,28 @@ void Model::setCamara(SDL_Rect * camara)
 //    NotifyMessage("Terminamos: setCamara", "Model.cpp");
 }
 
-void Model::setFormacion(Formacion* formacion,bool local)
+void Model::setFormacionLocal(Formacion* formacion)
 {
 //    NotifyMessage("Iniciamos: setFormacion", "Model.cpp");
-    formacion->setPosicionInicial(this->jugadores,local);
+    this->formacion= formacion;
+    this->formacion->setPosicionInicialLocal(this->jugadores);
 //    NotifyMessage("Terminamos: setFormacion", "Model.cpp");
 
+}
+
+void Model::setPelotaParada()
+{
+    this->juegoIniciado= false;
+}
+
+void Model::setPelotaEnMovimiento()
+{
+    this->juegoIniciado= true;
+}
+
+bool Model::pelotaEnMovimiento()
+{
+    return this->juegoIniciado;
 }
 
 void Model::setCasaca(std::string casacaName)

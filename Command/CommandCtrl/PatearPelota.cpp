@@ -11,6 +11,9 @@ PatearPelota::~PatearPelota()
 
 void PatearPelota ::execute()
 {
+    if(!this->model->pelotaEnMovimiento()){
+    this->model->setPelotaEnMovimiento();
+    }
     this->model->jugadorActivoPateaPelota();
 }
 

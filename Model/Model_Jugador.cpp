@@ -50,7 +50,7 @@ void Jugador::patearPelota(Pelota* pelota)
 {
 ///va a cambiar por posee pelota
 //   if(this->checkCollisionPelota((pelota->getCollider())))
-    if(this->getPosesion() && (this->checkCollisionPelota((pelota->getCollider()))))
+    if(/*this->getPosesion() &&*/ (this->checkCollisionPelota((pelota->getCollider()))))
     {
         if (((this->direccion) >0)  && ((this->direccion)<180))
         {

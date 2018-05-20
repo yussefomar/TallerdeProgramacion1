@@ -9,7 +9,7 @@ class Formacion312 : public Formacion
     public:
         Formacion312();
         virtual ~Formacion312();
-        void setPosicionInicial(Jugador* jugadores,bool local);
+        void setPosicionInicialLocal(Jugador* jugadores);
 
     protected:
 

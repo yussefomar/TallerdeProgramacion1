@@ -66,7 +66,7 @@ void View_Jugador::initialize(Jugador *model,SDL_Renderer * gRenderer,LTexture *
 
 
     gSpriteClips[ 8 ].x =  offset+0;
-    gSpriteClips[  8].y =  640;
+    gSpriteClips[  8].y =  385;
     gSpriteClips[ 8].w =  62;
     gSpriteClips[ 8 ].h = 62;
 

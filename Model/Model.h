@@ -21,10 +21,13 @@ public:
     virtual Jugador* getJugadorActivo();
     virtual std::string  getCasaca();
     virtual void setCamara(SDL_Rect * camara);
-    virtual void setFormacion(Formacion* formacion, bool local);
+    virtual void setFormacionLocal(Formacion* formacion);
     virtual void setCasaca(std::string casacaName);
     //virtual void setIp(std::string ipName); va a ser un string???
     virtual char getCodigoJugadorActivo();
+    virtual void setPelotaEnMovimiento();
+    virtual void setPelotaParada();
+    virtual bool pelotaEnMovimiento();
 
     /*Servicios del Modelo en modo Offline*/
     virtual void agregarCambio(Command* cambio);
@@ -63,6 +66,8 @@ protected:
 private:
     Pelota pelota;
     Jugador* jugadores;
+    Formacion *formacion;
+    bool juegoIniciado;
     std::string casacaSprite; // TEMPORAL.
     SDL_Rect * camara;
     unsigned int nroJugadorActivo;
