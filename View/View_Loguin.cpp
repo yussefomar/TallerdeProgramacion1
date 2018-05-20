@@ -130,6 +130,8 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
 
     }
 
+    informacionIngreso.error = false;
+
     while( quit == false )
     {
 		SDL_Event event;
