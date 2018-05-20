@@ -6,6 +6,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <string>
+#include "../View/InformacionIngreso.h"
 
 using namespace std;
 
@@ -17,8 +18,12 @@ class View_Loguin
     View_Loguin(int i);
     //Destructor
     ~View_Loguin();
+    //Inicializamos los elementos básico de la pantalla.
+    bool Inicializar();
     //Procesamos la información.
-    std::string Procesar(std::string mensajeError);
+    void Procesar(InformacionIngreso &informacionIngreso);
+    //Cerramos y destruimos todo lo relacionado a la pantalla.
+    void Cerrar();
 };
 
 #endif /* VIEW_LOGUIN_H_ */

@@ -21,17 +21,24 @@ int main(int argc, char* args[])
 {
 
 try{
-    /*
+
+    /***********************************************************************************/
+    /**EJEMPLO**/
+    /***********************************************************************************/
     bool quit = false;
     View_Loguin loguinScreen(1);
-    std::string ejemplo = "";
-    std::string mensajeError = "";
-   // while( quit == false )
-    //{
-     //   ejemplo = loguinScreen.Procesar(mensajeError);
-        mensajeError = "mal ingreso de datos";
-    //}
-    */
+    InformacionIngreso informacionIngreso(false);
+    if(!loguinScreen.Inicializar()) return -1;
+    while( quit == false )
+    {
+        loguinScreen.Procesar(informacionIngreso);
+        /** a modo de ejemplo, supongamos que luego de loguearnos hubo algo mal. **/
+        informacionIngreso.mensaje = "mal ingreso de datos";
+        informacionIngreso.error = true;
+    }
+    loguinScreen.Cerrar();
+    /***********************************************************************************/
+    /***********************************************************************************/
 
     //modoOnline();
     modoOffline();
@@ -74,7 +81,7 @@ void modoOnline()
     /***********************************************************************************/
     /**EJEMPLO**/
     /***********************************************************************************/
-    bool quit = false;
+    /*bool quit = false;
     View_Loguin loguinScreen(1);
     std::string ejemplo = "";
     std::string mensajeError = "";
@@ -82,7 +89,7 @@ void modoOnline()
     {
         ejemplo = loguinScreen.Procesar(mensajeError);
         mensajeError = "mal ingreso de datos";
-    }
+    }*/
     /***********************************************************************************/
     /***********************************************************************************/
 

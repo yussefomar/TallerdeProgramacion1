@@ -8,6 +8,7 @@ using namespace std;
 
 #include "../View/View_Loguin.h"
 #include "../View/StringInput.h"
+#include "../View/InformacionIngreso.h"
 
 #include <iostream>
 
@@ -35,6 +36,7 @@ void UpdateSalida(std::string value);
 TTF_Font* fontPeticion;
 TTF_Font* fontRespuesta;
 
+SDL_Color textColorMensaje = { 255, 150, 150, 255 }; // white
 SDL_Color textColor = { 255, 255, 255, 255 }; // white
 SDL_Color backgroundColor = { 0, 0, 0, 255 }; // red
 
@@ -74,17 +76,26 @@ View_Loguin::~View_Loguin()
 
 }
 
-std::string View_Loguin::Procesar(std::string mensajeError)
-{
-if ( !InitEverything() )
-		return "";
+bool View_Loguin::Inicializar(){
+    return InitEverything();
+}
+void View_Loguin::Cerrar(){
+    // Clean up font
+    TTF_CloseFont( fontPeticion );
+    TTF_CloseFont( fontRespuesta );
+    //Quit SDL_ttf
+    TTF_Quit();
+    //Quit SDL
+    SDL_Quit();
+}
 
+void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
+{
     std::string temp = "";
     bool quit = false;
     bool nameEntered = false;
     bool passwordEntered = false;
     bool teamEntered = false;
-
     //The gets the user's name
     StringInput ip(1);
     //The gets the user's name
@@ -94,7 +105,30 @@ if ( !InitEverything() )
     //The gets the user's name
     StringInput actualTeam(1);
 
-    UpdateSalida(mensajeError);
+    //Chequeamos toda la funcionalidad básica para el procesamiento.
+    UpdateInputUsuario(informacionIngreso.nombre);
+    if(!informacionIngreso.nombre.empty()) nameEntered = true;
+
+    UpdateInputPassword(informacionIngreso.password);
+    if(!informacionIngreso.password.empty()) passwordEntered = true;
+
+    UpdateInputEquipo(informacionIngreso.equipo);
+    if(!informacionIngreso.equipo.empty()) teamEntered = true;
+
+    UpdateSalida(informacionIngreso.mensaje);
+    if(informacionIngreso.error){
+
+        UpdateInputUsuario("");
+        nameEntered = false;
+        UpdateInputPassword("");
+        passwordEntered = false;
+        UpdateInputEquipo("");
+        teamEntered = false;
+
+        UpdateInputPeticionPassword("");
+        UpdateInputPeticionEquipo("");
+
+    }
 
     while( quit == false )
     {
@@ -172,29 +206,23 @@ if ( !InitEverything() )
             {
                 //Quit the program
                 quit = true;
-                return "";
+                informacionIngreso.error = true;
             }
         }
-        /*
+
         //Update the screen
-        if( SDL_Flip( screen ) == -1 )
+        /*if( SDL_Flip( screen ) == -1 )
         {
-            return false;
+            informacionIngreso.error = true;
+            return informacionIngreso;
         }*/
       /**************************************/
       Render();
     }
 
-    std::string datos = actualUsuario.str + ";" + actualPassword.str + ";" + actualTeam.str;
-    // Clean up font
-    TTF_CloseFont( fontPeticion );
-    TTF_CloseFont( fontRespuesta );
-    //Quit SDL_ttf
-    TTF_Quit();
-    //Quit SDL
-    SDL_Quit();
-
-    return datos;
+    informacionIngreso.nombre = actualUsuario.str;
+    informacionIngreso.password = actualPassword.str;
+    informacionIngreso.equipo = actualTeam.str;;
 }
 
 
@@ -305,7 +333,7 @@ void UpdateInputPeticionEquipo(std::string value)
 
 void UpdateSalida(std::string value)
 {
-	SDL_Surface* salida = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColor );
+	SDL_Surface* salida = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColorMensaje );
 	salidaTexture = SurfaceToTexture( salida );
 	SDL_QueryTexture( salidaTexture, NULL, NULL, &salidaRect.w, &salidaRect.h );
 	salidaRect.x = 100;

@@ -199,6 +199,8 @@
 		<Unit filename="View/Entity.h" />
 		<Unit filename="View/Event.cpp" />
 		<Unit filename="View/Event.h" />
+		<Unit filename="View/InformacionIngreso.cpp" />
+		<Unit filename="View/InformacionIngreso.h" />
 		<Unit filename="View/Observer.cpp" />
 		<Unit filename="View/Observer.h" />
 		<Unit filename="View/StringInput.cpp" />
