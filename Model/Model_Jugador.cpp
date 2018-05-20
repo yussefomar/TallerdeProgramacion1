@@ -28,14 +28,38 @@ void Jugador::setPosInitY(int posY)
 void Jugador::move()
 {
     this->estado->move();
+    updateDirection();
     this->mCollider.x = this->estado->getPosX();
     this->mCollider.y = this->estado->getPosY();
     if (this->getPosesion())
     {
-        pelota->setVelocidadX(this->getVelX()*this->getAceleracion());
-        pelota->setVelocidadY(this->getVelY()*this->getAceleracion());
+       // pelota->setVelocidadX(this->getVelX()*this->getAceleracion());
+       // pelota->setVelocidadY(this->getVelY()*this->getAceleracion());
+        pelota->setPosX(this->estado->getPosX()+ANCHO_JUGADOR/2);
+        pelota->setPosY(this->estado->getPosY()+ALTO_JUGADOR/2);
+          if (((this->direccion) >0)  && ((this->direccion)<180))
+        {
+            pelota->setPosX(pelota->getPosX()+10);
+        }
+
+        if (((this->direccion) >180)  && ((this->direccion)<360))
+        {
+            pelota->setPosX(pelota->getPosX()-10);
+        }
+
+        if ((((this->direccion) >=0)  && ((this->direccion)<90)) ||  ((((this->direccion) <=360)  && ((this->direccion)>270))) )
+        {
+
+            pelota->setPosY(pelota->getPosY()-10);
+        }
+        if (((this->direccion) >90)  && ((this->direccion)<270))
+        {
+
+            pelota->setPosY(pelota->getPosY()+10);
+
+        }
+
     }
-    updateDirection();
 
 }
 
@@ -104,6 +128,7 @@ void Jugador::recuperaPelota(Pelota* pelota)
 
     if(this->checkCollisionPelota((pelota->getCollider())))
     {
+
         this->poseePelota();
         this->pelota=pelota;
     }
