@@ -7,6 +7,7 @@
 Model::Model()
 {
     this->jugadores = new Jugador[CANTJUGADORES]();
+    this->jugadoresVisitantes = new Jugador[CANTJUGADORES]();
     this->nroJugadorActivo = 6;
     this->getJugadorActivo()->activar();
     this->juegoIniciado=false;
@@ -15,6 +16,7 @@ Model::Model()
 Model::~Model()
 {
     delete[] this->jugadores;
+    delete[] this->jugadoresVisitantes;
 }
 
 Pelota* Model::getPelota()
@@ -25,6 +27,11 @@ Pelota* Model::getPelota()
 Jugador* Model::getJugadorNro(int i)
 {
     return &(this->jugadores[i]);
+}
+
+Jugador* Model::getJugadorVisitanteNro(int i)
+{
+    return &(this->jugadoresVisitantes[i]);
 }
 
 Jugador* Model::getJugadorActivo()
@@ -84,6 +91,7 @@ void Model::update()
     for(int i = 0; i < CANTJUGADORES; ++i)
     {
         this->jugadores[i].move();
+        this->jugadoresVisitantes[i].move();
     }
     this->pelota.move();
 //        NotifyMessage("Terminamos: update", "Model.cpp");
@@ -96,6 +104,7 @@ void Model::moverJuego()
     for(int i = 0; i < CANTJUGADORES; ++i)
     {
         this->jugadores[i].move();
+        this->jugadoresVisitantes[i].move();
     }
     this->pelota.move();
 }
@@ -116,6 +125,16 @@ void Model::setFormacionLocal(Formacion* formacion)
 
 }
 
+void Model::setFormacionVisitante(Formacion* formacion)
+{
+//    NotifyMessage("Iniciamos: setFormacion", "Model.cpp");
+    this->formacionVisitante= formacion;
+    this->formacionVisitante->setPosicionInicialVisitante(this->jugadoresVisitantes);
+//    NotifyMessage("Terminamos: setFormacion", "Model.cpp");
+
+}
+
+
 void Model::setPelotaParada()
 {
     this->juegoIniciado= false;
@@ -123,12 +142,15 @@ void Model::setPelotaParada()
 
 void Model::setPelotaEnMovimiento()
 {
+    this->formacionVisitante->setPosicionVisitante(this->jugadoresVisitantes);
+    this->formacion->setPosicionLocal(this->jugadores);
     this->juegoIniciado= true;
 }
 
 bool Model::pelotaEnMovimiento()
 {
     return this->juegoIniciado;
+
 }
 
 void Model::setCasaca(std::string casacaName)
@@ -148,6 +170,12 @@ void Model::setCasaca(std::string casacaName)
         for(int i = 0; i < CANTJUGADORES; ++i)
         {
             this->jugadores[i].setCasacaAlternativa();
+        }
+    }else{
+
+        for(int i = 0; i < CANTJUGADORES; ++i)
+        {
+            this->jugadoresVisitantes[i].setCasacaAlternativa();
         }
     }
     //NotifyMessage("Terminamos: setCasaca", "Model.cpp");

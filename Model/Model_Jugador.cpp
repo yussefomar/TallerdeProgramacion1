@@ -25,6 +25,12 @@ void Jugador::setPosInitY(int posY)
     this->estado->setPosInitY(posY);
 }
 
+void Jugador::setDireccion(double direccion)
+{
+    this->direccion=direccion;
+}
+
+
 void Jugador::move()
 {
     this->estado->move();

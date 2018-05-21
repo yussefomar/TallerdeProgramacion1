@@ -79,18 +79,21 @@ Util_Configuracion::Util_Configuracion(Model* model, Util_LoggerObserver* logger
         {
             NotifyMessage("Seteamos la formación: 3-3", "Util_Configuracion.cpp");
             this->model->setFormacionLocal(&(this->formacion33));
+            this->model->setFormacionVisitante(&(this->formacion33));
         }
 
         if((strncasecmp(c1,c3, 3))==0)
         {
             NotifyMessage("Seteamos la formación: 3-1-2", "Util_Configuracion.cpp");
             this->model->setFormacionLocal(&(this->formacion312));
+            this->model->setFormacionVisitante(&(this->formacion312));
         }
 
         if((strncasecmp(c1,c4, 3))==0)
         {
             NotifyMessage("Seteamos la formación: 3-2-1", "Util_Configuracion.cpp");
             this->model->setFormacionLocal(&(this->formacion321));
+            this->model->setFormacionVisitante(&(this->formacion321));
         }
     }
     catch(const std::runtime_error& re)

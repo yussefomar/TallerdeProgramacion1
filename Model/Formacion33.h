@@ -10,7 +10,9 @@ public:
     Formacion33();
     virtual ~Formacion33();
     void setPosicionInicialLocal(Jugador* jugadores);
-
+    void setPosicionLocal(Jugador* jugadores);
+    void setPosicionInicialVisitante(Jugador* jugadores);
+    void setPosicionVisitante(Jugador* jugadores);
 
 protected:
 

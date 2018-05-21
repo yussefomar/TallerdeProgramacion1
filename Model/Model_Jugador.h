@@ -50,6 +50,8 @@ public:
     void desactivar();
 
     void setCasacaAlternativa();
+
+    void setDireccion(double direccion);
     bool casacaPrincipal();
     bool collide(SDL_Rect * camara);
     void acelerar();

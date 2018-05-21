@@ -13,7 +13,9 @@ public:
     Formacion();
     virtual ~Formacion();
     virtual void setPosicionInicialLocal(Jugador* jugadores) = 0;
-
+    virtual void setPosicionLocal(Jugador* jugadores) = 0;
+    virtual void setPosicionInicialVisitante(Jugador* jugadores) = 0;
+    virtual void setPosicionVisitante(Jugador* jugadores) = 0;
 protected:
 
 private:

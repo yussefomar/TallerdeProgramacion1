@@ -17,6 +17,7 @@ protected:
 private:
     View_Pelota viewPelota;
     View_Jugador* viewJugadores;
+    View_Jugador* viewJugadoresVisitantes;
     View_Cancha viewCancha;
     SDL_Rect* camara;
     SDL_Renderer* gRenderer;
