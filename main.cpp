@@ -25,7 +25,7 @@ try{
     /***********************************************************************************/
     /**EJEMPLO**/
     /***********************************************************************************/
-    bool quit = false;
+    bool quit = true;
     View_Loguin loguinScreen(1);
     InformacionIngreso informacionIngreso(false);
     if(!loguinScreen.Inicializar()) return -1;
@@ -168,7 +168,7 @@ void modoOffline()
     controller.Attach(&loggerObserver);
 
     //MSPORUPDATE CONTROLA EN CIERTA FORMA EL FPS DEL JUEGO... NO SE ASUSTEN
-    long double MSPORUPDATE = 0.7;
+    long double MSPORUPDATE = 0.3;
     long double tiempoActual = 0.0;
     long double lapsoDeTiempo = 0.0;
     long double tiempoPrevio = clock();

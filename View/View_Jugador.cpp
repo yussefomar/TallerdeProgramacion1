@@ -103,7 +103,7 @@ void View_Jugador::SetModel( Jugador * model)
 {
     this->model = model;
 }
-void View_Jugador::render( int camX, int camY,SDL_Renderer * gRenderer )
+/*void View_Jugador::render( int camX, int camY,SDL_Renderer * gRenderer )
 {
 
 
@@ -166,6 +166,187 @@ void View_Jugador::render( int camX, int camY,SDL_Renderer * gRenderer )
     }
     this->texturaJugador->render( (*this->model).getPosX() - camX, (*this->model).getPosY() - camY,currentClip,this->model->getDireccion(),NULL,SDL_FLIP_NONE,gRenderer);
 
+}*/
+
+void View_Jugador::render( int camX, int camY,SDL_Renderer * gRenderer )
+{
+
+
+
+    SDL_Rect* currentClip = &gSpriteClips[frame / 4 ];
+
+    int acelera=this->model->getAcelero();
+    int velocidadX=this->model->getVelX();
+    int velocidadY=this->model->getVelY();
+
+    //caminar
+    if((velocidadX!=0&&acelera==false ) || (velocidadY!=0&&acelera==false ))
+    {
+        if(frame<=MINFRAMECAMINA|| frame>=MAXFRAMECAMINA)
+        {
+            frame=MINFRAMECAMINA;
+        } ;
+        frame=frame + 1 ;
+
+
+    }
+
+
+    //pateo pelota
+
+    else if(this->model->patearPelota())
+    {
+
+        if(frame<=MINFRAMEPATEPELO || frame>=MAXFRAMEPATEPELO)
+        {
+            frame=MINFRAMEPATEPELO;
+        }
+        ++frame;
+
+        this->model->terminoDePatearPelota();
+        this->retardo=DESACTIVARRETARDO;
+    }
+
+
+    //acelero
+    else if(this->model->getAcelero())
+    {
+
+        if(frame<=MINFRAMEACELE || frame>MAXFRAMEACELE) //frame/4=numero de spritted
+        {
+            frame=MINFRAMEACELE;
+        }
+        ++frame;
+
+    }
+
+
+
+    if (frame / 4 > MAXSPRITEUTILIZADO) //inicializo en 0 cuando ya me sobrepase en la cantidad de spritt(son 8 )
+
+
+    {
+        frame=0;
+
+    }
+
+
+
+    this->texturaJugador->render( (*this->model).getPosX() - camX, (*this->model).getPosY() - camY,currentClip,this->model->getDireccion(),NULL,SDL_FLIP_NONE,gRenderer);
+
+
+
+
+
 }
+
+
+bool View_Jugador::enEspera()
+{
+
+    bool espera=false;
+    if (this->model->estaActivo())
+    {
+        int acelera=this->model->getAcelero();
+        int velocidadX=this->model->getVelX();
+        int velocidadY=this->model->getVelY();
+
+        //caminar
+        if((velocidadX!=0&&acelera==false ) || (velocidadY!=0&&acelera==false ))
+        {
+
+
+            this->retardo=DESACTIVARRETARDO;
+            espera=false;
+        }
+
+
+
+
+        else if(this->model->patearPelota())
+        {
+            this->retardo=DESACTIVARRETARDO;
+            espera= false;
+
+        }
+
+
+        //acelero
+        else if(this->model->getAcelero())
+        {
+            this->retardo=DESACTIVARRETARDO;
+            espera=false;
+
+        }
+        else
+        {
+
+            this->retardo=this->retardo+1;
+
+            if(this->retardo>TIEMPORETARDO )
+            {
+
+                espera=true;
+
+            }
+
+
+
+        }
+
+
+
+
+
+    }
+
+    return espera;
+
+
+}
+
+void View_Jugador::renderEnEspera( int camX, int camY,SDL_Renderer * gRenderer )//SI ESTA EN ESPERA ENTONCES MUESTRA ESA SPRITTED
+{
+
+
+
+    SDL_Rect* currentClip = &gSpriteClips[frame / 4 ];
+    // SDL_Rect* currentClipquieto = &gSpriteClips[1 / 4 ];
+
+
+
+
+
+
+
+    if(frame<= 4|| frame>8) //frame/4=numero de spritted
+    {
+        frame=4;
+    }
+
+    ++frame;
+
+
+
+
+
+    if (frame / 4 > 13) //inicializo en 0 cuando ya me sobrepase en la cantidad de spritt(son 8 )
+
+
+    {
+        frame=0;
+
+    }
+
+
+
+
+    this->texturaJugador->render( (*this->model).getPosX() - camX, (*this->model).getPosY() - camY,currentClip,this->model->getDireccion(),NULL,SDL_FLIP_NONE,gRenderer);
+
+
+
+
+}
+
 
 
