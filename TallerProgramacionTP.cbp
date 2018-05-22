@@ -180,7 +180,6 @@
 		<Unit filename="Network/ModeloCliente.h" />
 		<Unit filename="Network/SocketCliente.cpp" />
 		<Unit filename="Network/SocketCliente.h" />
-		<Unit filename="Utils/IObserver.h" />
 		<Unit filename="Utils/Util_Common.cpp" />
 		<Unit filename="Utils/Util_Common.h" />
 		<Unit filename="Utils/Util_Configuracion.cpp" />

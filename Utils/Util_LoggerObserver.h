@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../Utils/IObserver.h"
 #include "../Command/Command.h"
 
 #define MSJ 0x00
