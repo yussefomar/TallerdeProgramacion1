@@ -1,5 +1,12 @@
 #include "../Model/Model.h"
 #include "../View/ViewModel.h"
+#include <algorithm>
+#include <stdio.h>
+#include <stdlib.h>
+#include <vector>
+#include <list>
+#include <iostream>
+#include <string>
 
 #define CANTJUGADORES 7
 
@@ -42,16 +49,16 @@ Jugador* Model::getJugadorActivo()
 void Model::agregarCambio(Command* cambio)
 {
 
-//        NotifyMessage("Iniciamos: addCommand", "Model.cpp");
+
     this->cambios.push(cambio);
-//        NotifyMessage("Terminamos: addCommand", "Model.cpp");
+
 
 }
 
 void Model::jugadorActivoCambia()
 {
 
-//        NotifyMessage("Iniciamos: jugadorActivoCambia", "Model.cpp");
+
     unsigned i = this->nroJugadorActivo+1;
     if (i == CANTJUGADORES)
     {
@@ -66,6 +73,7 @@ void Model::jugadorActivoCambia()
             (this->jugadores[i]).activar();
             this->nroJugadorActivo = i;
             encontrado = true;
+            this->notificarAObservadores(i, COMMNULL, MJU);
         }
         ++i;
         if (i == CANTJUGADORES)
@@ -78,7 +86,7 @@ void Model::jugadorActivoCambia()
 void Model::update()
 {
 
-//        NotifyMessage("Iniciamos: update", "Model.cpp");
+
 
     if(!this->cambios.empty())
     {
@@ -94,7 +102,7 @@ void Model::update()
         this->jugadoresVisitantes[i].move();
     }
     this->pelota.move();
-//        NotifyMessage("Terminamos: update", "Model.cpp");
+
 
 
 }
@@ -111,26 +119,26 @@ void Model::moverJuego()
 
 void Model::setCamara(SDL_Rect * camara)
 {
-//    NotifyMessage("Iniciamos: setCamara", "Model.cpp");
+
     this->camara = camara;
-//    NotifyMessage("Terminamos: setCamara", "Model.cpp");
+    this->notificarAObservadores(0, COMMNULL, MSJ);
+
 }
 
 void Model::setFormacionLocal(Formacion* formacion)
 {
-//    NotifyMessage("Iniciamos: setFormacion", "Model.cpp");
+
     this->formacion= formacion;
     this->formacion->setPosicionInicialLocal(this->jugadores);
-//    NotifyMessage("Terminamos: setFormacion", "Model.cpp");
-
+    this->notificarAObservadores(0, COMMNULL, MSJ);
 }
 
 void Model::setFormacionVisitante(Formacion* formacion)
 {
-//    NotifyMessage("Iniciamos: setFormacion", "Model.cpp");
+
     this->formacionVisitante= formacion;
     this->formacionVisitante->setPosicionInicialVisitante(this->jugadoresVisitantes);
-//    NotifyMessage("Terminamos: setFormacion", "Model.cpp");
+    this->notificarAObservadores(0, COMMNULL, MSJ);
 
 }
 
@@ -156,7 +164,7 @@ bool Model::pelotaEnMovimiento()
 void Model::setCasaca(std::string casacaName)
 {
 
-    // NotifyMessage("Iniciamos: setCasaca", "Model.cpp");
+
     char c1[100];
     for(unsigned i = 0; i<casacaName.size(); i++)
     {
@@ -176,9 +184,10 @@ void Model::setCasaca(std::string casacaName)
         for(int i = 0; i < CANTJUGADORES; ++i)
         {
             this->jugadoresVisitantes[i].setCasacaAlternativa();
+            this->notificarAObservadores(i, COMMNULL, MJU);
         }
     }
-    //NotifyMessage("Terminamos: setCasaca", "Model.cpp");
+
 
 }
 
@@ -198,55 +207,56 @@ char Model::getCodigoJugadorActivo()
 void Model::jugadorActivoAumentaVelocidadEnX()
 {
     this->jugadores[this->nroJugadorActivo].aumentarVelocidadX();
-    this->Notify(this->nroJugadorActivo, INCVELX);
+    this->notificarAObservadores(this->nroJugadorActivo, INCVELX, MJU);
 }
 
 void Model::jugadorActivoAumentaVelocidadEnY()
 {
     this->jugadores[this->nroJugadorActivo].aumentarVelocidadY();
-    this->Notify(this->nroJugadorActivo, INCVELY);
+    this->notificarAObservadores(this->nroJugadorActivo, INCVELY, MJU);
 }
 
 void Model::jugadorActivoDisminuyeVelocidadEnX()
 {
     this->jugadores[this->nroJugadorActivo].disminuirVelocidadX();
-    this->Notify(this->nroJugadorActivo, DECVELX);
+    this->notificarAObservadores(this->nroJugadorActivo, DECVELX, MJU);
 }
+
 
 void Model::jugadorActivoDisminuyeVelocidadEnY()
 {
     this->jugadores[this->nroJugadorActivo].disminuirVelocidadY();
-    this->Notify(this->nroJugadorActivo, DECVELY);
+    this->notificarAObservadores(this->nroJugadorActivo, DECVELY, MJU);
 }
 
 void Model::jugadorActivoAcelera()
 {
     this->jugadores[this->nroJugadorActivo].acelerar();
-    this->Notify(this->nroJugadorActivo, ACCJUG);
+    this->notificarAObservadores(this->nroJugadorActivo, ACCJUG, MJU);
 }
 
 void Model::jugadorActivoDesacelera()
 {
     this->jugadores[this->nroJugadorActivo].desacelerar();
-    this->Notify(this->nroJugadorActivo, DESJUG);
+    this->notificarAObservadores(this->nroJugadorActivo, DESJUG, MJU);
 }
 
 void Model::jugadorActivoPateaPelota()
 {
     this->jugadores[this->nroJugadorActivo].patearPelota(&(this->pelota));
-    this->Notify(this->nroJugadorActivo, PATPELO);
+    this->notificarAObservadores(this->nroJugadorActivo, PATPELO, MJU);
 }
 
 void Model::jugadorActivoRecuperaPelota()
 {
     this->jugadores[this->nroJugadorActivo].recuperaPelota(&(this->pelota));
-    this->Notify(this->nroJugadorActivo, RECUPELO);
+    this->notificarAObservadores(this->nroJugadorActivo, RECUPELO, MJU);
 }
 
 void Model::jugadorActivoDetener()
 {
     this->jugadores[this->nroJugadorActivo].detenerVelocidad();
-    this->Notify(this->nroJugadorActivo, STOPJUG);
+    this->notificarAObservadores(this->nroJugadorActivo, STOPJUG, MJU);
 }
 
 /*Servicios del modelo en modo online*/
@@ -254,79 +264,83 @@ void Model::aumentarVelocidadEnX(char codigojugador)
 {
     unsigned nrojugador=codigojugador;
     this->jugadores[nrojugador].aumentarVelocidadX();
-    this->Notify(nrojugador, INCVELX);
+    this->notificarAObservadores(nrojugador, INCVELX, MJU);
 }
 
 void Model::aumentarVelocidadEnY(char codigojugador)
 {
     unsigned nrojugador=codigojugador;
     this->jugadores[nrojugador].aumentarVelocidadY();
-    this->Notify(nrojugador, INCVELY);
+    this->notificarAObservadores(nrojugador, INCVELY, MJU);
 }
 
 void Model:: disminuirVelocidadY(char codigojugador)
 {
     unsigned nrojugador=codigojugador;
     this->jugadores[nrojugador].disminuirVelocidadY();
-    this->Notify(nrojugador, DECVELY);
+    this->notificarAObservadores(nrojugador, DECVELY, MJU);
 }
 
 void Model:: disminuirVelocidadX(char codigojugador)
 {
     unsigned nrojugador=codigojugador;
     this->jugadores[nrojugador].disminuirVelocidadX();
-    this->Notify(nrojugador, DECVELX);
+    this->notificarAObservadores(nrojugador, DECVELX, MJU);
 }
 
 void Model:: desacelerar(char codigojugador)
 {
     unsigned nrojugador=codigojugador;
     this->jugadores[nrojugador].desacelerar();
-    this->Notify(nrojugador, DESJUG);
+    this->notificarAObservadores(nrojugador, DESJUG, MJU);
 }
 
 void Model:: patearPelota(char codigojugador)
 {
     unsigned nrojugador=codigojugador;
     this->jugadores[nrojugador].patearPelota(this->getPelota());
-    this->Notify(nrojugador, PATPELO);
+   this->notificarAObservadores(nrojugador, PATPELO, MJU);;
 }
 
 void Model:: recuperaPelota(char codigojugador)
 {
     unsigned nrojugador=codigojugador;
     this->jugadores[nrojugador].recuperaPelota(this->getPelota());
-    this->Notify(nrojugador, RECUPELO);
+    this->notificarAObservadores(nrojugador, RECUPELO, MJU);
 }
 
 void Model:: stopJugador(char codigojugador)
 {
     unsigned nrojugador=codigojugador;
     this->jugadores[nrojugador].detenerVelocidad();
-    this->Notify(nrojugador, STOPJUG);
+    this->notificarAObservadores(nrojugador, STOPJUG, MJU);
 }
 
 void Model::acelerar(char codigojugador)
 {
     unsigned nrojugador=codigojugador;
     this->jugadores[nrojugador].acelerar();
-    this->Notify(nrojugador, ACCJUG);
-
-    //this->notificarAObservadores(nrojugador, ACCJUG);
+    this->notificarAObservadores(nrojugador, ACCJUG, MJU);
+}
+void Model::agregarObservador(Util_LoggerObserver* observador)
+{
+   this->observadores.push_back(observador);
 }
 
-//void Model::agregarObservador(IObserver* observador)
-//{
-//    this->observadores.push_back(observador);
-//}
-//
-//void notificarAObservadores(char entidad, char evento)
-//{
-//    for (std::list<IObserver*>::iterator it=this->observadores.begin(); it != this->observadores.end(); ++it)
-//    {
-//        (*it)->notificar(entidad, evento);
-//    }
-//
-//}
+void Model::notificarAObservadores(unsigned entidad, char evento, char tipo)
+{
+      for(std::vector<Util_LoggerObserver*>::const_iterator iter = observadores.begin(); iter != observadores.end(); ++iter)
+       {
+        (*iter)->notificar(std::to_string(entidad), evento, tipo);
+       }
+
+}
+
+void Model::quitarObservador(Util_LoggerObserver* obs)
+{
+   this->observadores.erase(std::remove(observadores.begin(), observadores.end(), obs), observadores.end());
+}
+
+
 
 

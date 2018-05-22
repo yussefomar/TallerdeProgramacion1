@@ -2,9 +2,7 @@
 
 #include <time.h>       /* clock_t, clock, CLOCKS_PER_SEC */
 #include "Utils/Util_LoggerObserver.h"
-//#include "Utils/Util_Persitencia.h"
 #include "Utils/Util_Common.h"
-#include "Utils/IObserver.h"
 #include "Controller/Controller.h"
 #include "Model/Model.h"
 #include "Network/ModeloCliente.h"
@@ -73,9 +71,10 @@ void modoOnline()
     Util_LoggerObserver loggerObserver(3);
 
     Model model;
-    //model.Attach(&loggerObserver);
-
     Util_Configuracion configuracion(&model, &loggerObserver);
+    model.agregarObservador(&loggerObserver);
+
+
 //    Util_Persistencia  persistencia(&model, &loggerObserver);
 
     /***********************************************************************************/

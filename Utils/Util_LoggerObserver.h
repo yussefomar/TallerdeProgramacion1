@@ -5,8 +5,14 @@
 #include <stdlib.h>
 
 #include "../Utils/IObserver.h"
+#include "../Command/Command.h"
 
-class Util_LoggerObserver : IObserver
+#define MSJ 0x00
+#define ERR 0x01
+#define WAR 0x02
+#define MJU 0x03
+
+class Util_LoggerObserver
 {
         std::string path;
         std::string message;
@@ -17,8 +23,10 @@ class Util_LoggerObserver : IObserver
         int getLoggerLevel();
         std::string getLogFile();
         void writeSingleLine(std::string line, std::string type, std::string mvc);
-        void writeMessageLine(std::string line, std::string mvc);
-        void writeWarningLine(std::string line, std::string mvc);
-        void writeErrorLine(std::string line, std::string mvc);
+        void writeMessageLine(std::string message, std::string mvc);
+        void writeWarningLine(std::string message, std::string mvc);
+        void writeErrorLine(std::string message, std::string mvc);
         void updateLevel(int newLevel);
+        void notificar(std::string entidad, char evento, char tipo);
+
 };

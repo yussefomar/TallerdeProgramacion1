@@ -1,15 +1,18 @@
 #ifndef MODEL_H
 #define MODEL_H
 
+#include <vector>
+#include <list>
+#include <stdio.h>
+#include <stdlib.h>
 #include "../Model/Model_Pelota.h"
 #include "../Model/Model_Jugador.h"
 #include "../Command/Command.h"
 #include "../Model/Formacion.h"
-#include "../Utils/Util_Subject.h"
-
+#include "../Utils/Util_LoggerObserver.h"
 #include <queue>
 
-class Model : public Util_Subject
+class Model
 {
 public:
     Model();
@@ -54,9 +57,10 @@ public:
     virtual void recuperaPelota(char codigojugador);
     virtual void stopJugador(char codigojugador);
     virtual void acelerar(char codigojugador);
-    //agrego y uso IObserver porque es lo que hay
-//    virtual void agregarObservador(IObserver* observador);
-//    virtual void notificarAObservadores(char entidad, char evento);
+
+    virtual void agregarObservador(Util_LoggerObserver* obs);
+    virtual void notificarAObservadores(unsigned entidad, char evento, char tipo);
+    virtual void quitarObservador(Util_LoggerObserver* obs);
 
     virtual void update();
 
@@ -76,7 +80,8 @@ private:
     SDL_Rect * camara;
     unsigned int nroJugadorActivo;
     std::queue<Command*> cambios;
-    //std::list<IObservaor*> observadores;
+    std::vector<Util_LoggerObserver*> observadores;
+
 };
 
 #endif // MODEL_H

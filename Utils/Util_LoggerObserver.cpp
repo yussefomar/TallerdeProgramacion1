@@ -13,11 +13,13 @@ using namespace std;
 #include "../Utils/Util_LoggerObserver.h"
 #include "../Utils/Util_Common.h"
 
+
 Util_Common utils;
 
 Util_LoggerObserver::Util_LoggerObserver(int myLevel)
 {
     this->level = myLevel;
+
 }
 
 Util_LoggerObserver::~Util_LoggerObserver()
@@ -73,10 +75,24 @@ void Util_LoggerObserver::updateLevel(int newLevel)
     this->level = newLevel;
 }
 
-//void notificar(char entidad, char evento) {
-//    if(evento == STOPJUG) {
-//
-//        printf("se detuvo el jugador: %c", entidad);
-//        printf("hubo el siguiente cambio: %", this->model->pedirAlgunDato())
-//    }
-//}
+
+void Util_LoggerObserver::notificar(std::string entidad, char evento, char tipo) {
+
+//    std::string en = std::to_string(entidad);
+    if(tipo == MJU)
+      {
+        this->writeMessageLine("Hubo un cambio en jugador " + entidad, "Se ejecutó: " + evento);
+      }
+    if(tipo == ERR)
+    {
+        this->writeErrorLine(entidad, std::to_string(evento));
+    }
+    if(tipo == WAR)
+    {
+        this->writeWarningLine(entidad, std::to_string(evento));
+    }
+    if(tipo == MSJ)
+    {
+        this->writeMessageLine(entidad, std::to_string(evento));
+    }
+}
