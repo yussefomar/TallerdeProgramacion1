@@ -193,8 +193,6 @@
 		<Unit filename="Utils/Util_Parser.h" />
 		<Unit filename="Utils/Util_Persistencia.cpp" />
 		<Unit filename="Utils/Util_Persistencia.h" />
-		<Unit filename="Utils/Util_Subject.cpp" />
-		<Unit filename="Utils/Util_Subject.h" />
 		<Unit filename="View/Entity.cpp" />
 		<Unit filename="View/Entity.h" />
 		<Unit filename="View/Event.cpp" />
