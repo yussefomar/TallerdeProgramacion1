@@ -80,9 +80,9 @@ void Util_LoggerObserver::notificar(std::string entidad, char evento, char tipo)
 
 //    std::string en = std::to_string(entidad);
     if(tipo == MJU)
-      {
-        this->writeMessageLine("Hubo un cambio en jugador " + entidad, "Se ejecutó: " + evento);
-      }
+    {
+    this->writeMessageLine("Hubo un cambio en jugador " + entidad, "Se ejecutó: " + std::to_string(evento));
+    }
     if(tipo == ERR)
     {
         this->writeErrorLine(entidad, std::to_string(evento));
