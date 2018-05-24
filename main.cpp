@@ -18,28 +18,24 @@ void modoOnline();
 int main(int argc, char* args[])
 {
 
-try{
-
-    /***********************************************************************************/
-    /**EJEMPLO**/
-    /***********************************************************************************/
-    bool quit = true;
+try
+{
+    /**
+    bool quit = false;
     View_Loguin loguinScreen(1);
     InformacionIngreso informacionIngreso(false);
     if(!loguinScreen.Inicializar()) return -1;
     while( quit == false )
     {
         loguinScreen.Procesar(informacionIngreso);
-        /** a modo de ejemplo, supongamos que luego de loguearnos hubo algo mal. **/
+        //a modo de ejemplo, supongamos que luego de loguearnos hubo algo mal.
         informacionIngreso.mensaje = "mal ingreso de datos";
-        informacionIngreso.error = true;
+        informacionIngreso.error = false;
     }
     loguinScreen.Cerrar();
-    /***********************************************************************************/
-    /***********************************************************************************/
-
-    //modoOnline();
-    modoOffline();
+    **/
+    modoOnline();
+    //modoOffline();
     return 0;
 
      }
@@ -74,21 +70,26 @@ void modoOnline()
     Util_Configuracion configuracion(&model, &loggerObserver);
     model.agregarObservador(&loggerObserver);
 
-
-//    Util_Persistencia  persistencia(&model, &loggerObserver);
+    ModeloCliente modelCliente(&model);
 
     /***********************************************************************************/
     /**EJEMPLO**/
     /***********************************************************************************/
-    /*bool quit = false;
+    /**
+    bool quit = false;
+    char respuesta;
     View_Loguin loguinScreen(1);
-    std::string ejemplo = "";
-    std::string mensajeError = "";
+    InformacionIngreso informacionIngreso(false);
+    loguinScreen.Inicializar();
     while( quit == false )
     {
-        ejemplo = loguinScreen.Procesar(mensajeError);
-        mensajeError = "mal ingreso de datos";
-    }*/
+        loguinScreen.Procesar(informacionIngreso);
+        if(informacionIngreso.equipoIngresado) modelCliente.enviarMensajeLogin();
+        respuesta = modelCliente.recibirMensajeLogin();
+        informacionIngreso.procesarRespuesta(respuesta);
+    }
+    loguinScreen.Cerrar();
+    **/
     /***********************************************************************************/
     /***********************************************************************************/
 
@@ -96,7 +97,6 @@ void modoOnline()
     View view(&model);
     view.Attach(&loggerObserver);
 
-    ModeloCliente modelCliente(&model);
     Controller controller(&modelCliente);
     controller.Attach(&loggerObserver);
 
@@ -106,7 +106,6 @@ void modoOnline()
     long double lapsoDeTiempo = 0.0;
     long double tiempoPrevio = clock();
     long double lag = 0.0;
-
 
     while( !controller.quitPressed() )
     {
@@ -137,29 +136,9 @@ void modoOffline()
     Util_LoggerObserver loggerObserver(3);
 
     Model model;
-//    model.Attach(&loggerObserver);
-
     Util_Configuracion configuracion(&model, &loggerObserver);
-    //y si queres tambien podes loggerObserver(3, &model) para asi tener acceso al modelo.
-    //model.agregarObservador(&loggerObserver);
-//    Util_Persistencia  persistencia(&model, &loggerObserver);
+    model.agregarObservador(&loggerObserver);
 
-    /***********************************************************************************/
-    /**EJEMPLO**/
-    /***********************************************************************************/
-    /*
-    std::string temp = "";
-    View_Loguin loguin(1);
-    temp = loguin.procesar();
-
-    cout << "=================================================================\n";
-    cout << " El usuario se intentó loguear con la siguiente información: \n";
-    cout << "=================================================================\n";
-    cout << temp;
-    cout << "\n=================================================================\n";
-    */
-    /***********************************************************************************/
-    /***********************************************************************************/
     View view(&model);
     view.Attach(&loggerObserver);
 

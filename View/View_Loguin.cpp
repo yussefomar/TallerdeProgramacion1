@@ -3,14 +3,13 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <string>
-
-using namespace std;
+#include <iostream>
 
 #include "../View/View_Loguin.h"
 #include "../View/StringInput.h"
 #include "../View/InformacionIngreso.h"
 
-#include <iostream>
+using namespace std;
 
 // Setup
 bool InitEverything();
@@ -93,53 +92,51 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
 {
     std::string temp = "";
     bool quit = false;
-    bool nameEntered = false;
-    bool passwordEntered = false;
-    bool teamEntered = false;
+
     //The gets the user's name
-    StringInput ip(1);
+    StringInput ip("");
     //The gets the user's name
-    StringInput actualUsuario(1);
+    StringInput actualUsuario(informacionIngreso.nombre);
     //The gets the user's name
-    StringInput actualPassword(1);
+    StringInput actualPassword(informacionIngreso.password);
     //The gets the user's name
-    StringInput actualTeam(1);
+    StringInput actualTeam(informacionIngreso.equipo);
 
     //Chequeamos toda la funcionalidad básica para el procesamiento.
     UpdateInputUsuario(informacionIngreso.nombre);
-    if(!informacionIngreso.nombre.empty()) nameEntered = true;
+    //if(!informacionIngreso.nombre.empty()) nameEntered = true;
 
     UpdateInputPassword(informacionIngreso.password);
-    if(!informacionIngreso.password.empty()) passwordEntered = true;
+    //if(!informacionIngreso.password.empty()) passwordEntered = true;
 
     UpdateInputEquipo(informacionIngreso.equipo);
-    if(!informacionIngreso.equipo.empty()) teamEntered = true;
+    //if(!informacionIngreso.equipo.empty()) teamEntered = true;
 
-    UpdateSalida(informacionIngreso.mensaje);
-    if(informacionIngreso.error){
+    if(informacionIngreso.error)
+    {
+        UpdateSalida(informacionIngreso.mensaje);
 
         UpdateInputUsuario("");
-        nameEntered = false;
+        informacionIngreso.nombreIngresado = false;
         UpdateInputPassword("");
-        passwordEntered = false;
+        informacionIngreso.passwordIngresado = false;
         UpdateInputEquipo("");
-        teamEntered = false;
+        informacionIngreso.equipoIngresado = false;
 
         UpdateInputPeticionPassword("");
         UpdateInputPeticionEquipo("");
-
     }
 
     informacionIngreso.error = false;
 
-    while( quit == false )
-    {
+    //while( quit == false )
+    //{
 		SDL_Event event;
         //While there's events to handle
         while( SDL_PollEvent( &event ) )
         {
             //If the user hasn't entered their name yet
-            if( nameEntered == false )
+            if( informacionIngreso.nombreIngresado == false )
             {
                 //Keep a copy of the current version of the string
                 temp = actualUsuario.str;
@@ -149,18 +146,18 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
                 //If the string was changed
                 if( actualUsuario.str != temp )
                 {
+                    informacionIngreso.nombre = actualUsuario.str;
                     UpdateInputUsuario(actualUsuario.str);
                 }
 
                 //If the enter key was pressed
                 if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
                 {
-                     //Change the flag
-                     nameEntered = true;
+                     informacionIngreso.nombreIngresado = true;
                      UpdateInputPeticionPassword("password:");
                 }
             }
-            else if( passwordEntered == false )
+            else if( informacionIngreso.passwordIngresado == false )
             {
                 //Keep a copy of the current version of the string
                 temp = actualPassword.str;
@@ -170,18 +167,18 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
                 //If the string was changed
                 if( actualPassword.str != temp )
                 {
+                    informacionIngreso.password = actualPassword.str;
                     UpdateInputPassword(actualPassword.str);
                 }
 
                 //If the enter key was pressed
                 if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
                 {
-                    //Change the flag
-                    passwordEntered = true;
+                    informacionIngreso.passwordIngresado = true;
                     UpdateInputPeticionEquipo("ingrese equipo 1 o 2:");
                 }
             }
-            else if( teamEntered == false )
+            else if( informacionIngreso.equipoIngresado == false )
             {
 
                 //Keep a copy of the current version of the string
@@ -192,13 +189,14 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
                 //If the string was changed
                 if( actualTeam.str != temp )
                 {
+                    informacionIngreso.equipo = actualTeam.str;;
                     UpdateInputEquipo(actualTeam.str);
                 }
 
                 //If the enter key was pressed
                 if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
                 {
-                    teamEntered = true;
+                    informacionIngreso.equipoIngresado = true;
                     quit = true;
                 }
             }
@@ -220,7 +218,7 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
         }*/
       /**************************************/
       Render();
-    }
+    //}
 
     informacionIngreso.nombre = actualUsuario.str;
     informacionIngreso.password = actualPassword.str;

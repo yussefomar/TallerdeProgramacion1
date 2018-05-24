@@ -16,7 +16,7 @@ class StringInput
     //Mensaje que se almacena
     std::string str;
     //Constructor
-    StringInput(int i);
+    StringInput(std::string data);
     //Destructor
     ~StringInput();
     //Manejador de los eventos

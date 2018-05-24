@@ -13,10 +13,10 @@ SDL_Color inputTextColor = { 0xFF, 0xFF, 0xFF };
 //The event structure
 SDL_Event inputEvent;
 
-StringInput::StringInput(int i)
+StringInput::StringInput(std::string data)
 {
     //Initialize the string
-    str = "";
+    this->str = data;
 }
 
 StringInput::~StringInput()

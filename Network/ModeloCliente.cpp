@@ -187,3 +187,14 @@ unsigned ModeloCliente::ejecutarUnComando()
     this->model->update();
     return 1;
 }
+
+void ModeloCliente::enviarMensajeLogin()
+{
+    return;
+}
+
+char ModeloCliente::recibirMensajeLogin()
+{
+    char byte;
+    return byte;
+}
