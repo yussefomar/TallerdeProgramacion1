@@ -8,13 +8,15 @@
 #include <iostream>
 #include <string>
 
+#define CANTJUGADORESTOTALES 14
 #define CANTJUGADORES 7
 
 
 Model::Model()
 {
-    this->jugadores = new Jugador[CANTJUGADORES]();
-    this->jugadoresVisitantes = new Jugador[CANTJUGADORES]();
+    this->jugadores = new Jugador[CANTJUGADORESTOTALES]();
+    this->jugadoresLocales = this->jugadores;
+    this->jugadoresVisitantes = this->jugador
     this->nroJugadorActivo = 6;
     this->getJugadorActivo()->activar();
     this->juegoIniciado=false;
@@ -23,7 +25,6 @@ Model::Model()
 Model::~Model()
 {
     delete[] this->jugadores;
-    delete[] this->jugadoresVisitantes;
 }
 
 Pelota* Model::getPelota()
@@ -179,7 +180,9 @@ void Model::setCasaca(std::string casacaName)
         {
             this->jugadores[i].setCasacaAlternativa();
         }
-    }else{
+    }
+    else
+    {
 
         for(int i = 0; i < CANTJUGADORES; ++i)
         {
@@ -299,7 +302,7 @@ void Model:: patearPelota(char codigojugador)
 {
     unsigned nrojugador=codigojugador;
     this->jugadores[nrojugador].patearPelota(this->getPelota());
-   this->notificarAObservadores(nrojugador, PATPELO, MJU);;
+    this->notificarAObservadores(nrojugador, PATPELO, MJU);;
 }
 
 void Model:: recuperaPelota(char codigojugador)
@@ -324,21 +327,21 @@ void Model::acelerar(char codigojugador)
 }
 void Model::agregarObservador(Util_LoggerObserver* observador)
 {
-   this->observadores.push_back(observador);
+    this->observadores.push_back(observador);
 }
 
 void Model::notificarAObservadores(unsigned entidad, char evento, char tipo)
 {
-      for(std::vector<Util_LoggerObserver*>::const_iterator iter = observadores.begin(); iter != observadores.end(); ++iter)
-       {
+    for(std::vector<Util_LoggerObserver*>::const_iterator iter = observadores.begin(); iter != observadores.end(); ++iter)
+    {
         (*iter)->notificar(std::to_string(entidad), evento, tipo);
-       }
+    }
 
 }
 
 void Model::quitarObservador(Util_LoggerObserver* obs)
 {
-   this->observadores.erase(std::remove(observadores.begin(), observadores.end(), obs), observadores.end());
+    this->observadores.erase(std::remove(observadores.begin(), observadores.end(), obs), observadores.end());
 }
 
 

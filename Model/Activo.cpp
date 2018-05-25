@@ -16,7 +16,8 @@ Activo::~Activo()
     //dtor
 }
 
-void Activo::move() {
+void Activo::move()
+{
     this->mPosX += this->mVelX * aceleracion;
     //If the dot went too far to the left or right
     if( ( mPosX < 0 ) || ( mPosX + ANCHO_JUGADOR >= ANCHO_NIVEL) )
@@ -35,11 +36,13 @@ void Activo::move() {
     }
 
 }
-bool Activo::estaActivo() {
+bool Activo::estaActivo()
+{
     return true;
 }
 
-void Activo::acelerar() {
+void Activo::acelerar()
+{
     this->aceleracion = VELOCIDAD_ACELERACION;
     this->acelero=true;
 }

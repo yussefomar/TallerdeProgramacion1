@@ -47,7 +47,7 @@ public:
     virtual void jugadorActivoDetener();
     virtual void jugadorActivoCambia();
 
-     /*servicios del Modelo en online*/
+    /*servicios del Modelo en online*/
     virtual void aumentarVelocidadEnX(char codigoJugador);
     virtual void disminuirVelocidadY(char codigojugador);
     virtual void aumentarVelocidadEnY(char codigojugador);
@@ -71,9 +71,9 @@ protected:
 
 private:
     Pelota pelota;
-    Jugador* jugadores;
+    Jugador* jugadoresLocales;
     Jugador* jugadoresVisitantes;
-    Formacion *formacion;
+    Formacion *formacionLocales;
     Formacion *formacionVisitante;
     bool juegoIniciado;
     std::string casacaSprite; // TEMPORAL.

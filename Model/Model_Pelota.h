@@ -39,9 +39,9 @@ public:
     void aumentarVelocidadX();
 
     void aumentarVelocidadY();
-     void setVelocidadX(int velocidad);
+    void setVelocidadX(int velocidad);
     void setVelocidadY(int velocidad);
-        SDL_Rect * getCollider();
+    SDL_Rect * getCollider();
 
 private:
     //The X and Y offsets of the dot

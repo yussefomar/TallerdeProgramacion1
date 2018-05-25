@@ -20,9 +20,9 @@ class InformacionIngreso
         InformacionIngreso(bool error);
         virtual ~InformacionIngreso();
 
-    protected:
+protected:
 
-    private:
+private:
 };
 
 #endif // INFORMACIONINGRESO_H

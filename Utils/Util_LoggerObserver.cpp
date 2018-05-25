@@ -78,12 +78,13 @@ void Util_LoggerObserver::updateLevel(int newLevel)
 }
 
 
-void Util_LoggerObserver::notificar(std::string entidad, char evento, char tipo) {
+void Util_LoggerObserver::notificar(std::string entidad, char evento, char tipo)
+{
 
 //    std::string en = std::to_string(entidad);
     if(tipo == MJU)
     {
-    this->writeMessageLine("Se ejecutó: " + transformarEvento(evento), "Hubo un cambio en jugador " + entidad);
+        this->writeMessageLine("Se ejecutó: " + transformarEvento(evento), "Hubo un cambio en jugador " + entidad);
     }
     if(tipo == ERR)
     {
@@ -101,16 +102,27 @@ void Util_LoggerObserver::notificar(std::string entidad, char evento, char tipo)
 
 std::string transformarEvento(char evento)
 {
-    if(evento == DECVELX) return "DisminuirVelocidadXNet";
-    if(evento == DECVELY) return "DisminuirVelocidadYNet";
-    if(evento == INCVELX) return "AumentarVelocidadXNet";
-    if(evento == INCVELY) return "AumentarVelocidadYNet";
-    if(evento == CAMBJUG) return "CambiarJugadorNet";
-    if(evento == STOPJUG) return "StopJugadorNet";
-    if(evento == ACCJUG) return "AcelerarNet";
-    if(evento == DESJUG) return "DesacelerarNet";
-    if(evento == PATPELO) return "PatearPelotaNet";
-    if(evento == RECUPELO) return "RecuperarPelotaNet";
-    if(evento == COMMNULL) return "CommandNullNet";
+    if(evento == DECVELX)
+        return "DisminuirVelocidadXNet";
+    if(evento == DECVELY)
+        return "DisminuirVelocidadYNet";
+    if(evento == INCVELX)
+        return "AumentarVelocidadXNet";
+    if(evento == INCVELY)
+        return "AumentarVelocidadYNet";
+    if(evento == CAMBJUG)
+        return "CambiarJugadorNet";
+    if(evento == STOPJUG)
+        return "StopJugadorNet";
+    if(evento == ACCJUG)
+        return "AcelerarNet";
+    if(evento == DESJUG)
+        return "DesacelerarNet";
+    if(evento == PATPELO)
+        return "PatearPelotaNet";
+    if(evento == RECUPELO)
+        return "RecuperarPelotaNet";
+    if(evento == COMMNULL)
+        return "CommandNullNet";
     return std::to_string(evento);
 }

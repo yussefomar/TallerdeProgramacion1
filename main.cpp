@@ -10,7 +10,7 @@
 #include "View/View_Loguin.h"
 #include "Utils/Util_Configuracion.h"
 
-Util_Common common;
+Util_Common common; //Porque importa esta variable global
 
 void modoOffline();
 void modoOnline();
@@ -18,6 +18,7 @@ void modoOnline();
 int main(int argc, char* args[])
 {
 
+<<<<<<< Updated upstream
 try
 {
     /**
@@ -37,8 +38,35 @@ try
     modoOnline();
     //modoOffline();
     return 0;
+=======
+    try
+    {
 
-     }
+        /***********************************************************************************/
+        /**EJEMPLO**/
+        /***********************************************************************************/
+        bool quit = true;
+        View_Loguin loguinScreen(1);
+        InformacionIngreso informacionIngreso(false);
+        if(!loguinScreen.Inicializar())
+            return -1;
+        while( quit == false )
+        {
+            loguinScreen.Procesar(informacionIngreso);
+            /** a modo de ejemplo, supongamos que luego de loguearnos hubo algo mal. **/
+            informacionIngreso.mensaje = "mal ingreso de datos";
+            informacionIngreso.error = true;
+        }
+        loguinScreen.Cerrar();
+        /***********************************************************************************/
+        /***********************************************************************************/
+
+        //modoOnline();
+        modoOffline();
+        return 0;
+>>>>>>> Stashed changes
+
+    }
     catch(const std::runtime_error& re)
     {
 //        NotifyError("Error en Runtime: ", "View.cpp");

@@ -13,10 +13,10 @@ const std::string pathDefaultConfig = "./Configs/config.yaml";
 
 Util_Configuracion::Util_Configuracion(Model* model, Util_LoggerObserver* loggerObserver)
 {
-   this->Attach(loggerObserver);
-   parser.Attach(loggerObserver);
-   try
-   {
+    this->Attach(loggerObserver);
+    parser.Attach(loggerObserver);
+    try
+    {
         Parametros parametros = parser.CrearSuperConfig();
 
         std::string pathIndicado = "./Configs/"; //implementar metodo para levantar de consola
@@ -42,7 +42,7 @@ Util_Configuracion::Util_Configuracion(Model* model, Util_LoggerObserver* logger
         NotifyMessage(fullPath, "Util_Configuracion.cpp");
         if(!this->inicializar(pathDefaultConfig, fullPath))
         {
-           NotifyWarning("No se pudo levantar ningun archivo de configuración.", "Util_Configuracion.cpp");
+            NotifyWarning("No se pudo levantar ningun archivo de configuración.", "Util_Configuracion.cpp");
         }
         else
         {

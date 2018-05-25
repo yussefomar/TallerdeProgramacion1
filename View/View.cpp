@@ -35,44 +35,44 @@ View::~View()
 void View::ajustarCamara()
 {
 
-        NotifyMessage("Inicia: ajustarCamara", "View.cpp");
+    NotifyMessage("Inicia: ajustarCamara", "View.cpp");
 
-        this->camara->x = ( model->getPelota()->getPosX() + 12/ 2 ) - ANCHO_VENTANA/ 2;
-        this->camara->y = ( model->getPelota()->getPosY() + 12 / 2 ) - ALTO_VENTANA/ 2;
+    this->camara->x = ( model->getPelota()->getPosX() + 12/ 2 ) - ANCHO_VENTANA/ 2;
+    this->camara->y = ( model->getPelota()->getPosY() + 12 / 2 ) - ALTO_VENTANA/ 2;
 
-        //Keep the this->camara->in bounds
-        if( this->camara->x < 0 )
-        {
-            this->camara->x = 0;
-        }
-        if( this->camara->y < 0 )
-        {
-            this->camara->y = 0;
-        }
-        if( this->camara->x > ANCHO_NIVEL - this->camara->w )
-        {
-            this->camara->x = ANCHO_NIVEL - this->camara->w;
-        }
-        if( this->camara->y > ALTO_NIVEL - this->camara->h )
-        {
-            this->camara->y = ALTO_NIVEL - this->camara->h;
-        }
-        NotifyMessage("Finaliza: ajustarCamara", "View.cpp");
+    //Keep the this->camara->in bounds
+    if( this->camara->x < 0 )
+    {
+        this->camara->x = 0;
+    }
+    if( this->camara->y < 0 )
+    {
+        this->camara->y = 0;
+    }
+    if( this->camara->x > ANCHO_NIVEL - this->camara->w )
+    {
+        this->camara->x = ANCHO_NIVEL - this->camara->w;
+    }
+    if( this->camara->y > ALTO_NIVEL - this->camara->h )
+    {
+        this->camara->y = ALTO_NIVEL - this->camara->h;
+    }
+    NotifyMessage("Finaliza: ajustarCamara", "View.cpp");
 
 }
 
 void View::render()
 {
-         NotifyMessage("Inicia: render", "View.cpp");
-        this->ajustarCamara();
-        SDL_SetRenderDrawColor( this->gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-        SDL_RenderClear( this->gRenderer );
+    NotifyMessage("Inicia: render", "View.cpp");
+    this->ajustarCamara();
+    SDL_SetRenderDrawColor( this->gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+    SDL_RenderClear( this->gRenderer );
 
-        this->viewModel->render();
+    this->viewModel->render();
 
-        //Update screen
-        SDL_RenderPresent( this->gRenderer );
-        NotifyMessage("Finaliza: render", "View.cpp");
+    //Update screen
+    SDL_RenderPresent( this->gRenderer );
+    NotifyMessage("Finaliza: render", "View.cpp");
 
 }
 
@@ -80,61 +80,61 @@ bool View::inicializar()
 {
     bool exito = true;
 
-        NotifyMessage("Inicia: inicializar", "View.cpp");
+    NotifyMessage("Inicia: inicializar", "View.cpp");
 
-        if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
+    if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
+    {
+        printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
+        NotifyError("SDL could not initialize! SDL Error: ", "View.cpp");
+        NotifyError(SDL_GetError(), "View.cpp");
+        exito = false;
+    }
+    else
+    {
+        if( !SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" ) )
         {
-            printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
-            NotifyError("SDL could not initialize! SDL Error: ", "View.cpp");
+            printf( "Warning: Linear texture filtering not enabled!" );
+            NotifyWarning("Warning: Linear texture filtering not enabled!", "View.cpp");
+        }
+
+        //Create window
+        this->window = SDL_CreateWindow( "Taller de Programacion - Correlatividad", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ANCHO_VENTANA, ALTO_VENTANA, SDL_WINDOW_SHOWN );
+        if( this->window == NULL )
+        {
+            printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
+            NotifyError("Window could not be created! SDL Error: ", "View.cpp");
             NotifyError(SDL_GetError(), "View.cpp");
             exito = false;
         }
         else
         {
-            if( !SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" ) )
+            //Create vsynced renderer for this->window
+            this->gRenderer = SDL_CreateRenderer( this->window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
+            if( this->gRenderer == NULL )
             {
-                printf( "Warning: Linear texture filtering not enabled!" );
-                NotifyWarning("Warning: Linear texture filtering not enabled!", "View.cpp");
-            }
-
-            //Create window
-            this->window = SDL_CreateWindow( "Taller de Programacion - Correlatividad", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ANCHO_VENTANA, ALTO_VENTANA, SDL_WINDOW_SHOWN );
-            if( this->window == NULL )
-            {
-                printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
-                NotifyError("Window could not be created! SDL Error: ", "View.cpp");
+                printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
+                NotifyError("Renderer could not be created! SDL Error: ", "View.cpp");
                 NotifyError(SDL_GetError(), "View.cpp");
                 exito = false;
             }
             else
             {
-                //Create vsynced renderer for this->window
-                this->gRenderer = SDL_CreateRenderer( this->window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
-                if( this->gRenderer == NULL )
-                {
-                    printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
-                    NotifyError("Renderer could not be created! SDL Error: ", "View.cpp");
-                    NotifyError(SDL_GetError(), "View.cpp");
-                    exito = false;
-                }
-                else
-                {
-                    //Initialize renderer color
-                    SDL_SetRenderDrawColor( this->gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+                //Initialize renderer color
+                SDL_SetRenderDrawColor( this->gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 
-                    //Initialize PNG loading
-                    int imgFlags = IMG_INIT_PNG;
-                    if( !( IMG_Init( imgFlags ) & imgFlags ) )
-                    {
-                        printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
-                        NotifyError("SDL_image could not initialize! SDL_image Error: ", "View.cpp");
-                        NotifyError(IMG_GetError(), "View.cpp");
-                        exito = false;
-                    }
+                //Initialize PNG loading
+                int imgFlags = IMG_INIT_PNG;
+                if( !( IMG_Init( imgFlags ) & imgFlags ) )
+                {
+                    printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
+                    NotifyError("SDL_image could not initialize! SDL_image Error: ", "View.cpp");
+                    NotifyError(IMG_GetError(), "View.cpp");
+                    exito = false;
                 }
             }
         }
-        NotifyMessage("Finaliza: inicializar", "View.cpp");
+    }
+    NotifyMessage("Finaliza: inicializar", "View.cpp");
 
     return exito;
 }
@@ -167,17 +167,17 @@ void View::loadMedia()
 void View::close()
 {
 
-        NotifyMessage("Inicia: close", "View.cpp");
-        //Destroy this->window}
-        SDL_DestroyRenderer( this->gRenderer );
-        SDL_DestroyWindow( this->window );
+    NotifyMessage("Inicia: close", "View.cpp");
+    //Destroy this->window}
+    SDL_DestroyRenderer( this->gRenderer );
+    SDL_DestroyWindow( this->window );
 
-        this->gRenderer = NULL;
-        this->window = NULL;
+    this->gRenderer = NULL;
+    this->window = NULL;
 
-        //Quit SDL subsystems
-        IMG_Quit();
-        SDL_Quit();
-        NotifyMessage("Finaliza: close", "View.cpp");
+    //Quit SDL subsystems
+    IMG_Quit();
+    SDL_Quit();
+    NotifyMessage("Finaliza: close", "View.cpp");
 
 }

@@ -35,7 +35,7 @@ public:
     virtual void acelerar() = 0;
     int getAceleracion();
     void desacelerar();
-        bool getAcelero();
+    bool getAcelero();
     //virtual void stop() = 0;
 
 protected:

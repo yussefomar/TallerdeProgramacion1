@@ -4,13 +4,13 @@
 
 class Entity
 {
-    public:
-        Entity();
-        virtual ~Entity();
+public:
+    Entity();
+    virtual ~Entity();
 
-    protected:
+protected:
 
-    private:
+private:
 };
 
 #endif // ENTITY_H

@@ -15,7 +15,7 @@ void PatearPelotaNet ::execute()
     this->model->patearPelota(this->getCodigoJugador());
 }
 
- char PatearPelotaNet ::getCodigoComando()
+char PatearPelotaNet ::getCodigoComando()
 {
-   return PATPELO;
+    return PATPELO;
 }

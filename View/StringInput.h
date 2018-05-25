@@ -12,7 +12,7 @@ using namespace std;
 //Manejador de lo que se ingresa por teclado
 class StringInput
 {
-    public:
+public:
     //Mensaje que se almacena
     std::string str;
     //Constructor

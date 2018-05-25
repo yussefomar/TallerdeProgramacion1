@@ -41,16 +41,20 @@ void Pelota::move()
         mPosY -= mVelY;
         mVelY=(-1)*mVelY;
     }
-    if (mVelX>0){
+    if (mVelX>0)
+    {
         mVelX--;
     }
-    if (mVelX<0){
+    if (mVelX<0)
+    {
         mVelX++;
     }
-     if (mVelY>0){
+    if (mVelY>0)
+    {
         mVelY--;
     }
-    if (mVelY<0){
+    if (mVelY<0)
+    {
         mVelY++;
     }
 
@@ -58,12 +62,14 @@ void Pelota::move()
     this->colli_pelo.y = this->getPosY();
 }
 
-void Pelota::setVelocidadX(int velocidad){
-     mVelX = velocidad ;
-  }
-    void Pelota::setVelocidadY(int velocidad){
-        mVelY = velocidad;
-    }
+void Pelota::setVelocidadX(int velocidad)
+{
+    mVelX = velocidad ;
+}
+void Pelota::setVelocidadY(int velocidad)
+{
+    mVelY = velocidad;
+}
 
 
 int Pelota::getPosX()

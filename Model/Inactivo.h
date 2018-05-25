@@ -11,7 +11,7 @@ public:
     virtual ~Inactivo();
     void move();
     bool estaActivo();
-        void acelerar();
+    void acelerar();
 
 
 protected:

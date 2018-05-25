@@ -6,15 +6,15 @@
 
 class CommandNullNet : public CommandNet
 {
-    public:
-        CommandNullNet(Model* model);
-        virtual ~CommandNullNet();
-        void execute();
-        char getCodigoComando();
+public:
+    CommandNullNet(Model* model);
+    virtual ~CommandNullNet();
+    void execute();
+    char getCodigoComando();
 
-    protected:
+protected:
 
-    private:
+private:
 };
 
 #endif // COMMANDNULLNET_H

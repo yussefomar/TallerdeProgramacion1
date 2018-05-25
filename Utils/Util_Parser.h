@@ -45,15 +45,15 @@ private:
 
 class Conexion
 {
-    public:
+public:
     Conexion(const YAML::Node &node) :
         ip(node["ip"].as<std::string>()) {};
-std::string const &get_ip() const
-{
-    return ip;
-};
+    std::string const &get_ip() const
+    {
+        return ip;
+    };
 private:
-std::string ip;
+    std::string ip;
 };
 
 struct Parametros

@@ -11,8 +11,9 @@ DisminuirVelocidadX::~DisminuirVelocidadX()
 
 void DisminuirVelocidadX::execute()
 {
-    if(this->model->pelotaEnMovimiento()){
-    this->model->jugadorActivoDisminuyeVelocidadEnX();
+    if(this->model->pelotaEnMovimiento())
+    {
+        this->model->jugadorActivoDisminuyeVelocidadEnX();
     }
 }
 

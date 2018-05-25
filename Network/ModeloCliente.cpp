@@ -162,7 +162,7 @@ unsigned ModeloCliente::enviarUnComando()
 {
     if(this->codigosAEnviar.empty())
     {
-        this->socket.enviarByte(0x0A);
+        this->socket.enviarByte(COMMNULL);
         return 1;
     }
 

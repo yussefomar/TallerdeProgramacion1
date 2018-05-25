@@ -69,7 +69,9 @@ void Util_Common::backupFile()
     string newFileName = "./Logs/Cerrado (" + myUtil.currentDateTime() + ") Log.txt";
     string oldFileName = "./Logs/Log.txt";
     int result = rename(oldFileName.c_str(), newFileName.c_str());
-    if ( result == 0 ) puts ( "Hemos sobreescrito el nombre del archivo." );
-    else perror( "No pudimos reescribir el nombre del archivo." );
+    if ( result == 0 )
+        puts ( "Hemos sobreescrito el nombre del archivo." );
+    else
+        perror( "No pudimos reescribir el nombre del archivo." );
 }
 

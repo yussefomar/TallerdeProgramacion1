@@ -4,13 +4,13 @@
 
 class Event
 {
-    public:
-        Event();
-        virtual ~Event();
+public:
+    Event();
+    virtual ~Event();
 
-    protected:
+protected:
 
-    private:
+private:
 };
 
 #endif // EVENT_H

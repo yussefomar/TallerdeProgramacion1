@@ -75,10 +75,12 @@ View_Loguin::~View_Loguin()
 
 }
 
-bool View_Loguin::Inicializar(){
+bool View_Loguin::Inicializar()
+{
     return InitEverything();
 }
-void View_Loguin::Cerrar(){
+void View_Loguin::Cerrar()
+{
     // Clean up font
     TTF_CloseFont( fontPeticion );
     TTF_CloseFont( fontRespuesta );
@@ -104,6 +106,7 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
 
     //Chequeamos toda la funcionalidad básica para el procesamiento.
     UpdateInputUsuario(informacionIngreso.nombre);
+<<<<<<< Updated upstream
     //if(!informacionIngreso.nombre.empty()) nameEntered = true;
 
     UpdateInputPassword(informacionIngreso.password);
@@ -115,6 +118,22 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
     if(informacionIngreso.error)
     {
         UpdateSalida(informacionIngreso.mensaje);
+=======
+    if(!informacionIngreso.nombre.empty())
+        nameEntered = true;
+
+    UpdateInputPassword(informacionIngreso.password);
+    if(!informacionIngreso.password.empty())
+        passwordEntered = true;
+
+    UpdateInputEquipo(informacionIngreso.equipo);
+    if(!informacionIngreso.equipo.empty())
+        teamEntered = true;
+
+    UpdateSalida(informacionIngreso.mensaje);
+    if(informacionIngreso.error)
+    {
+>>>>>>> Stashed changes
 
         UpdateInputUsuario("");
         informacionIngreso.nombreIngresado = false;
@@ -129,9 +148,15 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
 
     informacionIngreso.error = false;
 
+<<<<<<< Updated upstream
     //while( quit == false )
     //{
 		SDL_Event event;
+=======
+    while( quit == false )
+    {
+        SDL_Event event;
+>>>>>>> Stashed changes
         //While there's events to handle
         while( SDL_PollEvent( &event ) )
         {
@@ -153,8 +178,14 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
                 //If the enter key was pressed
                 if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
                 {
+<<<<<<< Updated upstream
                      informacionIngreso.nombreIngresado = true;
                      UpdateInputPeticionPassword("password:");
+=======
+                    //Change the flag
+                    nameEntered = true;
+                    UpdateInputPeticionPassword("password:");
+>>>>>>> Stashed changes
                 }
             }
             else if( informacionIngreso.passwordIngresado == false )
@@ -216,9 +247,15 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
             informacionIngreso.error = true;
             return informacionIngreso;
         }*/
+<<<<<<< Updated upstream
       /**************************************/
       Render();
     //}
+=======
+        /**************************************/
+        Render();
+    }
+>>>>>>> Stashed changes
 
     informacionIngreso.nombre = actualUsuario.str;
     informacionIngreso.password = actualPassword.str;
@@ -234,266 +271,266 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
 
 void RunGame()
 {
-	//Render();
+    //Render();
 //	std::cout << "Press any key to exit\n";
-	//std::cin.ignore();
+    //std::cin.ignore();
 }
 
 void Render()
 {
-	// Clear the window and make it all red
-	SDL_RenderClear( renderer );
+    // Clear the window and make it all red
+    SDL_RenderClear( renderer );
 
     //Para el backgroundImage
-	SDL_RenderCopy( renderer, backgroundTexture, NULL, &backgroundRect );
+    SDL_RenderCopy( renderer, backgroundTexture, NULL, &backgroundRect );
 
-	// Render our text objects ( like normal )
-	SDL_RenderCopy( renderer, bienvenidaTexture, nullptr, &bienvenidaRect );
-	SDL_RenderCopy( renderer, peticionUsuarioTexture, nullptr, &peticionUsuarioRect );
-	SDL_RenderCopy( renderer, peticionPasswordTexture, nullptr, &peticionPasswordRect );
-	SDL_RenderCopy( renderer, peticionEquipoTexture, nullptr, &peticionEquipoRect );
-	SDL_RenderCopy( renderer, ingresoUsuarioTexture, nullptr, &ingresoUsuarioRect );
-	SDL_RenderCopy( renderer, ingresoPasswordTexture, nullptr, &ingresoPasswordRect );
-	SDL_RenderCopy( renderer, ingresoEquipoTexture, nullptr, &ingresoEquipoRect );
-	SDL_RenderCopy( renderer, salidaTexture, nullptr, &salidaRect );
+    // Render our text objects ( like normal )
+    SDL_RenderCopy( renderer, bienvenidaTexture, nullptr, &bienvenidaRect );
+    SDL_RenderCopy( renderer, peticionUsuarioTexture, nullptr, &peticionUsuarioRect );
+    SDL_RenderCopy( renderer, peticionPasswordTexture, nullptr, &peticionPasswordRect );
+    SDL_RenderCopy( renderer, peticionEquipoTexture, nullptr, &peticionEquipoRect );
+    SDL_RenderCopy( renderer, ingresoUsuarioTexture, nullptr, &ingresoUsuarioRect );
+    SDL_RenderCopy( renderer, ingresoPasswordTexture, nullptr, &ingresoPasswordRect );
+    SDL_RenderCopy( renderer, ingresoEquipoTexture, nullptr, &ingresoEquipoRect );
+    SDL_RenderCopy( renderer, salidaTexture, nullptr, &salidaRect );
 
-	// Render the changes above
-	SDL_RenderPresent( renderer );
+    // Render the changes above
+    SDL_RenderPresent( renderer );
 }
 
 // Initialization ++
 // ==================================================================
 bool SetupTTF(const std::string &fontNamePeticion,const std::string &fontNameRespuesta)
 {
-	// SDL2_TTF needs to be initialized just like SDL2
-	if ( TTF_Init() == -1 )
-	{
-		std::cout << " Falla al inicializar el TTF : " << SDL_GetError() << std::endl;
-		return false;
-	}
+    // SDL2_TTF needs to be initialized just like SDL2
+    if ( TTF_Init() == -1 )
+    {
+        std::cout << " Falla al inicializar el TTF : " << SDL_GetError() << std::endl;
+        return false;
+    }
 
-	// Load our fonts, with a huge size
-	fontPeticion = TTF_OpenFont( fontNamePeticion.c_str(), 45 );
-	fontRespuesta = TTF_OpenFont( fontNameRespuesta.c_str(), 30 );
+    // Load our fonts, with a huge size
+    fontPeticion = TTF_OpenFont( fontNamePeticion.c_str(), 45 );
+    fontRespuesta = TTF_OpenFont( fontNameRespuesta.c_str(), 30 );
 
-	// Error check
-	if ( fontPeticion == nullptr || fontRespuesta == nullptr )
-	{
-		std::cout << " Falla al cargar una fuente : " << SDL_GetError() << std::endl;
-		return false;
-	}
+    // Error check
+    if ( fontPeticion == nullptr || fontRespuesta == nullptr )
+    {
+        std::cout << " Falla al cargar una fuente : " << SDL_GetError() << std::endl;
+        return false;
+    }
 
-	return true;
+    return true;
 }
 
 void UpdateInputUsuario(std::string value)
 {
-	SDL_Surface* ingresoUsuario = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColor );
-	ingresoUsuarioTexture = SurfaceToTexture( ingresoUsuario );
-	SDL_QueryTexture( ingresoUsuarioTexture, NULL, NULL, &ingresoUsuarioRect.w, &ingresoUsuarioRect.h );
-	ingresoUsuarioRect.x = 30;
-	ingresoUsuarioRect.y = peticionUsuarioRect.y + 50;
+    SDL_Surface* ingresoUsuario = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColor );
+    ingresoUsuarioTexture = SurfaceToTexture( ingresoUsuario );
+    SDL_QueryTexture( ingresoUsuarioTexture, NULL, NULL, &ingresoUsuarioRect.w, &ingresoUsuarioRect.h );
+    ingresoUsuarioRect.x = 30;
+    ingresoUsuarioRect.y = peticionUsuarioRect.y + 50;
 }
 
 void UpdateInputPassword(std::string value)
 {
-	SDL_Surface* ingresoPassword = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColor );
-	ingresoPasswordTexture = SurfaceToTexture( ingresoPassword );
-	SDL_QueryTexture( ingresoPasswordTexture, NULL, NULL, &ingresoPasswordRect.w, &ingresoPasswordRect.h );
-	ingresoPasswordRect.x = 30;
-	ingresoPasswordRect.y = peticionPasswordRect.y + 50;
+    SDL_Surface* ingresoPassword = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColor );
+    ingresoPasswordTexture = SurfaceToTexture( ingresoPassword );
+    SDL_QueryTexture( ingresoPasswordTexture, NULL, NULL, &ingresoPasswordRect.w, &ingresoPasswordRect.h );
+    ingresoPasswordRect.x = 30;
+    ingresoPasswordRect.y = peticionPasswordRect.y + 50;
 }
 
 void UpdateInputEquipo(std::string value)
 {
-	SDL_Surface* ingresoEquipo = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColor );
-	ingresoEquipoTexture = SurfaceToTexture( ingresoEquipo );
-	SDL_QueryTexture( ingresoEquipoTexture, NULL, NULL, &ingresoEquipoRect.w, &ingresoEquipoRect.h );
-	ingresoEquipoRect.x = 30;
-	ingresoEquipoRect.y = peticionEquipoRect.y + 50;
+    SDL_Surface* ingresoEquipo = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColor );
+    ingresoEquipoTexture = SurfaceToTexture( ingresoEquipo );
+    SDL_QueryTexture( ingresoEquipoTexture, NULL, NULL, &ingresoEquipoRect.w, &ingresoEquipoRect.h );
+    ingresoEquipoRect.x = 30;
+    ingresoEquipoRect.y = peticionEquipoRect.y + 50;
 }
 
 void UpdateInputPeticionPassword(std::string value)
 {
-	SDL_Surface* peticionPassword = TTF_RenderText_Solid( fontPeticion, value.c_str(), textColor );
-	peticionPasswordTexture = SurfaceToTexture( peticionPassword );
-	SDL_QueryTexture( peticionPasswordTexture, NULL, NULL, &peticionPasswordRect.w, &peticionPasswordRect.h );
-	peticionPasswordRect.x = 30;
-	peticionPasswordRect.y = ingresoUsuarioRect.y + 50;
+    SDL_Surface* peticionPassword = TTF_RenderText_Solid( fontPeticion, value.c_str(), textColor );
+    peticionPasswordTexture = SurfaceToTexture( peticionPassword );
+    SDL_QueryTexture( peticionPasswordTexture, NULL, NULL, &peticionPasswordRect.w, &peticionPasswordRect.h );
+    peticionPasswordRect.x = 30;
+    peticionPasswordRect.y = ingresoUsuarioRect.y + 50;
 }
 
 void UpdateInputPeticionEquipo(std::string value)
 {
-	SDL_Surface* peticionEquipo = TTF_RenderText_Solid( fontPeticion, value.c_str(), textColor );
-	peticionEquipoTexture = SurfaceToTexture( peticionEquipo );
-	SDL_QueryTexture( peticionEquipoTexture, NULL, NULL, &peticionEquipoRect.w, &peticionEquipoRect.h );
-	peticionEquipoRect.x = 30;
-	peticionEquipoRect.y = ingresoPasswordRect.y + 50;
+    SDL_Surface* peticionEquipo = TTF_RenderText_Solid( fontPeticion, value.c_str(), textColor );
+    peticionEquipoTexture = SurfaceToTexture( peticionEquipo );
+    SDL_QueryTexture( peticionEquipoTexture, NULL, NULL, &peticionEquipoRect.w, &peticionEquipoRect.h );
+    peticionEquipoRect.x = 30;
+    peticionEquipoRect.y = ingresoPasswordRect.y + 50;
 }
 
 void UpdateSalida(std::string value)
 {
-	SDL_Surface* salida = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColorMensaje );
-	salidaTexture = SurfaceToTexture( salida );
-	SDL_QueryTexture( salidaTexture, NULL, NULL, &salidaRect.w, &salidaRect.h );
-	salidaRect.x = 100;
-	salidaRect.y = ingresoEquipoRect.y + 50;
+    SDL_Surface* salida = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColorMensaje );
+    salidaTexture = SurfaceToTexture( salida );
+    SDL_QueryTexture( salidaTexture, NULL, NULL, &salidaRect.w, &salidaRect.h );
+    salidaRect.x = 100;
+    salidaRect.y = ingresoEquipoRect.y + 50;
 }
 
 void CreateTextTextures()
 {
-	SDL_Surface* mensajeBienvenida = TTF_RenderText_Solid( fontPeticion, "BIENVENIDO A CORRELATIVIDAD!", textColor );
-	bienvenidaTexture = SurfaceToTexture( mensajeBienvenida );
-	SDL_QueryTexture( bienvenidaTexture, NULL, NULL, &bienvenidaRect.w, &bienvenidaRect.h );
-	bienvenidaRect.x = 30;
-	bienvenidaRect.y = 30;
+    SDL_Surface* mensajeBienvenida = TTF_RenderText_Solid( fontPeticion, "BIENVENIDO A CORRELATIVIDAD!", textColor );
+    bienvenidaTexture = SurfaceToTexture( mensajeBienvenida );
+    SDL_QueryTexture( bienvenidaTexture, NULL, NULL, &bienvenidaRect.w, &bienvenidaRect.h );
+    bienvenidaRect.x = 30;
+    bienvenidaRect.y = 30;
 
-	SDL_Surface* peticionUsuario = TTF_RenderText_Solid( fontPeticion, "INGRESE USUARIO:", textColor );
-	peticionUsuarioTexture = SurfaceToTexture( peticionUsuario );
-	SDL_QueryTexture( peticionUsuarioTexture, NULL, NULL, &peticionUsuarioRect.w, &peticionUsuarioRect.h );
-	peticionUsuarioRect.x = 30;
-	peticionUsuarioRect.y = bienvenidaRect.y + 80;
+    SDL_Surface* peticionUsuario = TTF_RenderText_Solid( fontPeticion, "INGRESE USUARIO:", textColor );
+    peticionUsuarioTexture = SurfaceToTexture( peticionUsuario );
+    SDL_QueryTexture( peticionUsuarioTexture, NULL, NULL, &peticionUsuarioRect.w, &peticionUsuarioRect.h );
+    peticionUsuarioRect.x = 30;
+    peticionUsuarioRect.y = bienvenidaRect.y + 80;
 
-	SDL_Surface* ingresoUsuario = TTF_RenderText_Solid( fontRespuesta, "", textColor );
-	ingresoUsuarioTexture = SurfaceToTexture( ingresoUsuario );
-	SDL_QueryTexture( ingresoUsuarioTexture, NULL, NULL, &ingresoUsuarioRect.w, &ingresoUsuarioRect.h );
-	ingresoUsuarioRect.x = 30;
-	ingresoUsuarioRect.y = peticionUsuarioRect.y + 50;
+    SDL_Surface* ingresoUsuario = TTF_RenderText_Solid( fontRespuesta, "", textColor );
+    ingresoUsuarioTexture = SurfaceToTexture( ingresoUsuario );
+    SDL_QueryTexture( ingresoUsuarioTexture, NULL, NULL, &ingresoUsuarioRect.w, &ingresoUsuarioRect.h );
+    ingresoUsuarioRect.x = 30;
+    ingresoUsuarioRect.y = peticionUsuarioRect.y + 50;
 
-	SDL_Surface* peticionPassword = TTF_RenderText_Solid( fontPeticion, "", textColor );
-	peticionPasswordTexture = SurfaceToTexture( peticionPassword );
-	SDL_QueryTexture( peticionPasswordTexture, NULL, NULL, &peticionPasswordRect.w, &peticionPasswordRect.h );
-	peticionPasswordRect.x = 30;
-	peticionPasswordRect.y = ingresoUsuarioRect.y + 50;
+    SDL_Surface* peticionPassword = TTF_RenderText_Solid( fontPeticion, "", textColor );
+    peticionPasswordTexture = SurfaceToTexture( peticionPassword );
+    SDL_QueryTexture( peticionPasswordTexture, NULL, NULL, &peticionPasswordRect.w, &peticionPasswordRect.h );
+    peticionPasswordRect.x = 30;
+    peticionPasswordRect.y = ingresoUsuarioRect.y + 50;
 
-	SDL_Surface* ingresoPassword = TTF_RenderText_Solid( fontRespuesta, "", textColor );
-	ingresoPasswordTexture = SurfaceToTexture( ingresoPassword );
-	SDL_QueryTexture( ingresoPasswordTexture, NULL, NULL, &ingresoPasswordRect.w, &ingresoPasswordRect.h );
-	ingresoPasswordRect.x = 30;
-	ingresoPasswordRect.y = peticionPasswordRect.y + 50;
+    SDL_Surface* ingresoPassword = TTF_RenderText_Solid( fontRespuesta, "", textColor );
+    ingresoPasswordTexture = SurfaceToTexture( ingresoPassword );
+    SDL_QueryTexture( ingresoPasswordTexture, NULL, NULL, &ingresoPasswordRect.w, &ingresoPasswordRect.h );
+    ingresoPasswordRect.x = 30;
+    ingresoPasswordRect.y = peticionPasswordRect.y + 50;
 
-	SDL_Surface* peticionEquipo = TTF_RenderText_Solid( fontPeticion, "", textColor );
-	peticionEquipoTexture = SurfaceToTexture( peticionEquipo );
-	SDL_QueryTexture( peticionEquipoTexture, NULL, NULL, &peticionEquipoRect.w, &peticionEquipoRect.h );
-	peticionEquipoRect.x = 30;
-	peticionEquipoRect.y = ingresoPasswordRect.y + 50;
+    SDL_Surface* peticionEquipo = TTF_RenderText_Solid( fontPeticion, "", textColor );
+    peticionEquipoTexture = SurfaceToTexture( peticionEquipo );
+    SDL_QueryTexture( peticionEquipoTexture, NULL, NULL, &peticionEquipoRect.w, &peticionEquipoRect.h );
+    peticionEquipoRect.x = 30;
+    peticionEquipoRect.y = ingresoPasswordRect.y + 50;
 
-	SDL_Surface* ingresoEquipo = TTF_RenderText_Solid( fontRespuesta, "", textColor );
-	ingresoEquipoTexture = SurfaceToTexture( ingresoEquipo );
-	SDL_QueryTexture( ingresoEquipoTexture, NULL, NULL, &ingresoEquipoRect.w, &ingresoEquipoRect.h );
-	ingresoEquipoRect.x = 30;
-	ingresoEquipoRect.y = peticionEquipoRect.y + 50;
+    SDL_Surface* ingresoEquipo = TTF_RenderText_Solid( fontRespuesta, "", textColor );
+    ingresoEquipoTexture = SurfaceToTexture( ingresoEquipo );
+    SDL_QueryTexture( ingresoEquipoTexture, NULL, NULL, &ingresoEquipoRect.w, &ingresoEquipoRect.h );
+    ingresoEquipoRect.x = 30;
+    ingresoEquipoRect.y = peticionEquipoRect.y + 50;
 
-	SDL_Surface* salida = TTF_RenderText_Solid( fontRespuesta, "", textColor );
-	salidaTexture = SurfaceToTexture( salida );
-	SDL_QueryTexture( salidaTexture, NULL, NULL, &salidaRect.w, &salidaRect.h );
-	salidaRect.x = 100;
-	salidaRect.y = ingresoEquipoRect.y + 50;
+    SDL_Surface* salida = TTF_RenderText_Solid( fontRespuesta, "", textColor );
+    salidaTexture = SurfaceToTexture( salida );
+    SDL_QueryTexture( salidaTexture, NULL, NULL, &salidaRect.w, &salidaRect.h );
+    salidaRect.x = 100;
+    salidaRect.y = ingresoEquipoRect.y + 50;
 }
 
 // Convert an SDL_Surface to SDL_Texture. We've done this before, so I'll keep it short
 SDL_Texture* SurfaceToTexture( SDL_Surface* surf )
 {
-	SDL_Texture* text;
+    SDL_Texture* text;
 
-	text = SDL_CreateTextureFromSurface( renderer, surf );
+    text = SDL_CreateTextureFromSurface( renderer, surf );
 
-	SDL_FreeSurface( surf );
+    SDL_FreeSurface( surf );
 
-	return text;
+    return text;
 }
 
 
 bool InitEverything()
 {
-	if ( !InitSDL() )
-		return false;
+    if ( !InitSDL() )
+        return false;
 
-	if ( !CreateWindow() )
-		return false;
+    if ( !CreateWindow() )
+        return false;
 
-	if ( !CreateRenderer() )
-		return false;
+    if ( !CreateRenderer() )
+        return false;
 
-	SetupRenderer();
+    SetupRenderer();
 
     //Iniciamos las fuentes
-	if ( !SetupTTF("Images/peticion.ttf", "Images/respuesta.otf") )
-		return false;
+    if ( !SetupTTF("Images/peticion.ttf", "Images/respuesta.otf") )
+        return false;
 
-	CreateTextTextures();
+    CreateTextTextures();
 
-	backgroundRect.x = 0;
-	backgroundRect.y = 0;
-	backgroundRect.w = windowRect.w;
-	backgroundRect.h = windowRect.h;
+    backgroundRect.x = 0;
+    backgroundRect.y = 0;
+    backgroundRect.w = windowRect.w;
+    backgroundRect.h = windowRect.h;
 
-	backgroundTexture = LoadTexture( "Images/background.jpg" );
+    backgroundTexture = LoadTexture( "Images/background.jpg" );
 
-	return true;
+    return true;
 }
 
 
 bool InitSDL()
 {
-	if ( SDL_Init( SDL_INIT_EVERYTHING ) == -1 )
-	{
-		std::cout << " Failed to initialize SDL : " << SDL_GetError() << std::endl;
-		return false;
-	}
+    if ( SDL_Init( SDL_INIT_EVERYTHING ) == -1 )
+    {
+        std::cout << " Failed to initialize SDL : " << SDL_GetError() << std::endl;
+        return false;
+    }
 
-	return true;
+    return true;
 }
 
 
 bool CreateWindow()
 {
-	window = SDL_CreateWindow( "TALLER DE PROGRAMACION I", windowRect.x, windowRect.y, windowRect.w, windowRect.h, 0 );
+    window = SDL_CreateWindow( "TALLER DE PROGRAMACION I", windowRect.x, windowRect.y, windowRect.w, windowRect.h, 0 );
 
-	if ( window == nullptr )
-	{
-		std::cout << "Falla al crear la ventana de loguin : " << SDL_GetError();
-		return false;
-	}
+    if ( window == nullptr )
+    {
+        std::cout << "Falla al crear la ventana de loguin : " << SDL_GetError();
+        return false;
+    }
 
-	return true;
+    return true;
 }
 
 
 bool CreateRenderer()
 {
-	renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED );
+    renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED );
 
-	if ( renderer == nullptr )
-	{
-		std::cout << "Failed to create renderer : " << SDL_GetError();
-		return false;
-	}
+    if ( renderer == nullptr )
+    {
+        std::cout << "Failed to create renderer : " << SDL_GetError();
+        return false;
+    }
 
-	return true;
+    return true;
 }
 
 
 void SetupRenderer()
 {
-	// Set size of renderer to the same as window
-	SDL_RenderSetLogicalSize( renderer, windowRect.w, windowRect.h );
+    // Set size of renderer to the same as window
+    SDL_RenderSetLogicalSize( renderer, windowRect.w, windowRect.h );
 
-	// Set color of renderer to red
-	SDL_SetRenderDrawColor( renderer, 255, 0, 0, 255 );
+    // Set color of renderer to red
+    SDL_SetRenderDrawColor( renderer, 255, 0, 0, 255 );
 }
 
 SDL_Texture* LoadTexture( const std::string &str )
 {
-	// Load image as SDL_Surface
-	SDL_Surface* surface = IMG_Load( str.c_str() );
+    // Load image as SDL_Surface
+    SDL_Surface* surface = IMG_Load( str.c_str() );
 
-	// SDL_Surface is just the raw pixels
-	// Convert it to a hardware-optimzed texture so we can render it
-	SDL_Texture* texture = SDL_CreateTextureFromSurface( renderer, surface );
+    // SDL_Surface is just the raw pixels
+    // Convert it to a hardware-optimzed texture so we can render it
+    SDL_Texture* texture = SDL_CreateTextureFromSurface( renderer, surface );
 
-	// Don't need the orignal texture, release the memory
-	SDL_FreeSurface( surface );
+    // Don't need the orignal texture, release the memory
+    SDL_FreeSurface( surface );
 
-	return texture;
+    return texture;
 }

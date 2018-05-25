@@ -39,11 +39,11 @@ void Jugador::move()
     this->mCollider.y = this->estado->getPosY();
     if (this->getPosesion())
     {
-       // pelota->setVelocidadX(this->getVelX()*this->getAceleracion());
-       // pelota->setVelocidadY(this->getVelY()*this->getAceleracion());
+        // pelota->setVelocidadX(this->getVelX()*this->getAceleracion());
+        // pelota->setVelocidadY(this->getVelY()*this->getAceleracion());
         pelota->setPosX(this->estado->getPosX()+ANCHO_JUGADOR/2);
         pelota->setPosY(this->estado->getPosY()+ALTO_JUGADOR/2);
-          if (((this->direccion) >0)  && ((this->direccion)<180))
+        if (((this->direccion) >0)  && ((this->direccion)<180))
         {
             pelota->setPosX(pelota->getPosX()+10);
         }
@@ -70,8 +70,9 @@ void Jugador::move()
 }
 
 
-bool Jugador::getAcelero(){
-return this->estado->getAcelero();
+bool Jugador::getAcelero()
+{
+    return this->estado->getAcelero();
 
 }
 
@@ -106,18 +107,21 @@ void Jugador::patearPelota(Pelota* pelota)
 
         }
 
-         this->pateoPelota=true;
-    }else{
+        this->pateoPelota=true;
+    }
+    else
+    {
 
-    this->pateoPelota=false;
+        this->pateoPelota=false;
     }
     this->noPoseePelota();
 
 }
 
-void Jugador::terminoDePatearPelota(){
+void Jugador::terminoDePatearPelota()
+{
 
-this->pateoPelota=false;
+    this->pateoPelota=false;
 }
 
 bool Jugador::patearPelota()

@@ -11,8 +11,9 @@ AumentarVelocidadX::~AumentarVelocidadX()
 
 void AumentarVelocidadX::execute()
 {
-    if(this->model->pelotaEnMovimiento()){
-    this->model->jugadorActivoAumentaVelocidadEnX();
+    if(this->model->pelotaEnMovimiento())
+    {
+        this->model->jugadorActivoAumentaVelocidadEnX();
     }
 }
 

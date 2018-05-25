@@ -17,14 +17,14 @@ using namespace std;
 
 class Util_Persistencia: public Util_LoggerSubject
 {
-	public:
-         Util_Persistencia(Model* model, Util_LoggerObserver* loggerObserver);
-         virtual ~Util_Persistencia();
-         bool inicializar();
-         void close();
+public:
+    Util_Persistencia(Model* model, Util_LoggerObserver* loggerObserver);
+    virtual ~Util_Persistencia();
+    bool inicializar();
+    void close();
 
-    private:
-        Model* model;
+private:
+    Model* model;
 
 
 

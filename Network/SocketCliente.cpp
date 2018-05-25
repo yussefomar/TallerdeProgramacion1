@@ -143,13 +143,15 @@ void SocketCliente::enviarByte(char byte)
     this->socketConectado = send(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL) > 0;
 }
 
-char SocketCliente::recibirByte() {
+char SocketCliente::recibirByte()
+{
     char byte;
     this->socketConectado = recv(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL) > 0;
     return byte;
 }
 
-void SocketCliente::enviarPedidoDeCambios() {
+void SocketCliente::enviarPedidoDeCambios()
+{
     char byte = 0xFF;
     this->enviarByte(byte);
     this->enviarByte(byte);

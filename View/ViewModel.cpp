@@ -32,39 +32,44 @@ void ViewModel::render()
     this->viewPelota.render(this->camara->x, this->camara->y,this->gRenderer);
 
 
-    if(this->hayAlgunJugadorActivoEnEspera()==true){
-
-         for(int i = 0; i < CANTVISTASJUG; ++i)
+    if(this->hayAlgunJugadorActivoEnEspera()==true)
     {
-
-
-        this->viewJugadores[i].renderEnEspera( this->camara->x, this->camara->y,this->gRenderer);
-        this->viewJugadoresVisitantes[i].renderEnEspera( this->camara->x, this->camara->y,this->gRenderer);
-    }
-    }else{
 
         for(int i = 0; i < CANTVISTASJUG; ++i)
+        {
+
+
+            this->viewJugadores[i].renderEnEspera( this->camara->x, this->camara->y,this->gRenderer);
+            this->viewJugadoresVisitantes[i].renderEnEspera( this->camara->x, this->camara->y,this->gRenderer);
+        }
+    }
+    else
     {
 
-     this->viewJugadores[i].render( this->camara->x, this->camara->y,this->gRenderer);
-        this->viewJugadoresVisitantes[i].render( this->camara->x, this->camara->y,this->gRenderer);
+        for(int i = 0; i < CANTVISTASJUG; ++i)
+        {
 
-    }
+            this->viewJugadores[i].render( this->camara->x, this->camara->y,this->gRenderer);
+            this->viewJugadoresVisitantes[i].render( this->camara->x, this->camara->y,this->gRenderer);
+
+        }
 
     }
 }
 
-bool ViewModel::hayAlgunJugadorActivoEnEspera(){
+bool ViewModel::hayAlgunJugadorActivoEnEspera()
+{
 
- bool espera=false;
-   for(int i = 0; i < CANTVISTASJUG; ++i)
+    bool espera=false;
+    for(int i = 0; i < CANTVISTASJUG; ++i)
     {
 
-                 //bool jugadorActivoEnEspera=this->viewJugadores[i].enEspera;
-                 if(this->viewJugadores[i].enEspera()){
-                    espera= true;
+        //bool jugadorActivoEnEspera=this->viewJugadores[i].enEspera;
+        if(this->viewJugadores[i].enEspera())
+        {
+            espera= true;
 
-                 }
+        }
 
     }
 

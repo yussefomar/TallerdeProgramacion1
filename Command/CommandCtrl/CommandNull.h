@@ -5,15 +5,15 @@
 
 class CommandNull : public CommandCtrl
 {
-    public:
-        CommandNull(Model* model);
-        virtual ~CommandNull();
-        void execute();
-        char getCodigoComando();
+public:
+    CommandNull(Model* model);
+    virtual ~CommandNull();
+    void execute();
+    char getCodigoComando();
 
-    protected:
+protected:
 
-    private:
+private:
 };
 
 #endif // COMMANDNULL_H

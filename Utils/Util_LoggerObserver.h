@@ -13,19 +13,19 @@
 
 class Util_LoggerObserver
 {
-        std::string path;
-        std::string message;
-        int level;
-    public:
-        Util_LoggerObserver(int myLevel);
-        virtual ~Util_LoggerObserver();
-        int getLoggerLevel();
-        std::string getLogFile();
-        void writeSingleLine(std::string line, std::string type, std::string mvc);
-        void writeMessageLine(std::string message, std::string mvc);
-        void writeWarningLine(std::string message, std::string mvc);
-        void writeErrorLine(std::string message, std::string mvc);
-        void updateLevel(int newLevel);
-        void notificar(std::string entidad, char evento, char tipo);
+    std::string path;
+    std::string message;
+    int level;
+public:
+    Util_LoggerObserver(int myLevel);
+    virtual ~Util_LoggerObserver();
+    int getLoggerLevel();
+    std::string getLogFile();
+    void writeSingleLine(std::string line, std::string type, std::string mvc);
+    void writeMessageLine(std::string message, std::string mvc);
+    void writeWarningLine(std::string message, std::string mvc);
+    void writeErrorLine(std::string message, std::string mvc);
+    void updateLevel(int newLevel);
+    void notificar(std::string entidad, char evento, char tipo);
 
 };

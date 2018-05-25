@@ -13,7 +13,7 @@ using namespace std;
 //Manejador de lo que se ingresa por teclado
 class View_Loguin
 {
-    public:
+public:
     //Constructor
     View_Loguin(int i);
     //Destructor

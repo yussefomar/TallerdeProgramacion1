@@ -7,14 +7,14 @@
 
 class CommandCtrl : public Command
 {
-    public:
-        CommandCtrl(Model* model);
-        virtual ~CommandCtrl();
+public:
+    CommandCtrl(Model* model);
+    virtual ~CommandCtrl();
 
-    protected:
-        Model* model;
+protected:
+    Model* model;
 
-    private:
+private:
 };
 
 #endif // COMMANDCTRL_H
