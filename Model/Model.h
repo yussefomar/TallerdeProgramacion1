@@ -72,10 +72,10 @@ protected:
 private:
     Pelota pelota;
     Jugador* jugadores;
-    Jugador* jugadoresLocales;
+    //Jugador* jugadoresLocales;
     Jugador* jugadoresVisitantes;
-    Formacion *formacion;
-    Formacion *formacionLocales;
+    Formacion* formacion;
+    //Formacion *formacionLocales;
     Formacion *formacionVisitante;
     bool juegoIniciado;
     std::string casacaSprite; // TEMPORAL.
