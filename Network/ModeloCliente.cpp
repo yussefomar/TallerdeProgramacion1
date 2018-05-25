@@ -188,13 +188,15 @@ unsigned ModeloCliente::ejecutarUnComando()
     return 1;
 }
 
-void ModeloCliente::enviarMensajeLogin()
+void ModeloCliente::enviarMensajeLogin(char mensaje)
 {
+    this->socket.enviarByte(mensaje);
     return;
 }
 
 char ModeloCliente::recibirMensajeLogin()
 {
     char byte;
+    byte = this->socket.recibirByte();
     return byte;
 }

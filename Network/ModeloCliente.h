@@ -33,7 +33,7 @@ public:
     virtual void jugadorActivoDetener();
     virtual void cambiarJugadorActivo();
     virtual void update();
-    virtual void enviarMensajeLogin();
+    virtual void enviarMensajeLogin(char mensaje);
     virtual char recibirMensajeLogin();
 
     unsigned enviarUnComando();

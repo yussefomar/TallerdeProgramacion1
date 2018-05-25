@@ -17,55 +17,11 @@ void modoOnline();
 
 int main(int argc, char* args[])
 {
-
-<<<<<<< Updated upstream
-try
-{
-    /**
-    bool quit = false;
-    View_Loguin loguinScreen(1);
-    InformacionIngreso informacionIngreso(false);
-    if(!loguinScreen.Inicializar()) return -1;
-    while( quit == false )
-    {
-        loguinScreen.Procesar(informacionIngreso);
-        //a modo de ejemplo, supongamos que luego de loguearnos hubo algo mal.
-        informacionIngreso.mensaje = "mal ingreso de datos";
-        informacionIngreso.error = false;
-    }
-    loguinScreen.Cerrar();
-    **/
-    modoOnline();
-    //modoOffline();
-    return 0;
-=======
     try
     {
-
-        /***********************************************************************************/
-        /**EJEMPLO**/
-        /***********************************************************************************/
-        bool quit = true;
-        View_Loguin loguinScreen(1);
-        InformacionIngreso informacionIngreso(false);
-        if(!loguinScreen.Inicializar())
-            return -1;
-        while( quit == false )
-        {
-            loguinScreen.Procesar(informacionIngreso);
-            /** a modo de ejemplo, supongamos que luego de loguearnos hubo algo mal. **/
-            informacionIngreso.mensaje = "mal ingreso de datos";
-            informacionIngreso.error = true;
-        }
-        loguinScreen.Cerrar();
-        /***********************************************************************************/
-        /***********************************************************************************/
-
         //modoOnline();
         modoOffline();
         return 0;
->>>>>>> Stashed changes
-
     }
     catch(const std::runtime_error& re)
     {
@@ -103,7 +59,6 @@ void modoOnline()
     /***********************************************************************************/
     /**EJEMPLO**/
     /***********************************************************************************/
-    /**
     bool quit = false;
     char respuesta;
     View_Loguin loguinScreen(1);
@@ -112,15 +67,19 @@ void modoOnline()
     while( quit == false )
     {
         loguinScreen.Procesar(informacionIngreso);
-        if(informacionIngreso.equipoIngresado) modelCliente.enviarMensajeLogin();
+        if(!informacionIngreso.arranca &&
+           !informacionIngreso.espera &&
+            informacionIngreso.equipoIngresado)
+            {
+                char byte;
+                modelCliente.enviarMensajeLogin(byte);
+            }
         respuesta = modelCliente.recibirMensajeLogin();
         informacionIngreso.procesarRespuesta(respuesta);
     }
     loguinScreen.Cerrar();
-    **/
     /***********************************************************************************/
     /***********************************************************************************/
-
 
     View view(&model);
     view.Attach(&loggerObserver);

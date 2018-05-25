@@ -13,16 +13,19 @@ class InformacionIngreso
         bool nombreIngresado;
         bool passwordIngresado;
         bool equipoIngresado;
-        bool error;
         bool equipoUno;
         bool equipoDos;
+        bool error;
+        bool lleno;
+        bool espera;
+        bool arranca;
         virtual void procesarRespuesta(char respuesta);
         InformacionIngreso(bool error);
         virtual ~InformacionIngreso();
 
-protected:
+    protected:
 
-private:
+    private:
 };
 
 #endif // INFORMACIONINGRESO_H

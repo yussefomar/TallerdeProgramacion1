@@ -16,7 +16,7 @@ Model::Model()
 {
     this->jugadores = new Jugador[CANTJUGADORESTOTALES]();
     this->jugadoresLocales = this->jugadores;
-    this->jugadoresVisitantes = this->jugador
+    this->jugadoresVisitantes = this->jugadores;
     this->nroJugadorActivo = 6;
     this->getJugadorActivo()->activar();
     this->juegoIniciado=false;

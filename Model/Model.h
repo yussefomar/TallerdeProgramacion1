@@ -71,8 +71,10 @@ protected:
 
 private:
     Pelota pelota;
+    Jugador* jugadores;
     Jugador* jugadoresLocales;
     Jugador* jugadoresVisitantes;
+    Formacion *formacion;
     Formacion *formacionLocales;
     Formacion *formacionVisitante;
     bool juegoIniciado;
