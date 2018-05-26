@@ -23,7 +23,7 @@
 #define ENTIDAD 0
 #define EVENTO 1
 
-SocketCliente::SocketCliente()
+SocketCliente::SocketCliente(std::string ipServer, std::string puertoServer)
 {
     struct addrinfo hints;
     struct addrinfo *posibilidades, *iterador;
@@ -35,9 +35,8 @@ SocketCliente::SocketCliente()
     hints.ai_socktype = SOCK_STREAM; /* Protocolo TCP */
     hints.ai_flags = 0;
 
-    /*Por el momento, hardcodeamos*/
-    std::string ip = LOCALHOST;
-    std::string puerto = PUERTOSERVER;
+    std::string ip = ipServer;
+    std::string puerto = puertoServer;
 
     resultado = getaddrinfo(ip.c_str(), puerto.c_str(), &hints, &posibilidades);
 
@@ -88,9 +87,9 @@ SocketCliente::SocketCliente()
     }
 
     freeaddrinfo(posibilidades);
-
-
 }
+
+
 
 SocketCliente::~SocketCliente()
 {
@@ -155,4 +154,10 @@ void SocketCliente::enviarPedidoDeCambios()
     char byte = 0xFF;
     this->enviarByte(byte);
     this->enviarByte(byte);
+}
+
+unsigned SocketCliente::recibirIdCliente() {
+    char idChar = this->recibirByte();
+    unsigned idCliente = idChar;
+    return idCliente;
 }

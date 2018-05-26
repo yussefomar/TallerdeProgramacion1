@@ -6,7 +6,7 @@
 class SocketCliente
 {
 public:
-    SocketCliente();
+    SocketCliente(std::string ipServer, std::string puertoServer);
     virtual ~SocketCliente();
 
     void enviarCodigoComando(std::string codigo);
@@ -16,6 +16,7 @@ public:
     char recibirByte();
     void enviarByte(char byte);
     void enviarPedidoDeCambios();
+    unsigned recibirIdCliente();
 
 protected:
 

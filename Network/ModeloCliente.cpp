@@ -37,6 +37,8 @@ ModeloCliente::ModeloCliente(Model* model)
     this->comandos[RECUPELO] = new RecuperarPelotaNet(model);
     this->comandos[COMMNULL]  = new CommandNullNet(model);
     this->tareaAEjecutar = 0;
+
+    this->socket = nullptr;
 }
 
 ModeloCliente::~ModeloCliente()
@@ -45,9 +47,19 @@ ModeloCliente::~ModeloCliente()
     {
         delete this->comandos[i];
     }
+    if(this->socket) {
+        delete this->socket;
+
+    }
+}
+
+void ModeloCliente::conectarConServer(std::string ipServer, std::string puertoServer) {
+    this->socket = new SocketCliente(ipServer, puertoServer);
+    this->model->setIdCliente(this->socket->recibirIdCliente());
 }
 
 /*El modelo cliente puede devolver datos que son necesarios*/
+
 Pelota* ModeloCliente::getPelota()
 {
     return this->model->getPelota();
@@ -69,6 +81,7 @@ std::string ModeloCliente::getCasaca()
 }
 
 /*El modelo cliente no deberia modificar al modelo*/
+
 void ModeloCliente::setCamara(SDL_Rect* camara)
 {
     return;
@@ -124,7 +137,14 @@ void ModeloCliente::cambiarJugadorActivo()
 {
     return;
 }
-/*Network*/
+
+
+
+/*El modelo cliente tiene toda la responsabilidad sobre conexiones via red.*/
+
+
+
+
 
 void ModeloCliente::update()
 {
@@ -162,20 +182,20 @@ unsigned ModeloCliente::enviarUnComando()
 {
     if(this->codigosAEnviar.empty())
     {
-        this->socket.enviarByte(COMMNULL);
+        this->socket->enviarByte(COMMNULL);
         return 1;
     }
 
     std::string codigo = this->codigosAEnviar.front();
     this->codigosAEnviar.pop();
-    this->socket.enviarCodigoComando(codigo);
+    this->socket->enviarCodigoComando(codigo);
 
     return 1;
 }
 
 unsigned ModeloCliente::recibirUnComando()
 {
-    std::string codigoRecibido = this->socket.recibirCodigoComando();
+    std::string codigoRecibido = this->socket->recibirCodigoComando();
     CommandNet* comando = this->comandos[codigoRecibido[EVENTO]];
     comando->setCodigoJugador(codigoRecibido[ENTIDAD]);
     this->model->agregarCambio(comando);
@@ -190,13 +210,13 @@ unsigned ModeloCliente::ejecutarUnComando()
 
 void ModeloCliente::enviarMensajeLogin(char mensaje)
 {
-    this->socket.enviarByte(mensaje);
+    this->socket->enviarByte(mensaje);
     return;
 }
 
 char ModeloCliente::recibirMensajeLogin()
 {
     char byte;
-    byte = this->socket.recibirByte();
+    byte = this->socket->recibirByte();
     return byte;
 }

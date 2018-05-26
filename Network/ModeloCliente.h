@@ -40,13 +40,15 @@ public:
     unsigned recibirUnComando();
     unsigned ejecutarUnComando();
 
+    void conectarConServer(std::string ipServer, std::string puertoServer);
+
 protected:
 
 private:
     Model* model;
     std::vector<CommandNet*> comandos;
     std::queue<std::string> codigosAEnviar;
-    SocketCliente socket;
+    SocketCliente* socket;
     unsigned tareaAEjecutar;
 };
 

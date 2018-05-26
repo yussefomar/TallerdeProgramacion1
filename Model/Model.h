@@ -49,17 +49,17 @@ public:
     virtual void jugadorActivoPasaPelota();
 
     /*servicios del Modelo en online*/
-    void aumentarVelocidadEnX(unsigned codigoJugador);
-    void disminuirVelocidadY(unsigned codigoJugador);
-    void aumentarVelocidadEnY(unsigned codigoJugador);
-    void disminuirVelocidadX(unsigned codigoJugador);
-    void desacelerar(unsigned codigoJugador);
-    void patearPelota(unsigned codigoJugador);
-    void recuperaPelota(unsigned codigoJugador);
-    void stopJugador(unsigned codigoJugador);
-    void acelerar(unsigned codigoJugador);
-    void cambiarDeJugador(unsigned codigoJugador);
-    void pasaPelota(unsigned codigojugador);
+    void aumentarVelocidadEnX(unsigned codigoCliente);
+    void disminuirVelocidadY(unsigned codigoCliente);
+    void aumentarVelocidadEnY(unsigned codigoCliente);
+    void disminuirVelocidadX(unsigned codigoCliente);
+    void desacelerar(unsigned codigoCliente);
+    void patearPelota(unsigned codigoCliente);
+    void recuperaPelota(unsigned codigoCliente);
+    void stopJugador(unsigned codigoCliente);
+    void acelerar(unsigned codigoCliente);
+    void cambiarDeJugador(unsigned codigoCliente);
+    void pasarPelota(unsigned codigoCliente);
 
     void agregarObservador(Util_LoggerObserver* obs);
     void notificarAObservadores(unsigned entidad, char evento, char tipo);
@@ -69,17 +69,18 @@ public:
 
     virtual void moverJuego();
 
+    /*Seteos del cliente en modo online*/
+    void setIdCliente(unsigned id);
+
 
 protected:
 
 private:
     Pelota pelota;
-    //Jugador* jugadores;
     Jugador* jugadoresEnCancha;
     Jugador* jugadoresLocales;
     Jugador* jugadoresVisitantes;
     Formacion* formacion;
-    //Formacion *formacionLocales;
     Formacion *formacionVisitante;
     bool juegoIniciado;
     std::string casacaSprite; // TEMPORAL.
@@ -87,6 +88,8 @@ private:
     unsigned int nroJugadorActivo;
     std::queue<Command*> cambios;
     std::vector<Util_LoggerObserver*> observadores;
+    std::vector<unsigned> clientes;
+    unsigned idCliente;
 
 };
 

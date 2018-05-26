@@ -10,6 +10,9 @@
 
 #define CANTJUGADORESTOTALES 14
 #define CANTJUGADORES 7
+#define LOCALES 0
+#define VISITANTES 6
+#define CANTMAXCLIENTES
 
 
 Model::Model()
@@ -18,16 +21,22 @@ Model::Model()
     //this->jugadoresLocales = this->jugadores;
     //this->jugadoresVisitantes = &(this->jugadores[7]);
     this->jugadoresEnCancha = new Jugador[CANTJUGADORESTOTALES];
-    this->jugadoresLocales = this->jugadoresEnCancha;
-    this->jugadoresVisitantes = &(this->jugadoresEnCancha[7]);
+    this->jugadoresLocales = &(this->jugadoresEnCancha[LOCALES]);
+    this->jugadoresVisitantes = &(this->jugadoresEnCancha[VISITANTES]);
     this->nroJugadorActivo = 6;
     this->getJugadorActivo()->activar();
     this->juegoIniciado=false;
+    this->clientes = std::vector<unsigned>(CANTMAXCLIENTES);
+    this->idCliente = 0;//POR DEFECTO HASTA ESPERAR EL NUEVO ID
 }
 
 Model::~Model()
 {
     delete[] this->jugadoresEnCancha;
+}
+
+void Model::setIdCliente(unsigned id) {
+    this->idCliente = id;
 }
 
 Pelota* Model::getPelota()
@@ -52,11 +61,7 @@ Jugador* Model::getJugadorActivo()
 
 void Model::agregarCambio(Command* cambio)
 {
-
-
     this->cambios.push(cambio);
-
-
 }
 
 void Model::jugadorActivoCambia()
@@ -257,11 +262,13 @@ void Model::jugadorActivoPasaPelota()
         {
             i= 0;
         }
-        if (!encontrado){
-        i++;
+        if (!encontrado)
+        {
+            i++;
         }
     }
-    if (encontrado){
+    if (encontrado)
+    {
         this->jugadoresLocales[this->nroJugadorActivo].pasaPelota(&(this->pelota),&this->jugadoresLocales[i] );
         this->notificarAObservadores(this->nroJugadorActivo, PASPELO, MJU);
     }
@@ -270,7 +277,8 @@ void Model::jugadorActivoPasaPelota()
 void Model::jugadorActivoRecuperaPelota()
 {
     Jugador activoPrevio =this->jugadoresLocales[this->nroJugadorActivo];
-    if (this->jugadoresLocales[this->nroJugadorActivo].recuperaPelota(&(this->pelota))){
+    if (this->jugadoresLocales[this->nroJugadorActivo].recuperaPelota(&(this->pelota)))
+    {
         activoPrevio.noPoseePelota();
     }
     this->notificarAObservadores(this->nroJugadorActivo, RECUPELO, MJU);
@@ -282,96 +290,96 @@ void Model::jugadorActivoDetener()
     this->notificarAObservadores(this->nroJugadorActivo, STOPJUG, MJU);
 }
 
+
+
 /*Servicios del modelo en modo online*/
 
-void Model::aumentarVelocidadEnX(unsigned codigoJugador)
+
+
+void Model::aumentarVelocidadEnX(unsigned codigoCliente)
 {
-    this->jugadoresEnCancha[codigoJugador].aumentarVelocidadX();
-    this->notificarAObservadores(codigoJugador, INCVELX, MJU);
+    unsigned nroJugador = this->clientes[codigoCliente];
+    this->jugadoresEnCancha[nroJugador].aumentarVelocidadX();
+    this->notificarAObservadores(nroJugador, INCVELX, MJU);
 }
 
-void Model::aumentarVelocidadEnY(unsigned codigoJugador)
+void Model::aumentarVelocidadEnY(unsigned codigoCliente)
 {
-    this->jugadoresEnCancha[codigoJugador].aumentarVelocidadY();
-    this->notificarAObservadores(codigoJugador, INCVELY, MJU);
+    unsigned nroJugador = this->clientes[codigoCliente];
+
+    this->jugadoresEnCancha[nroJugador].aumentarVelocidadY();
+    this->notificarAObservadores(nroJugador, INCVELY, MJU);
 }
 
-void Model:: disminuirVelocidadY(unsigned codigoJugador)
+void Model:: disminuirVelocidadY(unsigned codigoCliente)
 {
-    this->jugadoresEnCancha[codigoJugador].disminuirVelocidadY();
-    this->notificarAObservadores(codigoJugador, DECVELY, MJU);
+    unsigned nroJugador = this->clientes[codigoCliente];
+
+    this->jugadoresEnCancha[nroJugador].disminuirVelocidadY();
+    this->notificarAObservadores(nroJugador, DECVELY, MJU);
 }
 
-void Model:: disminuirVelocidadX(unsigned codigoJugador)
+void Model:: disminuirVelocidadX(unsigned codigoCliente)
 {
-    this->jugadoresEnCancha[codigoJugador].disminuirVelocidadX();
-    this->notificarAObservadores(codigoJugador, DECVELX, MJU);
+    unsigned nroJugador = this->clientes[codigoCliente];
+
+    this->jugadoresEnCancha[nroJugador].disminuirVelocidadX();
+    this->notificarAObservadores(nroJugador, DECVELX, MJU);
 }
 
-void Model:: desacelerar(unsigned codigoJugador)
+void Model:: desacelerar(unsigned codigoCliente)
 {
-    this->jugadoresEnCancha[codigoJugador].desacelerar();
-    this->notificarAObservadores(codigoJugador, DESJUG, MJU);
+    unsigned nroJugador = this->clientes[codigoCliente];
+
+    this->jugadoresEnCancha[nroJugador].desacelerar();
+    this->notificarAObservadores(nroJugador, DESJUG, MJU);
 }
 
-void Model:: patearPelota(unsigned codigoJugador)
+void Model:: patearPelota(unsigned codigoCliente)
 {
-    this->jugadoresEnCancha[codigoJugador].patearPelota(this->getPelota());
-    this->notificarAObservadores(codigoJugador, PATPELO, MJU);;
+    unsigned nroJugador = this->clientes[codigoCliente];
+
+    this->jugadoresEnCancha[nroJugador].patearPelota(this->getPelota());
+    this->notificarAObservadores(nroJugador, PATPELO, MJU);;
 }
 
-void Model:: recuperaPelota(unsigned codigoJugador)
+void Model:: recuperaPelota(unsigned codigoCliente)
 {
-    this->jugadoresEnCancha[codigoJugador].recuperaPelota(this->getPelota());
-    this->notificarAObservadores(codigoJugador, RECUPELO, MJU);
+
+    unsigned nroJugador = this->clientes[codigoCliente];
+
+    this->jugadoresEnCancha[codigoCliente].recuperaPelota(this->getPelota());
+    this->notificarAObservadores(codigoCliente, RECUPELO, MJU);
 }
 
-void Model:: pasaPelota(unsigned codigoJugador)
+void Model::stopJugador(unsigned codigoCliente)
 {
-  /*
-    unsigned i = codigoJugador+1;
-    if (i == CANTJUGADORES)
-    {
-        i= 0;
-    }
-    bool encontrado = false;
-    while ((i != codigoJugador) && !encontrado)
-    {
-        if ((this->jugadores[i].collide(this->camara )) && (codigoJugador!=i))
-        {
-            (this->jugadores[codigoJugador]).desactivar();
-            (this->jugadores[i]).activar();
-            this->nroJugadorActivo = i;
-            encontrado = true;
-        }
-        if (i == CANTJUGADORES)
-        {
-            i= 0;
-        }
-        if (!encontrado) {
-        i++;
-        }
-    }
+    unsigned nroJugador = this->clientes[codigoCliente];
 
-    this->jugadores[codigoJugador].pasaPelota(this->getPelota(),&this->jugadores[i]);
-    //this->notificarAObservadores(codigoJugador, RECUPELO, MJU);*/
+    this->jugadoresEnCancha[nroJugador].detenerVelocidad();
+    this->notificarAObservadores(nroJugador, STOPJUG, MJU);
 }
 
-void Model::stopJugador(unsigned codigoJugador)
+void Model::acelerar(unsigned codigoCliente)
 {
-    this->jugadoresEnCancha[codigoJugador].detenerVelocidad();
-    this->notificarAObservadores(codigoJugador, STOPJUG, MJU);
+    unsigned nroJugador = this->clientes[codigoCliente];
+
+    this->jugadoresEnCancha[nroJugador].acelerar();
+    this->notificarAObservadores(nroJugador, ACCJUG, MJU);
 }
 
-void Model::acelerar(unsigned codigoJugador)
+void Model::cambiarDeJugador(unsigned codigoCliente)
 {
-    this->jugadoresEnCancha[codigoJugador].acelerar();
-    this->notificarAObservadores(codigoJugador, ACCJUG, MJU);
+//TODO
+    return;
 }
 
-void Model::cambiarDeJugador(unsigned codigoJugador) {
-    return ;
+void Model:: pasarPelota(unsigned codigoCliente)
+{
+//TODO
+    return;
 }
+
 
 void Model::agregarObservador(Util_LoggerObserver* observador)
 {
