@@ -82,7 +82,7 @@ private:
     Jugador* jugadoresLocales;
     Jugador* jugadoresVisitantes;
     Formacion* formacion;
-    Formacion *formacionVisitante;
+    Formacion* formacionVisitante;
     bool juegoIniciado;
     std::string casacaSprite; // TEMPORAL.
     SDL_Rect * camara;

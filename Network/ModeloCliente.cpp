@@ -56,6 +56,7 @@ ModeloCliente::~ModeloCliente()
 void ModeloCliente::conectarConServer(std::string ipServer, std::string puertoServer) {
     this->socket = new SocketCliente(ipServer, puertoServer);
     this->model->setIdCliente(this->socket->recibirIdCliente());
+    std::cout << this->model->getIdCliente() << std::endl;
 }
 
 /*El modelo cliente puede devolver datos que son necesarios*/
@@ -172,9 +173,6 @@ void ModeloCliente::agregarCambio(Command* cambio)
 {
     if(cambio->getCodigoComando() == COMMNULL)
         return;
-//    codigoComando.push_back(this->model->getCodigoJugadorActivo());
-//    codigoComando.push_back(cambio->getCodigoComando());
-//    this->codigosAEnviar.push(codigoComando);
     char evento = cambio->getCodigoComando();
     char entidad = this->model->getIdCliente();
     entidad = entidad << 6;

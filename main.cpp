@@ -19,8 +19,8 @@ int main(int argc, char* args[])
 {
     try
     {
-        //modoOnline();
-        modoOffline();
+        modoOnline();
+        //modoOffline();
         return 0;
     }
     catch(const std::runtime_error& re)

@@ -39,6 +39,9 @@ Model::~Model()
 void Model::setIdCliente(char id) {
     this->idCliente = id;
     //SE BORRA CUANDO SE TENGA LISTO EL PROCESO DE LOGGIN
+    for(unsigned i = 0; i < CANTJUGADORESTOTALES; ++i) {
+        this->jugadoresEnCancha[i].desactivar();
+    }
     this->jugadoresEnCancha[this->clientes[id]].activar();
 }
 
@@ -53,7 +56,7 @@ Pelota* Model::getPelota()
 
 Jugador* Model::getJugadorNro(int i)
 {
-    return &(this->jugadoresEnCancha[i]);
+    return &(this->jugadoresLocales[i]);
 }
 
 Jugador* Model::getJugadorVisitanteNro(int i)
@@ -159,7 +162,8 @@ void Model::setPelotaEnMovimiento()
 
 bool Model::pelotaEnMovimiento()
 {
-    return this->juegoIniciado;
+    //return this->juegoIniciado;
+    return true;
 
 }
 
