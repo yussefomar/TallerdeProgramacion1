@@ -12,7 +12,7 @@ AumentarVelocidadXNet::~AumentarVelocidadXNet()
 
 void AumentarVelocidadXNet::execute()
 {
-    this->model->aumentarVelocidadEnX(this->getCodigoJugador());
+    this->model->aumentarVelocidadEnX(this->getIdCliente());
 }
 
 char AumentarVelocidadXNet::getCodigoComando()

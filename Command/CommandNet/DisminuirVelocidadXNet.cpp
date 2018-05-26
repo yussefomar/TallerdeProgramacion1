@@ -12,7 +12,7 @@ DisminuirVelocidadXNet::~DisminuirVelocidadXNet()
 
 void DisminuirVelocidadXNet::execute()
 {
-    this->model->disminuirVelocidadX(this->getCodigoJugador());
+    this->model->disminuirVelocidadX(this->getIdCliente());
 }
 
 char DisminuirVelocidadXNet::getCodigoComando()

@@ -13,7 +13,7 @@ RecuperarPelotaNet::~RecuperarPelotaNet()
 
 void RecuperarPelotaNet ::execute()//La mantiene en su pie
 {
-    this->model->recuperaPelota( this->getCodigoJugador());
+    this->model->recuperaPelota( this->getIdCliente());
 }
 char RecuperarPelotaNet ::getCodigoComando()
 {

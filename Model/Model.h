@@ -49,17 +49,17 @@ public:
     virtual void jugadorActivoPasaPelota();
 
     /*servicios del Modelo en online*/
-    void aumentarVelocidadEnX(unsigned codigoCliente);
-    void disminuirVelocidadY(unsigned codigoCliente);
-    void aumentarVelocidadEnY(unsigned codigoCliente);
-    void disminuirVelocidadX(unsigned codigoCliente);
-    void desacelerar(unsigned codigoCliente);
-    void patearPelota(unsigned codigoCliente);
-    void recuperaPelota(unsigned codigoCliente);
-    void stopJugador(unsigned codigoCliente);
-    void acelerar(unsigned codigoCliente);
-    void cambiarDeJugador(unsigned codigoCliente);
-    void pasarPelota(unsigned codigoCliente);
+    void aumentarVelocidadEnX(char codigoCliente);
+    void disminuirVelocidadY(char codigoCliente);
+    void aumentarVelocidadEnY(char codigoCliente);
+    void disminuirVelocidadX(char codigoCliente);
+    void desacelerar(char codigoCliente);
+    void patearPelota(char codigoCliente);
+    void recuperaPelota(char codigoCliente);
+    void stopJugador(char codigoCliente);
+    void acelerar(char codigoCliente);
+    void cambiarDeJugador(char codigoCliente);
+    void pasarPelota(char codigoCliente);
 
     void agregarObservador(Util_LoggerObserver* obs);
     void notificarAObservadores(unsigned entidad, char evento, char tipo);
@@ -70,7 +70,8 @@ public:
     virtual void moverJuego();
 
     /*Seteos del cliente en modo online*/
-    void setIdCliente(unsigned id);
+    void setIdCliente(char id);
+    char getIdCliente();
 
 
 protected:
@@ -88,8 +89,8 @@ private:
     unsigned int nroJugadorActivo;
     std::queue<Command*> cambios;
     std::vector<Util_LoggerObserver*> observadores;
-    std::vector<unsigned> clientes;
-    unsigned idCliente;
+    std::vector<unsigned> clientes; //asocia el id de los clientes conectados con el jugador que controlan
+    char idCliente;
 
 };
 

@@ -13,11 +13,11 @@ public:
     CommandNet(Model* model);
     virtual ~CommandNet();
 
-    void setCodigoJugador(char codigoJugador);
-    char getCodigoJugador();
+    void setIdCliente(char idCliente);
+    char getIdCliente();
 
 protected:
-    std::queue<char> codigoJugador;
+    std::queue<char> idCliente;
     Model* model;
 
 private:

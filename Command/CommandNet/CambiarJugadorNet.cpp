@@ -12,7 +12,7 @@ CambiarJugadorNet::~CambiarJugadorNet()
 void CambiarJugadorNet::execute()
 
 {
-    this->model->jugadorActivoCambia();
+    this->model->cambiarDeJugador(this->getIdCliente());
 }
 
 

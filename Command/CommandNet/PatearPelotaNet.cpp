@@ -12,7 +12,7 @@ PatearPelotaNet::~PatearPelotaNet()
 
 void PatearPelotaNet ::execute()
 {
-    this->model->patearPelota(this->getCodigoJugador());
+    this->model->patearPelota(this->getIdCliente());
 }
 
 char PatearPelotaNet ::getCodigoComando()

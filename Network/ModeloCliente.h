@@ -36,9 +36,9 @@ public:
     virtual void enviarMensajeLogin(char mensaje);
     virtual char recibirMensajeLogin();
 
-    unsigned enviarUnComando();
-    unsigned recibirUnComando();
-    unsigned ejecutarUnComando();
+    void enviarUnComando();
+    void recibirUnComando();
+    void ejecutarUnComando();
 
     void conectarConServer(std::string ipServer, std::string puertoServer);
 
@@ -47,7 +47,7 @@ protected:
 private:
     Model* model;
     std::vector<CommandNet*> comandos;
-    std::queue<std::string> codigosAEnviar;
+    std::queue<char> codigosAEnviar;
     SocketCliente* socket;
     unsigned tareaAEjecutar;
 };

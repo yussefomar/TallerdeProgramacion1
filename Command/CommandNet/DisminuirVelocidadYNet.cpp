@@ -12,7 +12,7 @@ DisminuirVelocidadYNet::~DisminuirVelocidadYNet()
 
 void DisminuirVelocidadYNet::execute()
 {
-    this->model->disminuirVelocidadY(this->getCodigoJugador());
+    this->model->disminuirVelocidadY(this->getIdCliente());
 }
 
 

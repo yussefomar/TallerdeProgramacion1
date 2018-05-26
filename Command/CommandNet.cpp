@@ -9,16 +9,16 @@ CommandNet::~CommandNet()
     //dtor
 }
 
-void CommandNet::setCodigoJugador(char codigoJugador)
+void CommandNet::setIdCliente(char idCliente)
 {
 
-    this->codigoJugador.push(codigoJugador);
+    this->idCliente.push(idCliente);
 }
 
-char CommandNet::getCodigoJugador()
+char CommandNet::getIdCliente()
 {
-    char codigo = this->codigoJugador.front();
-    this->codigoJugador.pop();
-    return codigo;
+    char id = this->idCliente.front();
+    this->idCliente.pop();
+    return id;
 }
 

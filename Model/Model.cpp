@@ -12,14 +12,11 @@
 #define CANTJUGADORES 7
 #define LOCALES 0
 #define VISITANTES 6
-#define CANTMAXCLIENTES
+#define CANTMAXCLIENTES 4
 
 
 Model::Model()
 {
-    //this->jugadores = new Jugador[CANTJUGADORESTOTALES]();
-    //this->jugadoresLocales = this->jugadores;
-    //this->jugadoresVisitantes = &(this->jugadores[7]);
     this->jugadoresEnCancha = new Jugador[CANTJUGADORESTOTALES];
     this->jugadoresLocales = &(this->jugadoresEnCancha[LOCALES]);
     this->jugadoresVisitantes = &(this->jugadoresEnCancha[VISITANTES]);
@@ -27,7 +24,11 @@ Model::Model()
     this->getJugadorActivo()->activar();
     this->juegoIniciado=false;
     this->clientes = std::vector<unsigned>(CANTMAXCLIENTES);
-    this->idCliente = 0;//POR DEFECTO HASTA ESPERAR EL NUEVO ID
+    //hiper hardcode para probar...
+    for(unsigned i = 0; i < this->clientes.size(); ++i) {
+        this->clientes[i] = i * 2;
+    }
+    this->idCliente = 0x00;//POR DEFECTO HASTA ESPERAR EL NUEVO ID
 }
 
 Model::~Model()
@@ -35,8 +36,14 @@ Model::~Model()
     delete[] this->jugadoresEnCancha;
 }
 
-void Model::setIdCliente(unsigned id) {
+void Model::setIdCliente(char id) {
     this->idCliente = id;
+    //SE BORRA CUANDO SE TENGA LISTO EL PROCESO DE LOGGIN
+    this->jugadoresEnCancha[this->clientes[id]].activar();
+}
+
+char Model::getIdCliente() {
+    return this->idCliente;
 }
 
 Pelota* Model::getPelota()
@@ -296,14 +303,14 @@ void Model::jugadorActivoDetener()
 
 
 
-void Model::aumentarVelocidadEnX(unsigned codigoCliente)
+void Model::aumentarVelocidadEnX(char codigoCliente)
 {
     unsigned nroJugador = this->clientes[codigoCliente];
     this->jugadoresEnCancha[nroJugador].aumentarVelocidadX();
     this->notificarAObservadores(nroJugador, INCVELX, MJU);
 }
 
-void Model::aumentarVelocidadEnY(unsigned codigoCliente)
+void Model::aumentarVelocidadEnY(char codigoCliente)
 {
     unsigned nroJugador = this->clientes[codigoCliente];
 
@@ -311,7 +318,7 @@ void Model::aumentarVelocidadEnY(unsigned codigoCliente)
     this->notificarAObservadores(nroJugador, INCVELY, MJU);
 }
 
-void Model:: disminuirVelocidadY(unsigned codigoCliente)
+void Model:: disminuirVelocidadY(char codigoCliente)
 {
     unsigned nroJugador = this->clientes[codigoCliente];
 
@@ -319,7 +326,7 @@ void Model:: disminuirVelocidadY(unsigned codigoCliente)
     this->notificarAObservadores(nroJugador, DECVELY, MJU);
 }
 
-void Model:: disminuirVelocidadX(unsigned codigoCliente)
+void Model:: disminuirVelocidadX(char codigoCliente)
 {
     unsigned nroJugador = this->clientes[codigoCliente];
 
@@ -327,7 +334,7 @@ void Model:: disminuirVelocidadX(unsigned codigoCliente)
     this->notificarAObservadores(nroJugador, DECVELX, MJU);
 }
 
-void Model:: desacelerar(unsigned codigoCliente)
+void Model:: desacelerar(char codigoCliente)
 {
     unsigned nroJugador = this->clientes[codigoCliente];
 
@@ -335,7 +342,7 @@ void Model:: desacelerar(unsigned codigoCliente)
     this->notificarAObservadores(nroJugador, DESJUG, MJU);
 }
 
-void Model:: patearPelota(unsigned codigoCliente)
+void Model:: patearPelota(char codigoCliente)
 {
     unsigned nroJugador = this->clientes[codigoCliente];
 
@@ -343,16 +350,16 @@ void Model:: patearPelota(unsigned codigoCliente)
     this->notificarAObservadores(nroJugador, PATPELO, MJU);;
 }
 
-void Model:: recuperaPelota(unsigned codigoCliente)
+void Model:: recuperaPelota(char codigoCliente)
 {
 
     unsigned nroJugador = this->clientes[codigoCliente];
 
-    this->jugadoresEnCancha[codigoCliente].recuperaPelota(this->getPelota());
-    this->notificarAObservadores(codigoCliente, RECUPELO, MJU);
+    this->jugadoresEnCancha[nroJugador].recuperaPelota(this->getPelota());
+    this->notificarAObservadores(nroJugador, RECUPELO, MJU);
 }
 
-void Model::stopJugador(unsigned codigoCliente)
+void Model::stopJugador(char codigoCliente)
 {
     unsigned nroJugador = this->clientes[codigoCliente];
 
@@ -360,7 +367,7 @@ void Model::stopJugador(unsigned codigoCliente)
     this->notificarAObservadores(nroJugador, STOPJUG, MJU);
 }
 
-void Model::acelerar(unsigned codigoCliente)
+void Model::acelerar(char codigoCliente)
 {
     unsigned nroJugador = this->clientes[codigoCliente];
 
@@ -368,13 +375,13 @@ void Model::acelerar(unsigned codigoCliente)
     this->notificarAObservadores(nroJugador, ACCJUG, MJU);
 }
 
-void Model::cambiarDeJugador(unsigned codigoCliente)
+void Model::cambiarDeJugador(char codigoCliente)
 {
 //TODO
     return;
 }
 
-void Model:: pasarPelota(unsigned codigoCliente)
+void Model:: pasarPelota(char codigoCliente)
 {
 //TODO
     return;

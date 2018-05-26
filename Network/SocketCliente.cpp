@@ -100,42 +100,14 @@ SocketCliente::~SocketCliente()
     }
 }
 
-void SocketCliente::enviarCodigoComando(std::string comando)
-{
-    char byte;
 
-    char entidad = comando[ENTIDAD];
-    char evento = comando[EVENTO];
-    byte = entidad << 4;
-    byte = byte | evento;
-    this->enviarByte(byte);
-}
-
-unsigned SocketCliente::recibirCantidadCambios()
-{
-    char cantidadCambios = 0x00;
-    cantidadCambios = this->recibirByte();
-    return cantidadCambios;
-}
 
 bool SocketCliente::estaConectado()
 {
     return this->socketConectado;
 }
 
-std::string SocketCliente::recibirCodigoComando()
-{
-    std::string comando;
-    char byte;
 
-    byte = this->recibirByte();
-    char entidad = byte >> 4;
-    comando.push_back(entidad);
-    char evento = byte & 0x0F;
-    comando.push_back(evento);
-
-    return comando;
-}
 
 void SocketCliente::enviarByte(char byte)
 {
@@ -149,15 +121,7 @@ char SocketCliente::recibirByte()
     return byte;
 }
 
-void SocketCliente::enviarPedidoDeCambios()
-{
-    char byte = 0xFF;
-    this->enviarByte(byte);
-    this->enviarByte(byte);
-}
 
-unsigned SocketCliente::recibirIdCliente() {
-    char idChar = this->recibirByte();
-    unsigned idCliente = idChar;
-    return idCliente;
+char SocketCliente::recibirIdCliente() {
+    return this->recibirByte();
 }

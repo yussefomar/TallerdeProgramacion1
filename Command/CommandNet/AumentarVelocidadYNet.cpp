@@ -10,7 +10,7 @@ AumentarVelocidadYNet::~AumentarVelocidadYNet()
 
 void AumentarVelocidadYNet::execute()
 {
-    this->model->aumentarVelocidadEnY(this->getCodigoJugador());
+    this->model->aumentarVelocidadEnY(this->getIdCliente());
 }
 
 char AumentarVelocidadYNet::getCodigoComando()

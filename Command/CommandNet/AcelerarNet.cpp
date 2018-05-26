@@ -12,7 +12,7 @@ AcelerarNet::~AcelerarNet()
 
 void AcelerarNet::execute()
 {
-    this->model->acelerar(this->getCodigoJugador());
+    this->model->acelerar(this->getIdCliente());
 }
 
 char AcelerarNet::getCodigoComando()

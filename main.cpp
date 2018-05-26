@@ -55,11 +55,9 @@ void modoOnline()
     model.agregarObservador(&loggerObserver);
 
     ModeloCliente modelCliente(&model);
+    modelCliente.conectarConServer("192.168.0.29", "8080");
 
-    /***********************************************************************************/
-    /**EJEMPLO**/
-    /***********************************************************************************/
-    /**
+    /*EJEMPLO
     bool quit = false;
     char respuesta;
     View_Loguin loguinScreen(1);
@@ -79,9 +77,7 @@ void modoOnline()
         informacionIngreso.procesarRespuesta(respuesta);
     }
     loguinScreen.Cerrar();
-    **/
-    /***********************************************************************************/
-    /***********************************************************************************/
+    EJEMPLO*/
 
     View view(&model);
     view.Attach(&loggerObserver);

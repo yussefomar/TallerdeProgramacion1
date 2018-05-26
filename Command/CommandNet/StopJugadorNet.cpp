@@ -13,7 +13,7 @@ StopJugadorNet::~StopJugadorNet()
 
 void StopJugadorNet::execute()
 {
-    this->model->stopJugador(this->getCodigoJugador());
+    this->model->stopJugador(this->getIdCliente());
 }
 
 char StopJugadorNet::getCodigoComando()

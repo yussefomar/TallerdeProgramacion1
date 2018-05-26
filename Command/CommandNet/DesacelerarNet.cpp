@@ -11,7 +11,7 @@ DesacelerarNet::~DesacelerarNet()
 
 void DesacelerarNet::execute()
 {
-    this->model->desacelerar(this->getCodigoJugador());
+    this->model->desacelerar(this->getIdCliente());
 }
 char DesacelerarNet::getCodigoComando()
 {
