@@ -49,20 +49,21 @@ public:
     virtual void jugadorActivoPasaPelota();
 
     /*servicios del Modelo en online*/
-    virtual void aumentarVelocidadEnX(char codigoJugador);
-    virtual void disminuirVelocidadY(char codigojugador);
-    virtual void aumentarVelocidadEnY(char codigojugador);
-    virtual void disminuirVelocidadX(char codigojugador);
-    virtual void desacelerar(char codigojugador);
-    virtual void patearPelota(char codigojugador);
-    virtual void recuperaPelota(char codigojugador);
-    virtual void pasaPelota(char codigojugador);
-    virtual void stopJugador(char codigojugador);
-    virtual void acelerar(char codigojugador);
+    void aumentarVelocidadEnX(unsigned codigoJugador);
+    void disminuirVelocidadY(unsigned codigoJugador);
+    void aumentarVelocidadEnY(unsigned codigoJugador);
+    void disminuirVelocidadX(unsigned codigoJugador);
+    void desacelerar(unsigned codigoJugador);
+    void patearPelota(unsigned codigoJugador);
+    void recuperaPelota(unsigned codigoJugador);
+    void stopJugador(unsigned codigoJugador);
+    void acelerar(unsigned codigoJugador);
+    void cambiarDeJugador(unsigned codigoJugador);
+    void pasaPelota(unsigned codigojugador);
 
-    virtual void agregarObservador(Util_LoggerObserver* obs);
-    virtual void notificarAObservadores(unsigned entidad, char evento, char tipo);
-    virtual void quitarObservador(Util_LoggerObserver* obs);
+    void agregarObservador(Util_LoggerObserver* obs);
+    void notificarAObservadores(unsigned entidad, char evento, char tipo);
+    void quitarObservador(Util_LoggerObserver* obs);
 
     virtual void update();
 
@@ -73,8 +74,9 @@ protected:
 
 private:
     Pelota pelota;
-    Jugador* jugadores;
-    //Jugador* jugadoresLocales;
+    //Jugador* jugadores;
+    Jugador* jugadoresEnCancha;
+    Jugador* jugadoresLocales;
     Jugador* jugadoresVisitantes;
     Formacion* formacion;
     //Formacion *formacionLocales;
