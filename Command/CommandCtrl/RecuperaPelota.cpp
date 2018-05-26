@@ -11,7 +11,10 @@ RecuperaPelota::~RecuperaPelota()
 
 void RecuperaPelota ::execute()//La mantiene en su pie
 {
+   if(this->model->pelotaEnMovimiento())
+    {
     this->model->jugadorActivoRecuperaPelota();
+    }
 }
 
 char RecuperaPelota ::getCodigoComando()

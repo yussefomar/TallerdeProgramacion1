@@ -17,6 +17,7 @@ como para net*/
 #define RECUPELO 0x08
 #define CAMBJUG 0x09
 #define COMMNULL 0X0A
+#define PASPELO 0X0B
 
 class Command
 {

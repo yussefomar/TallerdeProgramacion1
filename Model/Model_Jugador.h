@@ -30,8 +30,9 @@ public:
     //Position accessors
     int getVelX();
     int getVelY();
-    void recuperaPelota(Pelota* pelota);
+    bool recuperaPelota(Pelota* pelota);
     void patearPelota(Pelota* pelota );
+    void pasaPelota(Pelota* pelota, Jugador * jugador );
     void setPosX(int PosX);
     void setPosY(int PosY);
 

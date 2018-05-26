@@ -10,8 +10,9 @@
 #include "PatearPelota.h"
 #include "RecuperaPelota.h"
 #include "CommandNull.h"
+#include "PasarPelota.h"
 
-#define CANTCOMMANDS 11
+#define CANTCOMMANDS 12
 
 Controller::Controller(Model* model)
 {
@@ -28,7 +29,7 @@ Controller::Controller(Model* model)
     this->commands[PATPELO] = new PatearPelota(model);
     this->commands[RECUPELO] = new RecuperaPelota(model);
     this->commands[COMMNULL] = new CommandNull(model);
-
+    this->commands[PASPELO] = new PasarPelota(model);
 
     this->quit = false;
 }
@@ -89,6 +90,9 @@ Command* Controller::handleEvent(SDL_Event& e)
             NotifyMessage("Chequeamos: SDL_KEYDOWN", "Controller.cpp");
             switch( e.key.keysym.sym )
             {
+            case SDLK_a:
+                command = this->commands[PASPELO];
+                break;
             case SDLK_s:
                 command = this->commands[RECUPELO];
                 break;

@@ -252,9 +252,40 @@ void Model::jugadorActivoPateaPelota()
     this->notificarAObservadores(this->nroJugadorActivo, PATPELO, MJU);
 }
 
+void Model::jugadorActivoPasaPelota()
+{
+    unsigned i = this->nroJugadorActivo+1;
+    if (i == CANTJUGADORES)
+    {
+        i= 0;
+    }
+    bool encontrado = false;
+    while ((i != this->nroJugadorActivo) && !encontrado)
+    {
+        if ((this->jugadores[i].collide(this->camara )) && (this->nroJugadorActivo!=i))
+        {
+            encontrado = true;
+        }
+        if (i == CANTJUGADORES)
+        {
+            i= 0;
+        }
+        if (!encontrado){
+        i++;
+        }
+    }
+    if (encontrado){
+        this->jugadores[this->nroJugadorActivo].pasaPelota(&(this->pelota),&this->jugadores[i] );
+        this->notificarAObservadores(this->nroJugadorActivo, PASPELO, MJU);
+    }
+}
+
 void Model::jugadorActivoRecuperaPelota()
 {
-    this->jugadores[this->nroJugadorActivo].recuperaPelota(&(this->pelota));
+    Jugador activoPrevio =this->jugadores[this->nroJugadorActivo];
+    if (this->jugadores[this->nroJugadorActivo].recuperaPelota(&(this->pelota))){
+        activoPrevio.noPoseePelota();
+    }
     this->notificarAObservadores(this->nroJugadorActivo, RECUPELO, MJU);
 }
 
@@ -312,6 +343,38 @@ void Model:: recuperaPelota(char codigojugador)
     unsigned nrojugador=codigojugador;
     this->jugadores[nrojugador].recuperaPelota(this->getPelota());
     this->notificarAObservadores(nrojugador, RECUPELO, MJU);
+}
+
+void Model:: pasaPelota(char codigojugador)
+{
+  /*  unsigned nrojugador=codigojugador;
+
+    unsigned i = nrojugador+1;
+    if (i == CANTJUGADORES)
+    {
+        i= 0;
+    }
+    bool encontrado = false;
+    while ((i != nrojugador) && !encontrado)
+    {
+        if ((this->jugadores[i].collide(this->camara )) && (nrojugador!=i))
+        {
+            (this->jugadores[nrojugador]).desactivar();
+            (this->jugadores[i]).activar();
+            this->nroJugadorActivo = i;
+            encontrado = true;
+        }
+        if (i == CANTJUGADORES)
+        {
+            i= 0;
+        }
+        if (!encontrado) {
+        i++;
+        }
+    }
+
+    this->jugadores[nrojugador].pasaPelota(this->getPelota(),&this->jugadores[i]);
+    //this->notificarAObservadores(nrojugador, RECUPELO, MJU);*/
 }
 
 void Model:: stopJugador(char codigojugador)

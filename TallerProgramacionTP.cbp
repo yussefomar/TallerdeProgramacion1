@@ -90,6 +90,8 @@
 		<Unit filename="Command/CommandCtrl/DisminuirVelocidadX.h" />
 		<Unit filename="Command/CommandCtrl/DisminuirVelocidadY.cpp" />
 		<Unit filename="Command/CommandCtrl/DisminuirVelocidadY.h" />
+		<Unit filename="Command/CommandCtrl/PasarPelota.cpp" />
+		<Unit filename="Command/CommandCtrl/PasarPelota.h" />
 		<Unit filename="Command/CommandCtrl/PatearPelota.cpp" />
 		<Unit filename="Command/CommandCtrl/PatearPelota.h" />
 		<Unit filename="Command/CommandCtrl/RecuperaPelota.cpp" />

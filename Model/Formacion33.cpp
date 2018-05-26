@@ -15,7 +15,7 @@ void Formacion33::setPosicionInicialLocal(Jugador* jugadores)
 
     int posX;
     int posY;
-    int posicionesX[] = { 8,  4,  4,  5,  0,  0, 0};
+    int posicionesX[] = { 8,  4,  4,  2,  0,  0, 0};
     int posicionesY[] = { 0, -3,  3,  0, -3,  3, 0};
     int multiplo = -1;
     for(int i = 0; i < CANTJUGADORES; ++i)
@@ -27,6 +27,7 @@ void Formacion33::setPosicionInicialLocal(Jugador* jugadores)
         jugadores[i].setPosX(posX);
         jugadores[i].setPosY(posY);
     }
+            jugadores[6].setDireccion(270);
 }
 
 void Formacion33::setPosicionInicialVisitante(Jugador* jugadores)
