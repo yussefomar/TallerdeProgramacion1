@@ -58,27 +58,40 @@ void modoOnline()
     modelCliente.conectarConServer("192.168.0.29", "8080");
     modelCliente.setComoVisitante();
 
-    /*EJEMPLO
-    bool quit = false;
-    char respuesta;
-    View_Loguin loguinScreen(1);
-    InformacionIngreso informacionIngreso(false);
-    loguinScreen.Inicializar();
-    while( quit == false )
-    {
-        loguinScreen.Procesar(informacionIngreso);
-        if(!informacionIngreso.arranca &&
-           !informacionIngreso.espera &&
-            informacionIngreso.equipoIngresado)
-            {
-                char byte;
-                modelCliente.enviarMensajeLogin(byte);
-            }
-        respuesta = modelCliente.recibirMensajeLogin();
-        informacionIngreso.procesarRespuesta(respuesta);
-    }
-    loguinScreen.Cerrar();
-    EJEMPLO*/
+//    bool quit = false;
+//    char respuesta;
+//    View_Loguin loguinScreen(1);
+//    InformacionIngreso informacionIngreso(false);
+//    loguinScreen.Inicializar();
+//    while( quit == false )
+//    {
+//        loguinScreen.Procesar(informacionIngreso);
+//        if(informacionIngreso.ipPuertoIngreso) {
+//            modelCliente.conectarConServer(informacionIngreso.ip, informacionIngreso.puerto);
+//            //corroborar si se conecto
+//        }
+//        if(informacionIngreso.nombreIngresado) {
+//            modelCliente.enviarNombre(informacionIngreso.nombre);
+//            respuesta = modelCliente.recibirValidacionNombre();
+//            //Tratar respuesta.
+//        }
+//        if(informacionIngreso.passwordIngresado) {
+//            modelCliente.enviarPassword(informacionIngreso.password);
+//            respuesta = modelCliente.recibirValidacionPassword();
+//            //Tratar respuesta.
+//        }
+//        if(informacionIngreso.equipoIngresado) {
+//            if(informacionIngreso.equipo == "1") {
+//                modelCliente.setComoLocal();
+//            }
+//            if(informacionIngreso.equipo == "2") {
+//                modelCliente.setComoVisitante();
+//            }
+//        }
+//
+//    }
+//    loguinScreen.Cerrar();
+
 
     View view(&model);
     view.Attach(&loggerObserver);

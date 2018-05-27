@@ -43,6 +43,7 @@ public:
     void conectarConServer(std::string ipServer, std::string puertoServer);
     void setComoLocal();
     void setComoVisitante();
+    bool conectadoAlServer();
 
 protected:
 

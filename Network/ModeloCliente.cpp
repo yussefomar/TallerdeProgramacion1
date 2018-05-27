@@ -244,3 +244,7 @@ void ModeloCliente::setComoVisitante() {
     char codigo = DEFVISIT | entidad;
     this->codigosAEnviar.push(codigo);
 }
+
+bool ModeloCliente::conectadoAlServer() {
+    return this->socket->estaConectado();
+}
