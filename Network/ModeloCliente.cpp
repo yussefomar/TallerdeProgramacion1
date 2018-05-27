@@ -54,13 +54,15 @@ ModeloCliente::~ModeloCliente()
     {
         delete this->comandos[i];
     }
-    if(this->socket != nullptr) {
+    if(this->socket != nullptr)
+    {
         delete this->socket;
 
     }
 }
 
-void ModeloCliente::conectarConServer(std::string ipServer, std::string puertoServer) {
+void ModeloCliente::conectarConServer(std::string ipServer, std::string puertoServer)
+{
     this->socket = new SocketCliente(ipServer, puertoServer);
     this->idCliente = this->socket->recibirIdCliente();
     this->model->setIdCliente(this->idCliente);
@@ -231,45 +233,54 @@ char ModeloCliente::recibirMensajeLogin()
     return byte;
 }
 
-void ModeloCliente::setComoLocal() {
+void ModeloCliente::setComoLocal()
+{
     char entidad = this->model->getIdCliente();
     entidad = entidad << 6;
     char codigo = DEFLOCAL | entidad;
     this->codigosAEnviar.push(codigo);
 }
 
-void ModeloCliente::setComoVisitante() {
+void ModeloCliente::setComoVisitante()
+{
     char entidad = this->model->getIdCliente();
     entidad = entidad << 6;
     char codigo = DEFVISIT | entidad;
     this->codigosAEnviar.push(codigo);
 }
 
-bool ModeloCliente::conectadoAlServer() {
+bool ModeloCliente::conectadoAlServer()
+{
     return this->socket->estaConectado();
 }
 
-char ModeloCliente::hashear(std::string unString) {
+char ModeloCliente::hashear(std::string unString)
+{
     //esta misma funcion tiene que estar disponible en el server para hashear
     //los datos que pasan desde configuracion.
     char code;
-    for(unsigned i = 0; i < unString.size(); ++i) {
+    for(unsigned i = 0; i < unString.size(); ++i)
+    {
         code = code | unString[i];
     }
     return code;
 }
 
-void ModeloCliente::enviarNombre(std::string nombre) {
+void ModeloCliente::enviarNombre(std::string nombre)
+{
     char nombreComprimido = this->hashear(nombre);
     this->socket->enviarByte(nombreComprimido);
 }
-void ModeloCliente::enviarPassword(std::string password) {
+void ModeloCliente::enviarPassword(std::string password)
+{
     char passwordComprimido = this->hashear(password);
     this->socket->enviarByte(passwordComprimido);
 }
-char ModeloCliente::recibirValidacionNombre() {
+char ModeloCliente::recibirValidacionNombre()
+{
     return this->socket->recibirByte();
 }
-char ModeloCliente::recibirValidacionPassword() {
+char ModeloCliente::recibirValidacionPassword()
+{
     return this->socket->recibirByte();
 }

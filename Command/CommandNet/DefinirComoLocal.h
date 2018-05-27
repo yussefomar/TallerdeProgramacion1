@@ -6,15 +6,15 @@
 
 class DefinirComoLocal : public CommandNet
 {
-    public:
-        DefinirComoLocal(Model* model);
-        virtual ~DefinirComoLocal();
-            void  execute() ;
+public:
+    DefinirComoLocal(Model* model);
+    virtual ~DefinirComoLocal();
+    void  execute() ;
     char  getCodigoComando() ;
 
-    protected:
+protected:
 
-    private:
+private:
 };
 
 #endif // DEFINIRCOMOLOCAL_H

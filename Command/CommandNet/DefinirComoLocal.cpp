@@ -10,10 +10,12 @@ DefinirComoLocal::~DefinirComoLocal()
     //dtor
 }
 
-void DefinirComoLocal::execute() {
+void DefinirComoLocal::execute()
+{
     this->model->definirComoLocal(this->getIdCliente());
 }
 
-char DefinirComoLocal::getCodigoComando() {
+char DefinirComoLocal::getCodigoComando()
+{
     return DEFLOCAL;
 }

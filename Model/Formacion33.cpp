@@ -27,7 +27,7 @@ void Formacion33::setPosicionInicialLocal(Jugador* jugadores)
         jugadores[i].setPosX(posX);
         jugadores[i].setPosY(posY);
     }
-            jugadores[6].setDireccion(270);
+    jugadores[6].setDireccion(270);
 }
 
 void Formacion33::setPosicionInicialVisitante(Jugador* jugadores)

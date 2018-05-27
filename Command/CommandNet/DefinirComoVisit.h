@@ -6,15 +6,15 @@
 
 class DefinirComoVisit : public CommandNet
 {
-    public:
-        DefinirComoVisit(Model* model);
-        virtual ~DefinirComoVisit();
-            void  execute() ;
+public:
+    DefinirComoVisit(Model* model);
+    virtual ~DefinirComoVisit();
+    void  execute() ;
     char  getCodigoComando() ;
 
-    protected:
+protected:
 
-    private:
+private:
 };
 
 #endif // DEFINIRCOMOVISIT_H

@@ -31,14 +31,16 @@ InformacionIngreso::~InformacionIngreso()
 
 void InformacionIngreso::procesarRespuesta(char respuesta)
 {
-    if(respuesta == LOGINLBR) {
+    if(respuesta == LOGINLBR)
+    {
         this->error = false;
         this->equipoUno = true;
         this->equipoDos = true;
         this->mensaje = "";
         return;
     }
-    if(respuesta == LOGINUNO) {
+    if(respuesta == LOGINUNO)
+    {
         this->error = false;
         this->lleno = false;
         this->equipoUno = false;
@@ -47,7 +49,8 @@ void InformacionIngreso::procesarRespuesta(char respuesta)
         this->mensaje = "Solo es posible escoger el equipo 2:";
         return;
     }
-    if(respuesta == LOGINDOS) {
+    if(respuesta == LOGINDOS)
+    {
         this->error = false;
         this->lleno = false;
         this->equipoDos = false;
@@ -56,7 +59,8 @@ void InformacionIngreso::procesarRespuesta(char respuesta)
         this->mensaje = "Solo es posible escoger el equipo 1:";
         return;
     }
-    if(respuesta == LOGINFUL) {
+    if(respuesta == LOGINFUL)
+    {
         this->lleno = true;
         this->error = false;
         this->equipoUno = false;
@@ -70,7 +74,8 @@ void InformacionIngreso::procesarRespuesta(char respuesta)
         }
         return;
     }
-    if(respuesta == LOGINERR) {
+    if(respuesta == LOGINERR)
+    {
         this->error = true;
         this->espera = false;
         this->arranca = false;
@@ -80,14 +85,16 @@ void InformacionIngreso::procesarRespuesta(char respuesta)
         this->mensaje = "Las credenciales no coinciden.";
         return;
     }
-    if(respuesta == LOGINESP) {
+    if(respuesta == LOGINESP)
+    {
         this->error = false;
         this->espera = true;
         this->arranca = false;
         this->mensaje = "Ingreso correcto, esperando inicio.";
         return;
     }
-    if(respuesta == LOGINYES) {
+    if(respuesta == LOGINYES)
+    {
         this->error = false;
         this->espera = false;
         this->arranca = true;

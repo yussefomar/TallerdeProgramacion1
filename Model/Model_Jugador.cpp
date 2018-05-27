@@ -143,12 +143,12 @@ bool Jugador::recuperaPelota(Pelota* pelota)
         this->pelota=pelota;
         return true;
     }
-return false;
+    return false;
 }
 
 void Jugador::pasaPelota(Pelota* pelota,Jugador * jugador)
 {
- if(/*this->getPosesion() &&*/ (this->checkCollisionPelota((pelota->getCollider()))))
+    if(/*this->getPosesion() &&*/ (this->checkCollisionPelota((pelota->getCollider()))))
     {
         if (jugador->getPosX() > this->getPosX())
         {

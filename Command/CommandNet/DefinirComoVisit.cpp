@@ -10,10 +10,12 @@ DefinirComoVisit::~DefinirComoVisit()
     //dtor
 }
 
-void DefinirComoVisit::execute() {
+void DefinirComoVisit::execute()
+{
     this->model->definirComoVisitante(this->getIdCliente());
 }
 
-char DefinirComoVisit::getCodigoComando() {
+char DefinirComoVisit::getCodigoComando()
+{
     return DEFVISIT;
 }

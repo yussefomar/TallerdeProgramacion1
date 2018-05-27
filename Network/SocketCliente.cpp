@@ -122,6 +122,7 @@ char SocketCliente::recibirByte()
 }
 
 
-char SocketCliente::recibirIdCliente() {
+char SocketCliente::recibirIdCliente()
+{
     return this->recibirByte();
 }
