@@ -45,6 +45,13 @@ public:
     void setComoVisitante();
     bool conectadoAlServer();
 
+    void enviarNombre(std::string nombre);
+    void enviarPassword(std::string password);
+    char recibirValidacionNombre();
+    char recibirValidacionPassword();
+    char hashear(std::string unString);
+
+
 protected:
 
 private:

@@ -248,3 +248,28 @@ void ModeloCliente::setComoVisitante() {
 bool ModeloCliente::conectadoAlServer() {
     return this->socket->estaConectado();
 }
+
+char ModeloCliente::hashear(std::string unString) {
+    //esta misma funcion tiene que estar disponible en el server para hashear
+    //los datos que pasan desde configuracion.
+    char code;
+    for(unsigned i = 0; i < unString.size(); ++i) {
+        code = code | unString[i];
+    }
+    return code;
+}
+
+void ModeloCliente::enviarNombre(std::string nombre) {
+    char nombreComprimido = this->hashear(nombre);
+    this->socket->enviarByte(nombreComprimido);
+}
+void ModeloCliente::enviarPassword(std::string password) {
+    char passwordComprimido = this->hashear(password);
+    this->socket->enviarByte(passwordComprimido);
+}
+char ModeloCliente::recibirValidacionNombre() {
+    return this->socket->recibirByte();
+}
+char ModeloCliente::recibirValidacionPassword() {
+    return this->socket->recibirByte();
+}
