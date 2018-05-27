@@ -110,6 +110,10 @@
 		<Unit filename="Command/CommandNet/CambiarJugadorNet.h" />
 		<Unit filename="Command/CommandNet/CommandNullNet.cpp" />
 		<Unit filename="Command/CommandNet/CommandNullNet.h" />
+		<Unit filename="Command/CommandNet/DefinirComoLocal.cpp" />
+		<Unit filename="Command/CommandNet/DefinirComoLocal.h" />
+		<Unit filename="Command/CommandNet/DefinirComoVisit.cpp" />
+		<Unit filename="Command/CommandNet/DefinirComoVisit.h" />
 		<Unit filename="Command/CommandNet/DesacelerarNet.cpp" />
 		<Unit filename="Command/CommandNet/DesacelerarNet.h" />
 		<Unit filename="Command/CommandNet/DisminuirVelocidadXNet.cpp" />
