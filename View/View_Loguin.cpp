@@ -24,7 +24,6 @@ SDL_Texture* SurfaceToTexture( SDL_Surface* surf );
 void CreateTextTextures();
 // Update and Render
 void Render();
-void RunGame();
 void UpdateInputUsuario(std::string value);
 void UpdateInputPassword(std::string value);
 void UpdateInputEquipo(std::string value);
@@ -119,13 +118,13 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
     UpdateInputPuerto(informacionIngreso.puerto);
 
     informacionIngreso.error = false;
+    UpdateSalida(informacionIngreso.mensaje);
 
 		SDL_Event event;
         //While there's events to handle
         while( SDL_PollEvent( &event ) )
         {
-
-            if( informacionIngreso.ipIngresado == false && informacionIngreso.puertoIngresado == false )
+            if( informacionIngreso.ipIngresado == false || informacionIngreso.puertoIngresado == false )
             {
                 if(!informacionIngreso.ipIngresado)
                 {
@@ -143,7 +142,8 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
                          informacionIngreso.ipIngresado = true;
                          UpdateInputPeticionPuerto("puerto:");
                     }
-                }else if(!informacionIngreso.puertoIngresado)
+                }
+                else if(!informacionIngreso.puertoIngresado)
                 {
                     temp = actualPuerto.str;
                     actualPuerto.handle_input( event );
@@ -178,9 +178,7 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
                      UpdateInputPeticionPassword("password:");
                 }
             }
-
-            //If the enter key was pressed
-            if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
+            else if( informacionIngreso.passwordIngresado == false )
             {
                 temp = actualPassword.str;
                 actualPassword.handle_input( event );
@@ -242,13 +240,6 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
 /**** METODOS AUXILIARES PROPIOS DE ESTA CLASE.  *******/
 /*****************************************************************************/
 /*****************************************************************************/
-
-void RunGame()
-{
-    //Render();
-//	std::cout << "Press any key to exit\n";
-    //std::cin.ignore();
-}
 
 void Render()
 {
@@ -453,7 +444,7 @@ bool InitEverything()
     SetupRenderer();
 
     //Iniciamos las fuentes
-    if ( !SetupTTF("Images/peticion.ttf", "Images/respuesta.otf") )
+    if ( !SetupTTF("Images/peticion.ttf", "Images/Roboto-Regular.ttf") )
         return false;
 
     CreateTextTextures();

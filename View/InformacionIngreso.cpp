@@ -42,14 +42,14 @@ void InformacionIngreso::procesarRespuesta(char respuesta)
     //NOMBRE INCORRECTO.
     if(respuesta == LI_NOMBRE_ERROR) {
         this->nombreIngresado = false;
-        this->mensaje = "Ese nombre no está configurado, pruebe otro.";
+        this->mensaje = "Ese nombre no fue configurado, pruebe otro.";
         this->nombre = "";
         return;
     }
     //NOMBRE EXISTENTE.
     if(respuesta == LI_NOMBRE_REPETIDO) {
         this->nombreIngresado = false;
-        this->mensaje = "Ese nombre ya está en uso, pruebe otro.";
+        this->mensaje = "Ese nombre ya pertenece a otro jugador, pruebe otro.";
         this->nombre = "";
         return;
     }

@@ -57,6 +57,11 @@ void StringInput::handle_input(SDL_Event inputEvent)
                 //Append the character
                 str += (char)inputEvent.key.keysym.sym;
             }
+            else if( ( inputEvent.key.keysym.sym == (Uint16)'.' ) || ( inputEvent.key.keysym.sym == (Uint16)':' ) )
+            {
+                //Append the character
+                str += (char)inputEvent.key.keysym.sym;
+            }
         }
 
         //If backspace was pressed and the string isn't blank

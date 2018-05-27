@@ -57,19 +57,22 @@ void modoOnline()
     ModeloCliente modelCliente(&model);
     modelCliente.conectarConServer("192.168.0.29", "8080");
     modelCliente.setComoVisitante();
-/**
+
     char respuesta;
     View_Loguin loguinScreen(1);
     InformacionIngreso informacionIngreso(false);
     loguinScreen.Inicializar();
-
-    while( !informacionIngreso.ipIngresado && !informacionIngreso.puertoIngresado )
+/**
+    while( !informacionIngreso.ipIngresado || !informacionIngreso.puertoIngresado )
     {
         loguinScreen.Procesar(informacionIngreso);
         if(informacionIngreso.ipIngresado && informacionIngreso.puertoIngresado )
         {
             modelCliente.conectarConServer(informacionIngreso.ip, informacionIngreso.puerto);
             informacionIngreso.procesarConectividad(modelCliente.conectadoAlServer());
+            //===========================================================================
+            //informacionIngreso.procesarConectividad(false);
+            //===========================================================================
         }
     }
 
@@ -81,6 +84,9 @@ void modoOnline()
             modelCliente.enviarNombre(informacionIngreso.nombre);
             respuesta = modelCliente.recibirValidacionNombre();
             informacionIngreso.procesarRespuesta(respuesta);
+            //===========================================================================
+            //informacionIngreso.procesarRespuesta(0X0B);
+            //===========================================================================
         }
     }
 
@@ -92,6 +98,9 @@ void modoOnline()
             modelCliente.enviarPassword(informacionIngreso.password);
             respuesta = modelCliente.recibirValidacionPassword();
             informacionIngreso.procesarRespuesta(respuesta);
+            //===========================================================================
+            //informacionIngreso.procesarRespuesta(0X0F);
+            //===========================================================================
         }
     }
 
