@@ -2,7 +2,6 @@
 
 DisminuirVelocidadXNet::DisminuirVelocidadXNet(Model* model) : CommandNet(model)
 {
-    this->model = model;
 }
 
 DisminuirVelocidadXNet::~DisminuirVelocidadXNet()

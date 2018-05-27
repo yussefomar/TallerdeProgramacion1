@@ -10,14 +10,18 @@
 #include "PatearPelotaNet.h"
 #include "RecuperarPelotaNet.h"
 #include "CommandNullNet.h"
+#include "DefinirComoVisit.h"
+#include "DefinirComoLocal.h"
 
-#define CANTCOMMANDSNET 11
+#define CANTCOMMANDSNET 14
 #define ENTIDAD 0
 #define EVENTO 1
 
 #define ENVIAR 0
 #define RECIBIR 1
 #define EJECUTAR 2
+
+
 
 /*Cuidado... la cantidad de comandos en modelCliente puede y
 va a diferir del de controller*/
@@ -29,13 +33,16 @@ ModeloCliente::ModeloCliente(Model* model)
     this->comandos[DECVELY] = new DisminuirVelocidadYNet(model);
     this->comandos[INCVELX] = new AumentarVelocidadXNet(model);
     this->comandos[INCVELY] = new AumentarVelocidadYNet(model);
-    this->comandos[CAMBJUG] = new CambiarJugadorNet(model);
     this->comandos[STOPJUG] = new StopJugadorNet(model);
     this->comandos[ACCJUG] = new AcelerarNet(model);
     this->comandos[DESJUG] = new DesacelerarNet(model);
     this->comandos[PATPELO] = new PatearPelotaNet(model);
     this->comandos[RECUPELO] = new RecuperarPelotaNet(model);
+    this->comandos[CAMBJUG] = new CambiarJugadorNet(model);
+    this->comandos[PASPELO] = new CommandNullNet(model);  //pasar pelota aun no esta creado en net
     this->comandos[COMMNULL]  = new CommandNullNet(model);
+    this->comandos[DEFLOCAL] = new DefinirComoLocal(model);
+    this->comandos[DEFVISIT] = new DefinirComoVisit(model);
     this->tareaAEjecutar = 0;
 
     this->socket = nullptr;
@@ -55,8 +62,10 @@ ModeloCliente::~ModeloCliente()
 
 void ModeloCliente::conectarConServer(std::string ipServer, std::string puertoServer) {
     this->socket = new SocketCliente(ipServer, puertoServer);
-    this->model->setIdCliente(this->socket->recibirIdCliente());
-    std::cout << this->model->getIdCliente() << std::endl;
+    this->idCliente = this->socket->recibirIdCliente();
+    this->model->setIdCliente(this->idCliente);
+    this->model->setTodosJugadoresInactivos();
+    std::cout << "El cliente se identifica con el nro: " << this->model->getIdCliente() << std::endl;
 }
 
 /*El modelo cliente puede devolver datos que son necesarios*/
@@ -220,4 +229,18 @@ char ModeloCliente::recibirMensajeLogin()
     char byte;
     byte = this->socket->recibirByte();
     return byte;
+}
+
+void ModeloCliente::setComoLocal() {
+    char entidad = this->model->getIdCliente();
+    entidad = entidad << 6;
+    char codigo = DEFLOCAL | entidad;
+    this->codigosAEnviar.push(codigo);
+}
+
+void ModeloCliente::setComoVisitante() {
+    char entidad = this->model->getIdCliente();
+    entidad = entidad << 6;
+    char codigo = DEFVISIT | entidad;
+    this->codigosAEnviar.push(codigo);
 }

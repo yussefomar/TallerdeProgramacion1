@@ -12,7 +12,7 @@
 #include "CommandNull.h"
 #include "PasarPelota.h"
 
-#define CANTCOMMANDS 12
+#define CANTCOMMANDS 14
 
 Controller::Controller(Model* model)
 {
@@ -22,14 +22,16 @@ Controller::Controller(Model* model)
     this->commands[DECVELY] = new DisminuirVelocidadY(model);
     this->commands[INCVELX] = new AumentarVelocidadX(model);
     this->commands[INCVELY] = new AumentarVelocidadY(model);
-    this->commands[CAMBJUG] = new CambiarJugador(model);
     this->commands[STOPJUG] = new StopJugador(model);
     this->commands[ACCJUG] = new Acelerar(model);
     this->commands[DESJUG] = new Desacelerar(model);
     this->commands[PATPELO] = new PatearPelota(model);
     this->commands[RECUPELO] = new RecuperaPelota(model);
+    this->commands[CAMBJUG] = new CambiarJugador(model);
     this->commands[COMMNULL] = new CommandNull(model);
     this->commands[PASPELO] = new PasarPelota(model);
+    this->commands[DEFLOCAL] = new CommandNull(model); //para que no se rompa nada
+    this->commands[DEFVISIT] = new CommandNull(model); //por si las dudas.
 
     this->quit = false;
 }

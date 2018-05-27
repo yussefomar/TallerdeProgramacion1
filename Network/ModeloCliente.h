@@ -41,6 +41,8 @@ public:
     void ejecutarUnComando();
 
     void conectarConServer(std::string ipServer, std::string puertoServer);
+    void setComoLocal();
+    void setComoVisitante();
 
 protected:
 
@@ -50,6 +52,7 @@ private:
     std::queue<char> codigosAEnviar;
     SocketCliente* socket;
     unsigned tareaAEjecutar;
+    char idCliente;
 };
 
 #endif // MODELOCLIENTE_H

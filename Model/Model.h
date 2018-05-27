@@ -72,6 +72,9 @@ public:
     /*Seteos del cliente en modo online*/
     void setIdCliente(char id);
     char getIdCliente();
+    void setTodosJugadoresInactivos();
+    void definirComoLocal(char codigoCliente);
+    void definirComoVisitante(char codigoCliente);
 
 
 protected:
@@ -91,6 +94,8 @@ private:
     std::vector<Util_LoggerObserver*> observadores;
     std::vector<unsigned> clientes; //asocia el id de los clientes conectados con el jugador que controlan
     char idCliente;
+    unsigned cantidadLocales;
+    unsigned cantidadVisitantes;
 
 };
 

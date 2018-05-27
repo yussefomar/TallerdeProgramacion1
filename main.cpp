@@ -56,6 +56,7 @@ void modoOnline()
 
     ModeloCliente modelCliente(&model);
     modelCliente.conectarConServer("192.168.0.29", "8080");
+    modelCliente.setComoVisitante();
 
     /*EJEMPLO
     bool quit = false;

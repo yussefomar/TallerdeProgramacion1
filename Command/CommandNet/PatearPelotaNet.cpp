@@ -2,7 +2,6 @@
 
 PatearPelotaNet::PatearPelotaNet(Model* model) : CommandNet(model)
 {
-    this->model = model;
 }
 
 PatearPelotaNet::~PatearPelotaNet()

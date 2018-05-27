@@ -25,10 +25,13 @@ Model::Model()
     this->juegoIniciado=false;
     this->clientes = std::vector<unsigned>(CANTMAXCLIENTES);
     //hiper hardcode para probar...
-    for(unsigned i = 0; i < this->clientes.size(); ++i) {
+    for(unsigned i = 0; i < this->clientes.size(); ++i)
+    {
         this->clientes[i] = i * 2;
     }
     this->idCliente = 0x00;//POR DEFECTO HASTA ESPERAR EL NUEVO ID
+    this->cantidadLocales = 0;
+    this->cantidadVisitantes = 0;
 }
 
 Model::~Model()
@@ -36,16 +39,13 @@ Model::~Model()
     delete[] this->jugadoresEnCancha;
 }
 
-void Model::setIdCliente(char id) {
+void Model::setIdCliente(char id)
+{
     this->idCliente = id;
-    //SE BORRA CUANDO SE TENGA LISTO EL PROCESO DE LOGGIN
-    for(unsigned i = 0; i < CANTJUGADORESTOTALES; ++i) {
-        this->jugadoresEnCancha[i].desactivar();
-    }
-    this->jugadoresEnCancha[this->clientes[id]].activar();
 }
 
-char Model::getIdCliente() {
+char Model::getIdCliente()
+{
     return this->idCliente;
 }
 
@@ -411,6 +411,28 @@ void Model::quitarObservador(Util_LoggerObserver* obs)
     this->observadores.erase(std::remove(observadores.begin(), observadores.end(), obs), observadores.end());
 }
 
+void Model::setTodosJugadoresInactivos()
+{
+    for(unsigned i = 0; i < CANTJUGADORESTOTALES; ++i)
+    {
+        this->jugadoresEnCancha[i].desactivar();
+    }
+}
+
+void Model::definirComoLocal(char codigoCliente)
+{
+    this->cantidadLocales += 1;
+    this->clientes[codigoCliente] = this->cantidadLocales;
+    this->jugadoresEnCancha[this->clientes[codigoCliente]].activar();
+}
+
+void Model::definirComoVisitante(char codigoCliente)
+{
+    this->cantidadVisitantes += 1;
+    this->clientes[codigoCliente] = this->cantidadVisitantes + 6;
+    this->jugadoresEnCancha[this->clientes[codigoCliente]].activar();
+
+}
 
 
 
