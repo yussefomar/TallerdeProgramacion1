@@ -1,12 +1,10 @@
 #include "../View/InformacionIngreso.h"
 
-#define LOGINLBR 0X0B //EQUIPOS LIBRES.
-#define LOGINUNO 0X0C //EQUIPO UNO LLENO.
-#define LOGINDOS 0X0D //EQUIPO DOS LLENO.
-#define LOGINFUL 0X0E //EQUIPOS LLENOS.
-#define LOGINERR 0X0F //ERROR CREDENCIALES.
-#define LOGINESP 0X10 //INGRESO CORRECTO PERO EN ESPERA.
-#define LOGINYES 0X11 //INGRESO CORRECTO E INICIA.
+#define LI_NOMBRE_OK 0X0B //NOMBRE CORRECTO.
+#define LI_NOMBRE_ERROR 0X0C //NOMBRE INCORRECTO.
+#define LI_NOMBRE_REPETIDO 0X0D //NOMBRE EXISTENTE.
+#define LI_CREDENCIALES_OK 0X0E //CREDENCIALES CORRECTAS.
+#define LI_CREDENCIALES_ERROR 0X0F //CREDENCIALES INCORRECTAS.
 
 InformacionIngreso::InformacionIngreso(bool error)
 {
@@ -14,6 +12,8 @@ InformacionIngreso::InformacionIngreso(bool error)
     this->nombre = "";
     this->password = "";
     this->equipo = "";
+    this->ip = "";
+    this->puerto = "";
     this->mensaje = "";
     this->espera = false;
     this->arranca = false;
@@ -22,6 +22,8 @@ InformacionIngreso::InformacionIngreso(bool error)
     this->nombreIngresado = false;
     this->passwordIngresado = false;
     this->equipoIngresado = false;
+    this->ipIngresado = false;
+    this->puertoIngresado = false;
 }
 
 InformacionIngreso::~InformacionIngreso()
@@ -31,74 +33,59 @@ InformacionIngreso::~InformacionIngreso()
 
 void InformacionIngreso::procesarRespuesta(char respuesta)
 {
-    if(respuesta == LOGINLBR)
-    {
-        this->error = false;
-        this->equipoUno = true;
-        this->equipoDos = true;
-        this->mensaje = "";
+    //NOMBRE CORRECTO.
+    if(respuesta == LI_NOMBRE_OK) {
+        this->nombreIngresado = true;
+        this->mensaje = "Nombre ingresado correctamente.";
         return;
     }
-    if(respuesta == LOGINUNO)
-    {
-        this->error = false;
-        this->lleno = false;
-        this->equipoUno = false;
-        this->equipo = "2";
-        this->equipoIngresado = true;
-        this->mensaje = "Solo es posible escoger el equipo 2:";
-        return;
-    }
-    if(respuesta == LOGINDOS)
-    {
-        this->error = false;
-        this->lleno = false;
-        this->equipoDos = false;
-        this->equipo = "1";
-        this->equipoIngresado = true;
-        this->mensaje = "Solo es posible escoger el equipo 1:";
-        return;
-    }
-    if(respuesta == LOGINFUL)
-    {
-        this->lleno = true;
-        this->error = false;
-        this->equipoUno = false;
-        this->equipoDos = false;
-        if(this->espera != true && this->arranca != true)
-        {
-            this->nombreIngresado = true;
-            this->passwordIngresado = true;
-            this->equipoIngresado = true;
-            this->mensaje = "No es posible ingresar, los equipos están llenos, puede esperar.";
-        }
-        return;
-    }
-    if(respuesta == LOGINERR)
-    {
-        this->error = true;
-        this->espera = false;
-        this->arranca = false;
+    //NOMBRE INCORRECTO.
+    if(respuesta == LI_NOMBRE_ERROR) {
+        this->nombreIngresado = false;
+        this->mensaje = "Ese nombre no está configurado, pruebe otro.";
         this->nombre = "";
+        return;
+    }
+    //NOMBRE EXISTENTE.
+    if(respuesta == LI_NOMBRE_REPETIDO) {
+        this->nombreIngresado = false;
+        this->mensaje = "Ese nombre ya está en uso, pruebe otro.";
+        this->nombre = "";
+        return;
+    }
+    //CREDENCIALES CORRECTAS.
+    if(respuesta == LI_CREDENCIALES_OK) {
+        this->passwordIngresado = true;
+        this->mensaje = "Credenciales correctas.";
+        return;
+    }
+    //CREDENCIALES INCORRECTAS.
+    if(respuesta == LI_CREDENCIALES_ERROR) {
+        this->passwordIngresado = false;
+        this->mensaje = "Credenciales correctas.";
         this->password = "";
+        return;
+    }
+}
+
+void InformacionIngreso::procesarConectividad(bool respuesta)
+{
+    if(!respuesta){
+        this->ipIngresado = false;
+        this->puertoIngresado = false;
+        this->ip = "";
+        this->puerto = "";
+        this->mensaje = "Error al conectar con ese IP y PUERTO.";
+    }else{
+        this->ipIngresado = true;
+        this->puertoIngresado = true;
+        this->mensaje = "Conectado con ese IP y PUERTO.";
+    }
+}
+
+void InformacionIngreso::equipoErroneo()
+{
+        this->equipoIngresado = false;
+        this->mensaje = "No ha elegido un equipo valido";
         this->equipo = "";
-        this->mensaje = "Las credenciales no coinciden.";
-        return;
-    }
-    if(respuesta == LOGINESP)
-    {
-        this->error = false;
-        this->espera = true;
-        this->arranca = false;
-        this->mensaje = "Ingreso correcto, esperando inicio.";
-        return;
-    }
-    if(respuesta == LOGINYES)
-    {
-        this->error = false;
-        this->espera = false;
-        this->arranca = true;
-        this->mensaje = "Empezando juego!";
-        return;
-    }
 }

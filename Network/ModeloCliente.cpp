@@ -220,18 +220,18 @@ void ModeloCliente::ejecutarUnComando()
     this->model->update();
 }
 
-void ModeloCliente::enviarMensajeLogin(char mensaje)
-{
-    this->socket->enviarByte(mensaje);
-    return;
-}
-
-char ModeloCliente::recibirMensajeLogin()
-{
-    char byte;
-    byte = this->socket->recibirByte();
-    return byte;
-}
+//void ModeloCliente::enviarMensajeLogin(char mensaje)
+//{
+//    this->socket->enviarByte(mensaje);
+//    return;
+//}
+//
+//char ModeloCliente::recibirMensajeLogin()
+//{
+//    char byte;
+//    byte = this->socket->recibirByte();
+//    return byte;
+//}
 
 void ModeloCliente::setComoLocal()
 {

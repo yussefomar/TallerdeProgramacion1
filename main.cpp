@@ -55,43 +55,61 @@ void modoOnline()
     model.agregarObservador(&loggerObserver);
 
     ModeloCliente modelCliente(&model);
-    modelCliente.conectarConServer("192.168.0.29", "8080");
-    modelCliente.setComoVisitante();
+    //modelCliente.conectarConServer("192.168.0.29", "8080");
+    //modelCliente.setComoVisitante();
 
-//    bool quit = false;
-//    char respuesta;
-//    View_Loguin loguinScreen(1);
-//    InformacionIngreso informacionIngreso(false);
-//    loguinScreen.Inicializar();
-//    while( quit == false )
-//    {
-//        loguinScreen.Procesar(informacionIngreso);
-//        if(informacionIngreso.ipPuertoIngreso) {
-//            modelCliente.conectarConServer(informacionIngreso.ip, informacionIngreso.puerto);
-//            //corroborar si se conecto
-//        }
-//        if(informacionIngreso.nombreIngresado) {
-//            modelCliente.enviarNombre(informacionIngreso.nombre);
-//            respuesta = modelCliente.recibirValidacionNombre();
-//            //Tratar respuesta.
-//        }
-//        if(informacionIngreso.passwordIngresado) {
-//            modelCliente.enviarPassword(informacionIngreso.password);
-//            respuesta = modelCliente.recibirValidacionPassword();
-//            //Tratar respuesta.
-//        }
-//        if(informacionIngreso.equipoIngresado) {
-//            if(informacionIngreso.equipo == "1") {
-//                modelCliente.setComoLocal();
-//            }
-//            if(informacionIngreso.equipo == "2") {
-//                modelCliente.setComoVisitante();
-//            }
-//        }
-//
-//    }
-//    loguinScreen.Cerrar();
+    char respuesta;
+    View_Loguin loguinScreen(1);
+    InformacionIngreso informacionIngreso(false);
+    loguinScreen.Inicializar();
 
+    while( !informacionIngreso.ipIngresado && !informacionIngreso.puertoIngresado )
+    {
+        loguinScreen.Procesar(informacionIngreso);
+        if(informacionIngreso.ipIngresado && informacionIngreso.puertoIngresado )
+        {
+            modelCliente.conectarConServer(informacionIngreso.ip, informacionIngreso.puerto);
+            informacionIngreso.procesarConectividad(modelCliente.conectadoAlServer());
+        }
+    }
+
+    while( !informacionIngreso.nombreIngresado )
+    {
+        loguinScreen.Procesar(informacionIngreso);
+        if(informacionIngreso.nombreIngresado)
+        {
+            modelCliente.enviarNombre(informacionIngreso.nombre);
+            respuesta = modelCliente.recibirValidacionNombre();
+            informacionIngreso.procesarRespuesta(respuesta);
+        }
+    }
+
+    while( !informacionIngreso.passwordIngresado )
+    {
+        loguinScreen.Procesar(informacionIngreso);
+        if(informacionIngreso.passwordIngresado)
+        {
+            modelCliente.enviarPassword(informacionIngreso.password);
+            respuesta = modelCliente.recibirValidacionPassword();
+            informacionIngreso.procesarRespuesta(respuesta);
+        }
+    }
+
+    while( !informacionIngreso.equipoIngresado )
+    {
+        loguinScreen.Procesar(informacionIngreso);
+        if(informacionIngreso.equipoIngresado) {
+            if(informacionIngreso.equipo == "1") {
+                modelCliente.setComoLocal();
+            }else if(informacionIngreso.equipo == "2") {
+                modelCliente.setComoVisitante();
+            }else {
+                informacionIngreso.equipoErroneo();
+            }
+        }
+    }
+
+    loguinScreen.Cerrar();
 
     View view(&model);
     view.Attach(&loggerObserver);
