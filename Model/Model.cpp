@@ -11,7 +11,7 @@
 #define CANTJUGADORESTOTALES 14
 #define CANTJUGADORES 7
 #define LOCALES 0
-#define VISITANTES 6
+#define VISITANTES 7
 #define CANTMAXCLIENTES 4
 
 
@@ -381,14 +381,80 @@ void Model::acelerar(char codigoCliente)
 
 void Model::cambiarDeJugador(char codigoCliente)
 {
-//TODO
-    return;
+    bool visitante = false;
+    unsigned nroJugador = this->clientes[codigoCliente];
+    Jugador* vecJugadores = new Jugador[CANTJUGADORES];
+    vecJugadores = &(this->jugadoresEnCancha[LOCALES]);
+    if (nroJugador > 6 )
+    {
+        vecJugadores = &(this->jugadoresEnCancha[VISITANTES]);
+        nroJugador=nroJugador-7;
+        visitante= true;
+
+    }
+
+    unsigned i = nroJugador+1;
+    if (i == CANTJUGADORES)
+    {
+        i= 0;
+    }
+    bool encontrado = false;
+    while ((i != nroJugador) && !encontrado)
+    {
+        if ((vecJugadores[i].collide(this->camara )) && (nroJugador!=i))
+        {
+            (vecJugadores[nroJugador]).desactivar();
+            (vecJugadores[i]).activar();
+            if (visitante) {
+                this->clientes[codigoCliente] = i + 7;
+            }else {
+               this->clientes[codigoCliente] = i;
+            }
+
+            this->nroJugadorActivo = i;
+            encontrado = true;
+            this->notificarAObservadores(i, COMMNULL, MJU);
+        }
+          if (!encontrado)
+        {
+            i++;
+        }
+        if (i == CANTJUGADORES)
+        {
+            i= 0;
+        }
+    }
 }
 
 void Model:: pasarPelota(char codigoCliente)
 {
-//TODO
-    return;
+unsigned nroJugador = this->clientes[codigoCliente];
+  unsigned i = nroJugador+1;
+    if (i == CANTJUGADORES)
+    {
+        i= 0;
+    }
+    bool encontrado = false;
+    while ((i != nroJugador) && !encontrado)
+    {
+        if ((this->jugadoresLocales[i].collide(this->camara )) && (nroJugador!=i))
+        {
+            encontrado = true;
+        }
+        if (i == CANTJUGADORES)
+        {
+            i= 0;
+        }
+        if (!encontrado)
+        {
+            i++;
+        }
+    }
+    if (encontrado)
+    {
+        this->jugadoresLocales[nroJugador].pasaPelota(&(this->pelota),&this->jugadoresLocales[i] );
+        this->notificarAObservadores(nroJugador, PASPELO, MJU);
+    }
 }
 
 
