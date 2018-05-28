@@ -12,11 +12,11 @@ PasarPelotaNet::~PasarPelotaNet()
 
 void PasarPelotaNet ::execute()
 {
-  //  if(!this->model->pelotaEnMovimiento())
-   // {
-    //    this->model->setPelotaEnMovimiento();
-   // }
-    //this->model->jugadorActivoPasaPelota();
+    if(!this->model->pelotaEnMovimiento())
+    {
+        this->model->setPelotaEnMovimiento();
+    }
+    this->model->jugadorActivoPasaPelota(this->getIdCliente());
 }
 
 char PasarPelotaNet ::getCodigoComando()

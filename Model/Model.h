@@ -59,7 +59,7 @@ public:
     void stopJugador(char codigoCliente);
     void acelerar(char codigoCliente);
     void cambiarDeJugador(char codigoCliente);
-    void pasarPelota(char codigoCliente);
+    void jugadorActivoPasaPelota(char codigoCliente);
 
     void agregarObservador(Util_LoggerObserver* obs);
     void notificarAObservadores(unsigned entidad, char evento, char tipo);

@@ -426,7 +426,7 @@ void Model::cambiarDeJugador(char codigoCliente)
     }
 }
 
-void Model:: pasarPelota(char codigoCliente)
+void Model:: jugadorActivoPasaPelota(char codigoCliente)
 {
   bool visitante = false;
     unsigned nroJugador = this->clientes[codigoCliente];
