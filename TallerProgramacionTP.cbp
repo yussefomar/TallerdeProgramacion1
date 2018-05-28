@@ -120,6 +120,8 @@
 		<Unit filename="Command/CommandNet/DisminuirVelocidadXNet.h" />
 		<Unit filename="Command/CommandNet/DisminuirVelocidadYNet.cpp" />
 		<Unit filename="Command/CommandNet/DisminuirVelocidadYNet.h" />
+		<Unit filename="Command/CommandNet/PasarPelotaNet.cpp" />
+		<Unit filename="Command/CommandNet/PasarPelotaNet.h" />
 		<Unit filename="Command/CommandNet/PatearPelotaNet.cpp" />
 		<Unit filename="Command/CommandNet/PatearPelotaNet.h" />
 		<Unit filename="Command/CommandNet/RecuperarPelotaNet.cpp" />
