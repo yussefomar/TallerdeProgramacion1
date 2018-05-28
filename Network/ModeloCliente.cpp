@@ -8,6 +8,7 @@
 #include "AcelerarNet.h"
 #include "DesacelerarNet.h"
 #include "PatearPelotaNet.h"
+#include "PasarPelotaNet.h"
 #include "RecuperarPelotaNet.h"
 #include "CommandNullNet.h"
 #include "DefinirComoVisit.h"
@@ -39,7 +40,7 @@ ModeloCliente::ModeloCliente(Model* model)
     this->comandos[PATPELO] = new PatearPelotaNet(model);
     this->comandos[RECUPELO] = new RecuperarPelotaNet(model);
     this->comandos[CAMBJUG] = new CambiarJugadorNet(model);
-    this->comandos[PASPELO] = new CommandNullNet(model);  //pasar pelota aun no esta creado en net
+    this->comandos[PASPELO] = new PasarPelotaNet(model);  //pasar pelota aun no esta creado en net
     this->comandos[COMMNULL]  = new CommandNullNet(model);
     this->comandos[DEFLOCAL] = new DefinirComoLocal(model);
     this->comandos[DEFVISIT] = new DefinirComoVisit(model);

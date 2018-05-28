@@ -428,7 +428,17 @@ void Model::cambiarDeJugador(char codigoCliente)
 
 void Model:: pasarPelota(char codigoCliente)
 {
-unsigned nroJugador = this->clientes[codigoCliente];
+  bool visitante = false;
+    unsigned nroJugador = this->clientes[codigoCliente];
+    Jugador* vecJugadores = new Jugador[CANTJUGADORES];
+    vecJugadores = &(this->jugadoresEnCancha[LOCALES]);
+    if (nroJugador > 6 )
+    {
+        vecJugadores = &(this->jugadoresEnCancha[VISITANTES]);
+        nroJugador=nroJugador-7;
+        visitante= true;
+
+    }
   unsigned i = nroJugador+1;
     if (i == CANTJUGADORES)
     {
@@ -437,7 +447,7 @@ unsigned nroJugador = this->clientes[codigoCliente];
     bool encontrado = false;
     while ((i != nroJugador) && !encontrado)
     {
-        if ((this->jugadoresLocales[i].collide(this->camara )) && (nroJugador!=i))
+        if ((vecJugadores[i].collide(this->camara )) && (nroJugador!=i))
         {
             encontrado = true;
         }
@@ -452,7 +462,7 @@ unsigned nroJugador = this->clientes[codigoCliente];
     }
     if (encontrado)
     {
-        this->jugadoresLocales[nroJugador].pasaPelota(&(this->pelota),&this->jugadoresLocales[i] );
+        vecJugadores[nroJugador].pasaPelota(&(this->pelota),&vecJugadores[i] );
         this->notificarAObservadores(nroJugador, PASPELO, MJU);
     }
 }

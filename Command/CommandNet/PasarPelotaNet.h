@@ -1,9 +1,10 @@
 #ifndef PASARPELOTANET_H
 #define PASARPELOTANET_H
 
-#include "CommandCtrl.h"
+#include "../CommandNet.h"
+#include "../Model/Model.h"
 
-class PasarPelotaNet : public CommandCtrl
+class PasarPelotaNet : public CommandNet
 {
 public:
     PasarPelotaNet(Model* model);

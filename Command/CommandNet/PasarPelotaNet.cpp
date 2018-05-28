@@ -1,7 +1,8 @@
 #include "PasarPelotaNet.h"
 
-PasarPelotaNet::PasarPelotaNet(Model *model) : CommandCtrl(model)
+PasarPelotaNet::PasarPelotaNet(Model *model) : CommandNet(model)
 {
+
 }
 
 PasarPelotaNet::~PasarPelotaNet()
@@ -11,11 +12,11 @@ PasarPelotaNet::~PasarPelotaNet()
 
 void PasarPelotaNet ::execute()
 {
-    if(!this->model->pelotaEnMovimiento())
-    {
-        this->model->setPelotaEnMovimiento();
-    }
-    this->model->jugadorActivoPasaPelota();
+  //  if(!this->model->pelotaEnMovimiento())
+   // {
+    //    this->model->setPelotaEnMovimiento();
+   // }
+    //this->model->jugadorActivoPasaPelota();
 }
 
 char PasarPelotaNet ::getCodigoComando()
