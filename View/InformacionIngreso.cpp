@@ -62,7 +62,7 @@ void InformacionIngreso::procesarRespuesta(char respuesta)
     //CREDENCIALES INCORRECTAS.
     if(respuesta == LI_CREDENCIALES_ERROR) {
         this->passwordIngresado = false;
-        this->mensaje = "Credenciales correctas.";
+        this->mensaje = "Credenciales incorrectas.";
         this->password = "";
         return;
     }

@@ -120,6 +120,11 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
     informacionIngreso.error = false;
     UpdateSalida(informacionIngreso.mensaje);
 
+    if(informacionIngreso.ipIngresado) UpdateInputPeticionPuerto("puerto:");
+    if(informacionIngreso.puertoIngresado) UpdateInputPeticionUsuario("nombre:");
+    if(informacionIngreso.nombreIngresado) UpdateInputPeticionPassword("password:");
+    if(informacionIngreso.passwordIngresado) UpdateInputPeticionEquipo("equipo 1 o 2:");
+
 		SDL_Event event;
         //While there's events to handle
         while( SDL_PollEvent( &event ) )
@@ -140,7 +145,6 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
                     if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
                     {
                          informacionIngreso.ipIngresado = true;
-                         UpdateInputPeticionPuerto("puerto:");
                     }
                 }
                 else if(!informacionIngreso.puertoIngresado)
@@ -157,7 +161,6 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
                     if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
                     {
                          informacionIngreso.puertoIngresado = true;
-                         UpdateInputPeticionUsuario("nombre:");
                     }
                 }
             }
@@ -175,7 +178,6 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
                 if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
                 {
                      informacionIngreso.nombreIngresado = true;
-                     UpdateInputPeticionPassword("password:");
                 }
             }
             else if( informacionIngreso.passwordIngresado == false )
@@ -192,7 +194,6 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
                 if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
                 {
                     informacionIngreso.passwordIngresado = true;
-                    UpdateInputPeticionEquipo("equipo 1 o 2:");
                 }
             }
             else if( informacionIngreso.equipoIngresado == false )
