@@ -120,113 +120,117 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
     informacionIngreso.error = false;
     UpdateSalida(informacionIngreso.mensaje);
 
-    if(informacionIngreso.ipIngresado) UpdateInputPeticionPuerto("puerto:");
-    if(informacionIngreso.puertoIngresado) UpdateInputPeticionUsuario("nombre:");
-    if(informacionIngreso.nombreIngresado) UpdateInputPeticionPassword("password:");
-    if(informacionIngreso.passwordIngresado) UpdateInputPeticionEquipo("equipo 1 o 2:");
+    if(informacionIngreso.ipIngresado)
+        UpdateInputPeticionPuerto("puerto:");
+    if(informacionIngreso.puertoIngresado)
+        UpdateInputPeticionUsuario("nombre:");
+    if(informacionIngreso.nombreIngresado)
+        UpdateInputPeticionPassword("password:");
+    if(informacionIngreso.passwordIngresado)
+        UpdateInputPeticionEquipo("equipo 1 o 2:");
 
-		SDL_Event event;
-        //While there's events to handle
-        while( SDL_PollEvent( &event ) )
+    SDL_Event event;
+    //While there's events to handle
+    while( SDL_PollEvent( &event ) )
+    {
+        if( informacionIngreso.ipIngresado == false || informacionIngreso.puertoIngresado == false )
         {
-            if( informacionIngreso.ipIngresado == false || informacionIngreso.puertoIngresado == false )
+            if(!informacionIngreso.ipIngresado)
             {
-                if(!informacionIngreso.ipIngresado)
+                temp = actualIp.str;
+                actualIp.handle_input( event );
+
+                if( actualIp.str != temp )
                 {
-                    temp = actualIp.str;
-                    actualIp.handle_input( event );
-
-                    if( actualIp.str != temp )
-                    {
-                        informacionIngreso.ip = actualIp.str;
-                        UpdateInputIp(actualIp.str);
-                    }
-
-                    if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
-                    {
-                         informacionIngreso.ipIngresado = true;
-                    }
-                }
-                else if(!informacionIngreso.puertoIngresado)
-                {
-                    temp = actualPuerto.str;
-                    actualPuerto.handle_input( event );
-
-                    if( actualPuerto.str != temp )
-                    {
-                        informacionIngreso.puerto = actualPuerto.str;
-                        UpdateInputPuerto(actualPuerto.str);
-                    }
-
-                    if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
-                    {
-                         informacionIngreso.puertoIngresado = true;
-                    }
-                }
-            }
-            else if( informacionIngreso.nombreIngresado == false )
-            {
-                temp = actualUsuario.str;
-                actualUsuario.handle_input( event );
-
-                if( actualUsuario.str != temp )
-                {
-                    informacionIngreso.nombre = actualUsuario.str;
-                    UpdateInputUsuario(actualUsuario.str);
+                    informacionIngreso.ip = actualIp.str;
+                    UpdateInputIp(actualIp.str);
                 }
 
                 if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
                 {
-                     informacionIngreso.nombreIngresado = true;
+                    informacionIngreso.ipIngresado = true;
                 }
             }
-            else if( informacionIngreso.passwordIngresado == false )
+            else if(!informacionIngreso.puertoIngresado)
             {
-                temp = actualPassword.str;
-                actualPassword.handle_input( event );
+                temp = actualPuerto.str;
+                actualPuerto.handle_input( event );
 
-                if( actualPassword.str != temp )
+                if( actualPuerto.str != temp )
                 {
-                    informacionIngreso.password = actualPassword.str;
-                    UpdateInputPassword(actualPassword.str);
+                    informacionIngreso.puerto = actualPuerto.str;
+                    UpdateInputPuerto(actualPuerto.str);
                 }
 
                 if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
                 {
-                    informacionIngreso.passwordIngresado = true;
+                    informacionIngreso.puertoIngresado = true;
                 }
             }
-            else if( informacionIngreso.equipoIngresado == false )
+        }
+        else if( informacionIngreso.nombreIngresado == false )
+        {
+            temp = actualUsuario.str;
+            actualUsuario.handle_input( event );
+
+            if( actualUsuario.str != temp )
             {
-                temp = actualTeam.str;
-                actualTeam.handle_input( event );
-
-                if( actualTeam.str != temp )
-                {
-                    informacionIngreso.equipo = actualTeam.str;;
-                    UpdateInputEquipo(actualTeam.str);
-                }
-
-                if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
-                {
-                    informacionIngreso.equipoIngresado = true;
-                }
+                informacionIngreso.nombre = actualUsuario.str;
+                UpdateInputUsuario(actualUsuario.str);
             }
 
-            if( event.type == SDL_QUIT )
+            if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
+            {
+                informacionIngreso.nombreIngresado = true;
+            }
+        }
+        else if( informacionIngreso.passwordIngresado == false )
+        {
+            temp = actualPassword.str;
+            actualPassword.handle_input( event );
+
+            if( actualPassword.str != temp )
+            {
+                informacionIngreso.password = actualPassword.str;
+                UpdateInputPassword(actualPassword.str);
+            }
+
+            if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
+            {
+                informacionIngreso.passwordIngresado = true;
+            }
+        }
+        else if( informacionIngreso.equipoIngresado == false )
+        {
+            temp = actualTeam.str;
+            actualTeam.handle_input( event );
+
+            if( actualTeam.str != temp )
+            {
+                informacionIngreso.equipo = actualTeam.str;;
+                UpdateInputEquipo(actualTeam.str);
+            }
+
+            if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
             {
                 informacionIngreso.equipoIngresado = true;
             }
         }
-        /*
-        //If the user has Xed out the window
+
         if( event.type == SDL_QUIT )
         {
-            informacionIngreso.error = true;
-            return informacionIngreso;
-        }*/
-      /**************************************/
-      Render();
+            informacionIngreso.equipoIngresado = true;
+        }
+    }
+    /*
+    //If the user has Xed out the window
+    if( event.type == SDL_QUIT )
+    {
+        informacionIngreso.error = true;
+        return informacionIngreso;
+    }*/
+    /**************************************/
+    Render();
 
     informacionIngreso.nombre = actualUsuario.str;
     informacionIngreso.password = actualPassword.str;
@@ -250,19 +254,19 @@ void Render()
     //Para el backgroundImage
     SDL_RenderCopy( renderer, backgroundTexture, NULL, &backgroundRect );
 
-	// Render our text objects ( like normal )
-	SDL_RenderCopy( renderer, bienvenidaTexture, nullptr, &bienvenidaRect );
-	SDL_RenderCopy( renderer, peticionUsuarioTexture, nullptr, &peticionUsuarioRect );
-	SDL_RenderCopy( renderer, peticionPasswordTexture, nullptr, &peticionPasswordRect );
-	SDL_RenderCopy( renderer, peticionEquipoTexture, nullptr, &peticionEquipoRect );
-	SDL_RenderCopy( renderer, peticionIpTexture, nullptr, &peticionIpRect );
-	SDL_RenderCopy( renderer, peticionPuertoTexture, nullptr, &peticionPuertoRect );
-	SDL_RenderCopy( renderer, ingresoUsuarioTexture, nullptr, &ingresoUsuarioRect );
-	SDL_RenderCopy( renderer, ingresoPasswordTexture, nullptr, &ingresoPasswordRect );
-	SDL_RenderCopy( renderer, ingresoEquipoTexture, nullptr, &ingresoEquipoRect );
-	SDL_RenderCopy( renderer, ingresoIpTexture, nullptr, &ingresoIpRect );
-	SDL_RenderCopy( renderer, ingresoPuertoTexture, nullptr, &ingresoPuertoRect );
-	SDL_RenderCopy( renderer, salidaTexture, nullptr, &salidaRect );
+    // Render our text objects ( like normal )
+    SDL_RenderCopy( renderer, bienvenidaTexture, nullptr, &bienvenidaRect );
+    SDL_RenderCopy( renderer, peticionUsuarioTexture, nullptr, &peticionUsuarioRect );
+    SDL_RenderCopy( renderer, peticionPasswordTexture, nullptr, &peticionPasswordRect );
+    SDL_RenderCopy( renderer, peticionEquipoTexture, nullptr, &peticionEquipoRect );
+    SDL_RenderCopy( renderer, peticionIpTexture, nullptr, &peticionIpRect );
+    SDL_RenderCopy( renderer, peticionPuertoTexture, nullptr, &peticionPuertoRect );
+    SDL_RenderCopy( renderer, ingresoUsuarioTexture, nullptr, &ingresoUsuarioRect );
+    SDL_RenderCopy( renderer, ingresoPasswordTexture, nullptr, &ingresoPasswordRect );
+    SDL_RenderCopy( renderer, ingresoEquipoTexture, nullptr, &ingresoEquipoRect );
+    SDL_RenderCopy( renderer, ingresoIpTexture, nullptr, &ingresoIpRect );
+    SDL_RenderCopy( renderer, ingresoPuertoTexture, nullptr, &ingresoPuertoRect );
+    SDL_RenderCopy( renderer, salidaTexture, nullptr, &salidaRect );
 
     // Render the changes above
     SDL_RenderPresent( renderer );
@@ -279,9 +283,9 @@ bool SetupTTF(const std::string &fontNamePeticion,const std::string &fontNameRes
         return false;
     }
 
-	// Load our fonts, with a huge size
-	fontPeticion = TTF_OpenFont( fontNamePeticion.c_str(), 25 );
-	fontRespuesta = TTF_OpenFont( fontNameRespuesta.c_str(), 20 );
+    // Load our fonts, with a huge size
+    fontPeticion = TTF_OpenFont( fontNamePeticion.c_str(), 25 );
+    fontRespuesta = TTF_OpenFont( fontNameRespuesta.c_str(), 20 );
 
     // Error check
     if ( fontPeticion == nullptr || fontRespuesta == nullptr )
@@ -295,101 +299,101 @@ bool SetupTTF(const std::string &fontNamePeticion,const std::string &fontNameRes
 
 void UpdateInputIp(std::string value)
 {
-	SDL_Surface* ingresoIp = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColor );
-	ingresoIpTexture = SurfaceToTexture( ingresoIp );
-	SDL_QueryTexture( ingresoIpTexture, NULL, NULL, &ingresoIpRect.w, &ingresoIpRect.h );
-	ingresoIpRect.x = 30;
-	ingresoIpRect.y = peticionIpRect.y + 25;
+    SDL_Surface* ingresoIp = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColor );
+    ingresoIpTexture = SurfaceToTexture( ingresoIp );
+    SDL_QueryTexture( ingresoIpTexture, NULL, NULL, &ingresoIpRect.w, &ingresoIpRect.h );
+    ingresoIpRect.x = 30;
+    ingresoIpRect.y = peticionIpRect.y + 25;
 }
 
 void UpdateInputPuerto(std::string value)
 {
-	SDL_Surface* ingresoPuerto = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColor );
-	ingresoPuertoTexture = SurfaceToTexture( ingresoPuerto );
-	SDL_QueryTexture( ingresoPuertoTexture, NULL, NULL, &ingresoPuertoRect.w, &ingresoPuertoRect.h );
-	ingresoPuertoRect.x = 30;
-	ingresoPuertoRect.y = peticionPuertoRect.y + 30;
+    SDL_Surface* ingresoPuerto = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColor );
+    ingresoPuertoTexture = SurfaceToTexture( ingresoPuerto );
+    SDL_QueryTexture( ingresoPuertoTexture, NULL, NULL, &ingresoPuertoRect.w, &ingresoPuertoRect.h );
+    ingresoPuertoRect.x = 30;
+    ingresoPuertoRect.y = peticionPuertoRect.y + 30;
 }
 
 void UpdateInputUsuario(std::string value)
 {
-	SDL_Surface* ingresoUsuario = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColor );
-	ingresoUsuarioTexture = SurfaceToTexture( ingresoUsuario );
-	SDL_QueryTexture( ingresoUsuarioTexture, NULL, NULL, &ingresoUsuarioRect.w, &ingresoUsuarioRect.h );
-	ingresoUsuarioRect.x = 30;
-	ingresoUsuarioRect.y = peticionUsuarioRect.y + 30;
+    SDL_Surface* ingresoUsuario = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColor );
+    ingresoUsuarioTexture = SurfaceToTexture( ingresoUsuario );
+    SDL_QueryTexture( ingresoUsuarioTexture, NULL, NULL, &ingresoUsuarioRect.w, &ingresoUsuarioRect.h );
+    ingresoUsuarioRect.x = 30;
+    ingresoUsuarioRect.y = peticionUsuarioRect.y + 30;
 }
 
 void UpdateInputPassword(std::string value)
 {
-	SDL_Surface* ingresoPassword = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColor );
-	ingresoPasswordTexture = SurfaceToTexture( ingresoPassword );
-	SDL_QueryTexture( ingresoPasswordTexture, NULL, NULL, &ingresoPasswordRect.w, &ingresoPasswordRect.h );
-	ingresoPasswordRect.x = 30;
-	ingresoPasswordRect.y = peticionPasswordRect.y + 30;
+    SDL_Surface* ingresoPassword = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColor );
+    ingresoPasswordTexture = SurfaceToTexture( ingresoPassword );
+    SDL_QueryTexture( ingresoPasswordTexture, NULL, NULL, &ingresoPasswordRect.w, &ingresoPasswordRect.h );
+    ingresoPasswordRect.x = 30;
+    ingresoPasswordRect.y = peticionPasswordRect.y + 30;
 }
 
 void UpdateInputEquipo(std::string value)
 {
-	SDL_Surface* ingresoEquipo = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColor );
-	ingresoEquipoTexture = SurfaceToTexture( ingresoEquipo );
-	SDL_QueryTexture( ingresoEquipoTexture, NULL, NULL, &ingresoEquipoRect.w, &ingresoEquipoRect.h );
-	ingresoEquipoRect.x = 30;
-	ingresoEquipoRect.y = peticionEquipoRect.y + 30;
+    SDL_Surface* ingresoEquipo = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColor );
+    ingresoEquipoTexture = SurfaceToTexture( ingresoEquipo );
+    SDL_QueryTexture( ingresoEquipoTexture, NULL, NULL, &ingresoEquipoRect.w, &ingresoEquipoRect.h );
+    ingresoEquipoRect.x = 30;
+    ingresoEquipoRect.y = peticionEquipoRect.y + 30;
 }
 
 void UpdateInputPeticionIp(std::string value)
 {
-	SDL_Surface* peticionIp = TTF_RenderText_Solid( fontPeticion, value.c_str(), textColor );
-	peticionIpTexture = SurfaceToTexture( peticionIp );
-	SDL_QueryTexture( peticionIpTexture, NULL, NULL, &peticionIpRect.w, &peticionIpRect.h );
-	peticionIpRect.x = 30;
-	peticionIpRect.y = bienvenidaRect.y + 50;
+    SDL_Surface* peticionIp = TTF_RenderText_Solid( fontPeticion, value.c_str(), textColor );
+    peticionIpTexture = SurfaceToTexture( peticionIp );
+    SDL_QueryTexture( peticionIpTexture, NULL, NULL, &peticionIpRect.w, &peticionIpRect.h );
+    peticionIpRect.x = 30;
+    peticionIpRect.y = bienvenidaRect.y + 50;
 }
 
 void UpdateInputPeticionPuerto(std::string value)
 {
-	SDL_Surface* peticionPuerto = TTF_RenderText_Solid( fontPeticion, value.c_str(), textColor );
-	peticionPuertoTexture = SurfaceToTexture( peticionPuerto );
-	SDL_QueryTexture( peticionPuertoTexture, NULL, NULL, &peticionPuertoRect.w, &peticionPuertoRect.h );
-	peticionPuertoRect.x = 30;
-	peticionPuertoRect.y = ingresoIpRect.y + 30;
+    SDL_Surface* peticionPuerto = TTF_RenderText_Solid( fontPeticion, value.c_str(), textColor );
+    peticionPuertoTexture = SurfaceToTexture( peticionPuerto );
+    SDL_QueryTexture( peticionPuertoTexture, NULL, NULL, &peticionPuertoRect.w, &peticionPuertoRect.h );
+    peticionPuertoRect.x = 30;
+    peticionPuertoRect.y = ingresoIpRect.y + 30;
 }
 
 void UpdateInputPeticionUsuario(std::string value)
 {
-	SDL_Surface* peticionUsuario = TTF_RenderText_Solid( fontPeticion, value.c_str(), textColor );
-	peticionUsuarioTexture = SurfaceToTexture( peticionUsuario );
-	SDL_QueryTexture( peticionUsuarioTexture, NULL, NULL, &peticionUsuarioRect.w, &peticionUsuarioRect.h );
-	peticionUsuarioRect.x = 30;
-	peticionUsuarioRect.y = ingresoPuertoRect.y + 30;
+    SDL_Surface* peticionUsuario = TTF_RenderText_Solid( fontPeticion, value.c_str(), textColor );
+    peticionUsuarioTexture = SurfaceToTexture( peticionUsuario );
+    SDL_QueryTexture( peticionUsuarioTexture, NULL, NULL, &peticionUsuarioRect.w, &peticionUsuarioRect.h );
+    peticionUsuarioRect.x = 30;
+    peticionUsuarioRect.y = ingresoPuertoRect.y + 30;
 }
 
 void UpdateInputPeticionPassword(std::string value)
 {
-	SDL_Surface* peticionPassword = TTF_RenderText_Solid( fontPeticion, value.c_str(), textColor );
-	peticionPasswordTexture = SurfaceToTexture( peticionPassword );
-	SDL_QueryTexture( peticionPasswordTexture, NULL, NULL, &peticionPasswordRect.w, &peticionPasswordRect.h );
-	peticionPasswordRect.x = 30;
-	peticionPasswordRect.y = ingresoUsuarioRect.y + 30;
+    SDL_Surface* peticionPassword = TTF_RenderText_Solid( fontPeticion, value.c_str(), textColor );
+    peticionPasswordTexture = SurfaceToTexture( peticionPassword );
+    SDL_QueryTexture( peticionPasswordTexture, NULL, NULL, &peticionPasswordRect.w, &peticionPasswordRect.h );
+    peticionPasswordRect.x = 30;
+    peticionPasswordRect.y = ingresoUsuarioRect.y + 30;
 }
 
 void UpdateInputPeticionEquipo(std::string value)
 {
-	SDL_Surface* peticionEquipo = TTF_RenderText_Solid( fontPeticion, value.c_str(), textColor );
-	peticionEquipoTexture = SurfaceToTexture( peticionEquipo );
-	SDL_QueryTexture( peticionEquipoTexture, NULL, NULL, &peticionEquipoRect.w, &peticionEquipoRect.h );
-	peticionEquipoRect.x = 30;
-	peticionEquipoRect.y = ingresoPasswordRect.y + 30;
+    SDL_Surface* peticionEquipo = TTF_RenderText_Solid( fontPeticion, value.c_str(), textColor );
+    peticionEquipoTexture = SurfaceToTexture( peticionEquipo );
+    SDL_QueryTexture( peticionEquipoTexture, NULL, NULL, &peticionEquipoRect.w, &peticionEquipoRect.h );
+    peticionEquipoRect.x = 30;
+    peticionEquipoRect.y = ingresoPasswordRect.y + 30;
 }
 
 void UpdateSalida(std::string value)
 {
-	SDL_Surface* salida = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColorMensaje );
-	salidaTexture = SurfaceToTexture( salida );
-	SDL_QueryTexture( salidaTexture, NULL, NULL, &salidaRect.w, &salidaRect.h );
-	salidaRect.x = 100;
-	salidaRect.y = ingresoEquipoRect.y + 30;
+    SDL_Surface* salida = TTF_RenderText_Solid( fontRespuesta, value.c_str(), textColorMensaje );
+    salidaTexture = SurfaceToTexture( salida );
+    SDL_QueryTexture( salidaTexture, NULL, NULL, &salidaRect.w, &salidaRect.h );
+    salidaRect.x = 100;
+    salidaRect.y = ingresoEquipoRect.y + 30;
 }
 
 void CreateTextTextures()
@@ -400,22 +404,22 @@ void CreateTextTextures()
     bienvenidaRect.x = 30;
     bienvenidaRect.y = 30;
 
-	UpdateInputPeticionIp("IP:");
-	UpdateInputIp("");
+    UpdateInputPeticionIp("IP:");
+    UpdateInputIp("");
 
-	UpdateInputPeticionPuerto("");
-	UpdateInputPuerto("");
+    UpdateInputPeticionPuerto("");
+    UpdateInputPuerto("");
 
-	UpdateInputPeticionUsuario("");
-	UpdateInputUsuario("");
+    UpdateInputPeticionUsuario("");
+    UpdateInputUsuario("");
 
-	UpdateInputPeticionPassword("");
-	UpdateInputPassword("");
+    UpdateInputPeticionPassword("");
+    UpdateInputPassword("");
 
-	UpdateInputPeticionEquipo("");
-	UpdateInputEquipo("");
+    UpdateInputPeticionEquipo("");
+    UpdateInputEquipo("");
 
-	UpdateSalida("");
+    UpdateSalida("");
 }
 
 // Convert an SDL_Surface to SDL_Texture. We've done this before, so I'll keep it short

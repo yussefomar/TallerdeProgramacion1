@@ -34,33 +34,38 @@ InformacionIngreso::~InformacionIngreso()
 void InformacionIngreso::procesarRespuesta(char respuesta)
 {
     //NOMBRE CORRECTO.
-    if(respuesta == LI_NOMBRE_OK) {
+    if(respuesta == LI_NOMBRE_OK)
+    {
         this->nombreIngresado = true;
         this->mensaje = "Nombre ingresado correctamente.";
         return;
     }
     //NOMBRE INCORRECTO.
-    if(respuesta == LI_NOMBRE_ERROR) {
+    if(respuesta == LI_NOMBRE_ERROR)
+    {
         this->nombreIngresado = false;
         this->mensaje = "Ese nombre no fue configurado, pruebe otro.";
         this->nombre = "";
         return;
     }
     //NOMBRE EXISTENTE.
-    if(respuesta == LI_NOMBRE_REPETIDO) {
+    if(respuesta == LI_NOMBRE_REPETIDO)
+    {
         this->nombreIngresado = false;
         this->mensaje = "Ese nombre ya pertenece a otro jugador, pruebe otro.";
         this->nombre = "";
         return;
     }
     //CREDENCIALES CORRECTAS.
-    if(respuesta == LI_CREDENCIALES_OK) {
+    if(respuesta == LI_CREDENCIALES_OK)
+    {
         this->passwordIngresado = true;
         this->mensaje = "Credenciales correctas.";
         return;
     }
     //CREDENCIALES INCORRECTAS.
-    if(respuesta == LI_CREDENCIALES_ERROR) {
+    if(respuesta == LI_CREDENCIALES_ERROR)
+    {
         this->passwordIngresado = false;
         this->mensaje = "Credenciales incorrectas.";
         this->password = "";
@@ -70,13 +75,16 @@ void InformacionIngreso::procesarRespuesta(char respuesta)
 
 void InformacionIngreso::procesarConectividad(bool respuesta)
 {
-    if(!respuesta){
+    if(!respuesta)
+    {
         this->ipIngresado = false;
         this->puertoIngresado = false;
         this->ip = "";
         this->puerto = "";
         this->mensaje = "Error al conectar con ese IP y PUERTO.";
-    }else{
+    }
+    else
+    {
         this->ipIngresado = true;
         this->puertoIngresado = true;
         this->mensaje = "Conectado con ese IP y PUERTO.";
@@ -85,7 +93,7 @@ void InformacionIngreso::procesarConectividad(bool respuesta)
 
 void InformacionIngreso::equipoErroneo()
 {
-        this->equipoIngresado = false;
-        this->mensaje = "No ha elegido un equipo valido";
-        this->equipo = "";
+    this->equipoIngresado = false;
+    this->mensaje = "No ha elegido un equipo valido";
+    this->equipo = "";
 }

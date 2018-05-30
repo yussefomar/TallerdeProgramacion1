@@ -107,12 +107,18 @@ void modoOnline()
     while( !informacionIngreso.equipoIngresado )
     {
         loguinScreen.Procesar(informacionIngreso);
-        if(informacionIngreso.equipoIngresado) {
-            if(informacionIngreso.equipo == "1") {
+        if(informacionIngreso.equipoIngresado)
+        {
+            if(informacionIngreso.equipo == "1")
+            {
                 modelCliente.setComoLocal();
-            }else if(informacionIngreso.equipo == "2") {
+            }
+            else if(informacionIngreso.equipo == "2")
+            {
                 modelCliente.setComoVisitante();
-            }else {
+            }
+            else
+            {
                 informacionIngreso.equipoErroneo();
             }
         }

@@ -405,17 +405,20 @@ void Model::cambiarDeJugador(char codigoCliente)
         {
             (vecJugadores[nroJugador]).desactivar();
             (vecJugadores[i]).activar();
-            if (visitante) {
+            if (visitante)
+            {
                 this->clientes[codigoCliente] = i + 7;
-            }else {
-               this->clientes[codigoCliente] = i;
+            }
+            else
+            {
+                this->clientes[codigoCliente] = i;
             }
 
             this->nroJugadorActivo = i;
             encontrado = true;
             this->notificarAObservadores(i, COMMNULL, MJU);
         }
-          if (!encontrado)
+        if (!encontrado)
         {
             i++;
         }
@@ -426,9 +429,9 @@ void Model::cambiarDeJugador(char codigoCliente)
     }
 }
 
-void Model:: jugadorActivoPasaPelota(char codigoCliente)
+void Model::pasarPelota(char codigoCliente)
 {
-  bool visitante = false;
+    //bool visitante = false;
     unsigned nroJugador = this->clientes[codigoCliente];
     Jugador* vecJugadores = new Jugador[CANTJUGADORES];
     vecJugadores = &(this->jugadoresEnCancha[LOCALES]);
@@ -436,10 +439,10 @@ void Model:: jugadorActivoPasaPelota(char codigoCliente)
     {
         vecJugadores = &(this->jugadoresEnCancha[VISITANTES]);
         nroJugador=nroJugador-7;
-        visitante= true;
+        //visitante= true;
 
     }
-  unsigned i = nroJugador+1;
+    unsigned i = nroJugador+1;
     if (i == CANTJUGADORES)
     {
         i= 0;
