@@ -12,7 +12,7 @@
 #include "CommandNull.h"
 #include "PasarPelota.h"
 
-#define CANTCOMMANDS 14
+#define CANTCOMMANDS 15
 
 Controller::Controller(Model* model)
 {
@@ -32,6 +32,7 @@ Controller::Controller(Model* model)
     this->commands[PASPELO] = new PasarPelota(model);
     this->commands[DEFLOCAL] = new CommandNull(model); //para que no se rompa nada
     this->commands[DEFVISIT] = new CommandNull(model); //por si las dudas.
+    this->commands[DESCJUG] = new CommandNull(model);
 
     this->quit = false;
 }

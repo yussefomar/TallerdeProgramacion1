@@ -126,3 +126,69 @@ char SocketCliente::recibirIdCliente()
 {
     return this->recibirByte();
 }
+
+void SocketCliente::reconectar(std::string ip, std::string puerto)
+{
+    shutdown(this->socketFD, SHUT_RDWR);
+    close(this->socketFD);
+
+    struct addrinfo hints;
+    struct addrinfo *posibilidades, *iterador;
+    int resultado = 0;
+    int posibleSocketFD = 0;
+
+    memset(&hints, 0, sizeof(struct addrinfo));
+    hints.ai_family = AF_INET; /* IP v4*/
+    hints.ai_socktype = SOCK_STREAM; /* Protocolo TCP */
+    hints.ai_flags = 0;
+
+    resultado = getaddrinfo(ip.c_str(), puerto.c_str(), &hints, &posibilidades);
+
+    /*Pasar esto a un tipo de enunciado de error en logg del cliente*/
+    if (resultado != 0)
+    {
+        std::cerr << "ERROR EN ADDRINFO: " << gai_strerror(resultado) << std::endl;
+        return;
+    }
+
+    iterador = posibilidades;
+    bool direccionValida = false;
+    while (iterador != NULL && !direccionValida)
+    {
+        posibleSocketFD = socket(iterador->ai_family,
+                                 iterador->ai_socktype,
+                                 iterador->ai_protocol);
+        if (posibleSocketFD != -1)
+        {
+            direccionValida = true;
+            std::cout << "direccion valida" << std::endl;
+        }
+        else
+        {
+            iterador = iterador->ai_next;
+
+        }
+    }
+
+    if (!direccionValida)
+    {
+        std::cerr << "NO SE OBTUVIERON DIRECCIONES VALIDAS" << std::endl;
+    }
+
+    this->socketConectado = connect(posibleSocketFD,
+                                    iterador->ai_addr,
+                                    iterador->ai_addrlen) != -1;
+
+    if(this->socketConectado)
+    {
+        this->socketFD = posibleSocketFD;
+
+    }
+    else
+    {
+        std::cerr << "NO SE PUDO CONECTAR" << std::endl;
+        close(posibleSocketFD);
+    }
+
+    freeaddrinfo(posibilidades);
+}

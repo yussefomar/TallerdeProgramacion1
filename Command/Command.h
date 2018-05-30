@@ -20,6 +20,7 @@ como para net*/
 #define PASPELO 0x0B
 #define DEFLOCAL 0x0C
 #define DEFVISIT 0x0D //cuidado con estos dos ultimos comandos.
+#define DESCJUG 0x0E
 
 class Command
 {

@@ -502,19 +502,44 @@ void Model::setTodosJugadoresInactivos()
 
 void Model::definirComoLocal(char codigoCliente)
 {
-    this->cantidadLocales += 1;
-    this->clientes[codigoCliente] = this->cantidadLocales;
+    if(this->cantidadLocales + 1 > 3) {
+        this->definirComoVisitante(codigoCliente);
+    }
+    int i = this->cantidadLocales;
+    bool encontreJugadorLibre = false;
+    while (!encontreJugadorLibre) {
+        ++i;
+        encontreJugadorLibre = !this->jugadoresEnCancha[i].estaActivo();
+    }
+    this->clientes[codigoCliente] = i;
     this->jugadoresEnCancha[this->clientes[codigoCliente]].activar();
+
+    this->cantidadLocales += 1;
     this->notificarAObservadores(this->cantidadLocales, DEFLOCAL, MSJ);
 }
 
 void Model::definirComoVisitante(char codigoCliente)
 {
-    this->cantidadVisitantes += 1;
-    this->clientes[codigoCliente] = this->cantidadVisitantes + 6;
+    if(this->cantidadVisitantes + 1 > 3) {
+        this->definirComoLocal(codigoCliente);
+    }
+    int i = this->cantidadVisitantes + 7;
+    bool encontreJugadorLibre = false;
+    while (!encontreJugadorLibre) {
+        ++i;
+        encontreJugadorLibre = !this->jugadoresEnCancha[i].estaActivo();
+    }
+    this->clientes[codigoCliente] = i;
     this->jugadoresEnCancha[this->clientes[codigoCliente]].activar();
+
+    this->cantidadVisitantes += 1;
+
     this->notificarAObservadores(this->cantidadVisitantes, DEFVISIT, MSJ);
 
+}
+
+void Model::desconectarCliente(char codigoCliente) {
+    this->jugadoresEnCancha[this->clientes[codigoCliente]].desactivar();
 }
 
 

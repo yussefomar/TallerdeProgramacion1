@@ -51,6 +51,10 @@ public:
 
     void consultarInicio();
     void recibirRespuestaInicio();
+    bool habilitadoParaJugar();
+    void intentarReconexion();
+    void actualizar();
+    void tomarUnJugadorLibre();
 
 
 protected:
@@ -62,6 +66,12 @@ private:
     SocketCliente* socket;
     unsigned tareaAEjecutar;
     char idCliente;
+    char nombre;
+    char password;
+    std::string ip;
+    std::string puerto;
+    char lugarEnCancha;
+
 };
 
 #endif // MODELOCLIENTE_H

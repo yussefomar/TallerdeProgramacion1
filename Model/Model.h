@@ -75,6 +75,7 @@ public:
     void setTodosJugadoresInactivos();
     void definirComoLocal(char codigoCliente);
     void definirComoVisitante(char codigoCliente);
+    void desconectarCliente(char codigoCliente);
 
 
 protected:

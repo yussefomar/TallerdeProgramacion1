@@ -116,6 +116,8 @@
 		<Unit filename="Command/CommandNet/DefinirComoVisit.h" />
 		<Unit filename="Command/CommandNet/DesacelerarNet.cpp" />
 		<Unit filename="Command/CommandNet/DesacelerarNet.h" />
+		<Unit filename="Command/CommandNet/DesconexionAjena.cpp" />
+		<Unit filename="Command/CommandNet/DesconexionAjena.h" />
 		<Unit filename="Command/CommandNet/DisminuirVelocidadXNet.cpp" />
 		<Unit filename="Command/CommandNet/DisminuirVelocidadXNet.h" />
 		<Unit filename="Command/CommandNet/DisminuirVelocidadYNet.cpp" />

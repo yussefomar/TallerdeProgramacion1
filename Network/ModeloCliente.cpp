@@ -13,6 +13,9 @@
 #include "CommandNullNet.h"
 #include "DefinirComoVisit.h"
 #include "DefinirComoLocal.h"
+#include "DesconexionAjena.h"
+
+#include <unistd.h>
 
 #define CANTCOMMANDSNET 14
 #define ENTIDAD 0
@@ -45,6 +48,7 @@ ModeloCliente::ModeloCliente(Model* model)
     this->comandos[COMMNULL]  = new CommandNullNet(model);
     this->comandos[DEFLOCAL] = new DefinirComoLocal(model);
     this->comandos[DEFVISIT] = new DefinirComoVisit(model);
+    this->comandos[DESCJUG] = new DesconexionAjena(model);
     this->tareaAEjecutar = 0;
 
     this->socket = nullptr;
@@ -65,11 +69,13 @@ ModeloCliente::~ModeloCliente()
 
 void ModeloCliente::conectarConServer(std::string ipServer, std::string puertoServer)
 {
+    this->ip = ipServer;
+    this->puerto = puertoServer;
     this->socket = new SocketCliente(ipServer, puertoServer);
     this->idCliente = this->socket->recibirIdCliente();
     this->model->setIdCliente(this->idCliente);
     this->model->setTodosJugadoresInactivos();
-    std::cout << "El cliente se identifica con el nro: " << this->model->getIdCliente() << std::endl;
+    std::cout << "El cliente se identifica " << this->model->getIdCliente() << std::endl;
 }
 
 /*El modelo cliente puede devolver datos que son necesarios*/
@@ -162,6 +168,10 @@ void ModeloCliente::cambiarJugadorActivo()
 
 void ModeloCliente::update()
 {
+    if(!this->conectadoAlServer())
+    {
+        this->intentarReconexion();
+    }
     this->tareaAEjecutar = this->tareaAEjecutar % 3;
     if(this->tareaAEjecutar == ENVIAR)
     {
@@ -222,25 +232,14 @@ void ModeloCliente::ejecutarUnComando()
     this->model->update();
 }
 
-//void ModeloCliente::enviarMensajeLogin(char mensaje)
-//{
-//    this->socket->enviarByte(mensaje);
-//    return;
-//}
-//
-//char ModeloCliente::recibirMensajeLogin()
-//{
-//    char byte;
-//    byte = this->socket->recibirByte();
-//    return byte;
-//}
-
 void ModeloCliente::setComoLocal()
 {
     char entidad = this->model->getIdCliente();
     entidad = entidad << 6;
     char codigo = DEFLOCAL | entidad;
+    this->lugarEnCancha = codigo;
     this->codigosAEnviar.push(codigo);
+    this->lugarEnCancha = '1';
 }
 
 void ModeloCliente::setComoVisitante()
@@ -248,7 +247,9 @@ void ModeloCliente::setComoVisitante()
     char entidad = this->model->getIdCliente();
     entidad = entidad << 6;
     char codigo = DEFVISIT | entidad;
+    this->lugarEnCancha = codigo;
     this->codigosAEnviar.push(codigo);
+    this->lugarEnCancha = '2';
 }
 
 bool ModeloCliente::conectadoAlServer()
@@ -260,11 +261,7 @@ char ModeloCliente::hashear(std::string unString)
 {
     char code = 0X00;
     char caracter = 0X00;
-    /*for(unsigned i = 0; i < unString.size(); ++i)
-    {
-        caracter = unString[i];
-        code = code | caracter << 1;
-    }*/
+
     int hasha = 7;
     for(unsigned i = 0; i < unString.size(); ++i)
     {
@@ -278,11 +275,13 @@ char ModeloCliente::hashear(std::string unString)
 void ModeloCliente::enviarNombre(std::string nombre)
 {
     char nombreComprimido = this->hashear(nombre);
+    this->nombre = nombreComprimido;
     this->socket->enviarByte(nombreComprimido);
 }
 void ModeloCliente::enviarPassword(std::string password)
 {
     char passwordComprimido = this->hashear(password);
+    this->password = passwordComprimido;
     this->socket->enviarByte(passwordComprimido);
 }
 char ModeloCliente::recibirValidacionNombre()
@@ -301,9 +300,43 @@ void ModeloCliente::consultarInicio()
 
 void ModeloCliente::recibirRespuestaInicio()
 {
-    //bool inicio = false;
-    char respuesta = this->socket->recibirByte();
-//    if(respuesta == LI_INICIO_OK)
-//        inicio = true;
-//    return inicio;
+    char respuesta = this->socket->recibirByte(); // con esto determinamos si es un rechazado o un aceptado...
+    if(respuesta != LI_INICIO_OK) {
+
+        this->idCliente = 5;
+    }
+
 }
+
+bool ModeloCliente::habilitadoParaJugar()
+{
+    unsigned nroId = this->idCliente;
+
+    return nroId > 4; //los rechazados siempre tienen un valor mayor a 5;
+}
+
+void ModeloCliente::intentarReconexion()
+{
+    this->model->desconectarCliente(this->idCliente);
+    while(!this->socket->estaConectado())
+    {
+        this->socket->reconectar(this->ip, this->puerto);
+        usleep(1000);
+    }
+    std::cout << "se conecto" << std::endl;
+    //Proceso de verificacion de identidad
+    this->socket->enviarByte(this->nombre);
+    this->idCliente = this->socket->recibirByte();
+    this->socket->enviarByte(this->password);
+    this->idCliente = this->socket->recibirByte();
+    //en lugar de enviar una validacion se envia el id del cliente que no deberia cambiar.
+    this->idCliente = this->socket->recibirByte();
+    //this->actualizar();
+    if(this->lugarEnCancha == '1') {
+        this->setComoLocal();
+    } else {
+        this->setComoVisitante();
+    }
+
+}
+

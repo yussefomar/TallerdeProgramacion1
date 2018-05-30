@@ -76,6 +76,8 @@ void modoOnline()
         {
             modelCliente.conectarConServer(informacionIngreso.ip, informacionIngreso.puerto);
             informacionIngreso.procesarConectividad(modelCliente.conectadoAlServer());
+            //informacionIngreso.procesarConectividad(modelCliente.habilitadoParaJugar()) //aca,el cliente ya puede saber si la partida estaba llena o no.
+            //anunciar esto y salir de la partida.
             //===========================================================================
             //informacionIngreso.procesarConectividad(false);
             //===========================================================================
@@ -139,7 +141,8 @@ void modoOnline()
     }
 
     informacionIngreso.mensaje = "A la espera de que todos los jugadores se conecten.";
-    modelCliente.recibirRespuestaInicio();
+    modelCliente.recibirRespuestaInicio(); //Determinar aca si es un rechazado o no
+    //if(!modelCliente.habilitadoParaJugar()) return; //...
     informacionIngreso.mensaje = "Comenzamos";
 
     loguinScreen.Cerrar();
@@ -157,7 +160,7 @@ void modoOnline()
     long double tiempoPrevio = clock();
     long double lag = 0.0;
 
-    while( !controller.quitPressed() )
+    while( !controller.quitPressed())
     {
         tiempoActual = clock();
         lapsoDeTiempo = (tiempoActual - tiempoPrevio) / (CLOCKS_PER_SEC / 1000);
