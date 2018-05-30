@@ -104,6 +104,7 @@ void View_Loguin::Cerrar()
 void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
 {
     std::string temp = "";
+    bool quit = false;
     //Creamos los manejadores para cada ingreso.
     StringInput actualUsuario(informacionIngreso.nombre);
     StringInput actualPassword(informacionIngreso.password);
@@ -124,7 +125,8 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
     if(informacionIngreso.puertoIngresado) UpdateInputPeticionUsuario("nombre:");
     if(informacionIngreso.nombreIngresado) UpdateInputPeticionPassword("password:");
     if(informacionIngreso.passwordIngresado) UpdateInputPeticionEquipo("equipo 1 o 2:");
-
+    while(!quit)
+    {
 		SDL_Event event;
         //While there's events to handle
         while( SDL_PollEvent( &event ) )
@@ -145,6 +147,8 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
                     if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
                     {
                          informacionIngreso.ipIngresado = true;
+                         UpdateInputPeticionPuerto("puerto:");
+                         quit = true;
                     }
                 }
                 else if(!informacionIngreso.puertoIngresado)
@@ -161,6 +165,8 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
                     if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
                     {
                          informacionIngreso.puertoIngresado = true;
+                         UpdateInputPeticionUsuario("nombre:");
+                         quit = true;
                     }
                 }
             }
@@ -178,6 +184,8 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
                 if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
                 {
                      informacionIngreso.nombreIngresado = true;
+                     UpdateInputPeticionPassword("password:");
+                     quit = true;
                 }
             }
             else if( informacionIngreso.passwordIngresado == false )
@@ -194,6 +202,8 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
                 if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
                 {
                     informacionIngreso.passwordIngresado = true;
+                    UpdateInputPeticionEquipo("equipo 1 o 2:");
+                    quit = true;
                 }
             }
             else if( informacionIngreso.equipoIngresado == false )
@@ -210,6 +220,7 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
                 if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )
                 {
                     informacionIngreso.equipoIngresado = true;
+                    quit = true;
                 }
             }
 
@@ -227,12 +238,12 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
         }*/
       /**************************************/
       Render();
-
-    informacionIngreso.nombre = actualUsuario.str;
-    informacionIngreso.password = actualPassword.str;
-    informacionIngreso.equipo = actualTeam.str;
-    informacionIngreso.ip = actualIp.str;
-    informacionIngreso.puerto = actualPuerto.str;
+        informacionIngreso.nombre = actualUsuario.str;
+        informacionIngreso.password = actualPassword.str;
+        informacionIngreso.equipo = actualTeam.str;
+        informacionIngreso.ip = actualIp.str;
+        informacionIngreso.puerto = actualPuerto.str;
+    }
 }
 
 
