@@ -303,6 +303,7 @@ bool ModeloCliente::recibirRespuestaInicio()
 {
     bool inicio = false;
     char respuesta = this->socket->recibirByte();
-    if(respuesta == LI_INICIO_OK) inicio = true;
+    if(respuesta == LI_INICIO_OK)
+        inicio = true;
     return inicio;
 }

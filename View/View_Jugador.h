@@ -16,7 +16,7 @@
 #define MAXFRAMEPATEPELO 36
 #define MAXSPRITEUTILIZADO 9
 #define DESACTIVARRETARDO 0
-#define TIEMPORETARDO 200
+#define TIEMPORETARDO 1000
 
 class View_Jugador : public Util_LoggerSubject
 {

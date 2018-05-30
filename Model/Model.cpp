@@ -184,6 +184,7 @@ void Model::setCasaca(std::string casacaName)
         for(int i = 0; i < CANTJUGADORES; ++i)
         {
             this->jugadoresLocales[i].setCasacaAlternativa();
+            this->notificarAObservadores(i, COMMNULL, MJU);
         }
     }
     else
@@ -405,17 +406,20 @@ void Model::cambiarDeJugador(char codigoCliente)
         {
             (vecJugadores[nroJugador]).desactivar();
             (vecJugadores[i]).activar();
-            if (visitante) {
+            if (visitante)
+            {
                 this->clientes[codigoCliente] = i + 7;
-            }else {
-               this->clientes[codigoCliente] = i;
+            }
+            else
+            {
+                this->clientes[codigoCliente] = i;
             }
 
             this->nroJugadorActivo = i;
             encontrado = true;
             this->notificarAObservadores(i, COMMNULL, MJU);
         }
-          if (!encontrado)
+        if (!encontrado)
         {
             i++;
         }
@@ -426,9 +430,9 @@ void Model::cambiarDeJugador(char codigoCliente)
     }
 }
 
-void Model:: jugadorActivoPasaPelota(char codigoCliente)
+void Model::pasarPelota(char codigoCliente)
 {
-  bool visitante = false;
+    //bool visitante = false;
     unsigned nroJugador = this->clientes[codigoCliente];
     Jugador* vecJugadores = new Jugador[CANTJUGADORES];
     vecJugadores = &(this->jugadoresEnCancha[LOCALES]);
@@ -436,10 +440,10 @@ void Model:: jugadorActivoPasaPelota(char codigoCliente)
     {
         vecJugadores = &(this->jugadoresEnCancha[VISITANTES]);
         nroJugador=nroJugador-7;
-        visitante= true;
+        //visitante= true;
 
     }
-  unsigned i = nroJugador+1;
+    unsigned i = nroJugador+1;
     if (i == CANTJUGADORES)
     {
         i= 0;
@@ -492,6 +496,7 @@ void Model::setTodosJugadoresInactivos()
     for(unsigned i = 0; i < CANTJUGADORESTOTALES; ++i)
     {
         this->jugadoresEnCancha[i].desactivar();
+        this->notificarAObservadores(i, COMMNULL, MJU);
     }
 }
 
@@ -500,6 +505,7 @@ void Model::definirComoLocal(char codigoCliente)
     this->cantidadLocales += 1;
     this->clientes[codigoCliente] = this->cantidadLocales;
     this->jugadoresEnCancha[this->clientes[codigoCliente]].activar();
+    this->notificarAObservadores(this->cantidadLocales, DEFLOCAL, MSJ);
 }
 
 void Model::definirComoVisitante(char codigoCliente)
@@ -507,6 +513,7 @@ void Model::definirComoVisitante(char codigoCliente)
     this->cantidadVisitantes += 1;
     this->clientes[codigoCliente] = this->cantidadVisitantes + 6;
     this->jugadoresEnCancha[this->clientes[codigoCliente]].activar();
+    this->notificarAObservadores(this->cantidadVisitantes, DEFVISIT, MSJ);
 
 }
 

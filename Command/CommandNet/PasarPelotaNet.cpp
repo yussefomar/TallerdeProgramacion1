@@ -16,7 +16,7 @@ void PasarPelotaNet ::execute()
     {
         this->model->setPelotaEnMovimiento();
     }
-    this->model->jugadorActivoPasaPelota(this->getIdCliente());
+    this->model->pasarPelota(this->getIdCliente());
 }
 
 char PasarPelotaNet ::getCodigoComando()

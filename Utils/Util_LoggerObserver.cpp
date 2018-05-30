@@ -124,5 +124,9 @@ std::string transformarEvento(char evento)
         return "RecuperarPelotaNet";
     if(evento == COMMNULL)
         return "CommandNullNet";
+    if(evento == DEFLOCAL)
+        return "DefinirLocalNet";
+    if(evento == DEFVISIT)
+        return "DefinirVisitanteNet";
     return std::to_string(evento);
 }
