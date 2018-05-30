@@ -18,12 +18,8 @@ void modoOnline();
 
 int main(int argc, char* args[])
 {
-
-
-
     try
     {
-
         //View_Ventanas ventana;
         //ventana.conectado();
         //ventana.desconectado();
@@ -85,20 +81,25 @@ void modoOnline()
             //===========================================================================
         }
     }
-
+    std::cout << "llegamos a la ip, vamos por el nombre" << std::endl;
     while( !informacionIngreso.nombreIngresado )
     {
+                    std::cout << "entramos en w del nombre" << std::endl;
+
         loguinScreen.Procesar(informacionIngreso);
         if(informacionIngreso.nombreIngresado)
         {
             modelCliente.enviarNombre(informacionIngreso.nombre);
             respuesta = modelCliente.recibirValidacionNombre();
             informacionIngreso.procesarRespuesta(respuesta);
+            std::cout << "entramos en if del nombre" << std::endl;
+
             //===========================================================================
             //informacionIngreso.procesarRespuesta(0X0B);
             //===========================================================================
         }
     }
+    std::cout << "llegamos al nombre, vamos por pass" << std::endl;
 
     while( !informacionIngreso.passwordIngresado )
     {
@@ -108,11 +109,14 @@ void modoOnline()
             modelCliente.enviarPassword(informacionIngreso.password);
             respuesta = modelCliente.recibirValidacionPassword();
             informacionIngreso.procesarRespuesta(respuesta);
+            std::cout << "entramos en if del pass" << std::endl;
+
             //===========================================================================
             //informacionIngreso.procesarRespuesta(0X0F);
             //===========================================================================
         }
     }
+    std::cout << "llegamos al pass, vamos por equipo" << std::endl;
 
     while( !informacionIngreso.equipoIngresado )
     {
@@ -134,14 +138,9 @@ void modoOnline()
         }
     }
 
-    /**CORROBORAR SI ESTO VA BIEN PARA HACER LA ESPERA MIENTRAS SE CONECTAN TODOS.**/
-//    informacionIngreso.mensaje = "A la espera de que todos los jugadores se conecten.";
-//    while(informacionIngreso.espera)
-//    {
-//        loguinScreen.Procesar(informacionIngreso);
-//        modelCliente.consultarInicio();
-//        informacionIngreso.espera = !modelCliente.recibirRespuestaInicio();
-//    }
+    informacionIngreso.mensaje = "A la espera de que todos los jugadores se conecten.";
+    modelCliente.recibirRespuestaInicio();
+    informacionIngreso.mensaje = "Comenzamos";
 
     loguinScreen.Cerrar();
 

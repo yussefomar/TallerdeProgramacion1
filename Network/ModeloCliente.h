@@ -50,7 +50,7 @@ public:
     char hashear(std::string unString);
 
     void consultarInicio();
-    bool recibirRespuestaInicio();
+    void recibirRespuestaInicio();
 
 
 protected:

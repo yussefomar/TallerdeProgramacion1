@@ -299,11 +299,11 @@ void ModeloCliente::consultarInicio()
     this->socket->enviarByte(LI_CONSULTO_INICIO);
 }
 
-bool ModeloCliente::recibirRespuestaInicio()
+void ModeloCliente::recibirRespuestaInicio()
 {
-    bool inicio = false;
+    //bool inicio = false;
     char respuesta = this->socket->recibirByte();
-    if(respuesta == LI_INICIO_OK)
-        inicio = true;
-    return inicio;
+//    if(respuesta == LI_INICIO_OK)
+//        inicio = true;
+//    return inicio;
 }
