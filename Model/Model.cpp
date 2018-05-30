@@ -184,6 +184,7 @@ void Model::setCasaca(std::string casacaName)
         for(int i = 0; i < CANTJUGADORES; ++i)
         {
             this->jugadoresLocales[i].setCasacaAlternativa();
+            this->notificarAObservadores(i, COMMNULL, MJU);
         }
     }
     else
@@ -495,6 +496,7 @@ void Model::setTodosJugadoresInactivos()
     for(unsigned i = 0; i < CANTJUGADORESTOTALES; ++i)
     {
         this->jugadoresEnCancha[i].desactivar();
+        this->notificarAObservadores(i, COMMNULL, MJU);
     }
 }
 
@@ -503,6 +505,7 @@ void Model::definirComoLocal(char codigoCliente)
     this->cantidadLocales += 1;
     this->clientes[codigoCliente] = this->cantidadLocales;
     this->jugadoresEnCancha[this->clientes[codigoCliente]].activar();
+    this->notificarAObservadores(this->cantidadLocales, DEFLOCAL, MSJ);
 }
 
 void Model::definirComoVisitante(char codigoCliente)
@@ -510,6 +513,7 @@ void Model::definirComoVisitante(char codigoCliente)
     this->cantidadVisitantes += 1;
     this->clientes[codigoCliente] = this->cantidadVisitantes + 6;
     this->jugadoresEnCancha[this->clientes[codigoCliente]].activar();
+    this->notificarAObservadores(this->cantidadVisitantes, DEFVISIT, MSJ);
 
 }
 
