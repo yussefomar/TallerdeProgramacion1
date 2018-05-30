@@ -49,6 +49,9 @@ public:
     char recibirValidacionPassword();
     char hashear(std::string unString);
 
+    void consultarInicio();
+    bool recibirRespuestaInicio();
+
 
 protected:
 

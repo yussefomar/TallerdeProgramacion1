@@ -118,6 +118,13 @@ void modoOnline()
         }
     }
 
+    /**CORROBORAR SI ESTO VA BIEN PARA HACER LA ESPERA MIENTRAS SE CONECTAN TODOS.**/
+//    while(informacionIngreso.espera)
+//    {
+//        modelCliente.consultarInicio();
+//        informacionIngreso.espera = !modelCliente.recibirRespuestaInicio();
+//    }
+
     loguinScreen.Cerrar();
 
     View view(&model);

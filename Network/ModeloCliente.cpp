@@ -22,7 +22,8 @@
 #define RECIBIR 1
 #define EJECUTAR 2
 
-
+#define LI_CONSULTO_INICIO 0X11
+#define LI_INICIO_OK 0X12
 
 /*Cuidado... la cantidad de comandos en modelCliente puede y
 va a diferir del de controller*/
@@ -291,4 +292,17 @@ char ModeloCliente::recibirValidacionNombre()
 char ModeloCliente::recibirValidacionPassword()
 {
     return this->socket->recibirByte();
+}
+
+void ModeloCliente::consultarInicio()
+{
+    this->socket->enviarByte(LI_CONSULTO_INICIO);
+}
+
+bool ModeloCliente::recibirRespuestaInicio()
+{
+    bool inicio = false;
+    char respuesta = this->socket->recibirByte();
+    if(respuesta == LI_INICIO_OK) inicio = true;
+    return inicio;
 }
