@@ -119,8 +119,10 @@ void modoOnline()
     }
 
     /**CORROBORAR SI ESTO VA BIEN PARA HACER LA ESPERA MIENTRAS SE CONECTAN TODOS.**/
+//    informacionIngreso.mensaje = "A la espera de que todos los jugadores se conecten.";
 //    while(informacionIngreso.espera)
 //    {
+//        loguinScreen.Procesar(informacionIngreso);
 //        modelCliente.consultarInicio();
 //        informacionIngreso.espera = !modelCliente.recibirRespuestaInicio();
 //    }
