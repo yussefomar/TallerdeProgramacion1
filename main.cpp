@@ -9,6 +9,7 @@
 #include "View/View.h"
 #include "View/View_Loguin.h"
 #include "Utils/Util_Configuracion.h"
+#include "View/View_Ventanas.h"
 
 Util_Common common; //Porque importa esta variable global
 
@@ -17,8 +18,17 @@ void modoOnline();
 
 int main(int argc, char* args[])
 {
+
+
+
     try
     {
+
+        //View_Ventanas ventana;
+        //ventana.conectado();
+        //ventana.desconectado();
+        //ventana.enEspera();
+
         modoOnline();
         //modoOffline();
         return 0;
@@ -163,6 +173,8 @@ void modoOnline()
 
 void modoOffline()
 {
+
+
     // Hacemos un backup del log de la ejecucion anterior.
     common.backupFile();
     // Hacemos un log de la ejecucion anterior.
