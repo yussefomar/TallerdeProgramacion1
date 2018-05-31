@@ -76,6 +76,8 @@ public:
     void definirComoLocal(char codigoCliente);
     void definirComoVisitante(char codigoCliente);
     void desconectarCliente(char codigoCliente);
+    void habilitarRender();
+    bool necesitaRenderizar();
 
 
 protected:
@@ -97,6 +99,7 @@ private:
     char idCliente;
     unsigned cantidadLocales;
     unsigned cantidadVisitantes;
+    bool renderizar;
 
 };
 

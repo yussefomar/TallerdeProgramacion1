@@ -21,6 +21,9 @@ como para net*/
 #define DEFLOCAL 0x0C
 #define DEFVISIT 0x0D //cuidado con estos dos ultimos comandos.
 #define DESCJUG 0x0E
+#define NECRENDER 0X0F
+
+#define CANTCOMMANDS 16
 
 class Command
 {

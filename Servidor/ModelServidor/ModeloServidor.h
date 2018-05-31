@@ -26,6 +26,7 @@ public:
     void setClientesPermitidos(unsigned cantidadMaxClientes);
     void setIpYPuerto(std::string ip, std::string puerto);
     void enviarOKInicio();
+    void enviarARenderizar();
 
 protected:
 

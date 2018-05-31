@@ -35,7 +35,13 @@ int main(int argc, char* args[])
         lag += lapsoDeTiempo;
 
         modeloServidor.recibirMensajes();
-        modeloServidor.enviarMensajes();
+        while (lag >= MSPORUPDATE)
+        {
+            modeloServidor.enviarMensajes();
+            modeloServidor.recibirMensajes();
+            lag -= MSPORUPDATE;
+        }
+        modeloServidor.enviarARenderizar();
         std::cout << "ciclo nro: " << i << std::endl;
         ++i;
     }

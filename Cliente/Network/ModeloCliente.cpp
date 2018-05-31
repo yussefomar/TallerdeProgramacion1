@@ -14,12 +14,10 @@
 #include "DefinirComoVisit.h"
 #include "DefinirComoLocal.h"
 #include "DesconexionAjena.h"
+#include "RenderizarModel.h"
 
 #include <unistd.h>
 
-#define CANTCOMMANDSNET 14
-#define ENTIDAD 0
-#define EVENTO 1
 
 #define ENVIAR 0
 #define RECIBIR 1
@@ -33,7 +31,7 @@ va a diferir del de controller*/
 ModeloCliente::ModeloCliente(Model* model)
 {
     this->model = model;
-    this->comandos = std::vector<CommandNet*>(CANTCOMMANDSNET);
+    this->comandos = std::vector<CommandNet*>(CANTCOMMANDS);
     this->comandos[DECVELX] = new DisminuirVelocidadXNet(model);
     this->comandos[DECVELY] = new DisminuirVelocidadYNet(model);
     this->comandos[INCVELX] = new AumentarVelocidadXNet(model);
@@ -49,6 +47,7 @@ ModeloCliente::ModeloCliente(Model* model)
     this->comandos[DEFLOCAL] = new DefinirComoLocal(model);
     this->comandos[DEFVISIT] = new DefinirComoVisit(model);
     this->comandos[DESCJUG] = new DesconexionAjena(model);
+    this->comandos[NECRENDER] = new RenderizarModel(model);
     this->tareaAEjecutar = 0;
 
     this->socket = nullptr;
@@ -56,7 +55,7 @@ ModeloCliente::ModeloCliente(Model* model)
 
 ModeloCliente::~ModeloCliente()
 {
-    for(unsigned i = 0; i < CANTCOMMANDSNET; ++i)
+    for(unsigned i = 0; i < CANTCOMMANDS; ++i)
     {
         delete this->comandos[i];
     }

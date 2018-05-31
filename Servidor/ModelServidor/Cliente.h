@@ -23,6 +23,7 @@ public:
     unsigned getID();
     void actuarFrenteADesconexion();
     void intentarReconexion(SocketServidor* socketNuevo);
+    void enviarARenderizar();
 
 protected:
 
@@ -31,7 +32,6 @@ private:
     unsigned id;
     Buffer* buffer;
     SocketServidor* socket;
-    std::list<char> buckup;
 };
 
 #endif // CLIENTE_H

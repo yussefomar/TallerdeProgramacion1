@@ -1,6 +1,22 @@
 #include "Cliente.h"
 #include <iostream>
 
+#define DECVELX 0x00
+#define DECVELY 0x01
+#define INCVELX 0x02
+#define INCVELY 0x03
+#define STOPJUG 0x04
+#define ACCJUG 0x05
+#define DESJUG 0x06
+#define PATPELO 0x07
+#define RECUPELO 0x08
+#define CAMBJUG 0x09
+#define COMMNULL 0x0A
+#define PASPELO 0x0B
+#define DEFLOCAL 0x0C
+#define DEFVISIT 0x0D //cuidado con estos dos ultimos comandos.
+#define DESCJUG 0x0E
+#define NECRENDER 0X0F
 
 #define ENTIDAD 0
 #define EVENTO 1
@@ -26,7 +42,6 @@ void Cliente::enviarMensaje()
 {
     if(!this->estaConectado()) return;
     char codigo = this->buffer->popCodigo(this->id);
-    this->buckup.push_back(codigo);
     this->socket->enviarByte(codigo);
     this->actuarFrenteADesconexion();
 }
@@ -87,4 +102,8 @@ void Cliente::actuarFrenteADesconexion() {
 void Cliente::intentarReconexion(SocketServidor* socket) {
     delete this->socket;
     this->socket = socket;
+}
+
+void Cliente::enviarARenderizar() {
+    this->socket->enviarByte(NECRENDER);
 }

@@ -32,6 +32,7 @@ Model::Model()
     this->idCliente = 0x00;//POR DEFECTO HASTA ESPERAR EL NUEVO ID
     this->cantidadLocales = 0;
     this->cantidadVisitantes = 0;
+    this->renderizar = false;
 }
 
 Model::~Model()
@@ -540,6 +541,18 @@ void Model::definirComoVisitante(char codigoCliente)
 
 void Model::desconectarCliente(char codigoCliente) {
     this->jugadoresEnCancha[this->clientes[codigoCliente]].desactivar();
+}
+
+bool Model::necesitaRenderizar() {
+    if(this->renderizar) {
+        this->renderizar=false;
+        return true;
+    }
+    return this->renderizar;
+}
+
+void Model::habilitarRender() {
+    this->renderizar=true;
 }
 
 
