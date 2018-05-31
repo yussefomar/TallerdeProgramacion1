@@ -29,6 +29,11 @@ int main(int argc, char* args[])
 
     while(modeloServidor.clientesEstanConectados())
     {
+        tiempoActual = clock();
+        lapsoDeTiempo = (tiempoActual - tiempoPrevio) / (CLOCKS_PER_SEC / 1000);
+        tiempoPrevio = tiempoActual;
+        lag += lapsoDeTiempo;
+
         modeloServidor.recibirMensajes();
         modeloServidor.enviarMensajes();
         std::cout << "ciclo nro: " << i << std::endl;

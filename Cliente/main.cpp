@@ -61,8 +61,6 @@ void modoOnline()
     model.agregarObservador(&loggerObserver);
 
     ModeloCliente modelCliente(&model);
-    //modelCliente.conectarConServer("192.168.0.29", "8080");
-    //modelCliente.setComoVisitante();
 
     char respuesta;
     View_Loguin loguinScreen(1);
@@ -141,8 +139,7 @@ void modoOnline()
     }
 
     informacionIngreso.mensaje = "A la espera de que todos los jugadores se conecten.";
-    modelCliente.recibirRespuestaInicio(); //Determinar aca si es un rechazado o no
-    //if(!modelCliente.habilitadoParaJugar()) return; //...
+    modelCliente.recibirRespuestaInicio();
     informacionIngreso.mensaje = "Comenzamos";
 
     loguinScreen.Cerrar();
@@ -153,26 +150,13 @@ void modoOnline()
     Controller controller(&modelCliente);
     controller.Attach(&loggerObserver);
 
-    //MSPORUPDATE CONTROLA EN CIERTA FORMA EL FPS DEL JUEGO... NO SE ASUSTEN
-    long double MSPORUPDATE = 0.7;
-    long double tiempoActual = 0.0;
-    long double lapsoDeTiempo = 0.0;
-    long double tiempoPrevio = clock();
-    long double lag = 0.0;
-
     while( !controller.quitPressed())
     {
-        tiempoActual = clock();
-        lapsoDeTiempo = (tiempoActual - tiempoPrevio) / (CLOCKS_PER_SEC / 1000);
-        tiempoPrevio = tiempoActual;
-        lag += lapsoDeTiempo;
-
         controller.processInput();
 
-        while (lag >= MSPORUPDATE)
+        while (!model.necesitaRenderizar())
         {
             modelCliente.update();
-            lag -= MSPORUPDATE;
         }
 
         view.render();
