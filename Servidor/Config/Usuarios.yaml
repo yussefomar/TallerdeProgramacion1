@@ -1,0 +1,19 @@
+servidor:
+ cantidadCli: '2'
+
+users:
+ - name: 'martinez'
+   password: 'racing'
+ - name: 'mascherano'
+   password: 'river'
+ - name: 'riquelme'
+   password: 'boca'
+ - name: 'barco'
+   password: 'independiente'
+ - name: 'salas'
+   password: 'allboys'
+
+
+conexion:
+ ip: '10.1.82.13'
+ puerto: '8080'
