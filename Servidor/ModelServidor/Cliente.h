@@ -23,21 +23,9 @@ public:
     void recibirMensaje();
     void enviarMensaje();
     bool estaConectado();
-
-
-
-
-
-    void enviarId(unsigned id);
-    char recibirUsuario();
-    char recibirPassword();
     void permitirInicio();
-    char nombreUsuario;
-    char passwordUsuario;
-    unsigned getID();
-    void actuarFrenteADesconexion();
-    void intentarReconexion(SocketServidor* socketNuevo);
     void enviarARenderizar();
+
 
 protected:
 

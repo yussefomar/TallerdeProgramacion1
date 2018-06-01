@@ -130,7 +130,6 @@ void Cliente::enviarMensaje()
         return;
     char codigo = this->buffer->popCodigo(this->idCliente);
     this->socket->enviarByte(codigo);
-    this->actuarFrenteADesconexion();
 }
 
 void Cliente::recibirMensaje()
@@ -139,7 +138,6 @@ void Cliente::recibirMensaje()
         return;
     char codigo = this->socket->recibirByte();
     this->buffer->pushCodigo(codigo);
-    this->actuarFrenteADesconexion();
 }
 
 bool Cliente::estaConectado()
@@ -149,48 +147,10 @@ bool Cliente::estaConectado()
 
 
 
-void Cliente::enviarId(unsigned id)
-{
-    char idCaracter = id;
-    this->socket->enviarByte(idCaracter);
-}
 
 void Cliente::permitirInicio()
 {
     this->socket->enviarByte(TODOOK);
-}
-
-char Cliente::recibirUsuario()
-{
-    char codigo = this->socket->recibirByte();
-    return codigo;
-}
-
-char Cliente::recibirPassword()
-{
-    char codigo = this->socket->recibirByte();
-    return codigo;
-}
-
-unsigned Cliente::getID()
-{
-    return this->idCliente;
-}
-
-void Cliente::actuarFrenteADesconexion()
-{
-    if(this->estaConectado())
-        return;
-    char id = this->idCliente;
-    id = id << 6;
-    char code = id | DESCJUG;
-    this->buffer->pushCodigo(code);
-}
-
-void Cliente::intentarReconexion(SocketServidor* socket)
-{
-    delete this->socket;
-    this->socket = socket;
 }
 
 void Cliente::enviarARenderizar()

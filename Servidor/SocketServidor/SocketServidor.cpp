@@ -134,11 +134,17 @@ bool SocketServidor::estaConectado()
 
 void SocketServidor::enviarByte(char byte)
 {
+    if(!this->estaConectado())
+        return;
+
     this->socketConectado = send(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL) > 0;
 }
 
 char SocketServidor::recibirByte()
 {
+    if(!this->estaConectado())
+        return;
+
     char byte;
     this->socketConectado = recv(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL) > 0;
     return byte;
