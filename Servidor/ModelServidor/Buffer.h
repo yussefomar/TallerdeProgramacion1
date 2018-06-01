@@ -8,11 +8,11 @@
 class Buffer
 {
 public:
-    Buffer(int cantidadClientes);
+    Buffer();
     virtual ~Buffer();
-    unsigned cantidadCodigos(int idCanal);
     char popCodigo(int idCanal);
     void pushCodigo(char codigo);
+    void setCantidadBuffers(unsigned cantidad);
 
 protected:
 

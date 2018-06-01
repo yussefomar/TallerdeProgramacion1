@@ -27,10 +27,12 @@
 
 SocketServidor::SocketServidor(std::string ip, std::string puerto)
 {
+    SocketServidor::mutexSocketMaster.lock();
     if(!SocketServidor::masterSocketFDConectado)
     {
         this->generarMasterSocketFD(ip, puerto);
     }
+    SocketServidor::mutexSocketMaster.unlock();
 
     /*intentamos aceptar un cliente entrante*/
     do
@@ -55,6 +57,7 @@ SocketServidor::~SocketServidor()
 
 int SocketServidor::masterSocketFD = 0;
 int SocketServidor::masterSocketFDConectado = 0;
+std::mutex SocketServidor::mutexSocketMaster;
 
 void SocketServidor::generarMasterSocketFD(std::string ip, std::string puerto)
 {

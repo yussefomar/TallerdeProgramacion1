@@ -13,10 +13,8 @@ int main(int argc, char* args[])
     std::cout << "server run" << std::endl;
     ModeloServidor modeloServidor;
     Util_Configuracion configuracion(&modeloServidor);
-    modeloServidor.aceptarClientesEntrantes();
-    modeloServidor.recibirInformacion();
-    modeloServidor.enviarOKInicio();
-    modeloServidor.tratarNuevosClientes();
+    modeloServidor.aceptarClientes();
+    modeloServidor.permitirInicio();
     std::cout << "server with clients" << std::endl;
     unsigned i = 0;
 

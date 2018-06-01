@@ -9,51 +9,15 @@
 #include "View/View.h"
 #include "View/View_Loguin.h"
 #include "Utils/Util_Configuracion.h"
-#include "View/View_Ventanas.h"
+#include "LogIn.h"
 
 Util_Common common; //Porque importa esta variable global
 
-void modoOffline();
-void modoOnline();
 
-int main(int argc, char* args[])
+int main(int argc, char* args[]) try
 {
-    try
-    {
-        //View_Ventanas ventana;
-        //ventana.conectado();
-        //ventana.desconectado();
-        //ventana.enEspera();
-
-        modoOnline();
-        //modoOffline();
-        return 0;
-    }
-    catch(const std::runtime_error& re)
-    {
-//        NotifyError("Error en Runtime: ", "View.cpp");
-//        NotifyError(re.what(), "View.cpp");
-    }
-    catch(const std::exception& ex)
-    {
-//        NotifyError("Ha ocurrido un error: ", "View.cpp");
-//        NotifyError(ex.what(), "View.cpp");
-    }
-    catch(...)
-    {
-//        NotifyError("Error desconocido que no se ha podido especificar.", "View.cpp");
-    }
-
-
-}
-
-void modoOnline()
-{
-    // Hacemos un backup del log de la ejecucion anterior.
     common.backupFile();
-    // Hacemos un log de la ejecucion anterior.
     common.createFile();
-    // Creamos el logger con el nivel más bajo.
     Util_LoggerObserver loggerObserver(3);
 
     Model model;
@@ -61,94 +25,14 @@ void modoOnline()
     model.agregarObservador(&loggerObserver);
 
     ModeloCliente modelCliente(&model);
-
-    char respuesta;
-    View_Loguin loguinScreen(1);
-    InformacionIngreso informacionIngreso(false);
-    loguinScreen.Inicializar();
-
-    while( !informacionIngreso.ipIngresado || !informacionIngreso.puertoIngresado )
-    {
-        loguinScreen.Procesar(informacionIngreso);
-        if(informacionIngreso.ipIngresado && informacionIngreso.puertoIngresado )
-        {
-            modelCliente.conectarConServer(informacionIngreso.ip, informacionIngreso.puerto);
-            informacionIngreso.procesarConectividad(modelCliente.conectadoAlServer());
-            //informacionIngreso.procesarConectividad(modelCliente.habilitadoParaJugar()) //aca,el cliente ya puede saber si la partida estaba llena o no.
-            //anunciar esto y salir de la partida.
-            //===========================================================================
-            //informacionIngreso.procesarConectividad(false);
-            //===========================================================================
-        }
-    }
-    std::cout << "llegamos a la ip, vamos por el nombre" << std::endl;
-    while( !informacionIngreso.nombreIngresado )
-    {
-                    std::cout << "entramos en w del nombre" << std::endl;
-
-        loguinScreen.Procesar(informacionIngreso);
-        if(informacionIngreso.nombreIngresado)
-        {
-            modelCliente.enviarNombre(informacionIngreso.nombre);
-            respuesta = modelCliente.recibirValidacionNombre();
-            informacionIngreso.procesarRespuesta(respuesta);
-            std::cout << "entramos en if del nombre" << std::endl;
-
-            //===========================================================================
-            //informacionIngreso.procesarRespuesta(0X0B);
-            //===========================================================================
-        }
-    }
-    std::cout << "llegamos al nombre, vamos por pass" << std::endl;
-
-    while( !informacionIngreso.passwordIngresado )
-    {
-        loguinScreen.Procesar(informacionIngreso);
-        if(informacionIngreso.passwordIngresado)
-        {
-            modelCliente.enviarPassword(informacionIngreso.password);
-            respuesta = modelCliente.recibirValidacionPassword();
-            informacionIngreso.procesarRespuesta(respuesta);
-            std::cout << "entramos en if del pass" << std::endl;
-
-            //===========================================================================
-            //informacionIngreso.procesarRespuesta(0X0F);
-            //===========================================================================
-        }
-    }
-    std::cout << "llegamos al pass, vamos por equipo" << std::endl;
-
-    while( !informacionIngreso.equipoIngresado )
-    {
-        loguinScreen.Procesar(informacionIngreso);
-        if(informacionIngreso.equipoIngresado)
-        {
-            if(informacionIngreso.equipo == "1")
-            {
-                modelCliente.setComoLocal();
-            }
-            else if(informacionIngreso.equipo == "2")
-            {
-                modelCliente.setComoVisitante();
-            }
-            else
-            {
-                informacionIngreso.equipoErroneo();
-            }
-        }
-    }
-
-    informacionIngreso.mensaje = "A la espera de que todos los jugadores se conecten.";
-    modelCliente.recibirRespuestaInicio();
-    informacionIngreso.mensaje = "Comenzamos";
-
-    loguinScreen.Cerrar();
+    LogIn logIn(&modelCliente);
 
     View view(&model);
     view.Attach(&loggerObserver);
 
     Controller controller(&modelCliente);
     controller.Attach(&loggerObserver);
+    modelCliente.recibirRespuestaInicio();
 
     while( !controller.quitPressed())
     {
@@ -161,52 +45,23 @@ void modoOnline()
 
         view.render();
     }
-}
+    return 0;
 
-void modoOffline()
+}
+catch(const std::runtime_error& re)
 {
-
-
-    // Hacemos un backup del log de la ejecucion anterior.
-    common.backupFile();
-    // Hacemos un log de la ejecucion anterior.
-    common.createFile();
-    // Creamos el logger con el nivel más bajo.
-    Util_LoggerObserver loggerObserver(3);
-
-    Model model;
-    Util_Configuracion configuracion(&model, &loggerObserver);
-    model.agregarObservador(&loggerObserver);
-
-    View view(&model);
-    view.Attach(&loggerObserver);
-
-    Controller controller(&model);
-    controller.Attach(&loggerObserver);
-
-    //MSPORUPDATE CONTROLA EN CIERTA FORMA EL FPS DEL JUEGO... NO SE ASUSTEN
-    long double MSPORUPDATE = 0.3;
-    long double tiempoActual = 0.0;
-    long double lapsoDeTiempo = 0.0;
-    long double tiempoPrevio = clock();
-    long double lag = 0.0;
-
-    while( !controller.quitPressed() )
-    {
-        tiempoActual = clock();
-        lapsoDeTiempo = (tiempoActual - tiempoPrevio) / (CLOCKS_PER_SEC / 1000);
-        tiempoPrevio = tiempoActual;
-        lag += lapsoDeTiempo;
-
-        controller.processInput();
-
-        while (lag >= MSPORUPDATE)
-        {
-            model.update();
-            lag -= MSPORUPDATE;
-        }
-
-        view.render();
-    }
+//        NotifyError("Error en Runtime: ", "View.cpp");
+//        NotifyError(re.what(), "View.cpp");
 }
+catch(const std::exception& ex)
+{
+//        NotifyError("Ha ocurrido un error: ", "View.cpp");
+//        NotifyError(ex.what(), "View.cpp");
+}
+catch(...)
+{
+//        NotifyError("Error desconocido que no se ha podido especificar.", "View.cpp");
+}
+
+
 

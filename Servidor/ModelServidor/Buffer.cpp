@@ -3,8 +3,7 @@
 
 #define COMMNULL 0x0A
 
-Buffer::Buffer(int cantidadClientes) :
-    buffers(std::vector<std::queue<char>>(cantidadClientes))
+Buffer::Buffer()
 {
 
 }
@@ -14,9 +13,8 @@ Buffer::~Buffer()
     //dtor
 }
 
-unsigned Buffer::cantidadCodigos(int idCanal)
-{
-    return this->buffers[idCanal].size();
+void Buffer::setCantidadBuffers(unsigned cantidad) {
+    this->buffers = std::vector<std::queue<char>>(cantidad);
 }
 
 char Buffer::popCodigo(int idCanal)

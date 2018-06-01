@@ -9,7 +9,6 @@ using namespace std;
 
 #include "../Utils/Util_ParserUsuario.h"
 
-;
 std::vector<User> users;
 std::vector<Servidor> servidor;
 std::vector<Conexion> conexion;
@@ -36,13 +35,14 @@ std::vector<User> Util_ParserUsuario::GetUsuarios()
     try
     {
         this->read_yaml_Usuario();
-        return users;
     }
     catch(YAML::Exception ex)
     {
         //NotifyError("llenarParametrosObtenidos: no se pudo obtener el nodo xxxxxx", "Util_ParserUsuario.cpp");
         // parametrosObtenidos.esValido = 0;
     }
+            return users;
+
 
 }
 
@@ -62,14 +62,16 @@ int Util_ParserUsuario::GetCantidadClientes()
 {
     try
     {
-        Servidor servidor = this->read_yaml_CantidadClientes();
-        return std::stoi(servidor.get_cantidadClientes());
+        Servidor unServidor = this->read_yaml_CantidadClientes();
+                    return std::stoi(unServidor.get_cantidadClientes());
+
     }
     catch(YAML::Exception ex)
     {
         //NotifyError("llenarParametrosObtenidos: no se pudo obtener el nodo xxxxxx", "Util_ParserUsuario.cpp");
         // parametrosObtenidos.esValido = 0;
     }
+    return -1;
 
 }
 
@@ -90,12 +92,13 @@ Conexion Util_ParserUsuario::getIpPuerto()
     try
     {
         this->read_yaml_Conexion();
-        return conexion.at(0);
     }
     catch(YAML::Exception ex)
     {
         //NotifyError("llenarParametrosObtenidos: no se pudo obtener el nodo xxxxxx", "Util_ParserUsuario.cpp");
         // parametrosObtenidos.esValido = 0;
     }
+            return conexion.at(0);
+
 
 }

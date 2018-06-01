@@ -2,6 +2,7 @@
 #define SOCKETSERVIDOR_H
 
 #include <string>
+#include <mutex>
 class SocketServidor
 {
 public:
@@ -17,6 +18,7 @@ protected:
 private:
     static int masterSocketFD;
     static int masterSocketFDConectado;
+    static std::mutex mutexSocketMaster;
     int socketFD;
     bool socketConectado;
 };

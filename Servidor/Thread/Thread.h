@@ -14,9 +14,9 @@ class Thread
         virtual void procesoAEjecutar() = 0;
 
     protected:
+        std::thread hilo;
 
     private:
-        std::thread hilo;
 };
 
 #endif // THREAD_H
