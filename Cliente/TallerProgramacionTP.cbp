@@ -204,6 +204,8 @@
 		<Unit filename="Utils/Util_Parser.h" />
 		<Unit filename="Utils/Util_Persistencia.cpp" />
 		<Unit filename="Utils/Util_Persistencia.h" />
+		<Unit filename="Utils/Util_datosGuardados.cpp" />
+		<Unit filename="Utils/Util_datosGuardados.h" />
 		<Unit filename="View/Entity.cpp" />
 		<Unit filename="View/Entity.h" />
 		<Unit filename="View/Event.cpp" />
