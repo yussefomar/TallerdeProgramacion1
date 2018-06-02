@@ -126,18 +126,22 @@ int Cliente::contadorClientes = -1;
 
 void Cliente::enviarMensaje()
 {
-    if(!this->estaConectado())
+    if(!this->estaConectado()) {
         return;
+    }
     char codigo = this->buffer->popCodigo(this->idCliente);
     this->socket->enviarByte(codigo);
+    this->avisarDesconexion();
 }
 
 void Cliente::recibirMensaje()
 {
-    if(!this->estaConectado())
+    if(!this->estaConectado()) {
         return;
+    }
     char codigo = this->socket->recibirByte();
     this->buffer->pushCodigo(codigo);
+    this->avisarDesconexion();
 }
 
 bool Cliente::estaConectado()
@@ -156,4 +160,10 @@ void Cliente::permitirInicio()
 void Cliente::enviarARenderizar()
 {
     this->socket->enviarByte(NECRENDER);
+}
+
+void Cliente::avisarDesconexion() {
+    if(!this->estaConectado()) {
+        this->buffer->pushCodigo(DESCJUG);
+    }
 }

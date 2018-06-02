@@ -25,6 +25,7 @@ public:
     bool estaConectado();
     void permitirInicio();
     void enviarARenderizar();
+    void avisarDesconexion();
 
 
 protected:
