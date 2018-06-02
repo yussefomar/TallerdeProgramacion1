@@ -23,7 +23,7 @@ public:
 private:
     Pelota *model;
     LTexture * texturaPelota;
-    int frame;
+    int frame = 4;
     double direccion;
     SDL_Rect gSpriteClips[ 4 ];
 };
