@@ -44,7 +44,7 @@ class View_Ventanas
 
 		void conectado();
 		void desconectado();
-        void  enEspera();
+        void enEspera();
 
 
 	private:

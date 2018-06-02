@@ -1,7 +1,6 @@
 #include "LogIn.h"
 #include "View_Loguin.h"
 
-
 LogIn::LogIn(ModeloCliente* modelCliente)
 {
     char respuesta;

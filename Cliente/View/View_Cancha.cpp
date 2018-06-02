@@ -14,5 +14,3 @@ void View_Cancha::render( SDL_Rect * camara,SDL_Renderer * gRenderer )
 {
     this->texturaCancha->render( 0, 0,camara,0.0,NULL,SDL_FLIP_NONE,gRenderer);
 }
-
-

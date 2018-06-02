@@ -443,7 +443,6 @@ SDL_Texture* SurfaceToTexture( SDL_Surface* surf )
     return text;
 }
 
-
 bool InitEverything()
 {
     if ( !InitSDL() )

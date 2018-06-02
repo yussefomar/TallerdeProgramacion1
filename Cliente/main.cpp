@@ -42,7 +42,7 @@ int main(int argc, char* args[]) try
         {
             modelCliente.update();
         }
-
+        //view.cargarCartel("Holis");
         view.render();
     }
     return 0;

@@ -226,6 +226,8 @@
 		<Unit filename="View/View_Jugador.h" />
 		<Unit filename="View/View_Loguin.cpp" />
 		<Unit filename="View/View_Loguin.h" />
+		<Unit filename="View/View_Mensajes.cpp" />
+		<Unit filename="View/View_Mensajes.h" />
 		<Unit filename="View/View_Pelota.cpp" />
 		<Unit filename="View/View_Pelota.h" />
 		<Unit filename="View/View_Seleccionado.cpp" />

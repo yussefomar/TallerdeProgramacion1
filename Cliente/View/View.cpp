@@ -69,8 +69,8 @@ void View::render()
     SDL_RenderClear( this->gRenderer );
 
     this->viewModel->render();
-
-    //Update screen
+    //this->mostrarCartel("Asdasd");
+    this->mostrarCartel();
     SDL_RenderPresent( this->gRenderer );
     NotifyMessage("Finaliza: render", "View.cpp");
 
@@ -138,6 +138,22 @@ bool View::inicializar()
 
     return exito;
 }
+
+void View::mostrarCartel()
+{
+    this->panelMensaje.mostrarMensaje(this->mensaje, this->gRenderer);
+}
+
+void View::limpiarCartel()
+{
+    this->mensaje = "";
+}
+
+void View::cargarCartel(std::string value)
+{
+    this->mensaje = value;
+}
+
 void View::loadMedia()
 {
     if( !texturaJugador.loadFromFile("Images/spritejugador.png",this->gRenderer) )
