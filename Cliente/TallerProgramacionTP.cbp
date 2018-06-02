@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="TallerProgramacionTP" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/TallerProgramacionTP" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add option="-lSDL -lSDL_image -lSDL_ttf" />
+					<Add directory="include" />
+					<Add directory="Model" />
+					<Add directory="View" />
+					<Add directory="Controller" />
+					<Add directory="Network" />
+					<Add directory="Command" />
+					<Add directory="Command/CommandCtrl" />
+					<Add directory="Command/CommandNet" />
+				</Compiler>
+				<Linker>
+					<Add option="-lSDL2" />
+					<Add option="-lSDL2_image" />
+					<Add option="-lSDL2_ttf" />
+					<Add option="-lyaml-cpp" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/TallerProgramacionTP" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-std=c++11" />
+					<Add option="-lSDL -lSDL_image -lSDL_ttf" />
+					<Add directory="include" />
+					<Add directory="Model" />
+					<Add directory="View" />
+					<Add directory="Controller" />
+					<Add directory="Network" />
+					<Add directory="Command" />
+					<Add directory="Command/CommandCtrl" />
+					<Add directory="Command/CommandNet" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-lSDL2" />
+					<Add option="-lSDL2_image" />
+					<Add option="-lSDL2_ttf" />
+					<Add option="-lyaml-cpp" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-std=c++11" />
+			<Add option="-fexceptions" />
+			<Add option="-lSDL -lSDL_image -lSDL_ttf" />
+		</Compiler>
+		<Linker>
+			<Add option="-lSDL2" />
+			<Add option="-lSDL2_image" />
+			<Add option="-lSDL2_ttf" />
+			<Add option="-lyaml-cpp" />
+		</Linker>
+		<Unit filename="Command/Command.cpp" />
+		<Unit filename="Command/Command.h" />
+		<Unit filename="Command/CommandCtrl.cpp" />
+		<Unit filename="Command/CommandCtrl.h" />
+		<Unit filename="Command/CommandCtrl/Acelerar.cpp" />
+		<Unit filename="Command/CommandCtrl/Acelerar.h" />
+		<Unit filename="Command/CommandCtrl/AumentarVelocidadX.cpp" />
+		<Unit filename="Command/CommandCtrl/AumentarVelocidadX.h" />
+		<Unit filename="Command/CommandCtrl/AumentarVelocidadY.cpp" />
+		<Unit filename="Command/CommandCtrl/AumentarVelocidadY.h" />
+		<Unit filename="Command/CommandCtrl/CambiarJugador.cpp" />
+		<Unit filename="Command/CommandCtrl/CambiarJugador.h" />
+		<Unit filename="Command/CommandCtrl/CommandNull.cpp" />
+		<Unit filename="Command/CommandCtrl/CommandNull.h" />
+		<Unit filename="Command/CommandCtrl/Desacelerar.cpp" />
+		<Unit filename="Command/CommandCtrl/Desacelerar.h" />
+		<Unit filename="Command/CommandCtrl/DisminuirVelocidadX.cpp" />
+		<Unit filename="Command/CommandCtrl/DisminuirVelocidadX.h" />
+		<Unit filename="Command/CommandCtrl/DisminuirVelocidadY.cpp" />
+		<Unit filename="Command/CommandCtrl/DisminuirVelocidadY.h" />
+		<Unit filename="Command/CommandCtrl/PasarPelota.cpp" />
+		<Unit filename="Command/CommandCtrl/PasarPelota.h" />
+		<Unit filename="Command/CommandCtrl/PatearPelota.cpp" />
+		<Unit filename="Command/CommandCtrl/PatearPelota.h" />
+		<Unit filename="Command/CommandCtrl/RecuperaPelota.cpp" />
+		<Unit filename="Command/CommandCtrl/RecuperaPelota.h" />
+		<Unit filename="Command/CommandCtrl/StopJugador.cpp" />
+		<Unit filename="Command/CommandCtrl/StopJugador.h" />
+		<Unit filename="Command/CommandNet.cpp" />
+		<Unit filename="Command/CommandNet.h" />
+		<Unit filename="Command/CommandNet/AcelerarNet.cpp" />
+		<Unit filename="Command/CommandNet/AcelerarNet.h" />
+		<Unit filename="Command/CommandNet/AumentarVelocidadXNet.cpp" />
+		<Unit filename="Command/CommandNet/AumentarVelocidadXNet.h" />
+		<Unit filename="Command/CommandNet/AumentarVelocidadYNet.cpp" />
+		<Unit filename="Command/CommandNet/AumentarVelocidadYNet.h" />
+		<Unit filename="Command/CommandNet/CambiarJugadorNet.cpp" />
+		<Unit filename="Command/CommandNet/CambiarJugadorNet.h" />
+		<Unit filename="Command/CommandNet/CommandNullNet.cpp" />
+		<Unit filename="Command/CommandNet/CommandNullNet.h" />
+		<Unit filename="Command/CommandNet/DefinirComoLocal.cpp" />
+		<Unit filename="Command/CommandNet/DefinirComoLocal.h" />
+		<Unit filename="Command/CommandNet/DefinirComoVisit.cpp" />
+		<Unit filename="Command/CommandNet/DefinirComoVisit.h" />
+		<Unit filename="Command/CommandNet/DesacelerarNet.cpp" />
+		<Unit filename="Command/CommandNet/DesacelerarNet.h" />
+		<Unit filename="Command/CommandNet/DesconexionAjena.cpp" />
+		<Unit filename="Command/CommandNet/DesconexionAjena.h" />
+		<Unit filename="Command/CommandNet/DisminuirVelocidadXNet.cpp" />
+		<Unit filename="Command/CommandNet/DisminuirVelocidadXNet.h" />
+		<Unit filename="Command/CommandNet/DisminuirVelocidadYNet.cpp" />
+		<Unit filename="Command/CommandNet/DisminuirVelocidadYNet.h" />
+		<Unit filename="Command/CommandNet/PasarPelotaNet.cpp" />
+		<Unit filename="Command/CommandNet/PasarPelotaNet.h" />
+		<Unit filename="Command/CommandNet/PatearPelotaNet.cpp" />
+		<Unit filename="Command/CommandNet/PatearPelotaNet.h" />
+		<Unit filename="Command/CommandNet/RecuperarPelotaNet.cpp" />
+		<Unit filename="Command/CommandNet/RecuperarPelotaNet.h" />
+		<Unit filename="Command/CommandNet/RenderizarModel.cpp" />
+		<Unit filename="Command/CommandNet/RenderizarModel.h" />
+		<Unit filename="Command/CommandNet/StopJugadorNet.cpp" />
+		<Unit filename="Command/CommandNet/StopJugadorNet.h" />
+		<Unit filename="Configs/config.yaml" />
+		<Unit filename="Controller/Acelerar.h" />
+		<Unit filename="Controller/AumentarVelocidadX.h" />
+		<Unit filename="Controller/AumentarVelocidadY.h" />
+		<Unit filename="Controller/CambiarJugador.h" />
+		<Unit filename="Controller/Command.h" />
+		<Unit filename="Controller/Controller.cpp" />
+		<Unit filename="Controller/Controller.h" />
+		<Unit filename="Controller/Controller_Jugador.h" />
+		<Unit filename="Controller/Desacelerar.h" />
+		<Unit filename="Controller/DisminuirVelocidadX.h" />
+		<Unit filename="Controller/DisminuirVelocidadY.h" />
+		<Unit filename="Controller/PatearPelota.h" />
+		<Unit filename="Controller/RecuperaPelota.h" />
+		<Unit filename="Controller/StopJugador.h" />
+		<Unit filename="Images/background.jpg" />
+		<Unit filename="Images/canchafubol.jpg" />
+		<Unit filename="Images/peticion.ttf" />
+		<Unit filename="Images/respuesta.otf" />
+		<Unit filename="Images/soccer.png" />
+		<Unit filename="Logs/Log.txt" />
+		<Unit filename="Model/Activo.cpp" />
+		<Unit filename="Model/Activo.h" />
+		<Unit filename="Model/Estado.cpp" />
+		<Unit filename="Model/Estado.h" />
+		<Unit filename="Model/Formacion.cpp" />
+		<Unit filename="Model/Formacion.h" />
+		<Unit filename="Model/Formacion312.cpp" />
+		<Unit filename="Model/Formacion312.h" />
+		<Unit filename="Model/Formacion321.cpp" />
+		<Unit filename="Model/Formacion321.h" />
+		<Unit filename="Model/Formacion33.cpp" />
+		<Unit filename="Model/Formacion33.h" />
+		<Unit filename="Model/Inactivo.cpp" />
+		<Unit filename="Model/Inactivo.h" />
+		<Unit filename="Model/LTexture.cpp" />
+		<Unit filename="Model/LTexture.h" />
+		<Unit filename="Model/Model.cpp" />
+		<Unit filename="Model/Model.h" />
+		<Unit filename="Model/Model_Equipo.cpp" />
+		<Unit filename="Model/Model_Equipo.h" />
+		<Unit filename="Model/Model_Jugador.cpp" />
+		<Unit filename="Model/Model_Jugador.h" />
+		<Unit filename="Model/Model_Pelota.cpp" />
+		<Unit filename="Model/Model_Pelota.h" />
+		<Unit filename="Network/CommandNet.h" />
+		<Unit filename="Network/ControllerNet/AcelerarNet.h" />
+		<Unit filename="Network/ControllerNet/AumentarVelocidadXNet.h" />
+		<Unit filename="Network/ControllerNet/AumentarVelocidadYNet.h" />
+		<Unit filename="Network/ControllerNet/CambiarJugadorNet.h" />
+		<Unit filename="Network/ControllerNet/DesacelerarNet.h" />
+		<Unit filename="Network/ControllerNet/DisminuirVelocidadXNet.h" />
+		<Unit filename="Network/ControllerNet/DisminuirVelocidadYNet.h" />
+		<Unit filename="Network/ControllerNet/PatearPelotaNet.h" />
+		<Unit filename="Network/ControllerNet/RecuperarPelotaNet.h" />
+		<Unit filename="Network/ControllerNet/StopJugadorNet.h" />
+		<Unit filename="Network/ModeloCliente.cpp" />
+		<Unit filename="Network/ModeloCliente.h" />
+		<Unit filename="Network/SocketCliente.cpp" />
+		<Unit filename="Network/SocketCliente.h" />
+		<Unit filename="Utils/Util_Common.cpp" />
+		<Unit filename="Utils/Util_Common.h" />
+		<Unit filename="Utils/Util_Configuracion.cpp" />
+		<Unit filename="Utils/Util_Configuracion.h" />
+		<Unit filename="Utils/Util_LoggerObserver.cpp" />
+		<Unit filename="Utils/Util_LoggerObserver.h" />
+		<Unit filename="Utils/Util_LoggerSubject.cpp" />
+		<Unit filename="Utils/Util_LoggerSubject.h" />
+		<Unit filename="Utils/Util_Parser.cpp" />
+		<Unit filename="Utils/Util_Parser.h" />
+		<Unit filename="Utils/Util_Persistencia.cpp" />
+		<Unit filename="Utils/Util_Persistencia.h" />
+		<Unit filename="View/Entity.cpp" />
+		<Unit filename="View/Entity.h" />
+		<Unit filename="View/Event.cpp" />
+		<Unit filename="View/Event.h" />
+		<Unit filename="View/InformacionIngreso.cpp" />
+		<Unit filename="View/InformacionIngreso.h" />
+		<Unit filename="View/LogIn.cpp" />
+		<Unit filename="View/LogIn.h" />
+		<Unit filename="View/Observer.cpp" />
+		<Unit filename="View/Observer.h" />
+		<Unit filename="View/StringInput.cpp" />
+		<Unit filename="View/StringInput.h" />
+		<Unit filename="View/View.cpp" />
+		<Unit filename="View/View.h" />
+		<Unit filename="View/ViewModel.cpp" />
+		<Unit filename="View/ViewModel.h" />
+		<Unit filename="View/View_Cancha.cpp" />
+		<Unit filename="View/View_Cancha.h" />
+		<Unit filename="View/View_Jugador.cpp" />
+		<Unit filename="View/View_Jugador.h" />
+		<Unit filename="View/View_Loguin.cpp" />
+		<Unit filename="View/View_Loguin.h" />
+		<Unit filename="View/View_Pelota.cpp" />
+		<Unit filename="View/View_Pelota.h" />
+		<Unit filename="View/View_Seleccionado.cpp" />
+		<Unit filename="View/View_Seleccionado.h" />
+		<Unit filename="View/View_Ventanas.cpp" />
+		<Unit filename="View/View_Ventanas.h" />
+		<Unit filename="bin/Release/TallerProgramacionTP" />
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

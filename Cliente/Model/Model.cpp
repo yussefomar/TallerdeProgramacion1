@@ -401,7 +401,7 @@ void Model::cambiarDeJugador(char codigoCliente)
         i= 0;
     }
     bool encontrado = false;
-    while ((i != nroJugador) && !encontrado)
+    while ((i != nroJugador) && !encontrado && !vecJugadores[i].estaActivo())
     {
         if ((vecJugadores[i].collide(this->camara )) && (nroJugador!=i))
         {

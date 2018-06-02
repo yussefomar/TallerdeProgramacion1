@@ -143,7 +143,7 @@ void SocketServidor::enviarByte(char byte)
 char SocketServidor::recibirByte()
 {
     if(!this->estaConectado())
-        return;
+        return 0;
 
     char byte;
     this->socketConectado = recv(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL) > 0;
