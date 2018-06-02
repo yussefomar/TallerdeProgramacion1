@@ -46,7 +46,7 @@ void ModeloServidor::aceptarClientes() {
     std::vector<std::thread> hilos = std::vector<std::thread>(this->clientes.size());
     for(unsigned i = 0; i < this->clientes.size(); ++i) {
         this->clientes[i].setBuffer(&this->buffer);
-        this->clientes[i].setBDD(this->usuariosNombre, this->usuariosPassword);
+        this->clientes[i].setBDD(this->bdd);
     }
 
     //Se crean hilos para recibir clientes
@@ -127,4 +127,8 @@ void ModeloServidor::enviarARenderizar() {
     for(unsigned i = 0; i < this->clientes.size(); ++i) {
         this->clientes[i].enviarARenderizar();
     }
+}
+
+void ModeloServidor::setBDD(std::vector<char> bdd) {
+    this->bdd = bdd;
 }

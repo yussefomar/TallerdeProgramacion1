@@ -17,7 +17,7 @@ public:
 
     void setIPPuerto(std::string ip, std::string puerto);
     void setBuffer(Buffer* buffer);
-    void setBDD(std::vector<char> usuarios, std::vector<char> passwords);
+    void setBDD(std::vector<char> bdd);
     void aceptarCliente();
 
     void recibirMensaje();
@@ -40,10 +40,8 @@ private:
     SocketServidor* socket;
     std::string ip;
     std::string puerto;
-    std::vector<char> usuarios;
-    std::vector<char> passwords;
-    char nombre;
-    char pass;
+    std::vector<char> bdd;
+    char credencial;
 
 };
 

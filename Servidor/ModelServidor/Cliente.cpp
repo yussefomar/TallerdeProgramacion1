@@ -57,10 +57,9 @@ void Cliente::setBuffer(Buffer* buffer)
 {
     this->buffer = buffer;
 }
-void Cliente::setBDD(std::vector<char> usuarios, std::vector<char> passwords)
+void Cliente::setBDD(std::vector<char> bdd)
 {
-    this->usuarios = usuarios;
-    this->passwords = passwords;
+    this->bdd = bdd;
 }
 std::mutex Cliente::mutexIngresos;
 std::queue<char> Cliente::usuariosIngresados;
@@ -71,8 +70,8 @@ void Cliente::aceptarCliente()
     std::cout << "Este hilo es el nro: "<< this->idCliente << std::endl;
     Cliente::mutexIngresos.unlock();
 
-    bool usuarioValido = false;
-    bool passValido = false;
+    bool credencialesRepetidas = true;
+    bool credencialesValidas = false;
     this->socket = new SocketServidor(this->ip, this->puerto);
     this->socket->enviarByte(this->idCliente);
 
@@ -80,35 +79,34 @@ void Cliente::aceptarCliente()
     std::cout << "Generando user en el hilo nro: "<< this->idCliente << std::endl;
     Cliente::mutexIngresos.unlock();
 
-    while(!usuarioValido)
+    while(credencialesRepetidas)
     {
         Cliente::mutexIngresos.lock();
-        this->nombre = this->socket->recibirByte();
-        usuarioValido = Cliente::usuariosIngresados.empty();
-        usuarioValido |= Cliente::usuariosIngresados.front() != this->nombre;
-        if(!usuarioValido)
+        this->credencial = this->socket->recibirByte();
+        credencialesRepetidas = Cliente::usuariosIngresados.front() == this->credencial;
+        if(credencialesRepetidas)
         {
             this->socket->enviarByte(LI_NOMBRE_REPETIDO);
         }
         Cliente::mutexIngresos.unlock();
     }
-    this->socket->enviarByte(LI_NOMBRE_OK);
 
     Cliente::mutexIngresos.lock();
     std::cout << "Generando pass en el hilo nro: "<< this->idCliente << std::endl;
     Cliente::mutexIngresos.unlock();
 
-    while(!passValido)
+    while(!credencialesValidas)
     {
-        this->pass = this->socket->recibirByte();
-        for(unsigned i = 0; i < this->usuarios.size() && !passValido; ++i)
+        for(unsigned i = 0; i < this->bdd.size() && !credencialesValidas; ++i)
         {
-            passValido = this->usuarios[i] == this->nombre;
-            passValido &= this->passwords[i] == this->pass;
+            credencialesValidas = this->bdd[i] == this->credencial;
         }
-        if(!passValido)
+        if(!credencialesValidas)
         {
             this->socket->enviarByte(LI_CREDENCIALES_ERROR);
+                    this->credencial = this->socket->recibirByte();
+
+
         }
 
     }
@@ -117,7 +115,7 @@ void Cliente::aceptarCliente()
     Cliente::mutexIngresos.unlock();
 
     Cliente::mutexIngresos.lock();
-    Cliente::usuariosIngresados.push(this->nombre);
+    Cliente::usuariosIngresados.push(this->credencial);
     Cliente::mutexIngresos.unlock();
     this->socket->enviarByte(LI_CREDENCIALES_OK);
 }
@@ -126,7 +124,8 @@ int Cliente::contadorClientes = -1;
 
 void Cliente::enviarMensaje()
 {
-    if(!this->estaConectado()) {
+    if(!this->estaConectado())
+    {
         return;
     }
     char codigo = this->buffer->popCodigo(this->idCliente);
@@ -136,7 +135,8 @@ void Cliente::enviarMensaje()
 
 void Cliente::recibirMensaje()
 {
-    if(!this->estaConectado()) {
+    if(!this->estaConectado())
+    {
         return;
     }
     char codigo = this->socket->recibirByte();
@@ -162,8 +162,10 @@ void Cliente::enviarARenderizar()
     this->socket->enviarByte(NECRENDER);
 }
 
-void Cliente::avisarDesconexion() {
-    if(!this->estaConectado()) {
+void Cliente::avisarDesconexion()
+{
+    if(!this->estaConectado())
+    {
         this->buffer->pushCodigo(DESCJUG);
     }
 }

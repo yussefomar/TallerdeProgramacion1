@@ -26,10 +26,7 @@ public:
     void setIpYPuerto(std::string ip, std::string puerto);
     void permitirInicio();
     void enviarARenderizar();
-
-    std::vector<char> usuariosNombre;
-    std::vector<char> usuariosPassword;
-
+    void setBDD(std::vector<char> bdd);
 protected:
 
 private:
@@ -37,6 +34,8 @@ private:
     std::vector<Cliente> clientes;
     std::queue<char> clientesIngresados;
     std::mutex mutex;
+    std::vector<char> bdd;
+
 };
 
 #endif // MODELOSERVIDOR_H
