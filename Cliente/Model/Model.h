@@ -28,7 +28,6 @@ public:
     virtual void setFormacionLocal(Formacion* formacion);
     virtual void setFormacionVisitante(Formacion* formacion);
     virtual void setCasaca(std::string casacaName);
-    //virtual void setIp(std::string ipName); va a ser un string???
     virtual char getCodigoJugadorActivo();
     virtual void setPelotaEnMovimiento();
     virtual void setPelotaParada();
