@@ -71,7 +71,7 @@ void ModeloCliente::conectarConServer(std::string ipServer, std::string puertoSe
     this->ip = ipServer;
     this->puerto = puertoServer;
     this->socket = new SocketCliente(ipServer, puertoServer);
-    this->idCliente = this->socket->recibirIdCliente();
+    this->idCliente = this->socket->recibirByte();
     this->model->setIdCliente(this->idCliente);
     this->model->setTodosJugadoresInactivos();
     std::cout << "El cliente se identifica " << this->model->getIdCliente() << std::endl;

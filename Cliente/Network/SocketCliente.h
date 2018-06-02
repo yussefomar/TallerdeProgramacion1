@@ -12,8 +12,6 @@ public:
     bool estaConectado();
     char recibirByte();
     void enviarByte(char byte);
-
-    char recibirIdCliente();
     void reconectar(std::string ip, std::string puerto);
 
 protected:

@@ -122,10 +122,7 @@ char SocketCliente::recibirByte()
 }
 
 
-char SocketCliente::recibirIdCliente()
-{
-    return this->recibirByte();
-}
+
 
 void SocketCliente::reconectar(std::string ip, std::string puerto)
 {
