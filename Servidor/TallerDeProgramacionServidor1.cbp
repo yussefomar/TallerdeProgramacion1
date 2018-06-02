@@ -34,12 +34,13 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-std=c++11" />
 			<Add option="-Wall" />
+			<Add option="-std=c++11" />
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Linker>
 			<Add option="-lyaml-cpp" />
+			<Add option="-pthread" />
 		</Linker>
 		<Unit filename="ModelServidor/Buffer.cpp" />
 		<Unit filename="ModelServidor/Buffer.h" />
@@ -50,12 +51,8 @@
 		<Unit filename="SocketCliente/SocketCliente.h" />
 		<Unit filename="SocketServidor/SocketServidor.cpp" />
 		<Unit filename="SocketServidor/SocketServidor.h" />
-		<Unit filename="Thread/ Runnable .cpp" />
-		<Unit filename="Thread/ Runnable .h" />
 		<Unit filename="Thread/Thread.cpp" />
 		<Unit filename="Thread/Thread.h" />
-		<Unit filename="Thread/communicatingThread.cpp" />
-		<Unit filename="Thread/communicatingThread.h" />
 		<Unit filename="Utils/Util_Configuracion.cpp" />
 		<Unit filename="Utils/Util_Configuracion.h" />
 		<Unit filename="Utils/Util_ParserUsuario.cpp" />
