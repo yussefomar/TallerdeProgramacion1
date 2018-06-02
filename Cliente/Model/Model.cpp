@@ -32,6 +32,7 @@ Model::Model()
     this->idCliente = 0x00;//POR DEFECTO HASTA ESPERAR EL NUEVO ID
     this->cantidadLocales = 0;
     this->cantidadVisitantes = 0;
+    this->cantidadClientes = 0;
     this->renderizar = false;
 }
 
@@ -526,7 +527,7 @@ void Model::definirComoLocal(char codigoCliente)
 
 void Model::definirComoVisitante(char codigoCliente)
 {
-    if(this->cantidadVisitantes + 1 > 3) {
+    if(this->cantidadClientes > 0 && this->cantidadVisitantes + 1 == this->cantidadClientes) {
         this->definirComoLocal(codigoCliente);
     }
     int i = this->cantidadVisitantes + 7;
@@ -558,6 +559,10 @@ bool Model::necesitaRenderizar() {
 
 void Model::habilitarRender() {
     this->renderizar=true;
+}
+
+void Model::setCantidadClientes(unsigned cantidad) {
+    this->cantidadClientes = cantidad;
 }
 
 

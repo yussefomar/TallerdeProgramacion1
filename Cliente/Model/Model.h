@@ -77,6 +77,7 @@ public:
     void desconectarCliente(char codigoCliente);
     void habilitarRender();
     bool necesitaRenderizar();
+    void setCantidadClientes(unsigned cantidad);
 
 
 protected:
@@ -98,6 +99,7 @@ private:
     char idCliente;
     unsigned cantidadLocales;
     unsigned cantidadVisitantes;
+    unsigned cantidadClientes;
     bool renderizar;
 
 };
