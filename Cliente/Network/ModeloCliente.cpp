@@ -277,16 +277,27 @@ void ModeloCliente::enviarNombre(std::string nombre)
     this->nombre = nombreComprimido;
     this->socket->enviarByte(nombreComprimido);
 }
+
 void ModeloCliente::enviarPassword(std::string password)
 {
     char passwordComprimido = this->hashear(password);
     this->password = passwordComprimido;
     this->socket->enviarByte(passwordComprimido);
 }
+
+void ModeloCliente::enviarNombrePassword(std::string nombre, std::string password)
+{
+    std::string credencial = nombre + password;
+    char credencialComprimido = this->hashear(credencial);
+    this->credencial = credencialComprimido;
+    this->socket->enviarByte(credencialComprimido);
+}
+
 char ModeloCliente::recibirValidacionNombre()
 {
     return this->socket->recibirByte();
 }
+
 char ModeloCliente::recibirValidacionPassword()
 {
     return this->socket->recibirByte();

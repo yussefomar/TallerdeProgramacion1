@@ -29,9 +29,9 @@ LogIn::LogIn(ModeloCliente* modelCliente)
         loguinScreen.Procesar(informacionIngreso);
         if(informacionIngreso.nombreIngresado)
         {
-            modelCliente->enviarNombre(informacionIngreso.nombre);
-            respuesta = modelCliente->recibirValidacionNombre();
-            informacionIngreso.procesarRespuesta(respuesta);
+            //modelCliente->enviarNombre(informacionIngreso.nombre);
+            //respuesta = modelCliente->recibirValidacionNombre();
+            //informacionIngreso.procesarRespuesta(respuesta);
             std::cout << "entramos en if del nombre" << std::endl;
 
             //===========================================================================
@@ -46,7 +46,7 @@ LogIn::LogIn(ModeloCliente* modelCliente)
         loguinScreen.Procesar(informacionIngreso);
         if(informacionIngreso.passwordIngresado)
         {
-            modelCliente->enviarPassword(informacionIngreso.password);
+            modelCliente->enviarNombrePassword(informacionIngreso.nombre, informacionIngreso.password);
             respuesta = modelCliente->recibirValidacionPassword();
             informacionIngreso.procesarRespuesta(respuesta);
             std::cout << "entramos en if del pass" << std::endl;

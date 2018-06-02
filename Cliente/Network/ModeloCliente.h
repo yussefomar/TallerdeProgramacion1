@@ -45,6 +45,7 @@ public:
 
     void enviarNombre(std::string nombre);
     void enviarPassword(std::string password);
+    void enviarNombrePassword(std::string nombre, std::string password);
     char recibirValidacionNombre();
     char recibirValidacionPassword();
     char hashear(std::string unString);
@@ -68,6 +69,7 @@ private:
     char idCliente;
     char nombre;
     char password;
+    char credencial;
     std::string ip;
     std::string puerto;
     char lugarEnCancha;
