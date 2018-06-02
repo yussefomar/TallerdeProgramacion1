@@ -163,10 +163,8 @@ void Model::setPelotaEnMovimiento()
 
 bool Model::pelotaEnMovimiento()
 {
-    //return this->juegoIniciado;
-    return true;
-
-}
+    return this->juegoIniciado;
+ }
 
 void Model::setCasaca(std::string casacaName)
 {
@@ -401,7 +399,7 @@ void Model::cambiarDeJugador(char codigoCliente)
         i= 0;
     }
     bool encontrado = false;
-    while ((i != nroJugador) && !encontrado && !vecJugadores[i].estaActivo())
+    while ((i != nroJugador) && !encontrado && (!vecJugadores[i].estaActivo()))
     {
         if ((vecJugadores[i].collide(this->camara )) && (nroJugador!=i))
         {
@@ -433,7 +431,7 @@ void Model::cambiarDeJugador(char codigoCliente)
 
 void Model::pasarPelota(char codigoCliente)
 {
-    //bool visitante = false;
+    bool visitante = false;
     unsigned nroJugador = this->clientes[codigoCliente];
     Jugador* vecJugadores = new Jugador[CANTJUGADORES];
     vecJugadores = &(this->jugadoresEnCancha[LOCALES]);
@@ -441,35 +439,42 @@ void Model::pasarPelota(char codigoCliente)
     {
         vecJugadores = &(this->jugadoresEnCancha[VISITANTES]);
         nroJugador=nroJugador-7;
-        //visitante= true;
+        visitante= true;
+    }
+    if(!visitante && !this->pelotaEnMovimiento())
+    {
+        this->setPelotaEnMovimiento();
+       }
 
-    }
-    unsigned i = nroJugador+1;
-    if (i == CANTJUGADORES)
-    {
-        i= 0;
-    }
-    bool encontrado = false;
-    while ((i != nroJugador) && !encontrado)
-    {
-        if ((vecJugadores[i].collide(this->camara )) && (nroJugador!=i))
-        {
-            encontrado = true;
-        }
+    if(this->pelotaEnMovimiento() ){
+        unsigned i = nroJugador+1;
         if (i == CANTJUGADORES)
         {
             i= 0;
         }
-        if (!encontrado)
+
+        bool encontrado = false;
+        while ((i != nroJugador) && !encontrado)
         {
-            i++;
+            if ((vecJugadores[i].collide(this->camara )) && (nroJugador!=i))
+            {
+                encontrado = true;
+            }
+            if (i == CANTJUGADORES)
+            {
+                i= 0;
+            }
+            if (!encontrado)
+            {
+                i++;
+            }
         }
-    }
-    if (encontrado)
-    {
-        vecJugadores[nroJugador].pasaPelota(&(this->pelota),&vecJugadores[i] );
-        this->notificarAObservadores(nroJugador, PASPELO, MJU);
-    }
+        if (encontrado)
+        {
+            vecJugadores[nroJugador].pasaPelota(&(this->pelota),&vecJugadores[i] );
+            this->notificarAObservadores(nroJugador, PASPELO, MJU);
+        }
+        }
 }
 
 

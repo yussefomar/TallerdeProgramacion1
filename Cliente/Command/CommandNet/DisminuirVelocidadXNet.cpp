@@ -11,7 +11,10 @@ DisminuirVelocidadXNet::~DisminuirVelocidadXNet()
 
 void DisminuirVelocidadXNet::execute()
 {
+    if(this->model->pelotaEnMovimiento())
+    {
     this->model->disminuirVelocidadX(this->getIdCliente());
+    }
 }
 
 char DisminuirVelocidadXNet::getCodigoComando()

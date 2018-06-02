@@ -10,7 +10,10 @@ AumentarVelocidadYNet::~AumentarVelocidadYNet()
 
 void AumentarVelocidadYNet::execute()
 {
+    if(this->model->pelotaEnMovimiento())
+    {
     this->model->aumentarVelocidadEnY(this->getIdCliente());
+    }
 }
 
 char AumentarVelocidadYNet::getCodigoComando()

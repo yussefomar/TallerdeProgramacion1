@@ -12,7 +12,10 @@ DisminuirVelocidadYNet::~DisminuirVelocidadYNet()
 
 void DisminuirVelocidadYNet::execute()
 {
+    if(this->model->pelotaEnMovimiento())
+    {
     this->model->disminuirVelocidadY(this->getIdCliente());
+    }
 }
 
 

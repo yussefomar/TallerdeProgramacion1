@@ -55,7 +55,7 @@ void Formacion33::setPosicionVisitante(Jugador* jugadores)
 
     int posX;
     int posY;
-    int posicionesX[] = { 8,  2,  2,  3, -2, -2, -2};
+    int posicionesX[] = { 8,  3,  3,  3, -2, -2, -2};
     int posicionesY[] = { 0, -3,  3,  0, -3,  3,  0};
     int multiplo = 1;
     for(int i = 0; i < CANTJUGADORES; ++i)
@@ -73,7 +73,7 @@ void Formacion33::setPosicionLocal(Jugador* jugadores)
 
     int posX;
     int posY;
-    int posicionesX[] = { 8,  2,  2,  3, -2, -2, -2};
+    int posicionesX[] = { 8,  3,  3,  3, -2, -2, -2};
     int posicionesY[] = { 0, -3,  3,  0, -3,  3,  0};
     int multiplo = -1;
     for(int i = 0; i < CANTJUGADORES; ++i)

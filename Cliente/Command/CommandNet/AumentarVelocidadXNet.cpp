@@ -12,7 +12,10 @@ AumentarVelocidadXNet::~AumentarVelocidadXNet()
 
 void AumentarVelocidadXNet::execute()
 {
+   if(this->model->pelotaEnMovimiento())
+    {
     this->model->aumentarVelocidadEnX(this->getIdCliente());
+    }
 }
 
 char AumentarVelocidadXNet::getCodigoComando()

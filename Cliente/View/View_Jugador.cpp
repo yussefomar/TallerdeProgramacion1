@@ -230,7 +230,10 @@ void View_Jugador::render( int camX, int camY,SDL_Renderer * gRenderer )
 
     }
 
-
+    if ((this->model)->estaActivo())
+    {
+        this->texturaSeleccionado->render( (*this->model).getPosX() - camX, (*this->model).getPosY() - camY,NULL,this->model->getDireccion(),NULL,SDL_FLIP_NONE,gRenderer);
+    }
 
     this->texturaJugador->render( (*this->model).getPosX() - camX, (*this->model).getPosY() - camY,currentClip,this->model->getDireccion(),NULL,SDL_FLIP_NONE,gRenderer);
 
@@ -338,8 +341,10 @@ void View_Jugador::renderEnEspera( int camX, int camY,SDL_Renderer * gRenderer )
 
     }
 
-
-
+  if ((this->model)->estaActivo())
+    {
+        this->texturaSeleccionado->render( (*this->model).getPosX() - camX, (*this->model).getPosY() - camY,NULL,this->model->getDireccion(),NULL,SDL_FLIP_NONE,gRenderer);
+    }
 
     this->texturaJugador->render( (*this->model).getPosX() - camX, (*this->model).getPosY() - camY,currentClip,this->model->getDireccion(),NULL,SDL_FLIP_NONE,gRenderer);
 

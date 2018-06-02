@@ -12,10 +12,6 @@ PasarPelotaNet::~PasarPelotaNet()
 
 void PasarPelotaNet ::execute()
 {
-    if(!this->model->pelotaEnMovimiento())
-    {
-        this->model->setPelotaEnMovimiento();
-    }
     this->model->pasarPelota(this->getIdCliente());
 }
 
