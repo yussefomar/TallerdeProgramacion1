@@ -69,9 +69,11 @@ void InformacionIngreso::procesarRespuesta(char respuesta)
     {
         this->nombreIngresado = false;
         this->passwordIngresado = false;
-        this->mensaje = "Credenciales Incorrectas.";
+        this->equipoIngresado = false;
         this->nombre = "";
+        this->equipo = "";
         this->password = "";
+        this->mensaje = "Credenciales Incorrectas.";
         return;
     }
 }
@@ -82,8 +84,10 @@ void InformacionIngreso::procesarConectividad(bool respuesta)
     {
         this->ipIngresado = false;
         this->puertoIngresado = false;
+        this->nombreIngresado = false;
         this->ip = "";
         this->puerto = "";
+        this->nombre = "";
         this->mensaje = "Error al conectar con ese IP y PUERTO.";
     }
     else
@@ -97,6 +101,6 @@ void InformacionIngreso::procesarConectividad(bool respuesta)
 void InformacionIngreso::equipoErroneo()
 {
     this->equipoIngresado = false;
-    this->mensaje = "No ha elegido un equipo valido";
     this->equipo = "";
+    this->mensaje = "No ha elegido un equipo valido";
 }

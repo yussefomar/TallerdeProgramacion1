@@ -122,9 +122,13 @@ void View_Loguin::Procesar(InformacionIngreso &informacionIngreso)
     UpdateSalida(informacionIngreso.mensaje);
 
     if(informacionIngreso.ipIngresado) UpdateInputPeticionPuerto("puerto:");
+    else  UpdateInputPeticionPuerto("");
     if(informacionIngreso.puertoIngresado) UpdateInputPeticionUsuario("nombre:");
+    else UpdateInputPeticionUsuario("");
     if(informacionIngreso.nombreIngresado) UpdateInputPeticionPassword("password:");
+    else  UpdateInputPeticionPassword("");
     if(informacionIngreso.passwordIngresado) UpdateInputPeticionEquipo("equipo 1 o 2:");
+    else  UpdateInputPeticionEquipo("");
 
 while(!quit)
     {
