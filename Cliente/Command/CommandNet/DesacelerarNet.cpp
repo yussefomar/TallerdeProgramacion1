@@ -17,3 +17,7 @@ char DesacelerarNet::getCodigoComando()
 {
     return DECVELX;
 }
+
+CommandNet* DesacelerarNet::getCopia() {
+    return new DesacelerarNet(this->model);
+}

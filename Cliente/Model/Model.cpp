@@ -115,6 +115,7 @@ void Model::update()
         Command* cambio = this->cambios.front();
         cambio->execute();
         this->cambios.pop();
+        delete cambio;
     }
     this->moverJuego();
 }
@@ -169,7 +170,7 @@ void Model::setPelotaEnMovimiento()
 bool Model::pelotaEnMovimiento()
 {
     return this->juegoIniciado;
- }
+}
 
 void Model::setCasaca(std::string casacaName)
 {
@@ -389,49 +390,42 @@ void Model::cambiarDeJugador(char codigoCliente)
     bool visitante = false;
     unsigned nroJugador = this->clientes[codigoCliente];
     Jugador* vecJugadores;
-    vecJugadores = &(this->jugadoresEnCancha[LOCALES]);
+    vecJugadores = this->jugadoresLocales;
     if (nroJugador > 6 )
     {
-        vecJugadores = &(this->jugadoresEnCancha[VISITANTES]);
-        nroJugador=nroJugador-7;
+        vecJugadores = this->jugadoresVisitantes;
+        nroJugador=nroJugador % CANTJUGADORES;
         visitante= true;
 
     }
 
-    unsigned i = nroJugador+1;
-    if (i == CANTJUGADORES)
-    {
-        i= 0;
-    }
+    unsigned i;
     bool encontrado = false;
-    while ((i != nroJugador) && !encontrado && (!vecJugadores[i].estaActivo()))
+    for(i = 0; i < CANTJUGADORES && !encontrado; ++i)
     {
-        if ((vecJugadores[i].collide(this->camara )) && (nroJugador!=i))
-        {
-            (vecJugadores[nroJugador]).desactivar();
-            (vecJugadores[i]).activar();
-            if (visitante)
-            {
-                this->clientes[codigoCliente] = i + 7;
-            }
-            else
-            {
-                this->clientes[codigoCliente] = i;
-            }
+        encontrado = ((vecJugadores[i].collide(this->camara)) && (nroJugador!=i) && !vecJugadores[i].estaActivo()) || ((nroJugador!=i) && !vecJugadores[i].estaActivo());
 
-            this->nroJugadorActivo = i;
-            encontrado = true;
-            this->notificarAObservadores(i, COMMNULL, MJU);
-        }
-        if (!encontrado)
-        {
-            i++;
-        }
-        if (i == CANTJUGADORES)
-        {
-            i= 0;
-        }
     }
+
+    if(!encontrado)
+    {
+        std::cout << "no se encotro jugador que cumpla con las condiciones" << std::endl;
+    }
+
+    (vecJugadores[nroJugador]).desactivar();
+    (vecJugadores[i]).activar();
+    if (visitante)
+    {
+        this->clientes[codigoCliente] = i + 7;
+    }
+    else
+    {
+        this->clientes[codigoCliente] = i;
+    }
+
+    this->nroJugadorActivo = i;
+    this->notificarAObservadores(i, COMMNULL, MJU);
+
 }
 
 void Model::pasarPelota(char codigoCliente)
@@ -447,9 +441,10 @@ void Model::pasarPelota(char codigoCliente)
     if((codigoCliente == 0x00)  && !this->pelotaEnMovimiento())
     {
         this->setPelotaEnMovimiento();
-       }
+    }
 
-    if(this->pelotaEnMovimiento() ){
+    if(this->pelotaEnMovimiento() )
+    {
         unsigned i = nroJugador+1;
         if (i == CANTJUGADORES)
         {
@@ -477,7 +472,7 @@ void Model::pasarPelota(char codigoCliente)
             vecJugadores[nroJugador].pasaPelota(&(this->pelota),&vecJugadores[i] );
             this->notificarAObservadores(nroJugador, PASPELO, MJU);
         }
-        }
+    }
 }
 
 
@@ -515,7 +510,8 @@ void Model::definirComoLocal(char codigoCliente)
 //    }
     int i = -1;
     bool encontreJugadorLibre = false;
-    while (!encontreJugadorLibre) {
+    while (!encontreJugadorLibre)
+    {
         ++i;
         encontreJugadorLibre = !this->jugadoresEnCancha[i].estaActivo();
     }
@@ -533,7 +529,8 @@ void Model::definirComoVisitante(char codigoCliente)
 //    }
     int i = 6;
     bool encontreJugadorLibre = false;
-    while (!encontreJugadorLibre) {
+    while (!encontreJugadorLibre)
+    {
         ++i;
         encontreJugadorLibre = !this->jugadoresEnCancha[i].estaActivo();
     }
@@ -552,19 +549,23 @@ void Model::desconectarCliente(char codigoCliente)
     this->notificarAObservadores(codigoCliente,DESCJUG,ERR_CON);
 }
 
-bool Model::necesitaRenderizar() {
-    if(this->renderizar) {
+bool Model::necesitaRenderizar()
+{
+    if(this->renderizar)
+    {
         this->renderizar=false;
         return true;
     }
     return this->renderizar;
 }
 
-void Model::habilitarRender() {
+void Model::habilitarRender()
+{
     this->renderizar=true;
 }
 
-void Model::setCantidadClientes(unsigned cantidad) {
+void Model::setCantidadClientes(unsigned cantidad)
+{
     this->cantidadClientes = cantidad;
 }
 

@@ -19,3 +19,7 @@ char DefinirComoVisit::getCodigoComando()
 {
     return DEFVISIT;
 }
+
+CommandNet* DefinirComoVisit::getCopia() {
+    return new DefinirComoVisit(this->model);
+}

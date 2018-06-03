@@ -11,6 +11,7 @@ public:
     virtual ~PasarPelotaNet();
     void execute();
     char getCodigoComando();
+    CommandNet* getCopia();
 
 protected:
 

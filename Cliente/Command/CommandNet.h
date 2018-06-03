@@ -15,9 +15,10 @@ public:
 
     void setIdCliente(char idCliente);
     char getIdCliente();
+    virtual CommandNet* getCopia() = 0;
 
 protected:
-    std::queue<char> idCliente;
+    char idCliente;
     Model* model;
 
 private:

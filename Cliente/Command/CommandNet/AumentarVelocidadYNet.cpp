@@ -21,3 +21,7 @@ char AumentarVelocidadYNet::getCodigoComando()
     return INCVELY;
 }
 
+CommandNet* AumentarVelocidadYNet::getCopia() {
+    return new AumentarVelocidadYNet(this->model);
+}
+

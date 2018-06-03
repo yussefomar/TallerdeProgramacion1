@@ -19,3 +19,7 @@ char AcelerarNet::getCodigoComando()
 {
     return DESJUG;
 }
+
+CommandNet* AcelerarNet::getCopia() {
+    return new AcelerarNet(this->model);
+}

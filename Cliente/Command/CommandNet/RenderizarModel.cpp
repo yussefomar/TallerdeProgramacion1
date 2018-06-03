@@ -17,3 +17,7 @@ char RenderizarModel::getCodigoComando() {
 void RenderizarModel::execute() {
     this->model->habilitarRender();
 }
+
+CommandNet* RenderizarModel::getCopia() {
+    return new RenderizarModel(this->model);
+}

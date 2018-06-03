@@ -20,3 +20,7 @@ char PasarPelotaNet ::getCodigoComando()
     return PASPELO;
 }
 
+CommandNet* PasarPelotaNet::getCopia() {
+    return new PasarPelotaNet(this->model);
+}
+

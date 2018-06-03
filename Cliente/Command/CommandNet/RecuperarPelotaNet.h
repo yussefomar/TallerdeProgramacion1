@@ -11,6 +11,7 @@ public:
     virtual ~RecuperarPelotaNet();
     void execute() ;
     char  getCodigoComando() ;
+    CommandNet* getCopia();
 
 protected:
 

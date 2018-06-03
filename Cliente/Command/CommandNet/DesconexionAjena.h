@@ -11,6 +11,7 @@ class DesconexionAjena : public CommandNet
         virtual ~DesconexionAjena();
             void  execute() ;
     char  getCodigoComando() ;
+    CommandNet* getCopia();
 
     protected:
 

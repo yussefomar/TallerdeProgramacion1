@@ -23,5 +23,9 @@ char AumentarVelocidadXNet::getCodigoComando()
     return  INCVELX;
 }
 
+CommandNet* AumentarVelocidadXNet::getCopia() {
+    return new AumentarVelocidadXNet(this->model);
+}
+
 
 

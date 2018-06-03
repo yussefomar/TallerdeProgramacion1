@@ -21,3 +21,7 @@ char DisminuirVelocidadXNet::getCodigoComando()
 {
     return DECVELX;
 }
+
+CommandNet* DisminuirVelocidadXNet::getCopia() {
+    return new DisminuirVelocidadXNet(this->model);
+}

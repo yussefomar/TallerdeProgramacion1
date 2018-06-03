@@ -219,7 +219,7 @@ void ModeloCliente::recibirUnComando()
     char codigo = this->socket->recibirByte();
     char entidad = codigo >> 6;
     char evento = 0x3F & codigo;
-    CommandNet* comando = this->comandos[evento];
+    CommandNet* comando = this->comandos[evento]->getCopia();
     comando->setIdCliente(entidad);
     this->model->agregarCambio(comando);
 }
@@ -234,7 +234,7 @@ void ModeloCliente::setComoLocal()
     char entidad = this->model->getIdCliente();
     entidad = entidad << 6;
     char codigo = DEFLOCAL | entidad;
-    this->lugarEnCancha = codigo;
+
     this->codigosAEnviar.push(codigo);
     this->lugarEnCancha = '1';
 }
@@ -244,7 +244,7 @@ void ModeloCliente::setComoVisitante()
     char entidad = this->model->getIdCliente();
     entidad = entidad << 6;
     char codigo = DEFVISIT | entidad;
-    this->lugarEnCancha = codigo;
+
     this->codigosAEnviar.push(codigo);
     this->lugarEnCancha = '2';
 }

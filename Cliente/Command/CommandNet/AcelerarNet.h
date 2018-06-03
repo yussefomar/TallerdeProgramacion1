@@ -11,6 +11,8 @@ public:
     virtual ~AcelerarNet();
     void  execute() ;
     char  getCodigoComando() ;
+    CommandNet* getCopia();
+
 
 protected:
 

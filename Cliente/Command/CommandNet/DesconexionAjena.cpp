@@ -17,3 +17,8 @@ char DesconexionAjena::getCodigoComando() {
 void DesconexionAjena::execute() {
     this->model->desconectarCliente(this->getIdCliente());
 }
+CommandNet* DesconexionAjena::getCopia() {
+    return new DesconexionAjena(this->model);
+}
+
+

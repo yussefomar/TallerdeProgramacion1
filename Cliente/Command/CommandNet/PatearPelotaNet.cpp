@@ -21,3 +21,7 @@ char PatearPelotaNet ::getCodigoComando()
 {
     return PATPELO;
 }
+
+CommandNet* PatearPelotaNet::getCopia() {
+    return new PatearPelotaNet(this->model);
+}

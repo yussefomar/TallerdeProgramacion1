@@ -11,6 +11,7 @@ public:
     virtual ~CambiarJugadorNet();
     void  execute();
     char  getCodigoComando();
+    CommandNet* getCopia();
 
 protected:
 

@@ -21,3 +21,6 @@ char StopJugadorNet::getCodigoComando()
     return STOPJUG;
 }
 
+CommandNet* StopJugadorNet::getCopia() {
+    return new StopJugadorNet(this->model);
+}

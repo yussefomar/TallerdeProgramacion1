@@ -11,6 +11,7 @@ public:
     virtual ~DisminuirVelocidadXNet();
     void  execute();
     char  getCodigoComando() ;
+    CommandNet* getCopia();
 
 protected:
 

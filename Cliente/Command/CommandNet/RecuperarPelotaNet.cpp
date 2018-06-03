@@ -24,3 +24,7 @@ char RecuperarPelotaNet ::getCodigoComando()
     return RECUPELO;
 
 }
+
+CommandNet* RecuperarPelotaNet::getCopia() {
+    return new RecuperarPelotaNet(this->model);
+}

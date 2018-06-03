@@ -11,6 +11,8 @@ class RenderizarModel : public CommandNet
         virtual ~RenderizarModel();
             void  execute() ;
     char  getCodigoComando() ;
+    CommandNet* getCopia();
+
 
 
     protected:

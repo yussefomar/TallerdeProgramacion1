@@ -12,6 +12,7 @@ public:
     virtual ~DisminuirVelocidadYNet();
     void  execute();
     char getCodigoComando();
+    CommandNet* getCopia();
 
 protected:
 

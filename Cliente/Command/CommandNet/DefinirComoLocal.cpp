@@ -19,3 +19,6 @@ char DefinirComoLocal::getCodigoComando()
 {
     return DEFLOCAL;
 }
+CommandNet* DefinirComoLocal::getCopia() {
+    return new DefinirComoLocal(this->model);
+}

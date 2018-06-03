@@ -12,13 +12,10 @@ CommandNet::~CommandNet()
 void CommandNet::setIdCliente(char idCliente)
 {
 
-    this->idCliente.push(idCliente);
+    this->idCliente = idCliente;
 }
 
 char CommandNet::getIdCliente()
 {
-    char id = this->idCliente.front();
-    this->idCliente.pop();
-    return id;
+    return this->idCliente;
 }
-

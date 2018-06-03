@@ -19,3 +19,8 @@ char CommandNullNet::getCodigoComando()
 {
     return COMMNULL;
 }
+
+
+CommandNet* CommandNullNet::getCopia() {
+    return new CommandNullNet(this->model);
+}

@@ -23,3 +23,7 @@ char DisminuirVelocidadYNet::getCodigoComando()
 {
     return DECVELY;
 }
+
+CommandNet* DisminuirVelocidadYNet::getCopia() {
+    return new DisminuirVelocidadYNet(this->model);
+}

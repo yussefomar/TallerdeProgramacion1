@@ -11,7 +11,7 @@ public:
     virtual ~DefinirComoLocal();
     void  execute() ;
     char  getCodigoComando() ;
-
+CommandNet* getCopia();
 protected:
 
 private:

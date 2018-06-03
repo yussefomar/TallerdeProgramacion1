@@ -11,6 +11,7 @@ public:
     virtual ~CommandNullNet();
     void execute();
     char getCodigoComando();
+    CommandNet* getCopia();
 
 protected:
 

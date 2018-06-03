@@ -11,6 +11,7 @@ public:
     virtual ~AumentarVelocidadYNet();
     void  execute();
     char getCodigoComando() ;
+    CommandNet* getCopia();
 
 protected:
 

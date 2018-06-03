@@ -20,3 +20,7 @@ char CambiarJugadorNet::getCodigoComando()
 {
     return CAMBJUG;
 }
+
+CommandNet* CambiarJugadorNet::getCopia() {
+    return new CambiarJugadorNet(this->model);
+}
