@@ -13,12 +13,12 @@
 
 Util_Common common; //Porque importa esta variable global
 
-int main(int argc, char* args[]) try
+int main(int argc, char* args[])
 {
     common.backupFile();
     common.createFile();
     Util_LoggerObserver loggerObserver(3);
-
+try{
     Model model;
     Util_Configuracion configuracion(&model, &loggerObserver);
     model.agregarObservador(&loggerObserver);
@@ -52,20 +52,21 @@ int main(int argc, char* args[]) try
     return 0;
 
 }
-catch(const std::runtime_error& re)
-{
-//        NotifyError("Error en Runtime: ", "View.cpp");
-//        NotifyError(re.what(), "View.cpp");
-}
-catch(const std::exception& ex)
-{
-//        NotifyError("Ha ocurrido un error: ", "View.cpp");
-//        NotifyError(ex.what(), "View.cpp");
-}
-catch(...)
-{
-//        NotifyError("Error desconocido que no se ha podido especificar.", "View.cpp");
-}
+ catch(const std::runtime_error& re)
+    {
+    loggerObserver.writeErrorLine("Ha ocurrido un runtime error en main: ", "main.cpp");
+    loggerObserver.writeErrorLine(re.what(), "main.cpp");
+    }
+    catch(const std::exception& ex)
+    {
+        loggerObserver.writeErrorLine("Ha ocurrido un error en main: ", "main.cpp");
+        loggerObserver.writeErrorLine(ex.what(), "main.cpp");
+    }
+    catch(...)
+    {
+        loggerObserver.writeErrorLine("Error desconocido que no se ha podido especificar.", "main.cpp");
+    }
 
 
 
+}
