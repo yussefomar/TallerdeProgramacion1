@@ -387,7 +387,7 @@ void Model::acelerar(char codigoCliente)
 
 void Model::cambiarDeJugador(char codigoCliente)
 {
-    bool visitante = false;
+   /* bool visitante = false;
     unsigned nroJugador = this->clientes[codigoCliente];
     Jugador* vecJugadores;
     vecJugadores = this->jugadoresLocales;
@@ -424,7 +424,54 @@ void Model::cambiarDeJugador(char codigoCliente)
     }
 
     this->nroJugadorActivo = i;
-    this->notificarAObservadores(i, COMMNULL, MJU);
+    this->notificarAObservadores(i, COMMNULL, MJU);*/
+
+    bool visitante = false;
+    unsigned nroJugador = this->clientes[codigoCliente];
+    Jugador* vecJugadores = new Jugador[CANTJUGADORES];
+    vecJugadores = &(this->jugadoresEnCancha[LOCALES]);
+    if (nroJugador > 6 )
+    {
+        vecJugadores = &(this->jugadoresEnCancha[VISITANTES]);
+        nroJugador=nroJugador-7;
+        visitante= true;
+
+    }
+
+    unsigned i = nroJugador+1;
+    if (i == CANTJUGADORES)
+    {
+        i= 0;
+    }
+    bool encontrado = false;
+    while ((i != nroJugador) && !encontrado)
+    {
+        if ((vecJugadores[i].collide(this->camara )) && (nroJugador!=i) && (!vecJugadores[i].estaActivo()))
+        {
+            (vecJugadores[nroJugador]).desactivar();
+            (vecJugadores[i]).activar();
+            if (visitante)
+            {
+                this->clientes[codigoCliente] = i + 7;
+            }
+            else
+            {
+                this->clientes[codigoCliente] = i;
+            }
+
+            this->nroJugadorActivo = i;
+            encontrado = true;
+            this->notificarAObservadores(i, COMMNULL, MJU);
+        }
+        if (!encontrado)
+        {
+            i++;
+        }
+        if (i == CANTJUGADORES)
+        {
+            i= 0;
+        }
+    }
 
 }
 
@@ -438,7 +485,7 @@ void Model::pasarPelota(char codigoCliente)
         vecJugadores = &(this->jugadoresEnCancha[VISITANTES]);
         nroJugador=nroJugador-7;
     }
-    if((codigoCliente == 0x00)  && !this->pelotaEnMovimiento())
+    if((codigoCliente == 0x00)  && !this->pelotaEnMovimiento()  && vecJugadores[nroJugador].checkCollisionPelota(pelota.getCollider()))
     {
         this->setPelotaEnMovimiento();
     }
@@ -471,6 +518,9 @@ void Model::pasarPelota(char codigoCliente)
         {
             vecJugadores[nroJugador].pasaPelota(&(this->pelota),&vecJugadores[i] );
             this->notificarAObservadores(nroJugador, PASPELO, MJU);
+        } else {
+         vecJugadores[nroJugador].patearPelota(&(this->pelota));
+         this->notificarAObservadores(nroJugador, PASPELO, MJU);
         }
     }
 }
