@@ -73,6 +73,8 @@ void ModeloCliente::conectarConServer(std::string ipServer, std::string puertoSe
     this->socket = new SocketCliente(ipServer, puertoServer);
     this->idCliente = this->socket->recibirByte();
     this->model->setIdCliente(this->idCliente);
+    this->model->setCantidadClientes(this->socket->recibirByte());
+
     this->model->setTodosJugadoresInactivos();
     std::cout << "El cliente se identifica " << this->model->getIdCliente() << std::endl;
 }
@@ -167,10 +169,6 @@ void ModeloCliente::cambiarJugadorActivo()
 
 void ModeloCliente::update()
 {
-    if(!this->conectadoAlServer())
-    {
-        this->intentarReconexion();
-    }
     this->tareaAEjecutar = this->tareaAEjecutar % 3;
     if(this->tareaAEjecutar == ENVIAR)
     {
@@ -325,28 +323,5 @@ bool ModeloCliente::habilitadoParaJugar()
     return nroId > 4; //los rechazados siempre tienen un valor mayor a 5;
 }
 
-void ModeloCliente::intentarReconexion()
-{
-    this->model->desconectarCliente(this->idCliente);
-    while(!this->socket->estaConectado())
-    {
-        this->socket->reconectar(this->ip, this->puerto);
-        usleep(1000);
-    }
-    std::cout << "se conecto" << std::endl;
-    //Proceso de verificacion de identidad
-    this->socket->enviarByte(this->nombre);
-    this->idCliente = this->socket->recibirByte();
-    this->socket->enviarByte(this->password);
-    this->idCliente = this->socket->recibirByte();
-    //en lugar de enviar una validacion se envia el id del cliente que no deberia cambiar.
-    this->idCliente = this->socket->recibirByte();
-    //this->actualizar();
-    if(this->lugarEnCancha == '1') {
-        this->setComoLocal();
-    } else {
-        this->setComoVisitante();
-    }
 
-}
 

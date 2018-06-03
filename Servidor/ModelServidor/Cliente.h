@@ -26,6 +26,7 @@ public:
     void permitirInicio();
     void enviarARenderizar();
     void avisarDesconexion();
+    void setCantidadClientes(unsigned cantidad);
 
 
 protected:
@@ -42,6 +43,7 @@ private:
     std::string puerto;
     std::vector<char> bdd;
     char credencial;
+    unsigned cantidadClientes;
 
 };
 

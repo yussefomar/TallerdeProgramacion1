@@ -32,6 +32,7 @@ void ModeloServidor::setClientesPermitidos(unsigned cantidadMaxClientes)
 {
     this->clientes = std::vector<Cliente>(cantidadMaxClientes);
     this->buffer.setCantidadBuffers(cantidadMaxClientes);
+    this->cantidadClientes = cantidadMaxClientes;
 }
 
 void ModeloServidor::setIpYPuerto(std::string ip, std::string puerto)
@@ -47,6 +48,7 @@ void ModeloServidor::aceptarClientes() {
     for(unsigned i = 0; i < this->clientes.size(); ++i) {
         this->clientes[i].setBuffer(&this->buffer);
         this->clientes[i].setBDD(this->bdd);
+        this->clientes[i].setCantidadClientes(this->cantidadClientes);
     }
 
     //Se crean hilos para recibir clientes

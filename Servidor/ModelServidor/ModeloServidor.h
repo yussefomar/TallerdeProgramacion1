@@ -35,6 +35,7 @@ private:
     std::queue<char> clientesIngresados;
     std::mutex mutex;
     std::vector<char> bdd;
+    unsigned cantidadClientes;
 
 };
 

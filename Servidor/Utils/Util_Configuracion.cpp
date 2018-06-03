@@ -21,7 +21,6 @@ Util_Configuracion::Util_Configuracion(ModeloServidor* model)
         int cantidadClientes = parser.GetCantidadClientes();
         Conexion conexion = parser.getIpPuerto();
         this->modeloServidor->setClientesPermitidos(cantidadClientes);
-
         this->modeloServidor->setIpYPuerto(conexion.get_ip(), conexion.get_puerto());
 
         //METODOS PARA CONFIGURAR EL MODEL

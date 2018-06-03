@@ -74,6 +74,7 @@ void Cliente::aceptarCliente()
     bool credencialesValidas = false;
     this->socket = new SocketServidor(this->ip, this->puerto);
     this->socket->enviarByte(this->idCliente);
+    this->socket->enviarByte(this->cantidadClientes);
 
     Cliente::mutexIngresos.lock();
     std::cout << "Generando user en el hilo nro: "<< this->idCliente << std::endl;
@@ -168,4 +169,8 @@ void Cliente::avisarDesconexion()
     {
         this->buffer->pushCodigo(DESCJUG);
     }
+}
+
+void Cliente::setCantidadClientes(unsigned cantidad) {
+    this->cantidadClientes = cantidad;
 }

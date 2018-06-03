@@ -388,7 +388,7 @@ void Model::cambiarDeJugador(char codigoCliente)
 {
     bool visitante = false;
     unsigned nroJugador = this->clientes[codigoCliente];
-    Jugador* vecJugadores = new Jugador[CANTJUGADORES];
+    Jugador* vecJugadores;
     vecJugadores = &(this->jugadoresEnCancha[LOCALES]);
     if (nroJugador > 6 )
     {
@@ -510,10 +510,10 @@ void Model::setTodosJugadoresInactivos()
 
 void Model::definirComoLocal(char codigoCliente)
 {
-    if(this->cantidadLocales + 1 > 3) {
-        this->definirComoVisitante(codigoCliente);
-    }
-    int i = this->cantidadLocales;
+//    if(this->cantidadClientes > 1 && this->cantidadLocales + 1 == this->cantidadClientes) {
+//        this->definirComoVisitante(codigoCliente);
+//    }
+    int i = -1;
     bool encontreJugadorLibre = false;
     while (!encontreJugadorLibre) {
         ++i;
@@ -528,10 +528,10 @@ void Model::definirComoLocal(char codigoCliente)
 
 void Model::definirComoVisitante(char codigoCliente)
 {
-    if(this->cantidadClientes > 0 && this->cantidadVisitantes + 1 == this->cantidadClientes) {
-        this->definirComoLocal(codigoCliente);
-    }
-    int i = this->cantidadVisitantes + 7;
+//    if(this->cantidadClientes > 1 && this->cantidadVisitantes + 1 == this->cantidadClientes) {
+//        this->definirComoLocal(codigoCliente);
+//    }
+    int i = 6;
     bool encontreJugadorLibre = false;
     while (!encontreJugadorLibre) {
         ++i;

@@ -34,6 +34,9 @@ int main(int argc, char* args[]) try
     Controller controller(&modelCliente);
     controller.Attach(&loggerObserver);
     modelCliente.recibirRespuestaInicio();
+    for(unsigned i = 0; i < 100; ++i) {
+        modelCliente.update();
+    }
 
     while( !controller.quitPressed())
     {
