@@ -5,10 +5,14 @@
 #include "../Model/Model.h"
 #include "../Model/Model_Jugador.h"
 #include "../View/View_Mensajes.h"
-#include "../Utils/Util_LoggerSubject.h"
+#include "../Utils/Observador.h"
 #include <string>
 
-class View : public Util_LoggerSubject
+#define ERR_CON 0x20
+#define ERR_ESP 0x21
+#define OK_CONTINUA 0x22
+
+class View : public Util_LoggerSubject, public Observador
 {
 public:
     View(Model* model);
@@ -21,7 +25,7 @@ public:
     bool inicializar();
     void loadMedia();
     void close();
-protected:
+    void notificar(std::string entidad, char evento, char tipo);
 
 private:
     Model* model;

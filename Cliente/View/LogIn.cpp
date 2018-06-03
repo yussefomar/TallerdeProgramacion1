@@ -1,6 +1,9 @@
 #include "LogIn.h"
 #include "View_Loguin.h"
 
+
+Util_datosGuardados dg;
+
 LogIn::LogIn(ModeloCliente* modelCliente)
 {
     char respuesta;
@@ -8,8 +11,15 @@ LogIn::LogIn(ModeloCliente* modelCliente)
     InformacionIngreso informacionIngreso(false);
     loguinScreen.Inicializar();
 
+    DatosConexion datosConexion = dg.getDatosConexion();
+    informacionIngreso.ip = datosConexion.ip;
+    informacionIngreso.puerto = datosConexion.puerto;
+
+    if(!informacionIngreso.ip.empty()) informacionIngreso.ipIngresado = true;
+
     while( !informacionIngreso.ipIngresado || !informacionIngreso.puertoIngresado )
     {
+
         loguinScreen.Procesar(informacionIngreso);
         if(informacionIngreso.ipIngresado && informacionIngreso.puertoIngresado )
         {
@@ -22,6 +32,9 @@ LogIn::LogIn(ModeloCliente* modelCliente)
             //===========================================================================
         }
     }
+    dg.setDatosConexionFile(informacionIngreso.puerto,informacionIngreso.ip);
+
+
     std::cout << "llegamos a la ip, vamos por el nombre" << std::endl;
     while( !informacionIngreso.nombreIngresado )
     {

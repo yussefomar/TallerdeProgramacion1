@@ -10,10 +10,8 @@
 #include "View/View_Loguin.h"
 #include "Utils/Util_Configuracion.h"
 #include "LogIn.h"
-#include "Utils/Util_datosGuardados.h"
 
 Util_Common common; //Porque importa esta variable global
-Util_datosGuardados dg;
 
 int main(int argc, char* args[]) try
 {
@@ -25,14 +23,13 @@ int main(int argc, char* args[]) try
     Util_Configuracion configuracion(&model, &loggerObserver);
     model.agregarObservador(&loggerObserver);
 
-dg.setDatosConexionFile("2025","192.168.10.11");
-dg.getDatosConexion();
-
     ModeloCliente modelCliente(&model);
     LogIn logIn(&modelCliente);
 
     View view(&model);
     view.Attach(&loggerObserver);
+
+    model.agregarObservador(&view);
 
     Controller controller(&modelCliente);
     controller.Attach(&loggerObserver);

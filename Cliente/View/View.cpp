@@ -197,3 +197,19 @@ void View::close()
     NotifyMessage("Finaliza: close", "View.cpp");
 
 }
+
+void View::notificar(std::string entidad, char evento, char tipo)
+{
+    if(tipo == ERR_CON)
+    {
+        this->cargarCartel("JUGADOR DESCONECTADO: ");
+    }
+    if(tipo == ERR_ESP)
+    {
+        this->cargarCartel("estamos esperando a un jugador.");
+    }
+    if(tipo == OK_CONTINUA)
+    {
+        this->limpiarCartel();
+    }
+}

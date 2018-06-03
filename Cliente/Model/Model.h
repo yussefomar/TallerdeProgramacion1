@@ -60,9 +60,9 @@ public:
     void cambiarDeJugador(char codigoCliente);
     void pasarPelota(char codigoCliente);
 
-    void agregarObservador(Util_LoggerObserver* obs);
+    void agregarObservador(Observador* obs);
     void notificarAObservadores(unsigned entidad, char evento, char tipo);
-    void quitarObservador(Util_LoggerObserver* obs);
+    void quitarObservador(Observador* obs);
 
     virtual void update();
 
@@ -94,7 +94,7 @@ private:
     SDL_Rect * camara;
     unsigned int nroJugadorActivo;
     std::queue<Command*> cambios;
-    std::vector<Util_LoggerObserver*> observadores;
+    std::vector<Observador*> observadores;
     std::vector<unsigned> clientes; //asocia el id de los clientes conectados con el jugador que controlan
     char idCliente;
     unsigned cantidadLocales;

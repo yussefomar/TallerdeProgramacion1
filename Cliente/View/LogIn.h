@@ -2,6 +2,8 @@
 #define LOGIN_H
 
 #include "ModeloCliente.h"
+#include "../Utils/Util_datosGuardados.h"
+
 class LogIn
 {
     public:

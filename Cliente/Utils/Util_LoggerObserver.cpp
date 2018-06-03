@@ -80,8 +80,6 @@ void Util_LoggerObserver::updateLevel(int newLevel)
 
 void Util_LoggerObserver::notificar(std::string entidad, char evento, char tipo)
 {
-
-//    std::string en = std::to_string(entidad);
     if(tipo == MJU)
     {
         this->writeMessageLine("Se ejecutó: " + transformarEvento(evento), "Hubo un cambio en jugador " + entidad);

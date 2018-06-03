@@ -5,13 +5,14 @@
 #include <stdlib.h>
 
 #include "../Command/Command.h"
+#include "../Utils/Observador.h"
 
 #define MSJ 0x00
 #define ERR 0x01
 #define WAR 0x02
 #define MJU 0x03
 
-class Util_LoggerObserver
+class Util_LoggerObserver : public Observador
 {
     std::string path;
     std::string message;

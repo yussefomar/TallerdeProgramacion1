@@ -14,6 +14,10 @@
 #define VISITANTES 7
 #define CANTMAXCLIENTES 4
 
+#define ERR_CON 0x20
+#define ERR_ESP 0x21
+#define OK_CONTINUA 0x22
+
 
 Model::Model()
 {
@@ -479,21 +483,20 @@ void Model::pasarPelota(char codigoCliente)
 }
 
 
-void Model::agregarObservador(Util_LoggerObserver* observador)
+void Model::agregarObservador(Observador* observador)
 {
     this->observadores.push_back(observador);
 }
 
 void Model::notificarAObservadores(unsigned entidad, char evento, char tipo)
 {
-    for(std::vector<Util_LoggerObserver*>::const_iterator iter = observadores.begin(); iter != observadores.end(); ++iter)
+    for(std::vector<Observador*>::const_iterator iter = observadores.begin(); iter != observadores.end(); ++iter)
     {
         (*iter)->notificar(std::to_string(entidad), evento, tipo);
     }
-
 }
 
-void Model::quitarObservador(Util_LoggerObserver* obs)
+void Model::quitarObservador(Observador* obs)
 {
     this->observadores.erase(std::remove(observadores.begin(), observadores.end(), obs), observadores.end());
 }
@@ -545,8 +548,10 @@ void Model::definirComoVisitante(char codigoCliente)
 
 }
 
-void Model::desconectarCliente(char codigoCliente) {
+void Model::desconectarCliente(char codigoCliente)
+{
     this->jugadoresEnCancha[this->clientes[codigoCliente]].desactivar();
+    this->notificarAObservadores(codigoCliente,DESCJUG,ERR_CON);
 }
 
 bool Model::necesitaRenderizar() {
