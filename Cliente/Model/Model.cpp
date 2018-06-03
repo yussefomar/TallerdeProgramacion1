@@ -485,7 +485,7 @@ void Model::pasarPelota(char codigoCliente)
         vecJugadores = &(this->jugadoresEnCancha[VISITANTES]);
         nroJugador=nroJugador-7;
     }
-    if((codigoCliente == 0x00)  && !this->pelotaEnMovimiento()  && vecJugadores[nroJugador].checkCollisionPelota(pelota.getCollider()))
+    if(/*(codigoCliente == 0x00)  &&*/ !this->pelotaEnMovimiento()  && vecJugadores[nroJugador].checkCollisionPelota(pelota.getCollider()))
     {
         this->setPelotaEnMovimiento();
     }
