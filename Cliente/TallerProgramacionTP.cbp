@@ -153,6 +153,7 @@
 		<Unit filename="Images/respuesta.otf" />
 		<Unit filename="Images/soccer.png" />
 		<Unit filename="Logs/Log.txt" />
+		<Unit filename="Logs/datos.txt" />
 		<Unit filename="Model/Activo.cpp" />
 		<Unit filename="Model/Activo.h" />
 		<Unit filename="Model/Estado.cpp" />
