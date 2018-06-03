@@ -35,8 +35,8 @@ void Formacion33::setPosicionInicialVisitante(Jugador* jugadores)
 
     int posX;
     int posY;
-    int posicionesX[] = { 8,  4,  4,  5,  0,  0, 2};
-    int posicionesY[] = { 0, -3,  3,  0, -3,  3, 0};
+    int posicionesX[] = { 8,  4,  4,  2,  0,  0, 2};
+    int posicionesY[] = { 0, -3,  3,  1, -3,  3, -1};
     int multiplo = 1;
     for(int i = 0; i < CANTJUGADORES; ++i)
     {

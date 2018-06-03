@@ -14,7 +14,7 @@ void Formacion312::setPosicionInicialLocal(Jugador* jugadores)
 {
     int posX;
     int posY;
-    int posicionesX[] = { 8,  5,  5,  6,  0,  0, 0};
+    int posicionesX[] = { 8,  5,  5,  2,  0,  0, 0};
     int posicionesY[] = { 0, -3,  3,  0, -3,  3, 0};
     int multiplo = -1;
     for(int i = 0; i < CANTJUGADORES; ++i)
@@ -32,8 +32,8 @@ void Formacion312::setPosicionInicialVisitante(Jugador* jugadores)
 {
     int posX;
     int posY;
-    int posicionesX[] = { 8,  5,  5,  6,  0,  0, 2};
-    int posicionesY[] = { 0, -3,  3,  0, -3,  3, 0};
+    int posicionesX[] = { 8,  5,  5,  2,  0,  0, 2};
+    int posicionesY[] = { 0, -3,  3,  1, -3,  3, -1};
     int multiplo = 1;
     for(int i = 0; i < CANTJUGADORES; ++i)
     {
