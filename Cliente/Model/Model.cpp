@@ -436,7 +436,6 @@ void Model::cambiarDeJugador(char codigoCliente)
 
 void Model::pasarPelota(char codigoCliente)
 {
-    bool visitante = false;
     unsigned nroJugador = this->clientes[codigoCliente];
     Jugador* vecJugadores = new Jugador[CANTJUGADORES];
     vecJugadores = &(this->jugadoresEnCancha[LOCALES]);
@@ -444,9 +443,8 @@ void Model::pasarPelota(char codigoCliente)
     {
         vecJugadores = &(this->jugadoresEnCancha[VISITANTES]);
         nroJugador=nroJugador-7;
-        visitante= true;
     }
-    if(!visitante && !this->pelotaEnMovimiento())
+    if((codigoCliente == 0x00)  && !this->pelotaEnMovimiento())
     {
         this->setPelotaEnMovimiento();
        }
