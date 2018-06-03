@@ -23,7 +23,7 @@ void View_Mensajes::inicializarMensaje()
         return;
     }
     std::string fontNombreMensajes = "Images/Roboto-Regular.ttf";
-    this->fontMensaje = TTF_OpenFont( fontNombreMensajes.c_str(), 50 );;
+    this->fontMensaje = TTF_OpenFont( fontNombreMensajes.c_str(), 25 );;
     this->colorMensaje = { 0, 0, 0, 255 }; //red
 }
 
@@ -33,7 +33,7 @@ void View_Mensajes::mostrarMensaje(std::string value, SDL_Renderer* renderer)
     SDL_Surface* mensaje = TTF_RenderText_Solid( this->fontMensaje, value.c_str(), this->colorMensaje );
     SDL_Texture* mensajeTexture = SurfaceToTexture( mensaje, renderer );
     SDL_QueryTexture( mensajeTexture, NULL, NULL, &mensajeRect.w, &mensajeRect.h );
-    mensajeRect.x = 150; mensajeRect.y = 250;
+    mensajeRect.x = 50; mensajeRect.y = 550;
 
     SDL_RenderCopy( renderer, mensajeTexture, nullptr, &mensajeRect );
 }

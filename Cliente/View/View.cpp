@@ -202,7 +202,7 @@ void View::notificar(std::string entidad, char evento, char tipo)
 {
     if(tipo == ERR_CON)
     {
-        this->cargarCartel("JUGADOR DESCONECTADO: ");
+        this->cargarCartel("JUGADOR DESCONECTADO: " + entidad);
     }
     if(tipo == ERR_ESP)
     {
