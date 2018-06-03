@@ -1,7 +1,7 @@
 #include "../Model/Inactivo.h"
 
 #define VELOCIDAD_JUGADOR 3
-#define TOLERANCIA 1
+#define TOLERANCIA 3
 
 Inactivo::Inactivo()
 {
@@ -36,14 +36,15 @@ void Inactivo::move()
         this->mVelY=-VELOCIDAD_JUGADOR;
         this->mPosY += this->mVelY;
     }
-    if (posInitX==mPosX)
+    if ((mPosX >= posInitX - TOLERANCIA) &&  (mPosX <= posInitX + TOLERANCIA))
     {
         this->mVelX=0;
     }
-    if (posInitY==mPosY)
+    if (( mPosY >= posInitY - TOLERANCIA) && (mPosY <= posInitY + TOLERANCIA))
     {
         this->mVelY=0;
     }
+
 }
 bool Inactivo::estaActivo()
 {
