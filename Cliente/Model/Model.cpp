@@ -125,6 +125,16 @@ void Model::moverJuego()
     for(int i = 0; i < CANTJUGADORESTOTALES; ++i)
     {
         this->jugadoresEnCancha[i].move();
+       if (!this->jugadoresEnCancha[i].checkCollisionPelota(pelota.getCollider())){
+            this->jugadoresEnCancha[i].noPoseePelota();
+        } else {
+                if ( !this->jugadoresEnCancha[i].getPosesion() ){
+               this->jugadoresEnCancha[i].recuperaPelota(&pelota);
+                }
+        }
+        if (this->jugadoresEnCancha[i].patearPelota()  && (!this->jugadoresEnCancha[i].checkCollisionPelota(pelota.getCollider()))){
+            this->jugadoresEnCancha[i].terminoDePatearPelota();
+        }
     }
     this->pelota.move();
 }
