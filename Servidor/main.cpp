@@ -14,11 +14,12 @@ int main(int argc, char* args[])
     ModeloServidor modeloServidor;
     Util_Configuracion configuracion(&modeloServidor);
     modeloServidor.aceptarClientes();
+    std::thread hiloDeReconexion = std::thread(&ModeloServidor::lanzarHiloDeReconexion, &modeloServidor);
     modeloServidor.permitirInicio();
     std::cout << "server with clients" << std::endl;
     unsigned i = 0;
 
-    //MSPORUPDATE CONTROLA EN CIERTA FORMA EL FPS DEL JUEGO... NO SE ASUSTEN
+    //MSPORUPDATE CONTROLA EN CIERTA FORMA EL FPS DEL JUEGO...
     long double MSPORUPDATE = 0.7;
     long double tiempoActual = 0.0;
     long double lapsoDeTiempo = 0.0;

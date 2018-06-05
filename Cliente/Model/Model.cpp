@@ -420,48 +420,9 @@ void Model::acelerar(char codigoCliente)
 
 void Model::cambiarDeJugador(char codigoCliente)
 {
-   /* bool visitante = false;
-    unsigned nroJugador = this->clientes[codigoCliente];
-    Jugador* vecJugadores;
-    vecJugadores = this->jugadoresLocales;
-    if (nroJugador > 6 )
-    {
-        vecJugadores = this->jugadoresVisitantes;
-        nroJugador=nroJugador % CANTJUGADORES;
-        visitante= true;
-
-    }
-
-    unsigned i;
-    bool encontrado = false;
-    for(i = 0; i < CANTJUGADORES && !encontrado; ++i)
-    {
-        encontrado = ((vecJugadores[i].collide(this->camara)) && (nroJugador!=i) && !vecJugadores[i].estaActivo()) || ((nroJugador!=i) && !vecJugadores[i].estaActivo());
-
-    }
-
-    if(!encontrado)
-    {
-        std::cout << "no se encotro jugador que cumpla con las condiciones" << std::endl;
-    }
-
-    (vecJugadores[nroJugador]).desactivar();
-    (vecJugadores[i]).activar();
-    if (visitante)
-    {
-        this->clientes[codigoCliente] = i + 7;
-    }
-    else
-    {
-        this->clientes[codigoCliente] = i;
-    }
-
-    this->nroJugadorActivo = i;
-    this->notificarAObservadores(i, COMMNULL, MJU);*/
-
     bool visitante = false;
     unsigned nroJugador = this->clientes[codigoCliente];
-    Jugador* vecJugadores = new Jugador[CANTJUGADORES];
+    Jugador* vecJugadores;
     vecJugadores = &(this->jugadoresEnCancha[LOCALES]);
     if (nroJugador > 6 )
     {
@@ -588,28 +549,30 @@ void Model::setTodosJugadoresInactivos()
 
 void Model::definirComoLocal(char codigoCliente)
 {
-//    if(this->cantidadClientes > 1 && this->cantidadLocales + 1 == this->cantidadClientes) {
-//        this->definirComoVisitante(codigoCliente);
-//    }
+    if((this->cantidadClientes > 1) && (this->cantidadLocales + 1 == this->cantidadClientes)) {
+        this->definirComoVisitante(codigoCliente);
+    }
     int i = -1;
     bool encontreJugadorLibre = false;
     while (!encontreJugadorLibre)
     {
         ++i;
-        encontreJugadorLibre = !this->jugadoresEnCancha[i].estaActivo();
+        encontreJugadorLibre = !(this->jugadoresEnCancha[i].estaActivo());
     }
     this->clientes[codigoCliente] = i;
     this->jugadoresEnCancha[this->clientes[codigoCliente]].activar();
 
     this->cantidadLocales += 1;
     this->notificarAObservadores(this->cantidadLocales, DEFLOCAL, MSJ);
+        std::cout << "el cliente se instalo como local" << std::endl;
+
 }
 
 void Model::definirComoVisitante(char codigoCliente)
 {
-//    if(this->cantidadClientes > 1 && this->cantidadVisitantes + 1 == this->cantidadClientes) {
-//        this->definirComoLocal(codigoCliente);
-//    }
+    if((this->cantidadClientes > 1) && (this->cantidadVisitantes + 1 == this->cantidadClientes)) {
+        this->definirComoLocal(codigoCliente);
+    }
     int i = 6;
     bool encontreJugadorLibre = false;
     while (!encontreJugadorLibre)
@@ -623,6 +586,7 @@ void Model::definirComoVisitante(char codigoCliente)
     this->cantidadVisitantes += 1;
 
     this->notificarAObservadores(this->cantidadVisitantes, DEFVISIT, MSJ);
+    std::cout << "el cliente se instalo como visitante" << std::endl;
 
 }
 

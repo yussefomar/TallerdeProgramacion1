@@ -320,7 +320,7 @@ bool ModeloCliente::habilitadoParaJugar()
 {
     unsigned nroId = this->idCliente;
 
-    return nroId > 4; //los rechazados siempre tienen un valor mayor a 5;
+    return nroId  < 4; //los rechazados siempre tienen un valor mayor a 5;
 }
 
 

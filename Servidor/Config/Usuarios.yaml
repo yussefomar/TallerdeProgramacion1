@@ -1,5 +1,6 @@
+
 servidor:
- cantidadCli: '2'
+ cantidadCli: '1'
 
 users:
  - name: 'martinez'
@@ -15,5 +16,5 @@ users:
 
 
 conexion:
- ip: '192.168.1.35'
+ ip: '192.168.0.9'
  puerto: '8080'

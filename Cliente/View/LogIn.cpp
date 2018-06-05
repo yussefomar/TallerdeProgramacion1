@@ -15,7 +15,8 @@ LogIn::LogIn(ModeloCliente* modelCliente)
     informacionIngreso.ip = datosConexion.ip;
     informacionIngreso.puerto = datosConexion.puerto;
 
-    if(!informacionIngreso.ip.empty()) informacionIngreso.ipIngresado = true;
+    if(!informacionIngreso.ip.empty())
+        informacionIngreso.ipIngresado = true;
 
     while( !informacionIngreso.ipIngresado || !informacionIngreso.puertoIngresado )
     {
@@ -25,11 +26,13 @@ LogIn::LogIn(ModeloCliente* modelCliente)
         {
             modelCliente->conectarConServer(informacionIngreso.ip, informacionIngreso.puerto);
             informacionIngreso.procesarConectividad(modelCliente->conectadoAlServer());
-            //informacionIngreso.procesarConectividad(modelCliente->habilitadoParaJugar()) //aca,el cliente ya puede saber si la partida estaba llena o no.
-            //anunciar esto y salir de la partida.
-            //===========================================================================
-            //informacionIngreso.procesarConectividad(false);
-            //===========================================================================
+
+            //De respuesto hasta que se coloque el verdadero mensaje
+            if(!modelCliente->habilitadoParaJugar())
+            {
+                return;
+            }
+
         }
     }
     dg.setDatosConexionFile(informacionIngreso.puerto,informacionIngreso.ip);

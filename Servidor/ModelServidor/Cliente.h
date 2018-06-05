@@ -18,6 +18,8 @@ public:
     void setIPPuerto(std::string ip, std::string puerto);
     void setBuffer(Buffer* buffer);
     void setBDD(std::vector<char> bdd);
+    void setCantidadClientes(unsigned cantidad);
+
     void aceptarCliente();
 
     void recibirMensaje();
@@ -26,7 +28,6 @@ public:
     void permitirInicio();
     void enviarARenderizar();
     void avisarDesconexion();
-    void setCantidadClientes(unsigned cantidad);
 
 
 protected:

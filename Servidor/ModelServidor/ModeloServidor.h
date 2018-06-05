@@ -5,6 +5,7 @@
 #include <vector>
 #include <thread>
 #include <mutex>
+#include "Reconector.h"
 /*#include "Buffer.h"*/
 
 class ModeloServidor
@@ -14,6 +15,7 @@ public:
     virtual ~ModeloServidor();
 
     void aceptarClientes();
+    void generarReconectores();
 
     void enviarMensajes();
     void recibirMensajes();
@@ -27,15 +29,22 @@ public:
     void permitirInicio();
     void enviarARenderizar();
     void setBDD(std::vector<char> bdd);
+    void lanzarHiloDeReconexion();
+    void hiloDeAnalisisDeReconexion();
+
 protected:
 
 private:
     Buffer buffer;
     std::vector<Cliente> clientes;
     std::queue<char> clientesIngresados;
-    std::mutex mutex;
     std::vector<char> bdd;
-    unsigned cantidadClientes;
+
+    std::vector<Reconector> reconectores;
+    std::string ip;
+    std::string puerto;
+    std::thread hiloDeReconexion;
+
 
 };
 

@@ -48,6 +48,8 @@
 		<Unit filename="ModelServidor/Cliente.h" />
 		<Unit filename="ModelServidor/ModeloServidor.cpp" />
 		<Unit filename="ModelServidor/ModeloServidor.h" />
+		<Unit filename="ModelServidor/Reconector.cpp" />
+		<Unit filename="ModelServidor/Reconector.h" />
 		<Unit filename="SocketCliente/SocketCliente.h" />
 		<Unit filename="SocketServidor/SocketServidor.cpp" />
 		<Unit filename="SocketServidor/SocketServidor.h" />

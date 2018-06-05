@@ -174,3 +174,4 @@ void Cliente::avisarDesconexion()
 void Cliente::setCantidadClientes(unsigned cantidad) {
     this->cantidadClientes = cantidad;
 }
+

@@ -18,44 +18,52 @@ int main(int argc, char* args[])
     common.backupFile();
     common.createFile();
     Util_LoggerObserver loggerObserver(3);
-try{
-    Model model;
-    Util_Configuracion configuracion(&model, &loggerObserver);
-    model.agregarObservador(&loggerObserver);
-
-    ModeloCliente modelCliente(&model);
-    LogIn logIn(&modelCliente);
-
-    View view(&model);
-    view.Attach(&loggerObserver);
-
-    model.agregarObservador(&view);
-
-    Controller controller(&modelCliente);
-    controller.Attach(&loggerObserver);
-    modelCliente.recibirRespuestaInicio();
-    for(unsigned i = 0; i < 100; ++i) {
-        modelCliente.update();
-    }
-
-    while( !controller.quitPressed())
+    try
     {
-        controller.processInput();
+        Model model;
+        Util_Configuracion configuracion(&model, &loggerObserver);
+        model.agregarObservador(&loggerObserver);
 
-        while (!model.necesitaRenderizar())
+        ModeloCliente modelCliente(&model);
+        LogIn logIn(&modelCliente);
+        //rapido para probar rechazo... pero tienen que haber un cartel decente.
+        if(!modelCliente.habilitadoParaJugar())
+        {
+            std::cout << "RECHAZADO" << std::endl;
+            return 0;
+        }
+
+        View view(&model);
+        view.Attach(&loggerObserver);
+
+        model.agregarObservador(&view);
+
+        Controller controller(&modelCliente);
+        controller.Attach(&loggerObserver);
+        modelCliente.recibirRespuestaInicio();
+        for(unsigned i = 0; i < 100; ++i)
         {
             modelCliente.update();
         }
-        //view.cargarCartel("Holis");
-        view.render();
-    }
-    return 0;
 
-}
- catch(const std::runtime_error& re)
+        while( !controller.quitPressed())
+        {
+            controller.processInput();
+
+            while (!model.necesitaRenderizar())
+            {
+                modelCliente.update();
+            }
+            //view.cargarCartel("Holis");
+            view.render();
+        }
+        return 0;
+
+    }
+    catch(const std::runtime_error& re)
     {
-    loggerObserver.writeErrorLine("Ha ocurrido un runtime error en main: ", "main.cpp");
-    loggerObserver.writeErrorLine(re.what(), "main.cpp");
+        loggerObserver.writeErrorLine("Ha ocurrido un runtime error en main: ", "main.cpp");
+        loggerObserver.writeErrorLine(re.what(), "main.cpp");
     }
     catch(const std::exception& ex)
     {

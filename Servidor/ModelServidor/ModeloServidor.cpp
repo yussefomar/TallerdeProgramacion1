@@ -1,4 +1,5 @@
 #include "ModeloServidor.h"
+#include <iostream>
 
 #define DECVELX 0x00
 #define DECVELY 0x01
@@ -17,6 +18,8 @@
 #define DESCJUG 0x0E
 #define NECRENDER 0X0F
 
+#define RECHAZADO 0xFF
+
 ModeloServidor::ModeloServidor()
 {
 
@@ -31,33 +34,43 @@ ModeloServidor::~ModeloServidor()
 void ModeloServidor::setClientesPermitidos(unsigned cantidadMaxClientes)
 {
     this->clientes = std::vector<Cliente>(cantidadMaxClientes);
+    this->reconectores = std::vector<Reconector>(cantidadMaxClientes);
     this->buffer.setCantidadBuffers(cantidadMaxClientes);
-    this->cantidadClientes = cantidadMaxClientes;
 }
 
 void ModeloServidor::setIpYPuerto(std::string ip, std::string puerto)
 {
-    for(unsigned i = 0; i < this->clientes.size(); ++i) {
+    this->ip = ip;
+    this->puerto = puerto;
+    for(unsigned i = 0; i < this->clientes.size(); ++i)
+    {
         this->clientes[i].setIPPuerto(ip, puerto);
     }
 }
 
-void ModeloServidor::aceptarClientes() {
+void ModeloServidor::aceptarClientes()
+{
     //Se inicializan todos los clientes.
     std::vector<std::thread> hilos = std::vector<std::thread>(this->clientes.size());
-    for(unsigned i = 0; i < this->clientes.size(); ++i) {
+    for(unsigned i = 0; i < this->clientes.size(); ++i)
+    {
         this->clientes[i].setBuffer(&this->buffer);
         this->clientes[i].setBDD(this->bdd);
-        this->clientes[i].setCantidadClientes(this->cantidadClientes);
+        this->clientes[i].setCantidadClientes(this->clientes.size());
     }
-
+    for(unsigned i = 0; i < this->reconectores.size(); ++i)
+    {
+        this->reconectores[i].setCliente(&this->clientes[i]);
+    }
     //Se crean hilos para recibir clientes
-    for(unsigned i = 0; i < this->clientes.size(); ++i) {
+    for(unsigned i = 0; i < this->clientes.size(); ++i)
+    {
         hilos[i] = std::thread(&Cliente::aceptarCliente, &this->clientes[i]);
     }
 
     //Se espera a que todo hilo termine
-    for(unsigned i = 0; i < this->clientes.size(); ++i) {
+    for(unsigned i = 0; i < this->clientes.size(); ++i)
+    {
         hilos[i].join();
     }
 }
@@ -121,16 +134,55 @@ char ModeloServidor::hashear(std::string unString)
     return code;
 }
 
-
-
-
-
-void ModeloServidor::enviarARenderizar() {
-    for(unsigned i = 0; i < this->clientes.size(); ++i) {
+void ModeloServidor::enviarARenderizar()
+{
+    for(unsigned i = 0; i < this->clientes.size(); ++i)
+    {
         this->clientes[i].enviarARenderizar();
     }
 }
 
-void ModeloServidor::setBDD(std::vector<char> bdd) {
+void ModeloServidor::setBDD(std::vector<char> bdd)
+{
     this->bdd = bdd;
+}
+
+void ModeloServidor::lanzarHiloDeReconexion()
+{
+    while (this->clientesEstanConectados())
+    {
+        this->hiloDeReconexion = std::thread(&ModeloServidor::hiloDeAnalisisDeReconexion, this);
+        this->hiloDeReconexion.join();
+        std::cout << "SE LANZA HILO DE RECONEXION 1" << std::endl;
+    }
+
+}
+
+void ModeloServidor::hiloDeAnalisisDeReconexion()
+{
+    std::mutex mutexAHR;
+    mutexAHR.lock();
+    std::cout << "SE LANZA HILO DE RECONEXION 2" << std::endl;
+    mutexAHR.unlock();
+    SocketServidor* socketReconexion = new SocketServidor(this->ip, this->puerto);
+    mutexAHR.lock();
+    std::cout << "SE LANZA HILO DE RECONEXION 3" << std::endl;
+    mutexAHR.unlock();
+
+    bool socketReconexionAdoptado = false;
+    mutexAHR.lock();
+    std::cout << "SE LANZA HILO DE RECONEXION 3" << std::endl;
+    mutexAHR.unlock();
+
+    for(unsigned i = 0; i < this->reconectores.size() && !socketReconexionAdoptado; ++i)
+    {
+        socketReconexionAdoptado |= this->reconectores[i].analizarSocketReconexion(socketReconexion);
+    }
+
+    if(!socketReconexionAdoptado)
+    {
+        socketReconexion->enviarByte(RECHAZADO);
+        socketReconexion->enviarByte(RECHAZADO);
+        delete socketReconexion;
+    }
 }
