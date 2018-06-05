@@ -81,7 +81,7 @@ void Jugador::patearPelota(Pelota* pelota)
 {
 ///va a cambiar por posee pelota
 //   if(this->checkCollisionPelota((pelota->getCollider())))
-    if(/*this->getPosesion() &&*/ (this->checkCollisionPelota((pelota->getCollider()))) )
+    if(this->getPosesion() && (this->checkCollisionPelota((pelota->getCollider()))) )
     {
         if (((this->direccion) >0)  && ((this->direccion)<180))
         {
@@ -108,6 +108,7 @@ void Jugador::patearPelota(Pelota* pelota)
         }
 
         this->pateoPelota=true;
+        pelota->setLibre();
     }
     else
     {
@@ -136,12 +137,27 @@ bool Jugador::patearPelota()
 
 bool Jugador::recuperaPelota(Pelota* pelota)
 {
-
-    if(this->checkCollisionPelota((pelota->getCollider())))
+/*
+    if(this->checkCollisionPelota((pelota->getCollider())) && pelota->estaLibre())
     {
 
         this->poseePelota();
         this->pelota=pelota;
+        pelota->setEnUso();
+        return true;
+    }
+    return false;*/
+}
+
+bool Jugador::recibirPelota(Pelota* pelota)
+{
+
+    if(this->checkCollisionPelota((pelota->getCollider())) && pelota->estaLibre())
+    {
+
+        this->poseePelota();
+        this->pelota=pelota;
+        pelota->setEnUso();
         return true;
     }
     return false;
@@ -149,8 +165,9 @@ bool Jugador::recuperaPelota(Pelota* pelota)
 
 void Jugador::pasaPelota(Pelota* pelota,Jugador * jugador)
 {
-    if(/*this->getPosesion() &&*/ (this->checkCollisionPelota((pelota->getCollider()))))
+    if(this->getPosesion() && (this->checkCollisionPelota((pelota->getCollider()))))
     {
+        pelota->setLibre();
         if (jugador->getPosX() > this->getPosX())
         {
             pelota->setVelocidadX(20);
@@ -172,13 +189,14 @@ void Jugador::pasaPelota(Pelota* pelota,Jugador * jugador)
         }
 
         this->pateoPelota=true;
+
     }
     else
     {
 
         this->pateoPelota=false;
     }
-   // this->noPoseePelota();
+
 
 
 }

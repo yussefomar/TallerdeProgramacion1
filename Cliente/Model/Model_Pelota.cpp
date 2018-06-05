@@ -9,7 +9,7 @@ Pelota::Pelota()
     //Initialize the velocity
     mVelX = 0;
     mVelY = 0;
-
+    libre = true;
     colli_pelo.x=this->getPosX();
     colli_pelo.y=this->getPosY();
     colli_pelo.h=this->ANCHO_PELOTA;
@@ -129,3 +129,12 @@ SDL_Rect * Pelota::getCollider()
     return &colli_pelo;
 }
 
+void Pelota::setLibre(){
+    libre=true;
+}
+void Pelota::setEnUso(){
+libre=false;
+}
+bool Pelota::estaLibre(){
+return libre;
+}

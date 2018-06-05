@@ -31,6 +31,7 @@ public:
     int getVelX();
     int getVelY();
     bool recuperaPelota(Pelota* pelota);
+    bool recibirPelota(Pelota* pelota);
     void patearPelota(Pelota* pelota );
     void pasaPelota(Pelota* pelota, Jugador * jugador );
     void setPosX(int PosX);

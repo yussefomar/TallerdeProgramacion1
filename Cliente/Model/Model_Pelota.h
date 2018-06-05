@@ -37,7 +37,9 @@ public:
     void disminuirVelocidadY();
 
     void aumentarVelocidadX();
-
+    void setLibre();
+    void setEnUso();
+    bool estaLibre();
     void aumentarVelocidadY();
     void setVelocidadX(int velocidad);
     void setVelocidadY(int velocidad);
@@ -46,6 +48,7 @@ public:
 private:
     //The X and Y offsets of the dot
     int mPosX, mPosY;
+    bool libre;
 
     //The velocity of the dot
     int mVelX, mVelY;

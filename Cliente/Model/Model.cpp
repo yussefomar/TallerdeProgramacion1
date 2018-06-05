@@ -122,6 +122,7 @@ void Model::update()
 
 void Model::moverJuego()
 {
+
     for(int i = 0; i < CANTJUGADORESTOTALES; ++i)
     {
         this->jugadoresEnCancha[i].move();
@@ -129,14 +130,15 @@ void Model::moverJuego()
             this->jugadoresEnCancha[i].noPoseePelota();
         } else {
                 if ( !this->jugadoresEnCancha[i].getPosesion() ){
-               this->jugadoresEnCancha[i].recuperaPelota(&pelota);
+               this->jugadoresEnCancha[i].recibirPelota(&pelota);
                 }
         }
         if (this->jugadoresEnCancha[i].patearPelota()  && (!this->jugadoresEnCancha[i].checkCollisionPelota(pelota.getCollider()))){
             this->jugadoresEnCancha[i].terminoDePatearPelota();
         }
     }
-    this->pelota.move();
+  this->pelota.move();
+
 }
 
 void Model::setCamara(SDL_Rect * camara)
@@ -372,11 +374,32 @@ void Model:: patearPelota(char codigoCliente)
 
 void Model:: recuperaPelota(char codigoCliente)
 {
-
+    int i;
     unsigned nroJugador = this->clientes[codigoCliente];
+    if (this->jugadoresEnCancha[nroJugador].checkCollisionPelota(pelota.getCollider())){
+    if (nroJugador>6) {
+    for(i = 0; i < CANTJUGADORES; ++i){
+        if (this->jugadoresLocales[i].getPosesion()){
+        this->jugadoresLocales[i].noPoseePelota();
+        pelota.setLibre();
+        this->jugadoresEnCancha[nroJugador].recibirPelota(&pelota);
+        this->jugadoresEnCancha[nroJugador].poseePelota();
+     }
+     }
+    } else {
+        for(i = 0; i < CANTJUGADORES; ++i){
+        if (this->jugadoresVisitantes[i].getPosesion()){
+        this->jugadoresVisitantes[i].noPoseePelota();
+        pelota.setLibre();
+        this->jugadoresEnCancha[nroJugador].recibirPelota(&pelota);
+        this->jugadoresEnCancha[nroJugador].poseePelota();
 
-    this->jugadoresEnCancha[nroJugador].recuperaPelota(this->getPelota());
+        }
+     }
+    }
+
     this->notificarAObservadores(nroJugador, RECUPELO, MJU);
+    }
 }
 
 void Model::stopJugador(char codigoCliente)
