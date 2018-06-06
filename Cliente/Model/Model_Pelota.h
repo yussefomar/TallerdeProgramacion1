@@ -44,6 +44,7 @@ public:
     void setVelocidadX(int velocidad);
     void setVelocidadY(int velocidad);
     SDL_Rect * getCollider();
+    std::string datosString();
 
 private:
     //The X and Y offsets of the dot

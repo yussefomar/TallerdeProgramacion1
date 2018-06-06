@@ -68,6 +68,10 @@ public:
     bool getAcelero();
     void terminoDePatearPelota();
     bool patearPelota();
+    void setPosesion(bool tienePelota);
+    void updateAceleracion(int ac);
+    void updateVelocidad ( int velx, int vely);
+    std::string datosString();
 
 private:
     SDL_Rect mCollider;

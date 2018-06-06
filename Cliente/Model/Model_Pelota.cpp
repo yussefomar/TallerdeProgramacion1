@@ -138,3 +138,16 @@ libre=false;
 bool Pelota::estaLibre(){
 return libre;
 }
+
+
+
+std::string Pelota::datosString ()
+{
+std::string str = "";
+str = str + std::to_string(this->getPosX()) + ";";
+str = str + std::to_string(this->getPosY())+ ";";
+str = str + std::to_string(this->getVelX())+ ";";
+str = str + std::to_string(this->getVelY())+ ";";
+return str;
+
+}

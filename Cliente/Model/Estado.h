@@ -37,6 +37,9 @@ public:
     void desacelerar();
     bool getAcelero();
     //virtual void stop() = 0;
+      void setVelocidadX(int velx);
+    void setVelocidadY(int vely);
+void setAceleracion (int ac);
 
 protected:
     //The X and Y offsets of the dot

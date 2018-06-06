@@ -38,6 +38,7 @@ Model::Model()
     this->cantidadVisitantes = 0;
     this->cantidadClientes = 0;
     this->renderizar = false;
+    this->bakcup = "";
 }
 
 Model::~Model()
@@ -615,5 +616,106 @@ void Model::setCantidadClientes(unsigned cantidad)
 {
     this->cantidadClientes = cantidad;
 }
+std::string Model::armarBackUp()
+{
 
+std::string str = "";
+
+str = str + this->pelota.datosString();
+
+
+for(unsigned i = 0; i < CANTJUGADORESTOTALES; ++i)
+    {
+       str = str + this->jugadoresEnCancha[i].datosString();
+    }
+for(unsigned i = 0; i < clientes.size(); ++i)
+    {
+       str = str + std::to_string(this->clientes[i]) + ";";
+    }
+
+//datos cliente
+this->bakcup = str;
+
+return str;
+}
+
+void Model::desarmarBackUp(std::string str)
+{
+
+//pelota
+std::string datos = str;
+std::size_t pos = datos.find(";");
+std::string pelotaPosX = datos.substr(0,pos);
+datos = datos.substr(pos+1);
+ this->pelota.setPosX(std::stoi(pelotaPosX));
+
+pos = datos.find(";");
+std::string pelotaPosY = datos.substr(0,pos);
+datos = datos.substr(pos+1);
+this->pelota.setPosY(std::stoi(pelotaPosY));
+
+pos = datos.find(";");
+std::string pelotaVelX = datos.substr(0,pos);
+datos = datos.substr(pos+1);
+this->pelota.setVelocidadX(std::stoi(pelotaVelX));
+
+pos = datos.find(";");
+std::string pelotaVelY = datos.substr(0,pos);
+datos = datos.substr(pos+1);
+this->pelota.setVelocidadY(std::stoi(pelotaVelY));
+
+//jugadores
+    for(unsigned i = 0; i < CANTJUGADORESTOTALES; ++i)
+    {
+        pos = datos.find(";");
+        std::string aceleracion = datos.substr(0,pos);
+        datos = datos.substr(pos+1);
+
+        pos = datos.find(";");
+        std::string posX = datos.substr(0,pos);
+        datos = datos.substr(pos+1);
+
+        pos = datos.find(";");
+        std::string posY = datos.substr(0,pos);
+        datos = datos.substr(pos+1);
+
+        pos = datos.find(";");
+        std::string velX = datos.substr(0,pos);
+        datos = datos.substr(pos+1);
+
+        pos = datos.find(";");
+        std::string velY = datos.substr(0,pos);
+        datos = datos.substr(pos+1);
+
+        pos = datos.find(";");
+        std::string posesion = datos.substr(0,pos);
+        datos = datos.substr(pos+1);
+
+        pos = datos.find(";");
+        std::string direccion = datos.substr(0,pos);
+        datos = datos.substr(pos+1);
+
+       this->jugadoresEnCancha[i].updateAceleracion(std::stoi(aceleracion));
+       this->jugadoresEnCancha[i].setPosX(std::stoi(posX));
+       this->jugadoresEnCancha[i].setPosY(std::stoi(posY));
+       this->jugadoresEnCancha[i].updateVelocidad(std::stoi(velX),std::stoi(velY) );
+       this->jugadoresEnCancha[i].setPosesion(posesion =="1");
+       this->jugadoresEnCancha[i].setDireccion(std::stod(direccion));//double
+
+
+    }
+    //clientes
+    for(unsigned i = 0; i < clientes.size(); ++i)
+    {
+        pos = datos.find(";");
+        std::string numcli = datos.substr(0,pos);
+        datos = datos.substr(pos+1);
+       this->clientes[i] = std::stoi(numcli);
+    }
+
+
+
+
+
+}
 

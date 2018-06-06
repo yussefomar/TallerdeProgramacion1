@@ -78,6 +78,8 @@ public:
     void habilitarRender();
     bool necesitaRenderizar();
     void setCantidadClientes(unsigned cantidad);
+    std::string armarBackUp();
+    void desarmarBackUp(std::string str);
 
 
 protected:
@@ -101,6 +103,7 @@ private:
     unsigned cantidadVisitantes;
     unsigned cantidadClientes;
     bool renderizar;
+    std::string bakcup;
 
 };
 

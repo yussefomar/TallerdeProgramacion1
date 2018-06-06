@@ -447,3 +447,34 @@ void Jugador::updateDirection()
 
 
 }
+
+void Jugador::setPosesion(bool tienePelota)
+{
+    this->conPelota = tienePelota;
+}
+
+void Jugador::updateAceleracion(int ac)
+{
+     this->estado->setAceleracion(ac);
+}
+
+void Jugador::updateVelocidad ( int velx, int vely)
+{
+this->estado->setVelocidadX(velx);
+this->estado->setVelocidadY(vely);
+
+}
+
+std::string Jugador::datosString()
+{
+std::string str = "";
+str = str + std::to_string(this->getAceleracion()) + ";";
+str = str + std::to_string(this->getPosX())+ ";";
+str = str + std::to_string(this->getPosY())+ ";";
+str = str + std::to_string(this->getVelX())+ ";";
+str = str + std::to_string(this->getVelY())+ ";";
+str = str + std::to_string(this->getPosesion())+ ";";
+str = str + std::to_string(this->getDireccion())+ ";";
+return str;
+
+}

@@ -57,6 +57,23 @@ void Estado::setPosInitY(int posY)
 {
     this->posInitY = posY;
 }
+
+void Estado::setAceleracion (int ac)
+{
+    this->aceleracion = ac;
+}
+
+void Estado::setVelocidadX(int velx)
+{
+this->mVelX = velx;
+
+}
+void Estado::setVelocidadY(int vely)
+{
+this->mVelY = vely;
+
+}
+
 void Estado::copiarEstado(Estado* estado)
 {
     this->posInitX = estado->posInitX;
