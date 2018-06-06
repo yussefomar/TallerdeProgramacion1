@@ -1,6 +1,6 @@
 #include "LogIn.h"
 #include "View_Loguin.h"
-
+#include <unistd.h>
 
 Util_datosGuardados dg;
 
@@ -93,7 +93,24 @@ LogIn::LogIn(ModeloCliente* modelCliente)
         }
     }
 
-    informacionIngreso.mensaje = "A la espera de que todos los jugadores se conecten.";
+    unsigned int microseconds = 10000;
+    //SI MI INGRESO ES CORRECTO ME FIJO SI PUEDO ENTRAR A JUGAR.
+    if(!modelCliente->habilitadoParaJugar())
+    {
+        //EN ESTE CASO MUESTRO UN CARTEL PARA LUEGO SALIR.
+        informacionIngreso.mensaje = "El cupo de jugadores se encuentra al tope.";
+        loguinScreen.Procesar(informacionIngreso);
+        this->puedeArrancar = false;
+        usleep(microseconds);
+    }
+    else
+    {
+        //EN CASO DE QUE HAYA LUGAR PARA JUGAR ESPERO A QUE TODOS SE ENCUENTREN LISTOS.
+        informacionIngreso.mensaje = "A la espera de que todos los jugadores se conecten.";
+        loguinScreen.Procesar(informacionIngreso);
+        this->puedeArrancar = true;
+    }
+
     loguinScreen.Cerrar();
 
 }

@@ -26,12 +26,8 @@ int main(int argc, char* args[])
 
         ModeloCliente modelCliente(&model);
         LogIn logIn(&modelCliente);
-        //rapido para probar rechazo... pero tienen que haber un cartel decente.
-        if(!modelCliente.habilitadoParaJugar())
-        {
-            std::cout << "RECHAZADO" << std::endl;
-            return 0;
-        }
+
+        if(!logIn.puedeArrancar) return 0;
 
         View view(&model);
         view.Attach(&loggerObserver);

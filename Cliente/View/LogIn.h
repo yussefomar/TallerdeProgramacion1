@@ -9,7 +9,7 @@ class LogIn
     public:
         LogIn(ModeloCliente* modelCliente);
         virtual ~LogIn();
-
+        bool puedeArrancar;
     protected:
 
     private:
