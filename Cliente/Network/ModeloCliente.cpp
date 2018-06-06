@@ -359,7 +359,7 @@ void ModeloCliente::tratarDesconexion()
         {
             std::cout << "INTENTANDO RECONEXION" << std::endl;
             this->socket->reconectar(this->ip, this->puerto);
-            sleep(1000);
+            sleep(5);
         }
         this->idCliente = this->socket->recibirByte();
         this->model->setIdCliente(this->idCliente);
