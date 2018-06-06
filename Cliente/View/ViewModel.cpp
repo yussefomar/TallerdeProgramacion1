@@ -32,7 +32,7 @@ void ViewModel::render()
     this->viewPelota.render(this->camara->x, this->camara->y,this->gRenderer);
 
 
-    if(this->hayAlgunJugadorActivoEnEspera()==true)
+    /*if(this->hayAlgunJugadorActivoEnEspera()==true)
     {
 
         for(int i = 0; i < CANTVISTASJUG; ++i)
@@ -44,7 +44,7 @@ void ViewModel::render()
         }
     }
     else
-    {
+    {*/
 
         for(int i = 0; i < CANTVISTASJUG; ++i)
         {
@@ -54,7 +54,7 @@ void ViewModel::render()
 
         }
 
-    }
+   // }
 }
 
 bool ViewModel::hayAlgunJugadorActivoEnEspera()
