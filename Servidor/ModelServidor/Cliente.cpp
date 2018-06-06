@@ -1,13 +1,7 @@
 #include "Cliente.h"
 #include <iostream>
 
-#define LI_NOMBRE_OK 0X0B //NOMBRE CORRECTO.
-#define LI_NOMBRE_ERROR 0X0C //NOMBRE INCORRECTO.
-#define LI_NOMBRE_REPETIDO 0X0D //NOMBRE EXISTENTE.
-#define LI_CREDENCIALES_OK 0X0E //CREDENCIALES CORRECTAS.
-#define LI_CREDENCIALES_ERROR 0X0F //CREDENCIALES INCORRECTAS.
-#define LI_CONSULTO_INICIO 0X11 //ME PREGUNTAN SI SE INICIO.
-#define LI_INICIO_OK 0X12 //RESPONDO QUE ESTAN TODOS CONECTADOS.
+
 
 #define DECVELX 0x00
 #define DECVELY 0x01
@@ -25,6 +19,8 @@
 #define DEFVISIT 0x0D //cuidado con estos dos ultimos comandos.
 #define DESCJUG 0x0E
 #define NECRENDER 0X0F
+#define ARMARBACKUP 0x10
+
 
 #define ENTIDAD 0
 #define EVENTO 1
@@ -105,7 +101,7 @@ void Cliente::aceptarCliente()
         if(!credencialesValidas)
         {
             this->socket->enviarByte(LI_CREDENCIALES_ERROR);
-                    this->credencial = this->socket->recibirByte();
+            this->credencial = this->socket->recibirByte();
 
 
         }
@@ -171,7 +167,51 @@ void Cliente::avisarDesconexion()
     }
 }
 
-void Cliente::setCantidadClientes(unsigned cantidad) {
+void Cliente::setCantidadClientes(unsigned cantidad)
+{
     this->cantidadClientes = cantidad;
 }
 
+unsigned Cliente::getIdCliente()
+{
+    return this->idCliente;
+}
+
+unsigned Cliente::getCantidadClientes()
+{
+    return this->cantidadClientes;
+}
+
+char Cliente::getCredencial()
+{
+    return this->credencial;
+}
+
+void Cliente::enviarPedidoBackup()
+{
+    if(!this->estaConectado())
+    {
+        this->buffer->pushCodigo(ARMARBACKUP);
+    }
+}
+
+std::string Cliente::recibirBackup()
+{
+    if(this->socket->estaConectado()) {
+            return this->socket->recibirString();
+
+    }
+    std::string backupNulo = "";
+    return backupNulo;
+}
+
+void Cliente::enviarBackup(std::string backup)
+{
+    this->socket->enviarString(backup);
+}
+
+void Cliente::setSocket(SocketServidor* socket)
+{
+    delete this->socket;
+    this->socket = socket;
+}

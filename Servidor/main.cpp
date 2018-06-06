@@ -14,8 +14,9 @@ int main(int argc, char* args[])
     ModeloServidor modeloServidor;
     Util_Configuracion configuracion(&modeloServidor);
     modeloServidor.aceptarClientes();
-    std::thread hiloDeReconexion = std::thread(&ModeloServidor::lanzarHiloDeReconexion, &modeloServidor);
     modeloServidor.permitirInicio();
+
+    std::thread hiloDeReconexion = std::thread(&ModeloServidor::lanzarHiloDeReconexion, &modeloServidor);
     std::cout << "server with clients" << std::endl;
     unsigned i = 0;
 
@@ -32,6 +33,10 @@ int main(int argc, char* args[])
         lapsoDeTiempo = (tiempoActual - tiempoPrevio) / (CLOCKS_PER_SEC / 1000);
         tiempoPrevio = tiempoActual;
         lag += lapsoDeTiempo;
+        modeloServidor.recibirBackup();
+        std::cout << "RECIBE BACKUP" << std::endl;
+        modeloServidor.enviarBackup();
+        std::cout << "ENVIA BACKUP" << std::endl;
 
         modeloServidor.recibirMensajes();
         while (lag >= MSPORUPDATE)

@@ -98,10 +98,9 @@ LogIn::LogIn(ModeloCliente* modelCliente)
     }
 
     //EN CASO DE QUE HAYA LUGAR PARA JUGAR ESPERO A QUE TODOS SE ENCUENTREN LISTOS.
-    informacionIngreso.mensaje = "A la espera de que todos los jugadores se conecten.";
-    loguinScreen.Procesar(informacionIngreso);
+//    informacionIngreso.mensaje = "A la espera de que todos los jugadores se conecten.";
+//    loguinScreen.Procesar(informacionIngreso);
     this->puedeArrancar = true;
-
     loguinScreen.Cerrar();
 
 }

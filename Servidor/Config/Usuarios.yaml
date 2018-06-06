@@ -1,6 +1,6 @@
 
 servidor:
- cantidadCli: '1'
+ cantidadCli: '2'
 
 users:
  - name: 'martinez'

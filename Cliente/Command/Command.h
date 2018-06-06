@@ -22,8 +22,9 @@ como para net*/
 #define DEFVISIT 0x0D //cuidado con estos dos ultimos comandos.
 #define DESCJUG 0x0E
 #define NECRENDER 0X0F
+#define ARMARBACKUP 0x10
 
-#define CANTCOMMANDS 16
+#define CANTCOMMANDS 17
 
 class Command
 {

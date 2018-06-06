@@ -32,6 +32,9 @@ public:
     void lanzarHiloDeReconexion();
     void hiloDeAnalisisDeReconexion();
 
+    void enviarBackup();
+    void recibirBackup();
+
 protected:
 
 private:
@@ -44,6 +47,10 @@ private:
     std::string ip;
     std::string puerto;
     std::thread hiloDeReconexion;
+    std::mutex mutexReconexion;
+    std::vector<std::string> backups;
+    unsigned backupElegido;
+
 
 
 };

@@ -57,6 +57,13 @@ public:
     void actualizar();
     void tomarUnJugadorLibre();
 
+    void tratarDesconexion();
+
+    void enviarBackup();
+    void recibirBackup();
+
+
+
 
 protected:
 
@@ -73,7 +80,6 @@ private:
     std::string ip;
     std::string puerto;
     char lugarEnCancha;
-
 };
 
 #endif // MODELOCLIENTE_H

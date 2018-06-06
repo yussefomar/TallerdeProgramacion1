@@ -41,6 +41,7 @@ SocketServidor::SocketServidor(std::string ip, std::string puerto)
     }
     while (this->socketFD == -1);
     this->socketConectado = true;
+    this->estadoSocket = 1;
 }
 
 SocketServidor::~SocketServidor()
@@ -129,7 +130,7 @@ void SocketServidor::generarMasterSocketFD(std::string ip, std::string puerto)
 
 bool SocketServidor::estaConectado()
 {
-    return this->socketConectado;
+    return this->socketConectado && this->estadoSocket >0;
 }
 
 void SocketServidor::enviarByte(char byte)
@@ -148,4 +149,41 @@ char SocketServidor::recibirByte()
     char byte;
     this->socketConectado = recv(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL) > 0;
     return byte;
+}
+
+std::string SocketServidor::recibirString()
+{
+    unsigned bytesARecibir = this->recibirByte();
+    std::string unString = "";
+    unsigned bytesRecibidos = 0;
+    char* buffer = new char[bytesARecibir];
+
+    while(bytesRecibidos < bytesARecibir && this->estaConectado())
+    {
+        this->estadoSocket = recv(this->socketFD, &buffer[bytesRecibidos], bytesARecibir - bytesRecibidos, MSG_NOSIGNAL);
+        bytesRecibidos += this->estadoSocket;
+    }
+
+    for(unsigned i = 0; i < bytesARecibir && this->estaConectado(); ++i) {
+        unString.push_back(buffer[i]);
+    }
+    delete buffer;
+    return unString;
+}
+
+void SocketServidor::enviarString(std::string unString)
+{
+    unsigned bytesAEnviar = unString.size();
+    unsigned bytesEnviados = 0;
+    char* buffer = new char[bytesAEnviar];
+    for(unsigned i = 0; i < unString.size(); ++i) {
+        buffer[i] = unString[i];
+    }
+    this->enviarByte(bytesAEnviar);
+    while(bytesEnviados < bytesAEnviar && this->estaConectado())
+    {
+        this->estadoSocket = send(this->socketFD, &buffer[bytesEnviados], bytesAEnviar - bytesEnviados, MSG_NOSIGNAL);
+        bytesEnviados += this->estadoSocket;
+    }
+    delete buffer;
 }

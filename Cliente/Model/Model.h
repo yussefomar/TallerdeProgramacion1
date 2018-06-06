@@ -80,7 +80,10 @@ public:
     void setCantidadClientes(unsigned cantidad);
     std::string armarBackUp();
     void desarmarBackUp(std::string str);
+    void comenzarAArmarBackup();
+    void comemnzarADesarmarBackup();
 
+    std::string backupTrucha;
 
 protected:
 

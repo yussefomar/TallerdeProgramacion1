@@ -11,11 +11,17 @@ public:
 
     void setCliente(Cliente* cliente);
     bool analizarSocketReconexion(SocketServidor* socketReconexion);
+    void setMutexReconexion(std::mutex* mutexReconexion);
+    void enviarBackup(std::string backup);
 
 protected:
 
 private:
     Cliente* cliente;
+    std::mutex* mutexReconexion;
+    bool listoParaReconexion;
+    SocketServidor* socketReconexion;
+
 
 };
 

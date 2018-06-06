@@ -9,6 +9,14 @@
 #include <mutex>
 #include <queue>
 
+#define LI_NOMBRE_OK 0X0B //NOMBRE CORRECTO.
+#define LI_NOMBRE_ERROR 0X0C //NOMBRE INCORRECTO.
+#define LI_NOMBRE_REPETIDO 0X0D //NOMBRE EXISTENTE.
+#define LI_CREDENCIALES_OK 0X0E //CREDENCIALES CORRECTAS.
+#define LI_CREDENCIALES_ERROR 0X0F //CREDENCIALES INCORRECTAS.
+#define LI_CONSULTO_INICIO 0X11 //ME PREGUNTAN SI SE INICIO.
+#define LI_INICIO_OK 0X12 //RESPONDO QUE ESTAN TODOS CONECTADOS.
+
 class Cliente
 {
 public:
@@ -28,6 +36,15 @@ public:
     void permitirInicio();
     void enviarARenderizar();
     void avisarDesconexion();
+
+    unsigned getIdCliente();
+    unsigned getCantidadClientes();
+    char getCredencial();
+
+    void enviarPedidoBackup();
+    std::string recibirBackup();
+    void enviarBackup(std::string backup);
+    void setSocket(SocketServidor* socket);
 
 
 protected:

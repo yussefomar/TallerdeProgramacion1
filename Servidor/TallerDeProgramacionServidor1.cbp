@@ -16,6 +16,7 @@
 					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add directory="ModelServidor" />
+					<Add directory="Cliente/Command/CommandNet" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -27,6 +28,7 @@
 					<Add option="-O2" />
 					<Add option="-std=c++11" />
 					<Add directory="ModelServidor" />
+					<Add directory="Cliente/Command/CommandNet" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -42,6 +44,7 @@
 			<Add option="-lyaml-cpp" />
 			<Add option="-pthread" />
 		</Linker>
+		<Unit filename="../Cliente/Command/CommandNet/ArmarBackup.h" />
 		<Unit filename="ModelServidor/Buffer.cpp" />
 		<Unit filename="ModelServidor/Buffer.h" />
 		<Unit filename="ModelServidor/Cliente.cpp" />

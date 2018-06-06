@@ -15,6 +15,7 @@
 #include "DefinirComoLocal.h"
 #include "DesconexionAjena.h"
 #include "RenderizarModel.h"
+#include "ArmarBackup.h"
 
 #include <unistd.h>
 
@@ -23,8 +24,13 @@
 #define RECIBIR 1
 #define EJECUTAR 2
 
-#define LI_CONSULTO_INICIO 0X11
-#define LI_INICIO_OK 0X12
+#define LI_NOMBRE_OK 0X0B //NOMBRE CORRECTO.
+#define LI_NOMBRE_ERROR 0X0C //NOMBRE INCORRECTO.
+#define LI_NOMBRE_REPETIDO 0X0D //NOMBRE EXISTENTE.
+#define LI_CREDENCIALES_OK 0X0E //CREDENCIALES CORRECTAS.
+#define LI_CREDENCIALES_ERROR 0X0F //CREDENCIALES INCORRECTAS.
+#define LI_CONSULTO_INICIO 0X11 //ME PREGUNTAN SI SE INICIO.
+#define LI_INICIO_OK 0X12 //RESPONDO QUE ESTAN TODOS CONECTADOS.
 
 /*Cuidado... la cantidad de comandos en modelCliente puede y
 va a diferir del de controller*/
@@ -48,6 +54,8 @@ ModeloCliente::ModeloCliente(Model* model)
     this->comandos[DEFVISIT] = new DefinirComoVisit(model);
     this->comandos[DESCJUG] = new DesconexionAjena(model);
     this->comandos[NECRENDER] = new RenderizarModel(model);
+    this->comandos[ARMARBACKUP] = new ArmarBackup(model);
+
     this->tareaAEjecutar = 0;
 
     this->socket = nullptr;
@@ -203,6 +211,10 @@ void ModeloCliente::agregarCambio(Command* cambio)
 
 void ModeloCliente::enviarUnComando()
 {
+    if(!this->socket->estaConectado() || this->socket->serverDesconectado())
+    {
+        return;
+    }
     if(this->codigosAEnviar.empty())
     {
         this->socket->enviarByte(COMMNULL);
@@ -212,16 +224,22 @@ void ModeloCliente::enviarUnComando()
     char codigo = this->codigosAEnviar.front();
     this->codigosAEnviar.pop();
     this->socket->enviarByte(codigo);
+    this->tratarDesconexion();
 }
 
 void ModeloCliente::recibirUnComando()
 {
+    if(!this->socket->estaConectado() || this->socket->serverDesconectado())
+    {
+        return;
+    }
     char codigo = this->socket->recibirByte();
     char entidad = codigo >> 6;
     char evento = 0x3F & codigo;
     CommandNet* comando = this->comandos[evento]->getCopia();
     comando->setIdCliente(entidad);
     this->model->agregarCambio(comando);
+    this->tratarDesconexion();
 }
 
 void ModeloCliente::ejecutarUnComando()
@@ -309,7 +327,8 @@ void ModeloCliente::consultarInicio()
 void ModeloCliente::recibirRespuestaInicio()
 {
     char respuesta = this->socket->recibirByte(); // con esto determinamos si es un rechazado o un aceptado...
-    if(respuesta != LI_INICIO_OK) {
+    if(respuesta != LI_INICIO_OK)
+    {
 
         this->idCliente = 5;
     }
@@ -323,5 +342,62 @@ bool ModeloCliente::habilitadoParaJugar()
     return nroId  < 4; //los rechazados siempre tienen un valor mayor a 5;
 }
 
+void ModeloCliente::tratarDesconexion()
+{
+    if(this->socket->serverDesconectado())
+    {
+        std::cout << " SERVER DESCONECTADO" << std::endl;//Temporal
+        sleep(1000); // muy temporal
+
+        //notificar observadores sobre desconexion del server, view debe emitir el mensaje en pantalla
+        //Y LUEGO CERRAR LA APLICACION
+    }
+    else if(!this->socket->estaConectado())
+    {
+        //notificar observadores sobre desconexion y view debe emitir el mensaje en pantalla
+        while(!this->socket->estaConectado())
+        {
+            std::cout << "INTENTANDO RECONEXION" << std::endl;
+            this->socket->reconectar(this->ip, this->puerto);
+            sleep(1000);
+        }
+        this->idCliente = this->socket->recibirByte();
+        this->model->setIdCliente(this->idCliente);
+        this->model->setCantidadClientes(this->socket->recibirByte());
+        this->socket->enviarByte(this->credencial);
+        char respuesta = this->socket->recibirByte();
+        if(respuesta != LI_CREDENCIALES_OK)
+        {
+            std::cout << "COMETIMOS UN GRAVE ERROR EN CREDENCIANLES" <<std::endl;
+        }
+        respuesta = this->socket->recibirByte();
+        if(respuesta != LI_INICIO_OK)
+        {
+            std::cout << "COMETIMOS UN GRAVE ERROR EN EL INICIO" << std::endl;
+        }
+        this->model->habilitarRender();
+
+    }
+}
 
 
+void ModeloCliente::enviarBackup()
+{
+    this->socket->enviarString(this->model->backupTrucha);
+            std::cout << "SE ENVIO BACKUP" << std::endl;
+
+}
+
+void ModeloCliente::recibirBackup()
+{
+
+    this->model->backupTrucha = this->socket->recibirString();
+    if(this->model->backupTrucha.size())
+    {
+        this->model->comemnzarADesarmarBackup();
+                    std::cout << "SE RECIBIO BACKUP" << std::endl;
+
+
+    }
+
+}

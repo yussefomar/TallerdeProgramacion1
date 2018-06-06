@@ -102,6 +102,8 @@
 		<Unit filename="Command/CommandNet.h" />
 		<Unit filename="Command/CommandNet/AcelerarNet.cpp" />
 		<Unit filename="Command/CommandNet/AcelerarNet.h" />
+		<Unit filename="Command/CommandNet/ArmarBackup.cpp" />
+		<Unit filename="Command/CommandNet/ArmarBackup.h" />
 		<Unit filename="Command/CommandNet/AumentarVelocidadXNet.cpp" />
 		<Unit filename="Command/CommandNet/AumentarVelocidadXNet.h" />
 		<Unit filename="Command/CommandNet/AumentarVelocidadYNet.cpp" />
@@ -193,6 +195,7 @@
 		<Unit filename="Network/ModeloCliente.h" />
 		<Unit filename="Network/SocketCliente.cpp" />
 		<Unit filename="Network/SocketCliente.h" />
+		<Unit filename="Utils/Observador.cpp" />
 		<Unit filename="Utils/Observador.h" />
 		<Unit filename="Utils/Util_Common.cpp" />
 		<Unit filename="Utils/Util_Common.h" />

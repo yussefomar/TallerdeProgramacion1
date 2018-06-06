@@ -71,11 +71,11 @@ SocketCliente::SocketCliente(std::string ipServer, std::string puertoServer)
         std::cerr << "NO SE OBTUVIERON DIRECCIONES VALIDAS" << std::endl;
     }
 
-    this->socketConectado = connect(posibleSocketFD,
+    this->estadoSocket = connect(posibleSocketFD,
                                     iterador->ai_addr,
                                     iterador->ai_addrlen) != -1;
 
-    if(this->socketConectado)
+    if(this->estadoSocket)
     {
         this->socketFD = posibleSocketFD;
 
@@ -93,7 +93,7 @@ SocketCliente::SocketCliente(std::string ipServer, std::string puertoServer)
 
 SocketCliente::~SocketCliente()
 {
-    if(this->socketConectado)
+    if(this->estadoSocket)
     {
         shutdown(this->socketFD, SHUT_RDWR);
         close(this->socketFD);
@@ -104,20 +104,24 @@ SocketCliente::~SocketCliente()
 
 bool SocketCliente::estaConectado()
 {
-    return this->socketConectado;
+    return this->estadoSocket > 0;
+}
+
+bool SocketCliente::serverDesconectado() {
+    return this->estadoSocket == 0;
 }
 
 
 
 void SocketCliente::enviarByte(char byte)
 {
-    this->socketConectado = send(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL) > 0;
+    this->estadoSocket = send(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL);
 }
 
 char SocketCliente::recibirByte()
 {
     char byte;
-    this->socketConectado = recv(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL) > 0;
+    this->estadoSocket = recv(this->socketFD, &byte, sizeof(char), MSG_NOSIGNAL);
     return byte;
 }
 
@@ -172,11 +176,11 @@ void SocketCliente::reconectar(std::string ip, std::string puerto)
         std::cerr << "NO SE OBTUVIERON DIRECCIONES VALIDAS" << std::endl;
     }
 
-    this->socketConectado = connect(posibleSocketFD,
+    this->estadoSocket = connect(posibleSocketFD,
                                     iterador->ai_addr,
                                     iterador->ai_addrlen) != -1;
 
-    if(this->socketConectado)
+    if(this->estadoSocket)
     {
         this->socketFD = posibleSocketFD;
 
@@ -188,4 +192,42 @@ void SocketCliente::reconectar(std::string ip, std::string puerto)
     }
 
     freeaddrinfo(posibilidades);
+}
+
+
+std::string SocketCliente::recibirString()
+{
+    unsigned bytesARecibir = this->recibirByte();
+    std::string unString = "";
+    unsigned bytesRecibidos = 0;
+    char* buffer = new char[bytesARecibir];
+
+    while(bytesRecibidos < bytesARecibir && this->estaConectado() && !this->serverDesconectado())
+    {
+        this->estadoSocket = recv(this->socketFD, &buffer[bytesRecibidos], bytesARecibir - bytesRecibidos, MSG_NOSIGNAL);
+        bytesRecibidos += this->estadoSocket;
+    }
+
+    for(unsigned i = 0; i < bytesARecibir && this->estaConectado() && !this->serverDesconectado(); ++i) {
+        unString.push_back(buffer[i]);
+    }
+    delete buffer;
+    return unString;
+}
+
+void SocketCliente::enviarString(std::string unString)
+{
+    unsigned bytesAEnviar = unString.size();
+    unsigned bytesEnviados = 0;
+    char* buffer = new char[bytesAEnviar];
+    for(unsigned i = 0; i < unString.size(); ++i) {
+        buffer[i] = unString[i];
+    }
+    this->enviarByte(bytesAEnviar);
+    while(bytesEnviados < bytesAEnviar && this->estaConectado() && !this->serverDesconectado())
+    {
+        this->estadoSocket = send(this->socketFD, &buffer[bytesEnviados], bytesAEnviar - bytesEnviados, MSG_NOSIGNAL);
+        bytesEnviados += this->estadoSocket;
+    }
+    delete buffer;
 }

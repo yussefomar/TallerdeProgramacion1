@@ -36,21 +36,18 @@ int main(int argc, char* args[])
 
         Controller controller(&modelCliente);
         controller.Attach(&loggerObserver);
-        modelCliente.recibirRespuestaInicio();
-        for(unsigned i = 0; i < 100; ++i)
-        {
-            modelCliente.update();
-        }
 
+        modelCliente.recibirRespuestaInicio();
         while( !controller.quitPressed())
         {
+            modelCliente.enviarBackup();
+            modelCliente.recibirBackup();
             controller.processInput();
 
             while (!model.necesitaRenderizar())
             {
                 modelCliente.update();
             }
-            //view.cargarCartel("Holis");
             view.render();
         }
         return 0;

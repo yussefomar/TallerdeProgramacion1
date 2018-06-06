@@ -8,6 +8,8 @@
 #include <iostream>
 #include <string>
 
+#include <unistd.h>
+
 #define CANTJUGADORESTOTALES 14
 #define CANTJUGADORES 7
 #define LOCALES 0
@@ -127,18 +129,23 @@ void Model::moverJuego()
     for(int i = 0; i < CANTJUGADORESTOTALES; ++i)
     {
         this->jugadoresEnCancha[i].move();
-       if (!this->jugadoresEnCancha[i].checkCollisionPelota(pelota.getCollider())){
+        if (!this->jugadoresEnCancha[i].checkCollisionPelota(pelota.getCollider()))
+        {
             this->jugadoresEnCancha[i].noPoseePelota();
-        } else {
-                if ( !this->jugadoresEnCancha[i].getPosesion() ){
-               this->jugadoresEnCancha[i].recibirPelota(&pelota);
-                }
         }
-        if (this->jugadoresEnCancha[i].patearPelota()  && (!this->jugadoresEnCancha[i].checkCollisionPelota(pelota.getCollider()))){
+        else
+        {
+            if ( !this->jugadoresEnCancha[i].getPosesion() )
+            {
+                this->jugadoresEnCancha[i].recibirPelota(&pelota);
+            }
+        }
+        if (this->jugadoresEnCancha[i].patearPelota()  && (!this->jugadoresEnCancha[i].checkCollisionPelota(pelota.getCollider())))
+        {
             this->jugadoresEnCancha[i].terminoDePatearPelota();
         }
     }
-  this->pelota.move();
+    this->pelota.move();
 
 }
 
@@ -377,29 +384,37 @@ void Model:: recuperaPelota(char codigoCliente)
 {
     int i;
     unsigned nroJugador = this->clientes[codigoCliente];
-    if (this->jugadoresEnCancha[nroJugador].checkCollisionPelota(pelota.getCollider())){
-    if (nroJugador>6) {
-    for(i = 0; i < CANTJUGADORES; ++i){
-        if (this->jugadoresLocales[i].getPosesion()){
-        this->jugadoresLocales[i].noPoseePelota();
-        pelota.setLibre();
-        this->jugadoresEnCancha[nroJugador].recibirPelota(&pelota);
-        this->jugadoresEnCancha[nroJugador].poseePelota();
-     }
-     }
-    } else {
-        for(i = 0; i < CANTJUGADORES; ++i){
-        if (this->jugadoresVisitantes[i].getPosesion()){
-        this->jugadoresVisitantes[i].noPoseePelota();
-        pelota.setLibre();
-        this->jugadoresEnCancha[nroJugador].recibirPelota(&pelota);
-        this->jugadoresEnCancha[nroJugador].poseePelota();
-
+    if (this->jugadoresEnCancha[nroJugador].checkCollisionPelota(pelota.getCollider()))
+    {
+        if (nroJugador>6)
+        {
+            for(i = 0; i < CANTJUGADORES; ++i)
+            {
+                if (this->jugadoresLocales[i].getPosesion())
+                {
+                    this->jugadoresLocales[i].noPoseePelota();
+                    pelota.setLibre();
+                    this->jugadoresEnCancha[nroJugador].recibirPelota(&pelota);
+                    this->jugadoresEnCancha[nroJugador].poseePelota();
+                }
+            }
         }
-     }
-    }
+        else
+        {
+            for(i = 0; i < CANTJUGADORES; ++i)
+            {
+                if (this->jugadoresVisitantes[i].getPosesion())
+                {
+                    this->jugadoresVisitantes[i].noPoseePelota();
+                    pelota.setLibre();
+                    this->jugadoresEnCancha[nroJugador].recibirPelota(&pelota);
+                    this->jugadoresEnCancha[nroJugador].poseePelota();
 
-    this->notificarAObservadores(nroJugador, RECUPELO, MJU);
+                }
+            }
+        }
+
+        this->notificarAObservadores(nroJugador, RECUPELO, MJU);
     }
 }
 
@@ -513,9 +528,11 @@ void Model::pasarPelota(char codigoCliente)
         {
             vecJugadores[nroJugador].pasaPelota(&(this->pelota),&vecJugadores[i] );
             this->notificarAObservadores(nroJugador, PASPELO, MJU);
-        } else {
-         vecJugadores[nroJugador].patearPelota(&(this->pelota));
-         this->notificarAObservadores(nroJugador, PASPELO, MJU);
+        }
+        else
+        {
+            vecJugadores[nroJugador].patearPelota(&(this->pelota));
+            this->notificarAObservadores(nroJugador, PASPELO, MJU);
         }
     }
 }
@@ -550,8 +567,10 @@ void Model::setTodosJugadoresInactivos()
 
 void Model::definirComoLocal(char codigoCliente)
 {
-    if((this->cantidadClientes > 1) && (this->cantidadLocales + 1 == this->cantidadClientes)) {
+    if((this->cantidadClientes > 1) && (this->cantidadLocales + 1 == this->cantidadClientes))
+    {
         this->definirComoVisitante(codigoCliente);
+        return;
     }
     int i = -1;
     bool encontreJugadorLibre = false;
@@ -565,14 +584,16 @@ void Model::definirComoLocal(char codigoCliente)
 
     this->cantidadLocales += 1;
     this->notificarAObservadores(this->cantidadLocales, DEFLOCAL, MSJ);
-        std::cout << "el cliente se instalo como local" << std::endl;
+    std::cout << "el cliente se instalo como local" << std::endl;
 
 }
 
 void Model::definirComoVisitante(char codigoCliente)
 {
-    if((this->cantidadClientes > 1) && (this->cantidadVisitantes + 1 == this->cantidadClientes)) {
+    if((this->cantidadClientes > 1) && (this->cantidadVisitantes + 1 == this->cantidadClientes))
+    {
         this->definirComoLocal(codigoCliente);
+        return;
     }
     int i = 6;
     bool encontreJugadorLibre = false;
@@ -719,3 +740,14 @@ this->pelota.setVelocidadY(std::stoi(pelotaVelY));
 
 }
 
+void Model::comenzarAArmarBackup() {
+    this->backupTrucha = this->armarBackUp();
+        std::cout << "SE TERMINO DE ARMAR BACKUP " << std::endl;
+
+}
+
+void Model::comemnzarADesarmarBackup() {
+    this->desarmarBackUp(this->backupTrucha);
+            std::cout << "SE TERMINO DE DESARMAR BACKUP " << std::endl;
+
+}

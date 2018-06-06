@@ -36,6 +36,8 @@ void ModeloServidor::setClientesPermitidos(unsigned cantidadMaxClientes)
     this->clientes = std::vector<Cliente>(cantidadMaxClientes);
     this->reconectores = std::vector<Reconector>(cantidadMaxClientes);
     this->buffer.setCantidadBuffers(cantidadMaxClientes);
+    this->backups = std::vector<std::string>(this->clientes.size());
+
 }
 
 void ModeloServidor::setIpYPuerto(std::string ip, std::string puerto)
@@ -61,6 +63,7 @@ void ModeloServidor::aceptarClientes()
     for(unsigned i = 0; i < this->reconectores.size(); ++i)
     {
         this->reconectores[i].setCliente(&this->clientes[i]);
+        this->reconectores[i].setMutexReconexion(&this->mutexReconexion);
     }
     //Se crean hilos para recibir clientes
     for(unsigned i = 0; i < this->clientes.size(); ++i)
@@ -153,7 +156,7 @@ void ModeloServidor::lanzarHiloDeReconexion()
     {
         this->hiloDeReconexion = std::thread(&ModeloServidor::hiloDeAnalisisDeReconexion, this);
         this->hiloDeReconexion.join();
-        std::cout << "SE LANZA HILO DE RECONEXION 1" << std::endl;
+
     }
 
 }
@@ -161,18 +164,11 @@ void ModeloServidor::lanzarHiloDeReconexion()
 void ModeloServidor::hiloDeAnalisisDeReconexion()
 {
     std::mutex mutexAHR;
-    mutexAHR.lock();
-    std::cout << "SE LANZA HILO DE RECONEXION 2" << std::endl;
-    mutexAHR.unlock();
     SocketServidor* socketReconexion = new SocketServidor(this->ip, this->puerto);
-    mutexAHR.lock();
-    std::cout << "SE LANZA HILO DE RECONEXION 3" << std::endl;
-    mutexAHR.unlock();
+
 
     bool socketReconexionAdoptado = false;
-    mutexAHR.lock();
-    std::cout << "SE LANZA HILO DE RECONEXION 3" << std::endl;
-    mutexAHR.unlock();
+
 
     for(unsigned i = 0; i < this->reconectores.size() && !socketReconexionAdoptado; ++i)
     {
@@ -184,5 +180,21 @@ void ModeloServidor::hiloDeAnalisisDeReconexion()
         socketReconexion->enviarByte(RECHAZADO);
         socketReconexion->enviarByte(RECHAZADO);
         delete socketReconexion;
+    }
+}
+
+void ModeloServidor::recibirBackup() {
+    this->backupElegido = 0;
+    for(unsigned i = 0; i < this->clientes.size(); ++i) {
+        this->backups[i] = this->clientes[i].recibirBackup();
+        if(this->backups[i].size()) {
+            backupElegido = i;
+        }
+    }
+}
+
+void ModeloServidor::enviarBackup() {
+    for(unsigned i = 0; i < this->reconectores.size(); ++i) {
+        this->reconectores[i].enviarBackup(this->backups[this->backupElegido]);
     }
 }

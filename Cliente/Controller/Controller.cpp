@@ -33,6 +33,7 @@ Controller::Controller(Model* model)
     this->commands[DEFVISIT] = new CommandNull(model); //por si las dudas.
     this->commands[DESCJUG] = new CommandNull(model);
     this->commands[NECRENDER] = new CommandNull(model);
+    this->commands[ARMARBACKUP] = new CommandNull(model);
 
     this->quit = false;
 }
