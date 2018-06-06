@@ -26,17 +26,21 @@ LogIn::LogIn(ModeloCliente* modelCliente)
         {
             modelCliente->conectarConServer(informacionIngreso.ip, informacionIngreso.puerto);
             informacionIngreso.procesarConectividad(modelCliente->conectadoAlServer());
-
-            //De respuesto hasta que se coloque el verdadero mensaje
-            if(!modelCliente->habilitadoParaJugar())
-            {
-                return;
-            }
-
         }
     }
     dg.setDatosConexionFile(informacionIngreso.puerto,informacionIngreso.ip);
 
+    unsigned int microseconds = 7000;
+    //SI MI INGRESO ES CORRECTO ME FIJO SI PUEDO ENTRAR A JUGAR.
+    if(!modelCliente->habilitadoParaJugar())
+    {
+        //EN ESTE CASO MUESTRO UN CARTEL PARA LUEGO SALIR.
+        informacionIngreso.mensaje = "El cupo de jugadores se encuentra al tope.";
+        loguinScreen.Procesar(informacionIngreso);
+        this->puedeArrancar = false;
+        usleep(microseconds);
+        return;
+    }
 
     std::cout << "llegamos a la ip, vamos por el nombre" << std::endl;
     while( !informacionIngreso.nombreIngresado )
@@ -93,23 +97,10 @@ LogIn::LogIn(ModeloCliente* modelCliente)
         }
     }
 
-    unsigned int microseconds = 10000;
-    //SI MI INGRESO ES CORRECTO ME FIJO SI PUEDO ENTRAR A JUGAR.
-    if(!modelCliente->habilitadoParaJugar())
-    {
-        //EN ESTE CASO MUESTRO UN CARTEL PARA LUEGO SALIR.
-        informacionIngreso.mensaje = "El cupo de jugadores se encuentra al tope.";
-        loguinScreen.Procesar(informacionIngreso);
-        this->puedeArrancar = false;
-        usleep(microseconds);
-    }
-    else
-    {
-        //EN CASO DE QUE HAYA LUGAR PARA JUGAR ESPERO A QUE TODOS SE ENCUENTREN LISTOS.
-        informacionIngreso.mensaje = "A la espera de que todos los jugadores se conecten.";
-        loguinScreen.Procesar(informacionIngreso);
-        this->puedeArrancar = true;
-    }
+    //EN CASO DE QUE HAYA LUGAR PARA JUGAR ESPERO A QUE TODOS SE ENCUENTREN LISTOS.
+    informacionIngreso.mensaje = "A la espera de que todos los jugadores se conecten.";
+    loguinScreen.Procesar(informacionIngreso);
+    this->puedeArrancar = true;
 
     loguinScreen.Cerrar();
 
