@@ -51,8 +51,12 @@ void Formacion321::setPosicionVisitante(Jugador* jugadores)
 {
     int posX;
     int posY;
-    int posicionesX[] = { 8,  4,  4,  5,  -2,  -2, -3};
+    /*int posicionesX[] = { 8,  4,  4,  5,  -2,  -2, -3};
     int posicionesY[] = { 0, -3,  3,  0, -3,  3, 0};
+    */
+    int posicionesX[] = { 8,  4,  4,  5,  -3,  -2, -4};
+    int posicionesY[] = { 0, -3,  3,  0, -4,  4, 1};
+
     int multiplo = 1;
     for(int i = 0; i < CANTJUGADORES; ++i)
     {
